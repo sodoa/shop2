@@ -1,0 +1,98 @@
+package com.xinfan.wxshop.business.front;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.xinfan.wxshop.business.entity.Customer;
+import com.xinfan.wxshop.business.entity.DeliveryAddress;
+import com.xinfan.wxshop.business.entity.Order;
+import com.xinfan.wxshop.business.entity.OrderDetail;
+import com.xinfan.wxshop.business.entity.Wallet;
+import com.xinfan.wxshop.business.service.CartService;
+import com.xinfan.wxshop.business.service.CustomerService;
+import com.xinfan.wxshop.business.service.DeliveryAddressService;
+import com.xinfan.wxshop.business.service.GoodsService;
+import com.xinfan.wxshop.business.service.OrderService;
+import com.xinfan.wxshop.business.util.LoginSessionUtils;
+import com.xinfan.wxshop.common.base.DataMap;
+
+@Controller
+public class CenterAct {
+
+	@Autowired
+	private GoodsService GoodsService;
+
+	@Autowired
+	private CartService CartService;
+
+	@Autowired
+	private OrderService OrderService;
+	
+	@Autowired
+	private CustomerService CustomerService;
+
+	@Autowired
+	private DeliveryAddressService DeliveryAddressService;
+
+	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
+	public ModelAndView center(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/front/my_center");
+
+		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
+		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
+
+		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);  
+		List<DataMap> distList = CustomerService.getCustomerTopDistributionList(customerId);
+		List<Order> orderList = CustomerService.getCustomerTopOrderList(customerId);
+		Customer customer = CustomerService.getById(customerId);
+
+		request.setAttribute("wallet", wallet);
+		request.setAttribute("distList", distList);
+		request.setAttribute("orderList", orderList);
+		request.setAttribute("customer", customer);
+
+		return mv;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center2.html")
+	public ModelAndView center2(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/front/my_center2");
+
+		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
+		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
+
+		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);  
+		//List<DataMap> distList = CustomerService.getCustomerTopDistributionList(customerId);
+		//List<Order> orderList = CustomerService.getCustomerTopOrderList(customerId);
+		Customer customer = CustomerService.getById(customerId);
+
+		request.setAttribute("wallet", wallet);
+		//request.setAttribute("distList", distList);
+		//request.setAttribute("orderList", orderList);
+		request.setAttribute("customer", customer);
+
+		return mv;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/center/order_history/{id}.html")
+	public ModelAndView order_history(@PathVariable Integer id) {
+		ModelAndView mv = new ModelAndView("/front/order_history");
+
+		Order order = OrderService.getPayOrderInfo(0, id);
+		List<OrderDetail> list = OrderService.getOrderDetail(0, id);
+
+		mv.addObject("order", order);
+		mv.addObject("list", list);
+
+		return mv;
+	}
+
+}

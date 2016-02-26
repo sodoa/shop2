@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_lname" property="goodsLname" jdbcType="VARCHAR" />
+    <result column="goods_des" property="goodsDes" jdbcType="VARCHAR" />
+    <result column="goods_status" property="goodsStatus" jdbcType="INTEGER" />
+    <result column="thumbnail_url" property="thumbnailUrl" jdbcType="VARCHAR" />
+    <result column="orgin_prices" property="orginPrices" jdbcType="REAL" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="final_prices" property="finalPrices" jdbcType="REAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="TIMESTAMP" />
+    <result column="hot" property="hot" jdbcType="INTEGER" />
+    <result column="burst" property="burst" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="type_level1" property="typeLevel1" jdbcType="VARCHAR" />
+    <result column="type_level2" property="typeLevel2" jdbcType="VARCHAR" />
+    <result column="sellcount" property="sellcount" jdbcType="INTEGER" />
+    <result column="fashion" property="fashion" jdbcType="INTEGER" />
+    <result column="fashion_template" property="fashionTemplate" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="goods_area" property="goodsArea" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goods_id, goods_name, goods_lname, goods_des, goods_status, thumbnail_url, orgin_prices, 
+    discount, final_prices, unit, release_date, hot, burst, sort, type_level1, type_level2, 
+    sellcount, fashion, fashion_template, keywords, supplier, goods_area, summary
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.GoodsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.GoodsExample" >
+    delete from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.Goods" >
+    insert into t_goods (goods_id, goods_name, goods_lname, 
+      goods_des, goods_status, thumbnail_url, 
+      orgin_prices, discount, final_prices, 
+      unit, release_date, hot, 
+      burst, sort, type_level1, 
+      type_level2, sellcount, fashion, 
+      fashion_template, keywords, supplier, 
+      goods_area, summary)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsLname,jdbcType=VARCHAR}, 
+      #{goodsDes,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=INTEGER}, #{thumbnailUrl,jdbcType=VARCHAR}, 
+      #{orginPrices,jdbcType=REAL}, #{discount,jdbcType=REAL}, #{finalPrices,jdbcType=REAL}, 
+      #{unit,jdbcType=VARCHAR}, #{releaseDate,jdbcType=TIMESTAMP}, #{hot,jdbcType=INTEGER}, 
+      #{burst,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{typeLevel1,jdbcType=VARCHAR}, 
+      #{typeLevel2,jdbcType=VARCHAR}, #{sellcount,jdbcType=INTEGER}, #{fashion,jdbcType=INTEGER}, 
+      #{fashionTemplate,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
+      #{goodsArea,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.Goods" >
+    insert into t_goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodsLname != null" >
+        goods_lname,
+      </if>
+      <if test="goodsDes != null" >
+        goods_des,
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status,
+      </if>
+      <if test="thumbnailUrl != null" >
+        thumbnail_url,
+      </if>
+      <if test="orginPrices != null" >
+        orgin_prices,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="finalPrices != null" >
+        final_prices,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="releaseDate != null" >
+        release_date,
+      </if>
+      <if test="hot != null" >
+        hot,
+      </if>
+      <if test="burst != null" >
+        burst,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="typeLevel1 != null" >
+        type_level1,
+      </if>
+      <if test="typeLevel2 != null" >
+        type_level2,
+      </if>
+      <if test="sellcount != null" >
+        sellcount,
+      </if>
+      <if test="fashion != null" >
+        fashion,
+      </if>
+      <if test="fashionTemplate != null" >
+        fashion_template,
+      </if>
+      <if test="keywords != null" >
+        keywords,
+      </if>
+      <if test="supplier != null" >
+        supplier,
+      </if>
+      <if test="goodsArea != null" >
+        goods_area,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsLname != null" >
+        #{goodsLname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDes != null" >
+        #{goodsDes,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailUrl != null" >
+        #{thumbnailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orginPrices != null" >
+        #{orginPrices,jdbcType=REAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="finalPrices != null" >
+        #{finalPrices,jdbcType=REAL},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hot != null" >
+        #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="burst != null" >
+        #{burst,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="typeLevel1 != null" >
+        #{typeLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="typeLevel2 != null" >
+        #{typeLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="sellcount != null" >
+        #{sellcount,jdbcType=INTEGER},
+      </if>
+      <if test="fashion != null" >
+        #{fashion,jdbcType=INTEGER},
+      </if>
+      <if test="fashionTemplate != null" >
+        #{fashionTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsArea != null" >
+        #{goodsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.GoodsExample" resultType="java.lang.Integer" >
+    select count(*) from t_goods
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_goods
+    <set >
+      <if test="record.goodsId != null" >
+        goods_id = #{record.goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.goodsName != null" >
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsLname != null" >
+        goods_lname = #{record.goodsLname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsDes != null" >
+        goods_des = #{record.goodsDes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsStatus != null" >
+        goods_status = #{record.goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.thumbnailUrl != null" >
+        thumbnail_url = #{record.thumbnailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orginPrices != null" >
+        orgin_prices = #{record.orginPrices,jdbcType=REAL},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.finalPrices != null" >
+        final_prices = #{record.finalPrices,jdbcType=REAL},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.releaseDate != null" >
+        release_date = #{record.releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hot != null" >
+        hot = #{record.hot,jdbcType=INTEGER},
+      </if>
+      <if test="record.burst != null" >
+        burst = #{record.burst,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.typeLevel1 != null" >
+        type_level1 = #{record.typeLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeLevel2 != null" >
+        type_level2 = #{record.typeLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sellcount != null" >
+        sellcount = #{record.sellcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fashion != null" >
+        fashion = #{record.fashion,jdbcType=INTEGER},
+      </if>
+      <if test="record.fashionTemplate != null" >
+        fashion_template = #{record.fashionTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null" >
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsArea != null" >
+        goods_area = #{record.goodsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_goods
+    set goods_id = #{record.goodsId,jdbcType=INTEGER},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_lname = #{record.goodsLname,jdbcType=VARCHAR},
+      goods_des = #{record.goodsDes,jdbcType=VARCHAR},
+      goods_status = #{record.goodsStatus,jdbcType=INTEGER},
+      thumbnail_url = #{record.thumbnailUrl,jdbcType=VARCHAR},
+      orgin_prices = #{record.orginPrices,jdbcType=REAL},
+      discount = #{record.discount,jdbcType=REAL},
+      final_prices = #{record.finalPrices,jdbcType=REAL},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      release_date = #{record.releaseDate,jdbcType=TIMESTAMP},
+      hot = #{record.hot,jdbcType=INTEGER},
+      burst = #{record.burst,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      type_level1 = #{record.typeLevel1,jdbcType=VARCHAR},
+      type_level2 = #{record.typeLevel2,jdbcType=VARCHAR},
+      sellcount = #{record.sellcount,jdbcType=INTEGER},
+      fashion = #{record.fashion,jdbcType=INTEGER},
+      fashion_template = #{record.fashionTemplate,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      goods_area = #{record.goodsArea,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.Goods" >
+    update t_goods
+    <set >
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsLname != null" >
+        goods_lname = #{goodsLname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDes != null" >
+        goods_des = #{goodsDes,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsStatus != null" >
+        goods_status = #{goodsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailUrl != null" >
+        thumbnail_url = #{thumbnailUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orginPrices != null" >
+        orgin_prices = #{orginPrices,jdbcType=REAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="finalPrices != null" >
+        final_prices = #{finalPrices,jdbcType=REAL},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseDate != null" >
+        release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hot != null" >
+        hot = #{hot,jdbcType=INTEGER},
+      </if>
+      <if test="burst != null" >
+        burst = #{burst,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="typeLevel1 != null" >
+        type_level1 = #{typeLevel1,jdbcType=VARCHAR},
+      </if>
+      <if test="typeLevel2 != null" >
+        type_level2 = #{typeLevel2,jdbcType=VARCHAR},
+      </if>
+      <if test="sellcount != null" >
+        sellcount = #{sellcount,jdbcType=INTEGER},
+      </if>
+      <if test="fashion != null" >
+        fashion = #{fashion,jdbcType=INTEGER},
+      </if>
+      <if test="fashionTemplate != null" >
+        fashion_template = #{fashionTemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null" >
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsArea != null" >
+        goods_area = #{goodsArea,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.Goods" >
+    update t_goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_lname = #{goodsLname,jdbcType=VARCHAR},
+      goods_des = #{goodsDes,jdbcType=VARCHAR},
+      goods_status = #{goodsStatus,jdbcType=INTEGER},
+      thumbnail_url = #{thumbnailUrl,jdbcType=VARCHAR},
+      orgin_prices = #{orginPrices,jdbcType=REAL},
+      discount = #{discount,jdbcType=REAL},
+      final_prices = #{finalPrices,jdbcType=REAL},
+      unit = #{unit,jdbcType=VARCHAR},
+      release_date = #{releaseDate,jdbcType=TIMESTAMP},
+      hot = #{hot,jdbcType=INTEGER},
+      burst = #{burst,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      type_level1 = #{typeLevel1,jdbcType=VARCHAR},
+      type_level2 = #{typeLevel2,jdbcType=VARCHAR},
+      sellcount = #{sellcount,jdbcType=INTEGER},
+      fashion = #{fashion,jdbcType=INTEGER},
+      fashion_template = #{fashionTemplate,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      goods_area = #{goodsArea,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="pageList" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
+  	
+  		select * from t_goods where 1=1 
+  		<if test="goods_status!=null">
+  			 goods_status in (${goods_status})
+  		</if>
+  		
+  		<if test="burst!=null">
+  			burst  = #{burst}
+  		</if>
+  		
+  		<if test="hot!=null">
+  			hot  =  #{hot}
+  		</if>
+  		 		
+  		order by release_date desc 		
+  </select>
+  
+    <select id="pageBeanList" parameterType="com.xinfan.wxshop.common.base.DataMap" resultMap="BaseResultMap">
+  	
+  		select * from t_goods where 1=1 
+  		<if test="goodsStatus!=null">
+  			and goods_status in (${goodsStatus})
+  		</if>
+  		
+  		<if test="goodsName!=null">
+  			and (goods_name like '%${goodsName}%' or goods_lname like '%${goodsName}%')
+  		</if>
+  		
+  		<if test="burst!=null">
+  			and burst  = #{burst}
+  		</if>
+  		
+  		<if test="hot!=null">
+  			and hot  =  #{hot}
+  		</if>
+  		<if test="typeLevel1!=null">
+  			and type_level1  =#{typeLevel1}
+  		</if>
+  		<if test="typeLevel2!=null">
+  			and type_level2 = #{typeLevel2}
+  		</if>
+  		
+  		<if test="fashion!=null">
+  			and fashion = #{fashion}
+  		</if>
+  		 		
+  		order by release_date desc 		
+  </select>
+  
+  
+   <select id="getManageGoodsSearchList" parameterType="com.xinfan.wxshop.common.base.DataMap"  resultType="com.xinfan.wxshop.common.base.DataMap">
+  	
+  		select * from t_goods where 1=1 
+  		<if test="goods_status!=null">
+  			and goods_status  = #{goods_status}
+  		</if>
+  		
+  		<if test="goods_name!=null">
+  			and (goods_name like '%${goods_name}%' or goods_lname like '%${goods_name}%')
+  		</if>
+  		
+  		<if test="burst!=null">
+  			and burst  = #{burst}
+  		</if>
+  		
+  		<if test="hot!=null">
+  			and hot  =  #{hot}
+  		</if>
+  		<if test="type_level1!=null">
+  			and type_level1  =#{type_level1}
+  		</if>
+  		<if test="type_level2!=null">
+  			and type_level2 = #{type_level2}
+  		</if>
+  		
+  		<if test="fashion!=null">
+  			and fashion = #{fashion}
+  		</if>
+  		 		
+  		order by release_date desc 		
+  </select>
+  
+</mapper>

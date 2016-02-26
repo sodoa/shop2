@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<classPathEntry location="D:/jar/mysql-connector-java-5.0.8-bin.jar" />
+
+	<context id="wxshop" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/wxshop?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root" password="">
+		</jdbcConnection>
+
+		<!-- <javaTypeResolver> <property name="forceBigDecimals" value="false" 
+			/> </javaTypeResolver> -->
+
+		<javaModelGenerator targetPackage="com.xinfan.wxshop.business.entity"
+			targetProject="wxshop">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- -->
+		<sqlMapGenerator targetPackage="com.xinfan.wxshop.business.dao"
+			targetProject="wxshop">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.xinfan.wxshop.business.dao" targetProject="wxshop">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- <table tableName="t_appeal" domainObjectName="Appeal"/> <table tableName="t_area" 
+			domainObjectName="Area"/> <table tableName="t_cardreader" domainObjectName="Cardreader"/> 
+			<table tableName="t_config" domainObjectName="Config"/> <table tableName="t_consumer" 
+			domainObjectName="Consumer"/> <table tableName="t_dict" domainObjectName="Dict"/> 
+			<table tableName="t_fun" domainObjectName="Fun"/> <table tableName="t_identify" 
+			domainObjectName="Identify"/> <table tableName="t_login_ext" domainObjectName="LoginExt"/> 
+			<table tableName="t_news" domainObjectName="News"/> <table tableName="t_product" 
+			domainObjectName="Product"/> <table tableName="t_product_detail" domainObjectName="ProductDetail"/> 
+			<table tableName="t_role" domainObjectName="Role"/> <table tableName="t_role_fun" 
+			domainObjectName="RoleFun"/> <table tableName="t_scanner" domainObjectName="Scanner"/> 
+			<table tableName="t_sequence" domainObjectName="Sequence"/> <table tableName="t_user" 
+			domainObjectName="User"/> -->
+		<!-- <table tableName="t_order" domainObjectName="Order"/> <table tableName="t_info" 
+			domainObjectName="Info"/> <table tableName="t_show" domainObjectName="Show"/> 
+			<table tableName="t_news" domainObjectName="News"/> -->
+
+		<!-- <table tableName="t_config" domainObjectName="Config"/> <table tableName="t_delivery_address" 
+			domainObjectName="DeliveryAddress"/> -->
+
+		<!-- <table tableName="t_goods" domainObjectName="Goods"/> -->
+		<!-- <table tableName="t_cart" domainObjectName="Cart"/> -->
+
+		<!-- <table tableName="t_customer" domainObjectName="Customer"/> <table 
+			tableName="t_order" domainObjectName="Order"/> <table tableName="t_wallet" 
+			domainObjectName="Wallet"/> <table tableName="t_order_detail" domainObjectName="OrderDetail"/> 
+			<table tableName="t_distribution" domainObjectName="Distribution"/> -->
+
+
+		<table tableName="t_ranking" domainObjectName="Ranking" />
+		
+		
+		
+
+
+	</context>
+</generatorConfiguration>

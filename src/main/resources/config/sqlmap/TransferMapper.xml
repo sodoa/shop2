@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.TransferMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.Transfer" >
+    <id column="transfer_id" property="transferId" jdbcType="INTEGER" />
+    <result column="wallet_id" property="walletId" jdbcType="INTEGER" />
+    <result column="wx_openid" property="wxOpenid" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="transfer_date" property="transferDate" jdbcType="TIMESTAMP" />
+    <result column="amount" property="amount" jdbcType="REAL" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="client_ip" property="clientIp" jdbcType="VARCHAR" />
+    <result column="check_state" property="checkState" jdbcType="INTEGER" />
+    <result column="check_date" property="checkDate" jdbcType="TIMESTAMP" />
+    <result column="check_msg" property="checkMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    transfer_id, wallet_id, wx_openid, customer_id, transfer_date, amount, order_no, 
+    client_ip, check_state, check_date, check_msg
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.TransferExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_transfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_transfer
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_transfer
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.TransferExample" >
+    delete from t_transfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.Transfer" >
+    insert into t_transfer (transfer_id, wallet_id, wx_openid, 
+      customer_id, transfer_date, amount, 
+      order_no, client_ip, check_state, 
+      check_date, check_msg)
+    values (#{transferId,jdbcType=INTEGER}, #{walletId,jdbcType=INTEGER}, #{wxOpenid,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=INTEGER}, #{transferDate,jdbcType=TIMESTAMP}, #{amount,jdbcType=REAL}, 
+      #{orderNo,jdbcType=VARCHAR}, #{clientIp,jdbcType=VARCHAR}, #{checkState,jdbcType=INTEGER}, 
+      #{checkDate,jdbcType=TIMESTAMP}, #{checkMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.Transfer" >
+    insert into t_transfer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transferId != null" >
+        transfer_id,
+      </if>
+      <if test="walletId != null" >
+        wallet_id,
+      </if>
+      <if test="wxOpenid != null" >
+        wx_openid,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="transferDate != null" >
+        transfer_date,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="clientIp != null" >
+        client_ip,
+      </if>
+      <if test="checkState != null" >
+        check_state,
+      </if>
+      <if test="checkDate != null" >
+        check_date,
+      </if>
+      <if test="checkMsg != null" >
+        check_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transferId != null" >
+        #{transferId,jdbcType=INTEGER},
+      </if>
+      <if test="walletId != null" >
+        #{walletId,jdbcType=INTEGER},
+      </if>
+      <if test="wxOpenid != null" >
+        #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="transferDate != null" >
+        #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=REAL},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null" >
+        #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null" >
+        #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkMsg != null" >
+        #{checkMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.TransferExample" resultType="java.lang.Integer" >
+    select count(*) from t_transfer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_transfer
+    <set >
+      <if test="record.transferId != null" >
+        transfer_id = #{record.transferId,jdbcType=INTEGER},
+      </if>
+      <if test="record.walletId != null" >
+        wallet_id = #{record.walletId,jdbcType=INTEGER},
+      </if>
+      <if test="record.wxOpenid != null" >
+        wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.transferDate != null" >
+        transfer_date = #{record.transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=REAL},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clientIp != null" >
+        client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkState != null" >
+        check_state = #{record.checkState,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkDate != null" >
+        check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checkMsg != null" >
+        check_msg = #{record.checkMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_transfer
+    set transfer_id = #{record.transferId,jdbcType=INTEGER},
+      wallet_id = #{record.walletId,jdbcType=INTEGER},
+      wx_openid = #{record.wxOpenid,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      transfer_date = #{record.transferDate,jdbcType=TIMESTAMP},
+      amount = #{record.amount,jdbcType=REAL},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      client_ip = #{record.clientIp,jdbcType=VARCHAR},
+      check_state = #{record.checkState,jdbcType=INTEGER},
+      check_date = #{record.checkDate,jdbcType=TIMESTAMP},
+      check_msg = #{record.checkMsg,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.Transfer" >
+    update t_transfer
+    <set >
+      <if test="walletId != null" >
+        wallet_id = #{walletId,jdbcType=INTEGER},
+      </if>
+      <if test="wxOpenid != null" >
+        wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="transferDate != null" >
+        transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=REAL},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="clientIp != null" >
+        client_ip = #{clientIp,jdbcType=VARCHAR},
+      </if>
+      <if test="checkState != null" >
+        check_state = #{checkState,jdbcType=INTEGER},
+      </if>
+      <if test="checkDate != null" >
+        check_date = #{checkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkMsg != null" >
+        check_msg = #{checkMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.Transfer" >
+    update t_transfer
+    set wallet_id = #{walletId,jdbcType=INTEGER},
+      wx_openid = #{wxOpenid,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=INTEGER},
+      transfer_date = #{transferDate,jdbcType=TIMESTAMP},
+      amount = #{amount,jdbcType=REAL},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      client_ip = #{clientIp,jdbcType=VARCHAR},
+      check_state = #{checkState,jdbcType=INTEGER},
+      check_date = #{checkDate,jdbcType=TIMESTAMP},
+      check_msg = #{checkMsg,jdbcType=VARCHAR}
+    where transfer_id = #{transferId,jdbcType=INTEGER}
+  </update>
+</mapper>
