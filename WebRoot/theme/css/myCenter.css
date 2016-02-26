@@ -1,0 +1,110 @@
+
+.titel{float:left;width:56%;margin-left:22%;line-height:50px;font-size:16px;color:#fff}
+.shop_car {float: left;width: 20%;text-align: right;margin-right: 2%;margin-top: 10px;}
+
+.block{background:#fff;padding:22px 0;border-bottom:#DEDEDE solid 1px}
+.block div:first-child{width:88px;height:88px;margin:0 auto;background:url(images/myCenter/gallery.png)}
+.block div:first-child img{width:100%;border-radius:88px;}
+.block div:last-child{width:100%;line-height:30px;font-size:14px;font-weight:700;text-align:center;color:#9C9999;}
+
+.block1{height:44px;margin:30px 0px 20px 0;background:#fff;border-top:#DEDEDE solid 1px;border-bottom:#DEDEDE solid 1px;padding:10px 10px 5px 10px;}
+.block1 ul li{width:25%;text-align:center;float:left}
+.block1 ul li img{height:24px}
+
+.block2{height:30px;margin-top:10px;background:#fff;border-top:#DEDEDE solid 1px;border-bottom:#DEDEDE solid 1px;padding:10px 10px 5px 10px;}
+.block2 div:first-child{float:left;padding:4px 15px 0 25px;}
+.block2 div:first-child img{width:16px;height:18px}
+.block2  .name{float:left;line-height:25px;font-size:14px;font-weight:700;}
+.block2  .to{float:right;font-size:20px;font-family: -webkit-body;padding:0 10px}
+.block2  .to img{width:10px;height:20px}
+
+/*地址管理*/
+.block3{margin:15px 0;border-top:#DEDEDE solid 1px;border-bottom:#DEDEDE solid 1px;padding:0 2%;background:#fff}
+.block3 table{width:100%;padding:5px 0 2px 0;border-bottom:#DEDEDE solid 1px;}
+.block3 table tr:first-child {width:100%;font-size:14px;font-weight:700}
+.block3 table tr:last-child{font-size:12px}
+.block3 table tr td:first-child{padding-right:20px;width: 70%;}
+.block3 div{height:30px}
+.block3 div ul .address_select{float:left;background:url(../images/address/selectNo.png)1px 8px no-repeat;padding:5px;padding-left:15px;cursor: pointer}
+.block3 div ul .address_cur{background:url(../images/address/selectYes.png)1px 8px no-repeat;}
+.block3 div ul .address_delete{float:right;background:url(../images/address/delete.png)1px 8px no-repeat;padding:5px;padding-left:15px;cursor: pointer}
+.block3 div ul .address_edit{float:right;background:url(../images/address/edit.png)1px 8px no-repeat;padding:5px;padding-left:15px;cursor: pointer}
+
+/*新增地址地址管理*/
+
+.block4{margin:15px 0;border-top:#DEDEDE solid 1px;border-bottom:#DEDEDE solid 1px;padding:0 2%;background:#fff}
+.block4 ul{width:100%;}
+.block4 ul li{width:100%;border-bottom:#DEDEDE solid 1px; padding:10px 0;overflow:hidden}
+.block4 ul li:last-child{border:none;}
+.block4 ul li div{width:20%;font-size:14px;font-weight:700;float:left}
+.block4 ul li input{width:76%;display:inline;padding:: 2px 2% 0 2%;;float:left}
+
+/*订单详情*/
+.orderDetails_nav{background:#fff;width:100%;height:50px;padding:0 0;margin:0 0}
+.orderDetails_nav ul li{float:left;width:20%;text-align:center;}
+.orderDetails_nav ul li p{padding:22px 0 5px 0;font-size:14px;width:50px;margin:0 auto;}
+.orderDetails_nav ul li .cur{color:#F31C1C;border-bottom:#F31C1C solid 2px;}
+
+.order_paylist{background:#eee;}
+.order_paylist .order_li{position:relative;margin: 20px 0;padding: 0 2%;background-color: #fff;}
+.order_paylist .order_address{position:relative;border-top:#eee solid 1px;padding:10px}
+.order_paylist .order_address p:nth-child(1){display:inline;font-size:14px;font-weight:700;}
+.order_paylist .order_address p:nth-child(2){display:inline;}
+.order_paylist .order_address p:nth-child(3){float:right;color:#B3B3B3;font-size:9px;text-align:right;padding:2px}
+.order_paylist .order_address .myPhoto{width:38px;height:38px;border-radius:38px;position:relative;overflow:hidden;display:inline-block;vertical-align: middle;}
+.order_paylist .order_address .myName{margin-left:10px;font-size}
+.order_paylist .order_address .myAssess{margin:20px 0}
+.order_paylist .order_cost{height:18px;position:relative;border-top:#eee solid 1px;padding:10px}
+.order_paylist .order_cost p:nth-child(1){float:left}
+.order_paylist .order_cost p:nth-child(2){float:right;padding:0 15px}
+.order_paylist .order_cost p:nth-child(3){float:right;padding:0 15px}
+
+.null_cart{padding:100px;text-align:center;}
+.null_cart p:first-child{padding:10px;font-size:14px;color:#F31C1C;}
+.null_cart p:last-child{background:url(../images/spc2.png) no-repeat;background-position: 0 8px;color:#7D7878;width:150px;margin:0 auto;padding:10px 0px}
+
+.order_paylist ul{border-top:#eee solid 1px;height:72px;padding:10px 0;position:relative}
+.order_paylist ul li {float:left;}
+.order_paylist ul li:last-child{margin-left:10px}
+.order_paylist ul li img{width:72px;height:72px}
+.order_paylist ul li p:nth-child(1){font-weight:700;}
+.order_paylist ul li p:nth-child(2){color:#cccccc;font-size:9px;}
+.order_paylist ul li p:nth-child(3){font-size:9px;position:absolute;bottom:10px;}
+.order_paylist ul li p:nth-child(4){font-size:9px;position:absolute;bottom:10px;right:10px}
+
+.order_paylist .count_order{border-top:#eee solid 1px;padding:10px 0 5px 0;height:35px;position:relative}
+.order_paylist .count_order p{float:right;padding:6px 0;width:70px;text-align:center;margin:0 10px}
+.order_paylist .count_order p:first-child{background:#F31C1C;border:#eee solid 1px;color:#fff;border-radius:5px}
+.order_paylist .count_order p:last-child{border:#eee solid 1px;color:#8E8787;border-radius:5px}
+
+
+.shop_carlist{margin:10px 0;padding:0 10px 30px 10px;background:#fff;position:relative}
+.shop_carlist ul{ position:relative;height:121px;padding:15px 0;border-bottom:#eee solid 1px}
+.shop_carlist ul li:nth-child(1){float:left;margin:40px 10px;width: 16px; height: 16px;border: #cccccc solid 1px;border-radius: 16px;text-align:center;color:#fff}
+.shopSelect{background-color:#EC2626}
+.shop_carlist ul li:nth-child(2){float:left;width:100px;}
+.shop_carlist ul li:nth-child(3){float:left;width:35%;padding:0 10px}
+.shop_carlist ul li:nth-child(3)>p:nth-child(1){height:36px;}
+.shop_carlist ul li:nth-child(3)> p:nth-child(2){color:#cccccc;height:18px;overflow:hidden;}
+.updateShopNum{border:#cccccc solid 1px;border-radius:5px;width:102px;height:24px;margin-top:15px;}
+.updateShopNum>p:nth-child(1){border-right:#cccccc solid 1px;width:25px;height:24px;float:left;text-align:center;font-size:16px}
+.updateShopNum>p:nth-child(3){border-left:#cccccc solid 1px;width:25px;height:24px;float:left;text-align:center;font-size:16px}
+.updateShopNum input{width:50px;height:24px;float:left;text-align:center;font-size:16px}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance: none !important;margin: 0; }
+input[type="number"]{-moz-appearance:textfield;}
+.shop_carlist ul li:nth-child(4){float:right;margin-right:5px}
+.shop_carlist ul li:nth-child(4)>p:nth-child(2){color:#cccccc}
+.shop_carlist .shopDelet{margin-top:40px;margin-left:20px}
+
+.shop_carTopay{background: #fff;color: #444;width: 100%;max-width: 720px;overflow: hidden;padding:5px 0;bottom: 0;position: fixed;border-top: #e6e6e6 solid 1px;}
+.shop_carTopay>li:nth-child(1){float:right;margin-right:20px;padding: 5px 0;}
+.shop_carTopay>li:nth-child(1) p{padding:5px 20px;text-align:center;background-color:#E82828;border-radius: 5px;color: #fff;font-size: 12px;}
+.shop_carTopay>li:nth-child(2){float:right;margin-right:20px;}.shop_carTopay .del{float:right;margin-right:20px;padding: 5px 0;text-align:center;background-color:#E82828;border-radius: 5px;color: #fff;font-size: 12px;}.shop_carTopay .jj{float:right;margin-right:20px;padding: 5px 0;text-align:center;background-color:#E82828;border-radius: 5px;color: #fff;font-size: 12px;}.shop_carTopay .total{float:right;margin-right:20px;}
+
+.balance_toPaly{border-radius: 5px;padding:5px;width: 50px;text-align: center;  background-color: #F32525;color: #fff;}
+
+
+
+
+
+

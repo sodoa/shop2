@@ -1,0 +1,154 @@
+.shop_orderist{margin:0;padding:0px 0px 10px 0px;background:#fff;position:relative}
+
+.shop_orderist ul{ background: url('/theme/images/order/address.png');position:relative;height:90px;padding:0;border-bottom:#eee solid 1px}
+
+.shop_orderist ul li:nth-child(1){float:left;margin:40px 10px;width: 40px; height: 16px;text-align:center;}
+.shop_orderist ul li:nth-child(2){text-align:left;vertical-align:middle;margin-top: 10px;padding-top: 30px;padding-left: 20px;}
+.shop_orderist ul li:nth-child(3){float:right;margin-top:10px; vertical-align:middle;width: 80px; height: 20px;border: #cccccc solid 1px;border-radius: 10px;text-align:center;color:#fff}
+.address {
+    width: 100%;
+    height: 130px;
+    background: url(/assets/i/dingdanxiang/02.png);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.shop_orderist2{margin:0;padding:0px 0px 10px 0px;background:#fff;position:relative}
+
+.shop_orderist2 ul{position:relative;height:90px;padding:0;}
+
+.address2 {
+    width: 100%;
+    height: 100px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.address .left,.zhuangtai .left{
+	width:15%;
+	float:left;
+}
+.address .left img{
+	margin:41px 0px 0px 20%;
+}
+.address .right,.zhuangtai .right{
+	width:65%;
+	float:left;
+}
+.address .right>p:nth-of-type(1){
+	margin:0;
+	padding:0;
+	margin-top:29px;
+	font-size:16px;
+	color:#000;
+}
+.address .right>p span{
+	margin-left:5%;
+}
+.address .right>p:nth-of-type(2){
+	margin:0;
+	padding:0;
+	font-size:16px;
+	margin-top:10px;
+	color:#000;
+}
+
+
+
+.address2 .left{
+	width:15%;
+	float:left;
+}
+.address2 .left img{
+	margin:41px 0px 0px 20%;
+}
+.address2 .right{
+	width:65%;
+	float:left;
+}
+.address2 .right>p span{
+	margin-left:5%;
+}
+
+
+.address .edit{
+	width:20%;
+	float:left;
+}
+
+.address .edit p{
+	margin:41px 0px 0px 20%;
+}
+
+.address .edit a{
+	padding: 10px;
+	border:1px solid #eee;
+	width:100px;
+	border-radius: 10px;
+}
+
+.order {
+    background-color: #f8f8f8;
+}
+
+
+
+#payment_ul_wrap{
+    background-color:#f2f2f2;
+    padding:0;
+}
+#payment_ul{
+    line-height:18px;
+    padding:0 20px;
+}
+.payment_li{height:33px;padding:22px 0 22px 70px;display:none}
+.payment_logo{width:33px;height:33px;top:22px;left:26px;background:url(http://s.koudai.com/images/order/payment.png?v=2015040702) 0 0 no-repeat;background-size:33px}#payment_ZFB{background-position:0 0}#payment_BDQB{background-position:0 -33px}#payment_WXZF{background-position:0 -66px}#payment_CFT{background-position:0 -99px}#payment_UF{background-position:0 -132px}#payment_HDFK{background-position:0 -165px}#payment_WDZF{background-position:0 -132px}.payment_intro{font-size:12px}
+.toShowPayment{display:block}#payto{display:none !important}#order_notice{padding-left:10px;padding-right:10px}
+
+.payclass_select,#hongbao_select{width:18px;height:18px;left:20px;top:18px;background-color:#e2e2e2;border-radius:9px}
+.payclass_select:after,#hongbao_select:after{content:""; width:6px; height:10px; border-right:1px solid #fff; border-bottom:1px solid #fff; top:1px; left:6px; position:absolute; -webkit-transform:rotate(45deg);display:none}
+.current_pay_class>.payclass_select,.hongbao_current #hongbao_select{
+    background-color:#c60a1e
+}
+.current_pay_class>.payclass_select:after,.hongbao_current #hongbao_select:after{
+    display:block
+}
+
+.payment_select{width:14px;height:14px;left:0;top:34px;background-color:#c9c9c9;border-radius:7px}
+.payment_select:after{content:""; width:8px; height:8px; position:absolute; background-color:#c9c9c9; top:3px; left:3px; border-radius:4px}
+.payment_li_current>.payment_select{
+}
+.payment_li_current>.payment_select:after{
+    background-color:#cd4239
+}
+
+
+
+
+
+#pay_class_ul{
+    position:relative;
+}
+.pay_class_li{
+    height:55px;
+    line-height:55px;
+    font-size:15px;
+    background-color:#fff;
+    padding-left:50px;
+    border-top:1px solid #cacaca;
+    /*
+    box-sizing:border-box;
+    border-bottom:1px solid #ebebeb;
+    border-left:1px solid #ebebeb;
+    border-right:1px solid #ebebeb;
+    */
+    display:block
+}
+.pay_class_li:first-child{
+    border-top:none
+}
+.show_all_class .pay_class_li{
+    width:33%;
+}
+
+

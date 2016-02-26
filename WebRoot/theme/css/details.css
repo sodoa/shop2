@@ -1,0 +1,33 @@
+.detailsBlock1{width:100%;background-color:#fff}
+.detailsBlock1>div:nth-child(1){width:100%;}
+.detailsBlock1> div:nth-child(1)>img{width:100%;}
+.detailsBlock1>div:nth-child(2){width:96%;padding:15px 2%;height:62px;position:relative}
+.detailsBlock1>div:nth-child(2)>p:nth-child(1){font-size:14px;font-weight:700;max-width:80%;height:36px}
+.detailsBlock1>div:nth-child(2)>p:nth-child(2){font-size:14px;color:#F36161;font-weight:700;padding: 10px 0;float:left;max-width:80%}
+.detailsBlock1>div:nth-child(2)>p:nth-child(3){font-size:14px;padding: 10px 2%;float:left;max-width:80%}
+.detailsBlock1>div:nth-child(2)>p:nth-child(4){font-size:9px;margin:10px 0;padding: 4px 10px;line-height:12px;float:left;max-width:80%;background-color:#F36161;color:#fff;border-radius: 5px;}
+.collection{position:absolute;bottom:40px;right:20px;}
+
+.collection>div>img{width:18px;}
+.collection>p{padding-top:2px;font-size:9px;color:#9E9D9D;text-align:center}
+
+.detailsBlock2{width:100%;background-color:#fff;margin:20px 0}
+.detailsBlock2>.nav{width:100%;height:41px;background-color:#D4D4D4;border-bottom:#fff solid 1px}
+.detailsBlock2>.nav p{width:50%;padding:10px 0;float:left;text-align:center;font-size:14px;}
+.nav .cur{background:#fff}
+
+.detailsBlock2 .detailsConter{padding:20px 2%;}
+.detailsBlock2 .detailsConter>ul>li{width:100%}
+.detailsBlock2 .detailsConter>ul>li>img{width:100%}
+
+.detailsBlock2 .shopAssess{padding:20px 2% 10px 2%;}
+.detailsBlock2 .shopAssess>div{  position: relative;border-bottom: #eee solid 1px;padding: 10px;}
+.detailsBlock2 .shopAssess>div .myPhoto { width: 38px;height: 38px;border-radius: 38px;position: relative;overflow: hidden;display: inline-block;vertical-align: middle;}
+.detailsBlock2 .shopAssess>div .myName { margin-left: 10px;display: inline;}
+.detailsBlock2 .shopAssess>div .myAssess {margin: 20px 0;}
+.detailsBlock2 .shopAssess>p{padding:10px;text-align:center;}
+
+.detailsBlock3{padding:20px 0;height:32px;background-color:#fff;border-top:#eee solid 1px}
+.detailsBlock3 .shopcart{margin-left:10%;width:20%;float:left;background:#eee;border-radius:5px;padding:5px;text-align:center;position: relative;}
+.detailsBlock3 .shopcart>.shopNum{position: absolute;background: #DC3939;color:#fff;font-size:9px;line-height:12px; width: 12px;border-radius: 12px;height: 12px;text-align: center;top: 3px;left: 53%;}
+.detailsBlock3 .toplay{margin-left:10%;width:50%;float:left;font-size:14px;color:#fff;background:#DC3939;border-radius:5px;padding:6px;text-align:center}
