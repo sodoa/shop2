@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+.comment{
+
+	background-color:#f8f8f8;
+}
+.choudf{
+	margin-top:17px;
+	width:100%;
+	height:69px;
+	line-height:69px;
+	border-top:1px solid #e6e6e6;
+	background-color:#FFF;
+}
+.choudf p{
+	font-size:16px;
+	color:#000;
+	margin-left:5%;
+}
+.choudf span{
+	color:#fe0100;
+}
+.pingwenz{
+	width:90%;
+	margin:auto;
+	height:263px;
+	border:1px solid #e6e6e6;
+	background-color:#f1f1f1;
+	margin-bottom:30px;
+}
+.pingwenz p{
+	font-size:16px;
+	color:#afafaf;
+	margin-top:15px;
+	    margin-left: 5%;
+}
+
+.title .title3 button{
+	line-height: 19px!important;
+}
+.wai{
+	width:100%;
+	height:300px;
+	background-color:#FFF;
+	 border-bottom:1px solid #e6e6e6;
+}

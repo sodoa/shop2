@@ -1,0 +1,147 @@
+@charset "utf-8";
+/* CSS Document */
+
+.header{
+
+top:0px;
+
+height:50px;
+
+max-width:720px;
+
+min-width:320px;
+
+width:100%;
+
+filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;
+
+background: #FFB420;
+
+z-index:9999;
+
+position:relative;
+
+text-align:center;
+
+}
+
+.top_left{
+	float:left;
+	width:20%;
+	text-align:left;
+	margin-left:2%;
+	margin-top:10px;
+}
+
+.top_center{
+	float:left;
+	width:56%;
+	margin-top:10px;
+	height:30px;
+	background:#ffe9bb;
+}
+.top_right{
+	float:left;
+	width:20%;
+	text-align:right;
+	margin-right:2%;
+	margin-top:10px;
+}
+.top_center input{
+	background:#ffe9bb;
+	margin:5px 0;
+	height:20px;
+	width:80%;
+	border:none;
+	outline:none;
+	font-size:14px;
+}
+.shopcount{
+	position: absolute;
+	background: #fff;
+	width: 16px; 
+	border-radius: 16px;
+	height: 16px;
+	text-align: center;
+	top: 8px;
+	right: 1%;
+}
+.shopcount p{
+	margin:0;
+	color:#FFBB36;
+}
+
+.searchye{
+	width:100%;
+	height:100%;
+}
+.searchye ul{
+	padding:0;
+	margin:0;
+	height:100%;
+}
+.searchye ul li{
+	list-style:none;
+	width:47%;
+	float:left;
+	margin:10px 0 0 2%;
+	border:1px solid #f1f1f1;
+	position:relative;
+}
+
+.searchye ul li img{
+	width:100%;
+}
+.searchye ul li .touming{
+	width:100%;
+	height:20px;
+	line-height:20px;
+	background-color:#000;
+	opacity: 0.6;
+	margin-top:-20px;
+}
+.searchye ul li .touming p{
+	text-align:right;
+	color:#FFF;
+	font-size:14px;
+	margin-right:3%;
+}
+.searchye p{
+	padding:0;
+	margin:0;
+}
+.searchye .one{
+	width:100%;
+padding: 2px 2% 5px 2%;
+}
+.searchye .one p{
+	color:#000;
+	font-size:14px;
+	
+
+}
+.searchye .two{
+	width:96%;
+	height: 30px;
+    line-height: 30px;
+	margin:auto;
+	border-top:1px solid #f1f1f1;
+}
+.searchye .two p{
+	color:#CCC;
+	font-size:12px;
+	
+}
+.searchye .two p span:nth-of-type(1){
+	color:#ff2d49;
+	margin-right:2%;
+}
+.searchye .two p span:nth-of-type(2){
+	text-decoration: line-through;
+}
+.searchye .two p span:nth-of-type(3){
+	position:absolute;
+	right:3%;
+	color:#000;
+}
+
