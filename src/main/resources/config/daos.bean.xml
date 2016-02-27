@@ -48,51 +48,73 @@
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.WalletMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
-	
+
 	<bean id="CartDao" class="com.xinfan.wxshop.business.dao.CartDao">
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.CartMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
-	
+
 	<bean id="AppraiseDao" class="com.xinfan.wxshop.business.dao.AppraiseDao">
-		<property name="namespace" value="com.xinfan.wxshop.business.dao.AppraiseMapper" />
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.AppraiseMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>	
-	
+	</bean>
+
 	<bean id="AreaDao" class="com.xinfan.wxshop.business.dao.AreaDao">
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.AreaMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="GoodsImageDao" class="com.xinfan.wxshop.business.dao.GoodsImageDao">
-		<property name="namespace" value="com.xinfan.wxshop.business.dao.GoodsImageMapper" />
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.GoodsImageMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>			
-	
+	</bean>
+
 	<bean id="GoodsTypeDao" class="com.xinfan.wxshop.business.dao.GoodsTypeDao">
-		<property name="namespace" value="com.xinfan.wxshop.business.dao.GoodsTypeMapper" />
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.GoodsTypeMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="LoveDao" class="com.xinfan.wxshop.business.dao.LoveDao">
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.LoveMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="RankingDao" class="com.xinfan.wxshop.business.dao.RankingDao">
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.RankingMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="SequenceDao" class="com.xinfan.wxshop.business.dao.SequenceDao">
-		<property name="namespace" value="com.xinfan.wxshop.business.dao.SequenceMapper" />
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.SequenceMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
 	<bean id="TransferDao" class="com.xinfan.wxshop.business.dao.TransferDao">
-		<property name="namespace" value="com.xinfan.wxshop.business.dao.TransferMapper" />
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.TransferMapper" />
 		<property name="sqlSession" ref="sqlSession" />
-	</bean>		
-	
+	</bean>
+
+	<bean id="TransferDao" class="com.xinfan.wxshop.business.dao.TransferDao">
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.TransferMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="RedRecordDao" class="com.xinfan.wxshop.business.dao.RedRecordDao">
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.RedRecordMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="RedPacketDao" class="com.xinfan.wxshop.business.dao.RedPacketDao">
+		<property name="namespace"
+			value="com.xinfan.wxshop.business.dao.RedPacketMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
 
 </beans>
