@@ -102,6 +102,8 @@ public class CustomerService {
 		if(share_id == null || share_id.length() ==0){
 			share_id = "0";
 		}
+		
+		String wxId = attributes.getString("wx_id");
 
 		Customer exist = customerDao.selectByAccount(account);
 		if (exist != null) {
@@ -118,6 +120,7 @@ public class CustomerService {
 		bean.setRegdate(new Date());
 		bean.setSex(Integer.parseInt(sex));
 		bean.setCustomerId(customerId);
+		bean.setWxId(wxId);
 		bean.setUplineId(Integer.parseInt(share_id));
 
 		this.customerDao.insertSelective(bean);
@@ -134,6 +137,11 @@ public class CustomerService {
 
 	public Customer getByAccount(String account) {
 		Customer bean = customerDao.selectByAccount(account.trim());
+		return bean;
+	}
+	
+	public Customer getByWeixinId(String account) {
+		Customer bean = customerDao.selectByWxId(account.trim());
 		return bean;
 	}
 

@@ -53,6 +53,18 @@ public class CustomerDao extends SqlSessionDaoSupport {
 		return list.isEmpty() ? null : list.get(0);
 	}
 	
+
+	public Customer selectByWxId(String account) {
+
+		CustomerExample example = new CustomerExample();
+		example.createCriteria().andWxIdEqualTo(account);
+		List<Customer> list = getSqlSession().selectList(
+				wrapCommand("selectByExample"), example);
+
+		return list.isEmpty() ? null : list.get(0);
+	}
+	
+	
 	
 	public List<Customer> getListCustomerLayerUser(DataMap map) {
 		return getSqlSession().selectList(wrapCommand("getListCustomerLayerUser"), map);
