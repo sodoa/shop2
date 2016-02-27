@@ -576,4 +576,9 @@
   		order by release_date desc 		
   </select>
   
+  
+  <update id="updateGoodsSellCountByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.Goods" >
+  		update t_goods set sellcount = sellcount + #{sellcount} where goods_id  = #{goodsId}
+  </update>
+  
 </mapper>

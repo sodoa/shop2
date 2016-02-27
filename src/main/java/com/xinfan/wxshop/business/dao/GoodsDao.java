@@ -40,7 +40,8 @@ public class GoodsDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne(wrapCommand("selectByPrimaryKey"), id);
 	}
 	
-	
-	
+	public int updateGoodsSellCountByPrimaryKey(Goods pojo) {
+		return getSqlSession().update(wrapCommand("updateGoodsSellCountByPrimaryKey"), pojo);
+	}
 	
 }
