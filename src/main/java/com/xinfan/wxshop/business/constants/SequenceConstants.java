@@ -33,4 +33,6 @@ public class SequenceConstants {
 	
 	public static final String SEQ_TRANSFER = "seq_transfer";
 	
+	public static final String SEQ_RED_RECORD = "seq_red_record";
+	
 }
