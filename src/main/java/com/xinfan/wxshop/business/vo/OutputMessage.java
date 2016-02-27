@@ -21,6 +21,17 @@ public class OutputMessage {
 	@XStreamCDATA
 	private String MsgType = "text";
 
+	@XStreamAlias("Content")
+	private String Content;
+
+	public String getContent() {
+		return Content;
+	}
+
+	public void setContent(String content) {
+		Content = content;
+	}
+
 	public String getToUserName() {
 		return ToUserName;
 	}

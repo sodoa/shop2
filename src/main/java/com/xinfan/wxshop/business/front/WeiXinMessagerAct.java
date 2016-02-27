@@ -107,6 +107,19 @@ public class WeiXinMessagerAct {
 		logger.info("失败 认证 echostr：" + echostr);
 		return null;
 	}
+	
+	public static void main(String[] args){
+		
+		String xml = "<xml><ToUserName><![CDATA[gh_46560b440d13]]></ToUserName><FromUserName><![CDATA[oVProsuNsZqTdBjfhcgvHcaz139o]]></FromUserName><CreateTime>1456566768</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[计算机中]]></Content><MsgId>6255906633401811497</MsgId></xml> ";
+		// 将xml内容转换为InputMessage对象
+		XStream xs = SerializeXmlUtil.createXstream();
+		xs.processAnnotations(InputMessage.class);
+		xs.processAnnotations(OutputMessage.class);
+		xs.alias("xml", InputMessage.class);
+		InputMessage inputMsg = (InputMessage) xs.fromXML(xml.toString());
+		
+		System.out.println(inputMsg);
+	}
 
 	private void acceptMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
@@ -124,6 +137,9 @@ public class WeiXinMessagerAct {
 		for (int n; (n = in.read(b)) != -1;) {
 			xmlMsg.append(new String(b, 0, n, "UTF-8"));
 		}
+		
+		logger.info("" +xmlMsg.toString());
+		
 		// 将xml内容转换为InputMessage对象
 		InputMessage inputMsg = (InputMessage) xs.fromXML(xmlMsg.toString());
 
@@ -135,7 +151,7 @@ public class WeiXinMessagerAct {
 		// 取得消息类型
 		String msgType = inputMsg.getMsgType();
 		// 根据消息类型获取对应的消息内容
-		if (msgType.equals("")) {
+		if (msgType.equals("text") && inputMsg.getContent().contains("红包")) {
 			// 文本消息
 			logger.info("开发者微信号：" + inputMsg.getToUserName());
 			logger.info("发送方帐号：" + inputMsg.getFromUserName());
