@@ -7,12 +7,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
-import com.thoughtworks.xstream.io.xml.XppDriver;
 
 public class SerializeXmlUtil {
 	public static XStream createXstream() { 
-		return new XStream(new XppDriver() {
+		return new XStream(new DomDriver() {
 			@Override
 			public HierarchicalStreamWriter createWriter(Writer out) {
 				return new PrettyPrintWriter(out) {
