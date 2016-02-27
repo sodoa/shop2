@@ -206,126 +206,67 @@
 	
 
 	<ul class="focus">
-
-		<li><a href="g-s.html?init=11"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-		<div><img src="/theme/images/index/1.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="g-s.html?init=12"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-	
-
-		<div><img src="/theme/images/index/2.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-		<div><img src="/theme/images/index/3.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-		<div><img src="/theme/images/index/4.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-		<div><img src="/theme/images/index/5.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</p></div>
-
-		<div><img src="/theme/images/index/6.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</p></p></div>
-
-		<div><img src="/theme/images/index/7.png"style="width:100%"></div></a>
-
-		</li> 
-
-		<li><a href="#"><div><p>进口</p><p>欧美/日韩/东南亚</h5></p></div>
-
-		<div><img src="/theme/images/index/8.png"style="width:100%"></div></a>
-
-		</li> 
-
+		<!-- 此处由于inline-block属性BUG a标签结束标签必须分行写 -->
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus1.png"></a></li> 
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus2.png">
+		</a></li> 
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus3.png">
+		</a></li> 
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus4.png">
+		</a></li> 
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus5.png">
+		</a></li> 
+		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus6.png">
+		</a></li> 
 	</ul>
-
-	<script>
-
-	 $(function(){
-
-		$(".focus li:odd").css("border-left","#e6e6e6 solid 1px").css("float","right");
-
-		$(".focus li:even").css("border-right","#e6e6e6 solid 1px");
-
-	 });
-
-	</script>
-
+<script type="text/javascript">
+	$(function(){
+		
+		$(".focus").css("height",($(".focus").width()/3)*(122/162)*2);
+	});
 	
-
-	<ul class="focus2">
-		<li>
-
-			<div><img src="/theme/images/index/9.png"></div>
-
-			<div><p>2000</p><p>成交订单</p></div>
-
-		</li
-
-		><li>
-
-			<div><img src="/theme/images/index/10.png" ></div>
-
-			<div><p>1000</p><p>分享次数</p></div>
-
-		</li
-
-		><li>
-
-			<div><img src="/theme/images/index/11.png"></div>
-
-			<div><p>8000</h3><p>注册用户</p></div>
-
-		</li>		
-	</ul>
-
+</script>
 	
 
 	<div class=" focus3">
 
 		<div class="bao"><p>爆品</p></div>
 		<c:forEach var="item" items="${burstList}">
-			<div><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage">
-				<span><p class="discount" style="margin:30px 0"  >${item.discount}折</p><p style="overflow: hidden;">${item.goodsLname}</p></span>
+			<div class="shop"><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage">
+				<span><p class="discount" >${item.discount}折</p><p class="name" style="overflow: hidden;width:60%">${item.goodsLname}</p></span>
 				</a>
 			</div>
 		</c:forEach>
 	</div>
+
 
 	<div class="focus3">
 
 		<div class="hot"><p>热卖</p></div>
 		<c:forEach var="item" items="${hotList}">
-			<div><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}"  onerror="imagerror(this)" width="694" height="284">
-				<span style="width:100%;">
-					<div style="clear:both;width:30%; display:inline;"><p style="clear: both;" class="discount"  >${item.discount}折</p></div>
-					<div style="clear:both;width:70%; display:inline;"><p style="clear: both;overflow: hidden;" >${item.goodsLname}</p></div>
-				</span>
+			<div class="shop"><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}"  onerror="imagerror(this)" width="694" height="284">
+				<span><p class="discount">${item.discount}折</p><p class="name" style="overflow: hidden;width:60%">${item.goodsLname}</p></span>				
 				</a>
 			</div>
 		</c:forEach>
 	</div>
 	
+	<script type="text/javascript">
+	$(function(){
+		var obj=$(".focus3 .discount");
+		$.each(obj,function(i,item){
+			
+			var h1=$(".focus3 .discount").eq(i).height();
+			var h2=$(".focus3 .name").eq(i).height();			
+			if(h2>h1){
+				$(".focus3 .discount").eq(i).css("margin-top",(h2-h1)/2)
+				$(".focus3 .discount").eq(i).css("margin-bottom",(h2-h1)/2);
+				$(".focus3 .shop").eq(i).css("padding-bottom",h2+20);
+			}
+		});
+	});
+	
+</script>
 	<a href="/center/cart.html">
 		<div class="cart_btn for_gaq" data-for-gaq="进入购物车;店铺页">
 			<span></span>
