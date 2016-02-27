@@ -17,6 +17,8 @@
 	<bean id="CountService" class="com.xinfan.wxshop.business.service.CountService" />
 	<bean id="GoodsTypeService" class="com.xinfan.wxshop.business.service.GoodsTypeService" />
 	<bean id="RankingService" class="com.xinfan.wxshop.business.service.RankingService" />
+	<bean id="RedPacketService" class="com.xinfan.wxshop.business.service.RedPacketService" />
+	
 	
 	<bean id="SmsService" class="com.xinfan.wxshop.common.sms.YunPianSmsServiceImpl" />
 	

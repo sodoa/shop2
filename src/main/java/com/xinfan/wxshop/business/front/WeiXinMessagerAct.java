@@ -19,8 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thoughtworks.xstream.XStream;
+import com.xinfan.wxshop.business.entity.RedRecord;
 import com.xinfan.wxshop.business.pay.weixin.utils.Sha1Util;
-import com.xinfan.wxshop.business.service.GoodsService;
+import com.xinfan.wxshop.business.service.RedPacketService;
 import com.xinfan.wxshop.business.util.SerializeXmlUtil;
 import com.xinfan.wxshop.business.vo.InputMessage;
 import com.xinfan.wxshop.business.vo.OutputMessage;
@@ -32,7 +33,7 @@ public class WeiXinMessagerAct {
 	private static final Logger logger = LoggerFactory.getLogger(WeiXinMessagerAct.class);
 
 	@Autowired
-	private GoodsService GoodsService;
+	private RedPacketService RedPacketService;
 
 	/**
 	 * <xml> <ToUserName><![CDATA[toUser]]></ToUserName>
@@ -139,13 +140,27 @@ public class WeiXinMessagerAct {
 			logger.info("消息内容：" + inputMsg.getContent());
 			logger.info("消息Id：" + inputMsg.getMsgId());
 			
+			String msgContent = "";
+			
+			try{
+				
+				RedRecord record = new RedRecord();
+				record.setFromusername(inputMsg.getFromUserName());
+				record.setMsgid(String.valueOf(inputMsg.getMsgId()));
+				msgContent = RedPacketService.updatePickupRedPacket(record);
+			}
+			catch(Exception e){
+				logger.error(e.getMessage(),e);
+				msgContent = "红包领取失败";
+			}
+			
 			StringBuffer str = new StringBuffer();
 			str.append("<xml>");
 			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
 			str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
 			str.append("<CreateTime>" + returnTime + "</CreateTime>");
 			str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
-			str.append("<Content><![CDATA[你说的是：" + inputMsg.getContent() + "，吗？]]></Content>");
+			str.append("<Content><![CDATA[" + msgContent + "]]></Content>");
 			str.append("</xml>");
 			logger.info(str.toString());
 			
