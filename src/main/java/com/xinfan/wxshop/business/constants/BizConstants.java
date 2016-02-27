@@ -20,7 +20,7 @@ public class BizConstants {
 	public static final String CACHE_KEY_CONFIGCACHE = "ConfigCache";
 	public static final String CACHE_KEY_GOODSTYPE_CACHE = "GoodsTypeCache";
 	public static final String CACHE_KEY_AREACACHE_CACHE = "AreaCache";
-	
+	public static final String CACHE_KEY_SEARCHWORDS_CACHE = "SearchWordsCache";
 	
 	
 	

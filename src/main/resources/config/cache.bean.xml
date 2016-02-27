@@ -38,5 +38,9 @@
 	<bean class="com.xinfan.wxshop.business.cache.AreaCacheLoader" >
 		<property name="cacheKey" value="AreaCache" />
 	</bean>		
+	
+	<bean class="com.xinfan.wxshop.business.cache.SearchWordsCacheLoader" >
+		<property name="cacheKey" value="SearchWordsCache" />
+	</bean>		
 			
 </beans>
