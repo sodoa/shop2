@@ -83,6 +83,9 @@ public class WeiXinMessagerAct {
 		params.add(token);
 		params.add(timestamp);
 		params.add(nonce);
+		
+		logger.info(params.toString());
+		
 		// 1. 将token、timestamp、nonce三个参数进行字典序排序
 		Collections.sort(params, new Comparator<String>() {
 			@Override

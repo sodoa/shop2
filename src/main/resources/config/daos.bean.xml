@@ -99,12 +99,6 @@
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
 
-	<bean id="TransferDao" class="com.xinfan.wxshop.business.dao.TransferDao">
-		<property name="namespace"
-			value="com.xinfan.wxshop.business.dao.TransferMapper" />
-		<property name="sqlSession" ref="sqlSession" />
-	</bean>
-
 	<bean id="RedRecordDao" class="com.xinfan.wxshop.business.dao.RedRecordDao">
 		<property name="namespace"
 			value="com.xinfan.wxshop.business.dao.RedRecordMapper" />
@@ -112,8 +106,7 @@
 	</bean>
 
 	<bean id="RedPacketDao" class="com.xinfan.wxshop.business.dao.RedPacketDao">
-		<property name="namespace"
-			value="com.xinfan.wxshop.business.dao.RedPacketMapper" />
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.RedPacketMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>
 
