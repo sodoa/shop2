@@ -4,64 +4,74 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class RedRecord extends BaseEntity  {
-    private Integer rdid;
+public class RedRecord extends BaseEntity {
+	private Integer rdid;
 
-    private String lined;
+	private String lined;
 
-    private Integer amount;
+	private Integer amount;
 
-    private Date createdate;
+	private Date createdate;
 
-    private String msgid;
+	private String msgid;
 
-    private String fromusername;
+	private String fromusername;
 
-    public Integer getRdid() {
-        return rdid;
-    }
+	private String clientIp;
 
-    public void setRdid(Integer rdid) {
-        this.rdid = rdid;
-    }
+	public String getClientIp() {
+		return clientIp;
+	}
 
-    public String getLined() {
-        return lined;
-    }
+	public void setClientIp(String clientIp) {
+		this.clientIp = clientIp;
+	}
 
-    public void setLined(String lined) {
-        this.lined = lined == null ? null : lined.trim();
-    }
+	public Integer getRdid() {
+		return rdid;
+	}
 
-    public Integer getAmount() {
-        return amount;
-    }
+	public void setRdid(Integer rdid) {
+		this.rdid = rdid;
+	}
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+	public String getLined() {
+		return lined;
+	}
 
-    public Date getCreatedate() {
-        return createdate;
-    }
+	public void setLined(String lined) {
+		this.lined = lined == null ? null : lined.trim();
+	}
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+	public Integer getAmount() {
+		return amount;
+	}
 
-    public String getMsgid() {
-        return msgid;
-    }
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
 
-    public void setMsgid(String msgid) {
-        this.msgid = msgid == null ? null : msgid.trim();
-    }
+	public Date getCreatedate() {
+		return createdate;
+	}
 
-    public String getFromusername() {
-        return fromusername;
-    }
+	public void setCreatedate(Date createdate) {
+		this.createdate = createdate;
+	}
 
-    public void setFromusername(String fromusername) {
-        this.fromusername = fromusername == null ? null : fromusername.trim();
-    }
+	public String getMsgid() {
+		return msgid;
+	}
+
+	public void setMsgid(String msgid) {
+		this.msgid = msgid == null ? null : msgid.trim();
+	}
+
+	public String getFromusername() {
+		return fromusername;
+	}
+
+	public void setFromusername(String fromusername) {
+		this.fromusername = fromusername == null ? null : fromusername.trim();
+	}
 }

@@ -86,9 +86,11 @@ public class RedPacketService {
 		//map.put("max_value", money *100);//最大红包
 		map.put("total_num", 1);//红包发送总人数
 		map.put("wishing", "果然逗日常红包，天天有领");//红包祝福语
-		map.put("client_ip", "");//ip地址
+		map.put("client_ip", record.getClientIp());//ip地址
 		map.put("act_name", "日常红包");//活动名称
 		map.put("remark", "果然逗日常红包，天天有领");//备注
+		
+		map.put("sign", MoneyUtils.createSign(map));//签名
 			
 		Map<String,String> resultMap = GetWxOrderno.getSSLResult(url, MoneyUtils.createXML(map));
 		if(resultMap!=null){

@@ -166,6 +166,7 @@ public class WeiXinMessagerAct {
 				RedRecord record = new RedRecord();
 				record.setFromusername(inputMsg.getFromUserName());
 				record.setMsgid(String.valueOf(inputMsg.getMsgId()));
+				record.setClientIp(request.getRemoteAddr());
 				msgContent = RedPacketService.updatePickupRedPacket(record);
 			}
 			catch(Exception e){
@@ -183,6 +184,7 @@ public class WeiXinMessagerAct {
 			str.append("</xml>");
 			logger.info(str.toString());
 			
+			response.setCharacterEncoding("utf-8");
 			response.getWriter().write(str.toString());
 		}
 	}

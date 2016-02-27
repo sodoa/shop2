@@ -32,7 +32,7 @@ public class RedRecordDao extends SqlSessionDaoSupport {
 	public List<RedRecord> selectByMsgId(RedRecord record) {
 		RedRecordExample example = new RedRecordExample();
 		example.createCriteria().andMsgidEqualTo(record.getMsgid()).andLinedEqualTo(record.getLined());
-		return getSqlSession().selectList(wrapCommand("selectByExample"), record);
+		return getSqlSession().selectList(wrapCommand("selectByExample"), example);
 	}
 
 }
