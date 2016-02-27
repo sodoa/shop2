@@ -199,5 +199,11 @@
 		<body-content>scriptless</body-content>
 	</tag>
 	
+		<tag>
+		<name>search_words_list_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.SearchWordsListTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
 
 </taglib>
