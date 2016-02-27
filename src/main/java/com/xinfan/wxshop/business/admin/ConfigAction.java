@@ -63,7 +63,7 @@ public class ConfigAction {
 					configService.update(config);
 				}
 				
-				CacheHelper.refresh(BizConstants.CACHE_KEY_CONFIGCACHE);
+				CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_CONFIGCACHE);
 			}
 			
 			result = JSONResult.success();

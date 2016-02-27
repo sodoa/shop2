@@ -4,21 +4,27 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.dao.SearchWordsDao;
 import com.xinfan.wxshop.business.entity.SearchWords;
+import com.xinfan.wxshop.common.cache.CacheHelper;
 
 public class SearchWordsService {
 
 	@Autowired
 	private SearchWordsDao SearchWordsDao;
 
-	public int deleteByKey(String key) {
-		return SearchWordsDao.deleteByKey(key);
+	public void deleteByKey(String key) {
+		SearchWordsDao.deleteByKey(key);
+		CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_SEARCHWORDS_CACHE);
 	}
 
-	public int insertSelective(SearchWords record) {
+	public void insertSelective(SearchWords record) {
 		record.setSort(1);
-		return SearchWordsDao.insertSelective(record);
+
+		SearchWordsDao.insertSelective(record);
+
+		CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_SEARCHWORDS_CACHE);
 	}
 
 	public List<SearchWords> selectAll() {

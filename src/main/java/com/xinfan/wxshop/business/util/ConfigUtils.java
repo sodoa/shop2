@@ -23,7 +23,7 @@ public class ConfigUtils {
 	 * @return
 	 */
 	public static String getValue(String configId) {
-		Map configs = (Map) CacheHelper.getCacheObject(BizConstants.PROVIDER_COMMON_CACHE, BizConstants.CACHE_KEY_CONFIGCACHE);
+		Map configs = (Map) CacheHelper.getInstance().getCacheObject(BizConstants.PROVIDER_COMMON_CACHE, BizConstants.CACHE_KEY_CONFIGCACHE);
 
 		String key = configId.toUpperCase();
 		Config item = (Config) configs.get(key);
@@ -55,7 +55,7 @@ public class ConfigUtils {
 	 * @return
 	 */
 	public static String getName(String configId) {
-		Map configs = (Map) CacheHelper.getCacheObject(BizConstants.PROVIDER_COMMON_CACHE, BizConstants.CACHE_KEY_CONFIGCACHE);
+		Map configs = (Map) CacheHelper.getInstance().getCacheObject(BizConstants.PROVIDER_COMMON_CACHE, BizConstants.CACHE_KEY_CONFIGCACHE);
 
 		String key = configId.toUpperCase();
 		Config item = (Config) configs.get(key);

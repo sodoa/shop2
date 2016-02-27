@@ -35,7 +35,7 @@ public class GoodsTypeService {
 		
 		int size = goodsTypeDao.updateByPrimaryKeySelective(bean);
 
-		CacheHelper.refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
+		CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
 
 		return size;
 	}
@@ -48,7 +48,7 @@ public class GoodsTypeService {
 		}
 
 		int size = goodsTypeDao.deleteByPrimaryKey(id);
-		CacheHelper.refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
+		CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
 
 		return size;
 	}
@@ -56,7 +56,7 @@ public class GoodsTypeService {
 	public int insertGoodsType(GoodsType bean) {
 
 		int size = goodsTypeDao.insertSelective(bean);
-		CacheHelper.refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
+		CacheHelper.getInstance().refresh(BizConstants.CACHE_KEY_GOODSTYPE_CACHE);
 		return size;
 	}
 

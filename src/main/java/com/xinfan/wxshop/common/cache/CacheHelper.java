@@ -42,7 +42,7 @@ public class CacheHelper {
 		return instance;
 	}
 
-	public static Object getCacheObject(String cacheName, String key) {
+	public  Object getCacheObject(String cacheName, String key) {
 
 
 		CacheProvider provider = CacheHolder.getInstance().getCacheProvider(cacheName);
@@ -65,7 +65,7 @@ public class CacheHelper {
 		return obj;
 	}
 
-	public static boolean refresh(String key) {
+	public  boolean refresh(String key) {
 
 		CacheLoader loader = loaderMap.get(key);
 		if (loader != null) {
