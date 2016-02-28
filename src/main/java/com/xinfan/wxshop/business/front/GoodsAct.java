@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsImage;
-import com.xinfan.wxshop.business.helper.GoodsHelper;
+import com.xinfan.wxshop.business.helper.FilePathHelper;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.AppraiseService;
 import com.xinfan.wxshop.business.service.CartService;
@@ -59,7 +59,7 @@ public class GoodsAct extends BaseFrontAct{
 		page = AppraiseService.listGoodsAppraise(goodsId, page);
 		
 		if(goods!=null){
-			String html = GoodsHelper.getGoodsSummaryHtml(request, goods.getSummary());
+			String html = FilePathHelper.getGoodsSummaryHtml(request, goods.getSummary());
 			mv.addObject("html", html);
 		}
 		
@@ -116,7 +116,7 @@ public class GoodsAct extends BaseFrontAct{
 		
 		String summary = request.getParameter("s");
 		
-		String html = GoodsHelper.getGoodsSummaryHtml(request, summary);
+		String html = FilePathHelper.getGoodsSummaryHtml(request, summary);
 		mv.addObject("html", html);
 
 		return mv;

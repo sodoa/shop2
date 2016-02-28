@@ -19,7 +19,8 @@
 	<bean id="RankingService" class="com.xinfan.wxshop.business.service.RankingService" />
 	<bean id="RedPacketService" class="com.xinfan.wxshop.business.service.RedPacketService" />
 	<bean id="SearchWordsService" class="com.xinfan.wxshop.business.service.SearchWordsService" />
-	
+	<bean id="ArticleService" class="com.xinfan.wxshop.business.service.ArticleService" />
+		
 	<bean id="SmsService" class="com.xinfan.wxshop.common.sms.YunPianSmsServiceImpl" />
 	
 	

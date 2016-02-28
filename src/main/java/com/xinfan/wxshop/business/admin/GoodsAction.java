@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsImage;
-import com.xinfan.wxshop.business.helper.GoodsHelper;
+import com.xinfan.wxshop.business.helper.FilePathHelper;
 import com.xinfan.wxshop.business.model.DataTableDataGrid;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.GoodsService;
@@ -63,8 +63,8 @@ public class GoodsAction {
 		
 		String goodsId = request.getParameter("id");
 		
-		String realPath = GoodsHelper.getGoodsImageListToSavePath(goodsId);
-		String basePath = GoodsHelper.getRealPath(request);
+		String realPath = FilePathHelper.getGoodsImageListToSavePath(goodsId);
+		String basePath = FilePathHelper.getRealPath(request);
 		String filename = new Date().getTime()+".jpg";
 		
 		try {
@@ -98,7 +98,7 @@ public class GoodsAction {
 			if (StringUtils.isNotEmpty(id)) {
 				
 				GoodsImage image = this.GoodsService.getGoodsImage(Integer.parseInt(id));
-				String basePath = GoodsHelper.getRealPath(request);
+				String basePath = FilePathHelper.getRealPath(request);
 				FileUtils.deleteQuietly(new File(basePath+image.getImageUrl()));
 				this.GoodsService.deleteGoodsImage(Integer.parseInt(id));
 			}
@@ -148,7 +148,7 @@ public class GoodsAction {
 		mv.addObject("bean", goods);
 		mv.addObject("time", time);
 
-		String html = GoodsHelper.getGoodsSummaryHtml(request, goods.getSummary());
+		String html = FilePathHelper.getGoodsSummaryHtml(request, goods.getSummary());
 		mv.addObject("html", html);
 
 		return mv;
@@ -203,13 +203,13 @@ public class GoodsAction {
 		Goods existGoods = this.GoodsService.getGoods(Integer.parseInt(goodsId));
 
 		try {
-			File file = new File(GoodsHelper.getRealPath(request) + existGoods.getSummary());
+			File file = new File(FilePathHelper.getRealPath(request) + existGoods.getSummary());
 			if (file.exists()) {
 				FileUtils.deleteQuietly(file);
 			}
 
-			String path = GoodsHelper.getGoodsSummaryHtmlPath();
-			FileUtils.writeStringToFile(new File(GoodsHelper.getRealPath(request) + path), summary);
+			String path = FilePathHelper.getGoodsSummaryHtmlPath();
+			FileUtils.writeStringToFile(new File(FilePathHelper.getRealPath(request) + path), summary);
 			goods.setSummary(path);
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -218,7 +218,7 @@ public class GoodsAction {
 		goods.setGoodsId(Integer.parseInt(goodsId));
 		GoodsService.updateGoods(goods);
 
-		String thumdPath = GoodsHelper.getImageThumdUploadPath(request);
+		String thumdPath = FilePathHelper.getImageThumdUploadPath(request);
 		File tFile = new File(thumdPath);
 
 		if (tFile.exists()) {
@@ -226,17 +226,17 @@ public class GoodsAction {
 			int index = 0;
 			if (!thumdFile.isEmpty()) {
 				File thumdImage = thumdFile.iterator().next();
-				String newPath = GoodsHelper.getImageThumdToSavePath(String.valueOf(goods.getGoodsId()));
+				String newPath = FilePathHelper.getImageThumdToSavePath(String.valueOf(goods.getGoodsId()));
 				try {
 					newPath += (index + ".jpg");
-					FileUtils.copyFile(thumdImage, new File(GoodsHelper.getRealPath(request) + newPath));
+					FileUtils.copyFile(thumdImage, new File(FilePathHelper.getRealPath(request) + newPath));
 					GoodsService.updateGoodsThumdUrl(goods.getGoodsId(), newPath);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 			try {
-				FileUtils.deleteDirectory(new File(GoodsHelper.getRealPath(request) + existGoods.getSummary()));
+				FileUtils.deleteDirectory(new File(FilePathHelper.getRealPath(request) + existGoods.getSummary()));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -256,7 +256,7 @@ public class GoodsAction {
 
 		mv.addObject("bean", goods);
 
-		String html = GoodsHelper.getGoodsSummaryHtml(request, goods.getSummary());
+		String html = FilePathHelper.getGoodsSummaryHtml(request, goods.getSummary());
 		mv.addObject("html", html);
 
 		return mv;
@@ -308,8 +308,8 @@ public class GoodsAction {
 		goods.setSupplier(supplier);
 
 		try {
-			String path = GoodsHelper.getGoodsSummaryHtmlPath();
-			FileUtils.writeStringToFile(new File(GoodsHelper.getRealPath(request) + path), summary);
+			String path = FilePathHelper.getGoodsSummaryHtmlPath();
+			FileUtils.writeStringToFile(new File(FilePathHelper.getRealPath(request) + path), summary);
 			goods.setSummary(path);
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -317,16 +317,16 @@ public class GoodsAction {
 
 		GoodsService.addGoods(goods);
 
-		String thumdPath = GoodsHelper.getImageThumdUploadPath(request);
+		String thumdPath = FilePathHelper.getImageThumdUploadPath(request);
 		Collection<File> thumdFile = FileUtils.listFiles(new File(thumdPath), new String[] { "jpg" }, true);
 
 		int index = 0;
 		if (!thumdFile.isEmpty()) {
 			File thumdImage = thumdFile.iterator().next();
-			String newPath = GoodsHelper.getImageThumdToSavePath(String.valueOf(goods.getGoodsId()));
+			String newPath = FilePathHelper.getImageThumdToSavePath(String.valueOf(goods.getGoodsId()));
 			try {
 				newPath += (index + ".jpg");
-				FileUtils.copyFile(thumdImage, new File(GoodsHelper.getRealPath(request) + newPath));
+				FileUtils.copyFile(thumdImage, new File(FilePathHelper.getRealPath(request) + newPath));
 				GoodsService.updateGoodsThumdUrl(goods.getGoodsId(), newPath);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -554,7 +554,7 @@ public class GoodsAction {
 			if (StringUtils.isNotEmpty(id)) {
 				
 				GoodsImage image = this.GoodsService.getGoodsImage(Integer.parseInt(id));
-				String basePath = GoodsHelper.getRealPath(request);
+				String basePath = FilePathHelper.getRealPath(request);
 				FileUtils.deleteQuietly(new File(basePath+image.getImageUrl()));
 				this.GoodsService.deleteGoodsImage(Integer.parseInt(id));
 			}
@@ -601,8 +601,8 @@ public class GoodsAction {
 		
 		String goodsId = request.getParameter("id");
 		
-		String realPath = GoodsHelper.getGoodsFashionImageListToSavePath(goodsId);
-		String basePath = GoodsHelper.getRealPath(request);
+		String realPath = FilePathHelper.getGoodsFashionImageListToSavePath(goodsId);
+		String basePath = FilePathHelper.getRealPath(request);
 		String filename = new Date().getTime()+".jpg";
 		
 		try {

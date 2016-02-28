@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 
-public class GoodsHelper {
+public class FilePathHelper {
 
 	public static String getImageListUploadPath(HttpServletRequest request) {
 		String time = request.getParameter("time");
@@ -77,5 +77,33 @@ public class GoodsHelper {
 		return "";
 	}
 	
+	public static String getArticleContentHtml(HttpServletRequest request,String realdir) {
+		String basepath = request.getSession().getServletContext().getRealPath("/");
+		basepath = basepath.replace("\\", "/");
+
+		File file = new File(basepath + realdir);
+		if(file.exists()){
+			String html = "";
+			try {
+				html = FileUtils.readFileToString(file, "UTF-8");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return html;
+		}
+		return "";
+	}
+	
+	public static String getArticleContentHtmlToSavePath() {
+		String realdir = String.valueOf(new Date().getTime());
+		String path = "/file/article/content/"+realdir+".html";
+		return path;
+	}
+
+	public static String getArticleImgToSavePath() {
+		String realdir = String.valueOf(new Date().getTime());
+		String path = "/file/article/image/" + realdir +".jpg";
+		return path;
+	}
 	
 }

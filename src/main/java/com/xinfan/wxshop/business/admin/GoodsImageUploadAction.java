@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.xinfan.wxshop.business.helper.GoodsHelper;
+import com.xinfan.wxshop.business.helper.FilePathHelper;
 import com.xinfan.wxshop.common.util.JSONUtils;
 
 @Controller
@@ -32,7 +32,7 @@ public class GoodsImageUploadAction {
 		Map result = new HashMap();
 
 		System.out.println("开始");
-		String path = GoodsHelper.getImageListUploadPath(request);
+		String path = FilePathHelper.getImageListUploadPath(request);
 		// String fileName = file.getOriginalFilename();
 		String fileName = new Date().getTime() + ".jpg";
 
@@ -64,7 +64,7 @@ public class GoodsImageUploadAction {
 		Map result = new HashMap();
 
 		System.out.println("开始");
-		String path = GoodsHelper.getImageThumdUploadPath(request);
+		String path = FilePathHelper.getImageThumdUploadPath(request);
 		// String fileName = file.getOriginalFilename();
 		String fileName = new Date().getTime() + ".jpg";
 

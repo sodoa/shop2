@@ -35,4 +35,6 @@ public class SequenceConstants {
 	
 	public static final String SEQ_RED_RECORD = "seq_red_record";
 	
+	public static final String SEQ_ARTICLE = "seq_article";
+	
 }
