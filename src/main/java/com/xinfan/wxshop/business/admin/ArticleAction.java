@@ -1,7 +1,6 @@
 package com.xinfan.wxshop.business.admin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,24 +90,68 @@ public class ArticleAction {
 		}
 		
 		return mv;
-
 	}
 	
 	@RequestMapping("/update.jspx")
 	public ModelAndView update(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/article/add");
+		ModelAndView mv = new ModelAndView("/admin/article/update");
+		
+		String id = request.getParameter("id");
+		Article article = this.ArticleService.selectByPrimaryKey(Integer.parseInt(id));
+		String html = FilePathHelper.getArticleContentHtml(request, article.getContent());
+		
+		mv.addObject("bean", article);
+		mv.addObject("html", html);
+		
 		return mv;
 	}
 	
 	@RequestMapping("/save-update.jspx")
-	public @ResponseBody
-	JSONResult saveupdate(HttpServletRequest request) {
-		String words = request.getParameter("words");
+	public ModelAndView saveupdate( @RequestParam("img") MultipartFile file,HttpServletRequest request) {
 		
-		Article record = new Article();
-		ArticleService.insertSelective(record);
+		ModelAndView mv = new ModelAndView("/admin/article/tip");
 		
-		return JSONResult.success();
+		try {
+			String id = request.getParameter("id");
+			String title = request.getParameter("title");
+			String summary = request.getParameter("summary");
+			String classify = request.getParameter("classify");
+			String keywords = request.getParameter("keywords");
+			String content = request.getParameter("content");
+			
+			Article article = this.ArticleService.selectByPrimaryKey(Integer.parseInt(id));
+			
+			Article record = new Article();
+			record.setId(Integer.parseInt(id));
+			
+			String path = FilePathHelper.getArticleContentHtmlToSavePath();
+			FileUtils.writeStringToFile(new File(FilePathHelper.getRealPath(request) + path), content);
+			record.setContent(path);
+			
+			if(!file.isEmpty() && file.getSize()>0){
+				
+				String imagePath = FilePathHelper.getArticleImgToSavePath();
+				FileUtils.writeByteArrayToFile(new File(FilePathHelper.getRealPath(request) + imagePath), file.getBytes());
+				record.setImg(imagePath);
+				
+				FileUtils.deleteQuietly(new File(FilePathHelper.getRealPath(request) + article.getContent()));
+			}
+			
+			record.setClassify(classify);
+			record.setTitle(title);
+			record.setClassify(classify);
+			record.setKeywords(keywords);
+			record.setSummary(summary);
+			
+			ArticleService.insertSelective(record);
+			mv.addObject("msg", "操作成功");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+		}
+		
+		return mv;
 	}
 
 }
