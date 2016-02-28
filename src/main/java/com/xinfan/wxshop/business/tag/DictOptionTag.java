@@ -35,10 +35,20 @@ public class DictOptionTag extends SimpleTagSupport {
 			out.append("</option>");
 		}
 
-		getJspContext().setAttribute("list", list);
-		getJspBody().invoke(null);
+		getJspContext().getOut().print(out.toString());
 
 	}
+	
+	
+	public String getValue() {
+		return value;
+	}
+
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
 
 	public String getType() {
 		return type;
