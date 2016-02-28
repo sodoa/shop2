@@ -191,19 +191,62 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
-	
+
 
 	<tag>
 		<name>wx_current_customerid_Tag</name>
 		<tag-class>com.xinfan.wxshop.business.tag.WXCurrentCustomerIdTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
-	
-		<tag>
+
+	<tag>
 		<name>search_words_list_tag</name>
 		<tag-class>com.xinfan.wxshop.business.tag.SearchWordsListTag</tag-class>
 		<body-content>scriptless</body-content>
 	</tag>
-	
+
+	<tag>
+		<name>dict_list_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.DictListTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>dict_option_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.DictOptionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+
+	<tag>
+		<name>dict_label_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.DictLabelTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
 
 </taglib>

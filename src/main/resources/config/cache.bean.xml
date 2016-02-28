@@ -42,5 +42,9 @@
 	<bean class="com.xinfan.wxshop.business.cache.SearchWordsCacheLoader" >
 		<property name="cacheKey" value="SearchWordsCache" />
 	</bean>		
+	
+	<bean class="com.xinfan.wxshop.business.cache.DictCacheLoader" >
+		<property name="cacheKey" value="DictCache" />
+	</bean>			
 			
 </beans>

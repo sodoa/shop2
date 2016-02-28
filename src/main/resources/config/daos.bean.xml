@@ -119,5 +119,10 @@
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.ArticleMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>	
+	
+	<bean id="DictDao" class="com.xinfan.wxshop.business.dao.DictDao">
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.DictMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>		
 
 </beans>
