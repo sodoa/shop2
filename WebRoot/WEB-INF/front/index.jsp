@@ -214,7 +214,7 @@
 		</a></li> 
 		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus4.png">
 		</a></li> 
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus5.png">
+		<li><a href="/ac.html"><img src="/theme/images/index/focus5.png">
 		</a></li> 
 		<li><a href="/sh.html"><img src="/theme/images/index/focus6.png">
 		</a></li> 

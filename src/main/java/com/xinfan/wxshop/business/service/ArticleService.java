@@ -23,8 +23,11 @@ public class ArticleService {
 
 			return ArticleDao.selectAll();
 		}
-
 		return ArticleDao.selectByClassify(classify);
+	}
+	
+	public List<Article> getShareList(int pagesize) {
+		return ArticleDao.selectAll();
 	}
 
 	public void insertSelective(Article record) {
