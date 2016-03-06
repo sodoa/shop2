@@ -156,7 +156,7 @@ public class GoodsService {
 		DataMap param = new DataMap();
 		param.put("goodsStatus", "1");
 		param.put("goodsName", keywords);
-		param.put("theme", theme);
+		param.put("theme_type", theme);
 		List<Goods> list = goodsDao.pageBeanList(param, page);
 
 		return list;
