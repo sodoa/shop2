@@ -24,7 +24,7 @@
 </style>
 </head>
 <body>
-	<div class="block2" style="background-color: white;border: 1px solid #eee;padding-top: 5px;padding-bottom: 5px; ">
+	<div class="block2" style="background-color: white;border: 1px solid #eee;padding-top: 5px;padding-bottom: 5px; overflow: hidden;">
 		【<sp:dict_label_tag type="article_classify" value="${bean.classify}"></sp:dict_label_tag>】${bean.title}
 		<div style="float: right;padding-right: 10px;">&nbsp;&nbsp;&nbsp;<sp:dateformat time="${bean.releasedate}" format="yyyy-MM-dd" /></div>
 		
