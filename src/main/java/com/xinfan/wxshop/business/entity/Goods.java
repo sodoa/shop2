@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Goods extends BaseEntity {
+public class Goods extends BaseEntity{
     private Integer goodsId;
 
     private String goodsName;
@@ -50,6 +50,8 @@ public class Goods extends BaseEntity {
     private String goodsArea;
 
     private String summary;
+
+    private String themeType;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -233,5 +235,13 @@ public class Goods extends BaseEntity {
 
     public void setSummary(String summary) {
         this.summary = summary == null ? null : summary.trim();
+    }
+
+    public String getThemeType() {
+        return themeType;
+    }
+
+    public void setThemeType(String themeType) {
+        this.themeType = themeType == null ? null : themeType.trim();
     }
 }

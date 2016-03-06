@@ -25,6 +25,7 @@
     <result column="supplier" property="supplier" jdbcType="VARCHAR" />
     <result column="goods_area" property="goodsArea" jdbcType="VARCHAR" />
     <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="theme_type" property="themeType" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -87,7 +88,7 @@
   <sql id="Base_Column_List" >
     goods_id, goods_name, goods_lname, goods_des, goods_status, thumbnail_url, orgin_prices, 
     discount, final_prices, unit, release_date, hot, burst, sort, type_level1, type_level2, 
-    sellcount, fashion, fashion_template, keywords, supplier, goods_area, summary
+    sellcount, fashion, fashion_template, keywords, supplier, goods_area, summary, theme_type
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.GoodsExample" >
     select
@@ -127,7 +128,8 @@
       burst, sort, type_level1, 
       type_level2, sellcount, fashion, 
       fashion_template, keywords, supplier, 
-      goods_area, summary)
+      goods_area, summary, theme_type
+      )
     values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsLname,jdbcType=VARCHAR}, 
       #{goodsDes,jdbcType=VARCHAR}, #{goodsStatus,jdbcType=INTEGER}, #{thumbnailUrl,jdbcType=VARCHAR}, 
       #{orginPrices,jdbcType=REAL}, #{discount,jdbcType=REAL}, #{finalPrices,jdbcType=REAL}, 
@@ -135,7 +137,8 @@
       #{burst,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{typeLevel1,jdbcType=VARCHAR}, 
       #{typeLevel2,jdbcType=VARCHAR}, #{sellcount,jdbcType=INTEGER}, #{fashion,jdbcType=INTEGER}, 
       #{fashionTemplate,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, 
-      #{goodsArea,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR})
+      #{goodsArea,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{themeType,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.Goods" >
     insert into t_goods
@@ -209,6 +212,9 @@
       <if test="summary != null" >
         summary,
       </if>
+      <if test="themeType != null" >
+        theme_type,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="goodsId != null" >
@@ -279,6 +285,9 @@
       </if>
       <if test="summary != null" >
         #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="themeType != null" >
+        #{themeType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -360,6 +369,9 @@
       <if test="record.summary != null" >
         summary = #{record.summary,jdbcType=VARCHAR},
       </if>
+      <if test="record.themeType != null" >
+        theme_type = #{record.themeType,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -389,7 +401,8 @@
       keywords = #{record.keywords,jdbcType=VARCHAR},
       supplier = #{record.supplier,jdbcType=VARCHAR},
       goods_area = #{record.goodsArea,jdbcType=VARCHAR},
-      summary = #{record.summary,jdbcType=VARCHAR}
+      summary = #{record.summary,jdbcType=VARCHAR},
+      theme_type = #{record.themeType,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -463,6 +476,9 @@
       <if test="summary != null" >
         summary = #{summary,jdbcType=VARCHAR},
       </if>
+      <if test="themeType != null" >
+        theme_type = #{themeType,jdbcType=VARCHAR},
+      </if>
     </set>
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
@@ -489,9 +505,11 @@
       keywords = #{keywords,jdbcType=VARCHAR},
       supplier = #{supplier,jdbcType=VARCHAR},
       goods_area = #{goodsArea,jdbcType=VARCHAR},
-      summary = #{summary,jdbcType=VARCHAR}
+      summary = #{summary,jdbcType=VARCHAR},
+      theme_type = #{themeType,jdbcType=VARCHAR}
     where goods_id = #{goodsId,jdbcType=INTEGER}
   </update>
+	  
   
   <select id="pageList" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
   	

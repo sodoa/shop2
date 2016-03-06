@@ -1604,6 +1604,76 @@ public class GoodsExample {
             addCriterion("summary not between", value1, value2, "summary");
             return (Criteria) this;
         }
+
+        public Criteria andThemeTypeIsNull() {
+            addCriterion("theme_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeIsNotNull() {
+            addCriterion("theme_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeEqualTo(String value) {
+            addCriterion("theme_type =", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeNotEqualTo(String value) {
+            addCriterion("theme_type <>", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeGreaterThan(String value) {
+            addCriterion("theme_type >", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeGreaterThanOrEqualTo(String value) {
+            addCriterion("theme_type >=", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeLessThan(String value) {
+            addCriterion("theme_type <", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeLessThanOrEqualTo(String value) {
+            addCriterion("theme_type <=", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeLike(String value) {
+            addCriterion("theme_type like", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeNotLike(String value) {
+            addCriterion("theme_type not like", value, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeIn(List<String> values) {
+            addCriterion("theme_type in", values, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeNotIn(List<String> values) {
+            addCriterion("theme_type not in", values, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeBetween(String value1, String value2) {
+            addCriterion("theme_type between", value1, value2, "themeType");
+            return (Criteria) this;
+        }
+
+        public Criteria andThemeTypeNotBetween(String value1, String value2) {
+            addCriterion("theme_type not between", value1, value2, "themeType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
