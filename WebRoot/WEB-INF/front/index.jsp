@@ -278,16 +278,8 @@
 			
 		$(function(){
 			
-			$("#search_word").keydown(function(e){
-				var theEvent = window.event || e; 
-				var code = theEvent.keyCode || theEvent.which; 
-				if (code == 13) { 
-					var word = $(this).val();
-					if(word == null || word.length ==0 || word.trim().length == 0){
-						return;
-					}
-					window.location.href = "/s.html?w="+encodeURI(word);
-				} 
+			$("#search_word").bind("focusin",function(){
+				window.location.href= "/g-s.html";
 			});
 			
 		});

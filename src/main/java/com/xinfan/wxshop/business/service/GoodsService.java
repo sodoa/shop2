@@ -13,6 +13,7 @@ import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsImage;
 import com.xinfan.wxshop.business.entity.GoodsType;
+import com.xinfan.wxshop.business.util.StringUtils;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.cache.CacheHolder;
 import com.xinfan.wxshop.common.cache.CacheProvider;
@@ -142,6 +143,18 @@ public class GoodsService {
 	public List<Goods> getGoodsClassifySerchList(DataMap param, Pagination page) {
 
 		param.put("goodsStatus", "1");
+		List<Goods> list = goodsDao.pageBeanList(param, page);
+
+		return list;
+	}
+	
+	public List<Goods> getGoodsKeyWordsSerchList(String keywords, Pagination page) {
+		
+		keywords = StringUtils.stringFilter(keywords);
+		
+		DataMap param = new DataMap();
+		param.put("goodsStatus", "1");
+		param.put("goodsName", keywords);
 		List<Goods> list = goodsDao.pageBeanList(param, page);
 
 		return list;

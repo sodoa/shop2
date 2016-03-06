@@ -41,25 +41,14 @@ public class GoodsClassifyAct {
 	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/classify");
 		Pagination page = RequestUtils.getPagination(request);
-		String cur = request.getParameter("cur");
-		String init = request.getParameter("init");
+		String w = request.getParameter("w");
 		
-		page.setPageSize(2);
-		
-		DataMap param = new DataMap();
-		if(cur!=null && cur.length()>0){
-			param.put("typeLevel1", cur);
-		}
-		
-		if(init==null || init.length()==0){
-			init = "0";
-		}
+		page.setPageSize(5);
 
-		List<Goods> list = GoodsService.getGoodsClassifySerchList(param,page);
+		List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,page);
 		
 		mv.addObject("page", page);
-		mv.addObject("cur", cur);
-		mv.addObject("init", init);
+		mv.addObject("w", w);
 		
 		return mv;
 	}
@@ -73,17 +62,11 @@ public class GoodsClassifyAct {
 		try {
 
 			Pagination page = RequestUtils.getPagination(request);
-			String cur = request.getParameter("cur");
+			String w = request.getParameter("w");
 			
-			page.setPageSize(2);
-			
-			DataMap param = new DataMap();
-			if(cur!=null && cur.length()>0){
-				param.put("typeLevel1", cur);
-			}
+			page.setPageSize(5);
 
-			List<Goods> list = GoodsService.getGoodsClassifySerchList(param,
-					page);
+			List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,page);
 			
 			result = JSONResult.success();
 			result.putValue("list", list);

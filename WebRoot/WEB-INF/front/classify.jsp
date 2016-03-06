@@ -13,34 +13,39 @@
 
 </head>
 <body>
-
-
+	
 	<div class="header">
 		<div class="top_left1">
 			<a href="/"><img src="/theme/images/back.png" style="width: 12px"></a>
 		</div>
-		<div class="top_center1"><p style="display:inline;cursor: pointer;">商品分类</p><div class="triangle_border_up"></div></div>
+		<div class="top_center">
+			<a href="#"><img src="/theme/images/Search.png"></a>
+			<input name="search_word"  id="search_word" placeholder="输入商品名称或关键字" maxlength="20" value="${w}" />
+		</div>
 		<div class="top_right1">
-
 			<a href="javascript:void(0)" onclick="GoCenterUrl('/cart.html')"><img
 				src="/theme/images/spc.png" style="width: 29px; height: 29px">
 			</a>
 
 		</div>
 	</div>
-
-	<div class="conter" style="z-index:1;position:absolute;top:0;width:100%">
-		<div class="category" >
-			<ul>
-				<sp:goods_type_list_tag topGoodsType="${init}" size="12">
-					<c:forEach var="item" items="${goodstype_list}">
-						<li style="cursor: pointer;" <c:if test="${cur==item.goodstype}">class="cur"</c:if> data="${item.goodstype}">${item.goodstypeName}</li>
-					</c:forEach>
-				</sp:goods_type_list_tag>
-			</ul>
+	
+	<div class="category" style="display: none;position:absolute;z-index: 9999;width: 100%;height: 100%;top: 0px;">
+		<div style="clear: both;width: 100%;display: inline-block;padding: 10px;margin: 10px;padding-left: 15px;">
+			<input style="height: 32px;border:1px solid #eee;width:50%;" name="panel_search_word" id="panel_search_word" value="${w}"  placeholder="输入商品名称或关键字" maxlength="20">
+			<a href="javascript:void(0);" onclick="panel_search_form()"><img src="/theme/images/Search.png" width="20" height="20"></a>
+			<a style="padding: 5px;cursor: pointer;float: right;margin-right: 30px;" type="button" value="查询" onclick="panel_close_search()">关闭</a>
 		</div>
-		
-		
+		<div style="display: inline-block;width: 100%;padding: 10px;margin: 10px;border-top: 1px solid #eee;">
+			<sp:search_words_list_tag>
+				<c:forEach var="item" items="${list}">
+					<a onclick="panel_pickup_words('${item.words}')" style="padding:5px;padding-right:10px;padding-top:5px;padding-bottom:5px;border:1px solid #eee;margin:5px;cursor: pointer;">${item.words}</a>
+				</c:forEach>
+			</sp:search_words_list_tag>
+		</div>
+	</div>
+	
+	<div class="conter" style="z-index:1;width:100%;">
 		<div class="block">
 			<ul id="page-comtain">
 			</ul>
@@ -50,54 +55,53 @@
 	
 <script>
 
+function panel_close_search(){
+	$(".category").hide();
+}
+
+function panel_pickup_words(keywords){
+	$("#panel_search_word").val(keywords);
+	panel_search_form();
+}
+
+function panel_search_form(){
+	var w = $("#panel_search_word").val();
+	//if(w.length>0){
+	var encode_w = encodeURIComponent(w);
+	window.location.href="g-s.html?w="+encode_w;
+	//}
+}
+
 $(function(){
 
 	var ch=$(".category").height();
 
 	var hh=$(".header").height();
 
-	$(".conter").css("top",-ch+hh);
-
 	//分类框动画
 
-	$(".top_center1").click(function(){
-
-		if($(this).find("div").hasClass("triangle_border_up")){		
-
-			$(this).find("div").removeClass("triangle_border_up");
-
-			$(this).find("div").addClass("triangle_border_down");
-
-			$(".conter").animate({top:hh},200);
-
-		}else{
-
-			$(this).find("div").removeClass("triangle_border_down");
-
-			$(this).find("div").addClass("triangle_border_up");
-
-			$(".conter").animate({top:-ch+hh},200);
-
-		}		
-
+	$("#search_word").bind("focusin",function(){
+		$(".category").show();
 	});
-
+	
+	$("#panel_search_word").keydown(function(e){
+		var theEvent = window.event || e; 
+		var code = theEvent.keyCode || theEvent.which; 
+		if (code == 13) { 
+			var word = $(this).val();
+			if(word == null || word.length ==0 || word.trim().length == 0){
+				return;
+			}
+			panel_search_form();
+			//window.location.href = "/s.html?w="+encodeURI(word);
+		} 
+	});
+	
 	//选择类别
-
-  $(".category ul li").click(function(){
-
-	if(!$(this).hasClass("cur")){
-		$(".category ul li").removeClass("cur");
-		$(this).addClass("cur");
-		
-		window.location.href = "/g-s.html?cur="+$(this).attr("data")+"&init=${init}";
-	}
-
-  });
 	
 	////////////////////////////////////////////////////////////////////////////////
 	
-	var cur = '${cur}';
+	var cur = '${w}';
 	var totalPage = '${page.totalPage}';
 	
 	laypage({
@@ -122,7 +126,7 @@ $(function(){
 
 	      $.ajax({type:"POST",
 	             url:"/g-s-more.html",
-	             data:{'page':pageNo,'cur':cur},
+	             data:{'page':pageNo,'w':cur},
 	             dataType:"json",
 	             success:function(data){
 					if(data.result == 0){
@@ -143,7 +147,7 @@ $(function(){
       
       	 htmlArray.push('<li> ');
       	 htmlArray.push('	<div class="block-image">');
-      	 htmlArray.push('		<a href="goods-'+item.goodsId+'.html" ><img onerror="imagerror(this)"  src="'+item.thumbnailUrl+'"  style="width: 100%;height:200px;"> </a> <span>出售：'+item.sellcount+'件</span>');
+      	 htmlArray.push('		<a href="goods-'+item.goodsId+'.html" ><img onerror="imagerror(this)"  src="'+item.thumbnailUrl+'"  style="width: 100%;height:200px;"> </a> ');
       	 htmlArray.push('	</div>');
 
       	 htmlArray.push('	<div class="block-titel">'+item.goodsLname+'</div>');
