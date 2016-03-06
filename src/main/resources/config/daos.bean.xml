@@ -124,5 +124,10 @@
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.DictMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>		
+	
+	<bean id="IncomeRankDao" class="com.xinfan.wxshop.business.dao.IncomeRankDao">
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.IncomeRankMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>		
 
 </beans>
