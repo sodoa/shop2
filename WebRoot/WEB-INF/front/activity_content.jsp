@@ -16,7 +16,12 @@
 
 <link href="/theme/css/common.css" type="text/css" rel="stylesheet" />
 <link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
-
+<style type="text/css">
+	
+	.ac-content-wrap img{
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 	<div class="block2" style="background-color: white;border: 1px solid #eee;padding-top: 5px;padding-bottom: 5px; ">
@@ -34,7 +39,7 @@
 			</b>
 	</div>	
 	
-	<div class="block2" style="background-color: white;padding-top: 5px;padding-left: 5px;padding-right: 5px;height: 100%;">
+	<div class="ac-content-wrap" style="background-color: white;padding-top: 5px;padding-left: 5px;padding-right: 5px;height: 100%;">
 			${bean.content}
 	</div>
 
