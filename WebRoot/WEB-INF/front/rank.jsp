@@ -26,47 +26,47 @@
 
 	<div class="header" style="z-index:2">
 		<div class="top_left1" onclick="/"></div>
-		<div class="top_center1">排名</div>
+		<div class="top_center1">分销收益排名</div>
 		<div class="top_right1">
 			<a href="/center/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
 			</a>
 		</div>
 	</div>
 
-<c:forEach items="${list}" var="item" >
+
 	<div class="conter" style="background:#fff;padding-bottom:10px">
-	<p style="font-size:14px;padding:2% 0;margin:2% 4%;border-bottom:#e6e6e6 solid 1px">${item.name }</p>
-	
-	
-	<div class="block paim" style="border-bottom:#e6e6e6 solid 1px;margin-bottom:0">
-		<ul>
-			<c:forEach var="subItem" varStatus="s" end="1" items="${item.list}">
-			<li><div class="block-image">
-				<a href="/goods-${subItem.goodsId}.html" style="cursor: pointer;">
-				<img src="${subItem.img}" onerror="imagerror(this)" style="width:100%">
-				<p>NO.${s.index+1 }&emsp;销量：<font color="#fdb64d">${subItem.sellcount}</font></p>
-				</div>
-				<div class="block-titel">${subItem.desp}</div>
-				</a>
-			</li>
-			</c:forEach>
-		</ul>
-	</div>
-	
-	<c:if test="${fn:length(item.list)>2}">
-		<c:forEach items="${item.list}" var="subItem" varStatus="s" begin="2">
+		<p style="font-size:14px;padding:2% 0;margin:2% 4%;border-bottom:#e6e6e6 solid 1px">按周排名</p>
+		
+		<c:forEach items="${weeklist}" var="item" varStatus="s" >
 			<div class="rank">
-				<a href="/goods-${subItem.goodsId}.html" style="cursor: pointer;">
-				<p style="width: <fmt:formatNumber type='number' value='${(subItem.sellcount/item.list[0].sellcount)*100/2}' maxFractionDigits="2"></fmt:formatNumber>%;background:#fe0100;">&nbsp;${subItem.sellcount}</p>
-				<p style="width:auto;max-width:50%;">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${subItem.title}】</p>
-				</a>
+				<p style="min-width:100px;width: <fmt:formatNumber type='number' value='${(item.totalIncome/weeklist[0].totalIncome)*100/2}' maxFractionDigits="2"></fmt:formatNumber>%;background:#fe0100;">&nbsp;收入：${item.totalIncome} 元</p>
+				<p style="width:auto;max-width:50%;">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${item.displayname}】</p>
 			</div>
 		</c:forEach>
-	</c:if>
 	</div>
-</c:forEach>
+
+	<div class="conter" style="background:#fff;padding-bottom:10px">
+		<p style="font-size:14px;padding:2% 0;margin:2% 4%;border-bottom:#e6e6e6 solid 1px">按月排名</p>
+		
+		<c:forEach items="${monthlist}" var="item" varStatus="s" >
+			<div class="rank">
+				<p style="min-width:100px;width: <fmt:formatNumber type='number' value='${(item.totalIncome/monthlist[0].totalIncome)*100/2}' maxFractionDigits="2"></fmt:formatNumber>%;background:#fe0100;">&nbsp;收入：${item.totalIncome} 元</p>
+				<p style="width:auto;max-width:50%;">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${item.displayname}】</p>
+			</div>
+		</c:forEach>
+	</div>
 	
-	
+	<div class="conter" style="background:#fff;padding-bottom:10px">
+		<p style="font-size:14px;padding:2% 0;margin:2% 4%;border-bottom:#e6e6e6 solid 1px">按年排名</p>
+		
+		<c:forEach items="${yearlist}" var="item" varStatus="s" >
+			<div class="rank">
+				<p style="min-width:100px;width: <fmt:formatNumber type='number' value='${(item.totalIncome/yearlist[0].totalIncome)*100/2}' maxFractionDigits="2"></fmt:formatNumber>%;background:#fe0100;">&nbsp;收入：${item.totalIncome} 元</p>
+				<p style="width:auto;max-width:50%;">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${item.displayname}】</p>
+			</div>
+		</c:forEach>
+	</div>	
+		
 	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>

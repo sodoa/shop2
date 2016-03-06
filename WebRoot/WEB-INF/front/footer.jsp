@@ -11,7 +11,7 @@
 	<li><a href="/goods-burst.html"><img src="/theme/images/hot.png">
 		<p>爆点</p></a></li>
 	<li><a href="/rk.html"><img src="/theme/images/rank.png">
-		<p>排名</p></a></li>
+		<p>分销榜</p></a></li>
 	<li><a href="/center/my_center2.html"><img src="/theme/images/my.png">
 		<p>我的</p></a></li>
 </ul>
