@@ -24,6 +24,13 @@
 </style>
 </head>
 <body>
+	<div class="header" style="z-index:2">
+		<div class="top_left1" ><a href="ac.html"><img src="/theme/images/back.png" style="width:12px"></a></div>
+		<div class="top_center1">分销软文</div>
+		<div class="top_right1">
+		</div>
+	</div>
+
 	<div class="block2" style="background-color: white;border: 1px solid #eee;padding-top: 5px;padding-bottom: 5px; overflow: hidden;">
 		【<sp:dict_label_tag type="article_classify" value="${bean.classify}"></sp:dict_label_tag>】${bean.title}
 		<div style="float: right;padding-right: 10px;">&nbsp;&nbsp;&nbsp;<sp:dateformat time="${bean.releasedate}" format="yyyy-MM-dd" /></div>

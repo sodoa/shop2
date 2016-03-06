@@ -14,7 +14,11 @@
 
 </head>
 <body>
-
+	<div  style="background-color: white;padding-top: 5px;padding-left: 5px;padding-right: 5px;widht:92%;    margin: 2% 4%;">
+			<b>分享下面文章可以为您带来收益用户
+			</b>
+	</div>	
+	
 	<div class="block">
 
 		<ul>
