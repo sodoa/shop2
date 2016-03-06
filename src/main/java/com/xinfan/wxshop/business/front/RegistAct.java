@@ -22,6 +22,7 @@ import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
 import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
+import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.common.base.BizException;
 import com.xinfan.wxshop.common.base.DataMap;
@@ -53,11 +54,21 @@ public class RegistAct {
 		return mv;
 	}
 	
-
-	
 	@RequestMapping( method=RequestMethod.GET, value="/regist.html")
-	public ModelAndView regist() {
+	public ModelAndView regist(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/regist");
+		
+		String p = request.getParameter("p");
+
+		if (p == null || p.length() == 0 || "null".equals(p)) {
+			Object sessionp = request.getSession(true).getAttribute(BizConstants.SESSION_REDIRECT_VAR_KEY);
+			if (sessionp != null) {
+				p = (String) sessionp;
+			}
+		}
+
+		mv.addObject("p", p);
+		
 		return mv;
 	}
 	
@@ -235,6 +246,20 @@ public class RegistAct {
 			result = JSONResult.success();
 			
 			RequestUtils.getSession().removeAttribute(BizConstants.CUSTOMER_USER_REGIST_KEY);
+			
+			//auto login//////////////////////////////////////////////////
+			
+			Customer customer = CustomerService.login(account, password, attributes);
+
+			DataMap sessionMap = new DataMap();
+			sessionMap.put("account", customer.getAccount());
+			sessionMap.put("displayname", customer.getDisplayname());
+			sessionMap.put("customerid", customer.getCustomerId());
+
+			LoginSessionUtils.setCustomerUserSessionMap(sessionMap);
+			///////////////////////////////////////////////////////////////
+			
+			
 		}
 		catch(BizException e){
 			e.printStackTrace();

@@ -46,4 +46,7 @@ public class BizConstants {
 	
 	public static final int IMAGE_TYPE_SLASH = 1;
 	public static final int IMAGE_TYPE_FASHION = 2;
+	
+	public static final String SESSION_REDIRECT_VAR_KEY = "#session_p";
+	
 }

@@ -16,7 +16,7 @@
 	<div class="header">
 		<div class="titel">我的个人中心</div>
 		<div class="top_right">
-			<a href="/center/cart.html"><img src="/theme/images/spc.png"
+			<a href="/cart.html"><img src="/theme/images/spc.png"
 				style="width: 29px; height: 29px">
 			<div class="shopcount"></div> </a>
 		</div>

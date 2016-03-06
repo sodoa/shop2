@@ -34,10 +34,10 @@ public class CartDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne(wrapCommand("selectByPrimaryKey"), id);
 	}
 
-	public List<Cart> selectCartListByCustomerIdAndGoodsId(int id,int goodsId) {
+	public List<Cart> selectCartListBySessionIdIdAndGoodsId(String sessionId,int goodsId) {
 
 		CartExample example = new CartExample();
-		example.createCriteria().andCustomerIdEqualTo(id).andGoodsIdEqualTo(goodsId);
+		example.createCriteria().andSessionidEqualTo(sessionId).andGoodsIdEqualTo(goodsId);
 		return getSqlSession().selectList(wrapCommand("selectByExample"),
 				example);
 	}
@@ -50,10 +50,26 @@ public class CartDao extends SqlSessionDaoSupport {
 				example);
 	}
 	
+	public List<Cart> selectCartListBySessionId(String id) {
+
+		CartExample example = new CartExample();
+		example.createCriteria().andSessionidEqualTo(id);
+		return getSqlSession().selectList(wrapCommand("selectByExample"),
+				example);
+	}
+	
 	public int deleteCartListByCustomerId(int id) {
 
 		CartExample example = new CartExample();
 		example.createCriteria().andCustomerIdEqualTo(id);
+		return getSqlSession().delete(wrapCommand("deleteByExample"),
+				example);
+	}
+	
+	public int deleteCartListBySessionId(String id) {
+
+		CartExample example = new CartExample();
+		example.createCriteria().andSessionidEqualTo(id);
 		return getSqlSession().delete(wrapCommand("deleteByExample"),
 				example);
 	}

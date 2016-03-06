@@ -79,7 +79,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
 			商品详情
 		</div>
 		<div class="top_right1" >
-			<a href="/center/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px"></a>
+			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px"></a>
 		</div>
 	</div>
 	
@@ -104,7 +104,6 @@ iframe{ height:100%; width:100%; overflow:auto; }
 					</ul>
 		
 					<a href="javascript:;" id="btn_prev"><</a> <a href="javascript:;"
-		
 						id="btn_next">></a>
 				</div>
 			</div>
@@ -225,23 +224,18 @@ iframe{ height:100%; width:100%; overflow:auto; }
 		
 		$("#put_goods_in_cart").click(function(){
 			
-			checkLogin(function(){
-				$.ajax({type:"POST",
-		             url:"/center/put-goods-cart.html",
-		             data:{"goodsId" : current_goods_id},
-		             dataType:"json",
-		             success:function(data){
-		            	if(data.result ==0){
-		            		alert('添加成功');
-		            	}
-		            	else{
-		            		alert('添加失败');
-		            	}
-		             }
-				});
-				
-			},function(){
-				window.location.href = "/login.html?p="+GetUrlRelativePath();
+			$.ajax({type:"POST",
+	             url:"/put-goods-cart.html",
+	             data:{"goodsId" : current_goods_id},
+	             dataType:"json",
+	             success:function(data){
+	            	if(data.result ==0){
+	            		alert('添加成功');
+	            	}
+	            	else{
+	            		alert('添加失败');
+	            	}
+	             }
 			});
 			
 		});
@@ -250,23 +244,18 @@ iframe{ height:100%; width:100%; overflow:auto; }
 		
 		$("#put_goods_to_order").click(function(){
 			
-			checkLogin(function(){
-				$.ajax({type:"POST",
-		             url:"/center/put-goods-cart.html",
-		             data:{"goodsId" : current_goods_id},
-		             dataType:"json",
-		             success:function(data){
-		            	if(data.result ==0){
-		            		window.location.href = "/center/cart.html";
-		            	}
-		            	else{
-		            		alert('添加失败');
-		            	}
-		             }
-				});
-				
-			},function(){
-				window.location.href = "/login.html?p="+GetUrlRelativePath();
+			$.ajax({type:"POST",
+	             url:"/put-goods-cart.html",
+	             data:{"goodsId" : current_goods_id},
+	             dataType:"json",
+	             success:function(data){
+	            	if(data.result ==0){
+	            		window.location.href = "/cart.html";
+	            	}
+	            	else{
+	            		alert('添加失败');
+	            	}
+	             }
 			});
 			
 		});

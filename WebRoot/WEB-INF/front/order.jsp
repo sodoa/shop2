@@ -89,7 +89,16 @@
 	
 	<c:if test="${CartInfoVo.hasGoods}">
 		<ul class="shop_carTopay">
-			<li style="cursor: pointer;"><p onclick="sumibtForm()">去结算</p></li>
+			<li style="cursor: pointer;">
+				<c:choose>
+					<c:when test="${empty address}">
+						<p style="color: gray;">去结算</p>
+					</c:when>
+					<c:otherwise>
+						<p onclick="sumibtForm()">去结算</p>
+					</c:otherwise>
+				</c:choose>
+			</li>
 			<li><p > <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
 		</ul>
 	</c:if>
@@ -127,7 +136,7 @@
 	
 	
 	function selectAddress(){
-		window.location.href="/center/address_list.html?from=/center/order.html";
+		window.location.href="/center/address_list.html?from=/center/order.html&opt=1";
 	}
 	
 	$(function(){

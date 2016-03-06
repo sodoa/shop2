@@ -67,6 +67,9 @@
 
 	
 	<script type="text/javascript">
+		
+		var p = '${p}';
+	
 		$(function(){
 			
 			  if ($.AMUI && $.AMUI.validator) {
@@ -180,15 +183,15 @@
 													success : function(data) {
 														resetloading();
 														if (data.result == 0) {
-															window.location.href = "/login.html";
+															if(p!=null && p.length>0){
+																window.location.href = "" + p;
+															}
+															else{
+																window.location.href = "/";
+															}
 														} else {
-															$(
-																	'#login_error_msg_group')
-																	.show();
-															$(
-																	"#login_error_msg_group  p")
-																	.text(
-																			data.message);
+															$('#login_error_msg_group').show();
+															$("#login_error_msg_group  p").text(data.message);
 															$("#login_error_msg_group").fadeOut(3000);
 														}
 													}

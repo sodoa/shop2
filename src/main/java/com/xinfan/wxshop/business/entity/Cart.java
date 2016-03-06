@@ -15,7 +15,7 @@ public class Cart extends BaseEntity{
 
     private Date createtime;
 
-    private Date updatetime;
+    private String sessionid;
 
     public Integer getCartId() {
         return cartId;
@@ -57,11 +57,11 @@ public class Cart extends BaseEntity{
         this.createtime = createtime;
     }
 
-    public Date getUpdatetime() {
-        return updatetime;
+    public String getSessionid() {
+        return sessionid;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid == null ? null : sessionid.trim();
     }
 }

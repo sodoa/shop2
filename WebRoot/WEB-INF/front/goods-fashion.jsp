@@ -135,7 +135,7 @@
 	
 	
 	<div class="shopcart">
-		<a href="/center/cart.html"><div class="cart" style="cursor: pointer;"><img src="assets/i/detail/cart.PNG"></div></a>
+		<a href="/cart.html"><div class="cart" style="cursor: pointer;"><img src="assets/i/detail/cart.PNG"></div></a>
 		<button style="cursor: pointer;    font-family: 'Microsoft YaHei';" id="put_goods_in_cart">加入购物车</button>
 	</div>
 

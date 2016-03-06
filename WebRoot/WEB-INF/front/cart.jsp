@@ -64,14 +64,14 @@
 
 	</div>
 	
-	<form action="/center/cart-number.html" id="number_operator_form" method="post">
+	<form action="/cart-number.html" id="number_operator_form" method="post">
 		<input type="hidden" name="number_operator" /> 
 		<input type="hidden" name="cartId" />
 	</form>
 
  	<c:if test="${CartInfoVo.hasGoods}">
 	<ul class="shop_carTopay">
-		<li style="cursor: pointer;"><p onclick="javascript:window.location.href='/center/order.html'" >去结算</p></li>
+		<li style="cursor: pointer;"><p onclick="javascript:goToOrder()" >去结算</p></li>
 		<li><p > <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
 	</ul>
 	</c:if>
@@ -115,6 +115,10 @@
 			dialog("提醒","您确定要清空购物车？",function(){						
 				window.location.href="empty_cart.html";
 			});
+		}
+		
+		function goToOrder(){
+			window.location.href = "/center/order.html?p=" + GetUrlRelativePath();
 		}
 		
 	</script>

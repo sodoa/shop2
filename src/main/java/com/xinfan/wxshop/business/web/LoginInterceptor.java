@@ -86,7 +86,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 				response.setStatus(403);
 				return false;
 			} else {
-				response.sendRedirect(request.getContextPath() + frontLoginUrl + ".html");
+				String p = request.getParameter("p");
+				if (p != null && p.length() > 0 && !"null".equals(p)) {
+					request.getSession(true).setAttribute(BizConstants.SESSION_REDIRECT_VAR_KEY, p);
+				}
+				response.sendRedirect(request.getContextPath() + frontLoginUrl + ".html?p="+p);
 				return false;
 			}
 

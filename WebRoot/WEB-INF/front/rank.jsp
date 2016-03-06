@@ -28,7 +28,7 @@
 		<div class="top_left1" onclick="/"></div>
 		<div class="top_center1">分销收益排名</div>
 		<div class="top_right1">
-			<a href="/center/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
+			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
 			</a>
 		</div>
 	</div>

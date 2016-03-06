@@ -405,63 +405,73 @@ public class CartExample {
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeIsNull() {
-            addCriterion("updatetime is null");
+        public Criteria andSessionidIsNull() {
+            addCriterion("sessionid is null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeIsNotNull() {
-            addCriterion("updatetime is not null");
+        public Criteria andSessionidIsNotNull() {
+            addCriterion("sessionid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeEqualTo(Date value) {
-            addCriterion("updatetime =", value, "updatetime");
+        public Criteria andSessionidEqualTo(String value) {
+            addCriterion("sessionid =", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeNotEqualTo(Date value) {
-            addCriterion("updatetime <>", value, "updatetime");
+        public Criteria andSessionidNotEqualTo(String value) {
+            addCriterion("sessionid <>", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeGreaterThan(Date value) {
-            addCriterion("updatetime >", value, "updatetime");
+        public Criteria andSessionidGreaterThan(String value) {
+            addCriterion("sessionid >", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("updatetime >=", value, "updatetime");
+        public Criteria andSessionidGreaterThanOrEqualTo(String value) {
+            addCriterion("sessionid >=", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeLessThan(Date value) {
-            addCriterion("updatetime <", value, "updatetime");
+        public Criteria andSessionidLessThan(String value) {
+            addCriterion("sessionid <", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("updatetime <=", value, "updatetime");
+        public Criteria andSessionidLessThanOrEqualTo(String value) {
+            addCriterion("sessionid <=", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeIn(List<Date> values) {
-            addCriterion("updatetime in", values, "updatetime");
+        public Criteria andSessionidLike(String value) {
+            addCriterion("sessionid like", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeNotIn(List<Date> values) {
-            addCriterion("updatetime not in", values, "updatetime");
+        public Criteria andSessionidNotLike(String value) {
+            addCriterion("sessionid not like", value, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeBetween(Date value1, Date value2) {
-            addCriterion("updatetime between", value1, value2, "updatetime");
+        public Criteria andSessionidIn(List<String> values) {
+            addCriterion("sessionid in", values, "sessionid");
             return (Criteria) this;
         }
 
-        public Criteria andUpdatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("updatetime not between", value1, value2, "updatetime");
+        public Criteria andSessionidNotIn(List<String> values) {
+            addCriterion("sessionid not in", values, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidBetween(String value1, String value2) {
+            addCriterion("sessionid between", value1, value2, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidNotBetween(String value1, String value2) {
+            addCriterion("sessionid not between", value1, value2, "sessionid");
             return (Criteria) this;
         }
     }

@@ -23,7 +23,7 @@
 		</div>
 
 		<div class="top_right">
-			<a href="/center/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
+			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
 			</a>
 		</div>
 	</div>
@@ -267,7 +267,7 @@
 	});
 	
 </script>
-	<a href="/center/cart.html">
+	<a href="/cart.html">
 		<div class="cart_btn for_gaq" data-for-gaq="进入购物车;店铺页">
 			<span></span>
 		</div>

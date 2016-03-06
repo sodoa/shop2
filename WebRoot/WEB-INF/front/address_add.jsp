@@ -84,6 +84,9 @@ width:100px;height:30px;border:1px solid #eee;
 	<div style="height: 80px;"></div>
 
 	<script type="text/javascript">
+		
+		var from = '${from}';
+	
 		$(function() {
 
 			$(".address_select").click(function() {

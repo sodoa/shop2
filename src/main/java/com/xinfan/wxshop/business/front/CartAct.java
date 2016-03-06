@@ -39,18 +39,38 @@ public class CartAct {
 	private DeliveryAddressService DeliveryAddressService;
 
 
-	@RequestMapping("/center/cart.html")
+	@RequestMapping("/put-goods-cart.html")
+	public @ResponseBody
+	JSONResult putGooosInCart(HttpServletRequest request) {
+
+		JSONResult result = null;
+
+		try {
+			String goodsId = request.getParameter("goodsId");
+			String sessionId = LoginSessionUtils.getCustomerSessionId();
+			
+			CartService.addGoodInCart(sessionId,Integer.parseInt(goodsId));
+			
+			result = JSONResult.success();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = JSONResult.error();
+		}
+
+		return result;
+	}
+	
+
+	@RequestMapping("/cart.html")
 	public ModelAndView cart() {
 		ModelAndView mv = new ModelAndView("/front/cart");
-
-		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
-		CartInfoVo CartInfoVo = CartService.getCartInfo(customerId);
+		CartInfoVo CartInfoVo = CartService.getCartInfoBySessionId(LoginSessionUtils.getCustomerSessionId());
 		mv.addObject("CartInfoVo", CartInfoVo);
-
 		return mv;
 	}
 
-	@RequestMapping("/center/cart-number.html")
+	@RequestMapping("/cart-number.html")
 	public String numberOperator(HttpServletRequest request) {
 
 		String cartId = request.getParameter("cartId");
@@ -64,9 +84,27 @@ public class CartAct {
 		}
 
 		CartService.updateGoodsNumberInCart(Integer.parseInt(cartId), number);
+		return "redirect:/cart.html";
+	}
 
+	@RequestMapping("/cart-del.html")
+	public String cartDel(HttpServletRequest request) {
+		String cid = request.getParameter("cid");
+		CartService.deleteGoodInCard(Integer.parseInt(cid));
 		return "redirect:/center/cart.html";
-
+	}
+	
+	@RequestMapping("/empty_cart.html")
+	public ModelAndView emptyCart(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("redirect:/center/cart.html");
+		
+		int customerId = 0;
+		String sessionId = LoginSessionUtils.getCustomerSessionId();;
+		if(LoginSessionUtils.isCustomerLogin()){
+			customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
+		}
+		this.CartService.deleteAllGoodInCard(customerId, sessionId);
+		return mv;
 	}
 
 	@RequestMapping("/center/order.html")
@@ -75,6 +113,7 @@ public class CartAct {
 
 		String did = request.getParameter("did");
 		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
+		String sessionId = LoginSessionUtils.getCustomerSessionId();
 
 		if (did == null || did.length() == 0) {
 			DeliveryAddress address = DeliveryAddressService.getSugestDeliverAddress(customerId);
@@ -84,22 +123,12 @@ public class CartAct {
 			mv.addObject("address", address);
 		}
 
-		CartInfoVo CartInfoVo = CartService.getCartInfo(customerId);
-
+		CartInfoVo CartInfoVo = CartService.getCartInfoBySessionId(sessionId);
 		mv.addObject("CartInfoVo", CartInfoVo);
 
 		return mv;
 	}
 	
-	@RequestMapping("/center/cart-del.html")
-	public String cartDel(HttpServletRequest request) {
-
-		String cid = request.getParameter("cid");
-		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
-		CartService.deleteGoodInCard(Integer.parseInt(cid));
-
-		return "redirect:/center/cart.html";
-	}
 	
 	@RequestMapping("/center/order-del.html")
 	public String orderDel(HttpServletRequest request) {
@@ -109,22 +138,11 @@ public class CartAct {
 		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
 		OrderService.deleteOrder(Integer.parseInt(id),customerId);
 
-		return "redirect://center/order_list.html?li="+li;
+		return "redirect:/center/order_list.html?li="+li;
 	}
 	
 	
 	//order-del.html
-	
-	@RequestMapping("/center/empty_cart.html")
-	public ModelAndView emptyCart(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("redirect:/center/cart.html");
-
-		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
-
-		this.CartService.deleteAllGoodInCard(customerId);
-
-		return mv;
-	}
 
 	@RequestMapping("/my-order.html")
 	public ModelAndView myOrder() {
@@ -149,12 +167,13 @@ public class CartAct {
 		try {
 
 			int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
+			String sessionId = LoginSessionUtils.getCustomerSessionId();
 
 			String order_remark = request.getParameter("order_remark");
 			String deliveryId = request.getParameter("deliveryId");
 			String order_payment_type = payType;
 
-			MakeOrderTable orderTable = CartService.makeOrder(customerId, Integer.parseInt(deliveryId), order_remark, Integer.parseInt(order_payment_type));
+			MakeOrderTable orderTable = CartService.makeOrder(customerId,sessionId,Integer.parseInt(deliveryId), order_remark, Integer.parseInt(order_payment_type));
 
 			if (orderTable != null) {
 				mv.addObject("orderNo", orderTable.getOrderNo());
@@ -270,26 +289,5 @@ public class CartAct {
 		return mv;
 	}
 
-	@RequestMapping("/center/put-goods-cart.html")
-	public @ResponseBody
-	JSONResult putGooosInCart(HttpServletRequest request) {
-
-		JSONResult result = null;
-
-		try {
-			String goodsId = request.getParameter("goodsId");
-
-			int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
-			CartService.addGoodInCart(customerId, Integer.parseInt(goodsId));
-
-			result = JSONResult.success();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			result = JSONResult.error();
-		}
-
-		return result;
-	}
 
 }

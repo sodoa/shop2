@@ -43,7 +43,14 @@ public class AddressAct {
 		ModelAndView mv = new ModelAndView("/front/address_list");
 		
 		String from = request.getParameter("from");
-		mv.addObject("from", from);//from = 1 订单
+		String opt = request.getParameter("opt");
+		
+		if(from !=null && from.length()>2 && !"null".equals(from)){
+			mv.addObject("from", from);//from = 1 订单
+			mv.addObject("opt", opt);//from = 1 订单
+			request.getSession(true).setAttribute("from", from);
+			request.getSession(true).setAttribute("opt", opt);
+		}
 		
 		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
 		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
@@ -64,9 +71,19 @@ public class AddressAct {
 		}
 		
 		String from = request.getParameter("from");
+		if(from == null || from.length() ==0 || "null".equals(from)){
+			from = (String)request.getSession().getAttribute("from");
+		}
+		
+		String opt = request.getParameter("opt");
+		if(opt == null || opt.length() ==0 || "null".equals(opt)){
+			opt = (String)request.getSession().getAttribute("opt");
+		}
+		
 		if(from!=null && from.trim().length()>0){
 			return "redirect:"+from;
 		}
+		
 		return "redirect:/center/address_list.html";
 	}
 

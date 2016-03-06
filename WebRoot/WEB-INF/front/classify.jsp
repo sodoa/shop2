@@ -22,7 +22,7 @@
 		<div class="top_center1"><p style="display:inline;cursor: pointer;">商品分类</p><div class="triangle_border_up"></div></div>
 		<div class="top_right1">
 
-			<a href="javascript:void(0)" onclick="GoCenterUrl('/center/cart.html')"><img
+			<a href="javascript:void(0)" onclick="GoCenterUrl('/cart.html')"><img
 				src="/theme/images/spc.png" style="width: 29px; height: 29px">
 			</a>
 

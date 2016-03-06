@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.entity.Customer;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.CartService;
@@ -40,14 +41,21 @@ public class LoginAct {
 
 	@Autowired
 	private SmsService SmsService;
-	
 
-	@RequestMapping( method=RequestMethod.GET, value="/login.html")
+	@RequestMapping(method = RequestMethod.GET, value = "/login.html")
 	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/login");
 		String p = request.getParameter("p");
+
+		if (p == null || p.length() == 0 || "null".equals(p)) {
+			Object sessionp = request.getSession(true).getAttribute(BizConstants.SESSION_REDIRECT_VAR_KEY);
+			if (sessionp != null) {
+				p = (String) sessionp;
+			}
+		}
+
 		mv.addObject("p", p);
-		
+
 		return mv;
 	}
 
@@ -58,10 +66,9 @@ public class LoginAct {
 		if (sessionMap != null) {
 			ModelAndView mv = null;
 			String p = request.getParameter("p");
-			if(p!=null && p.trim().length()>0 && p.contains(".html")){
-				mv = new ModelAndView("redirect:"+p);
-			}
-			else{
+			if (p != null && p.trim().length() > 0 && p.contains(".html")) {
+				mv = new ModelAndView("redirect:" + p);
+			} else {
 				mv = new ModelAndView("redirect:/center/my_center2.html");
 			}
 
@@ -71,57 +78,56 @@ public class LoginAct {
 			return mv;
 		}
 	}
-	
-	@RequestMapping( method=RequestMethod.POST, value="/login.html")
-	public  @ResponseBody
+
+	@RequestMapping(method = RequestMethod.POST, value = "/login.html")
+	public @ResponseBody
 	JSONResult login(HttpServletRequest request) {
 
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-		
+
 		JSONResult result = null;
-		
+
 		Map attributes = new HashMap();
-		
-		try{
+
+		try {
 			Customer customer = CustomerService.login(account, password, attributes);
-			
+
 			DataMap sessionMap = new DataMap();
 			sessionMap.put("account", customer.getAccount());
 			sessionMap.put("displayname", customer.getDisplayname());
 			sessionMap.put("customerid", customer.getCustomerId());
-			
+
 			LoginSessionUtils.setCustomerUserSessionMap(sessionMap);
-			
+
 			result = JSONResult.success();
-		}
-		catch(BizException e){
+		} catch (BizException e) {
 			e.printStackTrace();
 			result = JSONResult.error("用户名密码错误");
 		}
-		
+
 		return result;
 	}
-	
-	@RequestMapping( method=RequestMethod.GET, value="/logout.html")
+
+	@RequestMapping(method = RequestMethod.GET, value = "/logout.html")
 	public ModelAndView logout(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/login.html");
 		LoginSessionUtils.setExpireCustomerSessionMap();
 		return mv;
 	}
-	
+
 	@RequestMapping("/userstate.html")
-	public @ResponseBody JSONResult userstate(HttpServletRequest request) {
+	public @ResponseBody
+	JSONResult userstate(HttpServletRequest request) {
 		JSONResult result = null;
-		
+
 		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
-		if(sessionMap == null){
+		if (sessionMap == null) {
 			result = JSONResult.error("未登录");
-		}
-		else{
+		} else {
 			result = JSONResult.success();
 		}
-		
+
 		return result;
 	}
 

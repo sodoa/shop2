@@ -38,9 +38,9 @@
 				<ul>
 					<li class="address_select  <c:if test='${item.isdefault==1}'>address_cur</c:if>" >
 						
-						<a href="/center/address_default.html?id=${item.deliveryId}&from=${from}">
+						<a href="/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}">
 							<c:choose>
-								<c:when test="${from=='1'}">选择收货地址</c:when>
+								<c:when test="${opt==1}">选择收货地址</c:when>
 								<c:otherwise>
 									选择默认地址
 								</c:otherwise>

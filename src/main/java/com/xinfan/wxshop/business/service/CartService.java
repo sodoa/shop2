@@ -97,6 +97,39 @@ public class CartService {
 		return info;
 	}
 	
+	public CartInfoVo getCartInfoBySessionId(String sessionId) {
+		List<Cart> cartList = cartDao.selectCartListBySessionId(sessionId);
+		List<Goods> goodsList = new ArrayList<Goods>();
+		CartInfoVo info = new CartInfoVo();
+
+		float totalAmount = 0f;
+		float saveAmount = 0f;
+		float orginAmount = 0f;
+
+		for (Cart cart : cartList) {
+
+			Goods goods = this.goodsDao.selectByPrimaryKey(cart.getGoodsId());
+			goodsList.add(goods);
+
+			totalAmount += (cart.getQuantity() * goods.getFinalPrices());
+			orginAmount += (cart.getQuantity() * goods.getOrginPrices());
+
+		}
+
+		saveAmount = (orginAmount - totalAmount);
+		if (saveAmount <= 0) {
+			saveAmount = 0;
+		}
+
+		info.setCarts(cartList);
+		info.setGoods(goodsList);
+		info.setTotalAmount(totalAmount);
+		info.setOrginAmount(orginAmount);
+		info.setSaveAmount(saveAmount);
+		info.setHasGoods(!cartList.isEmpty());
+
+		return info;
+	}
 	
 
 	public void updateGoodsNumberInCart(int cartId,int number) {
@@ -113,19 +146,20 @@ public class CartService {
 		}
 	}
 
-	public void addGoodInCart(int customerId, int goodsId) {
-		List<Cart> list = cartDao.selectCartListByCustomerIdAndGoodsId(
-				customerId, goodsId);
-
+	public void addGoodInCart(String sessionId, int goodsId) {
+		
+		List<Cart> list = cartDao.selectCartListBySessionIdIdAndGoodsId(sessionId, goodsId);
+		
 		if (list.isEmpty()) {
 			Cart cart = new Cart();
-			cart.setCustomerId(customerId);
+			cart.setCustomerId(0);
+			cart.setSessionid(sessionId);
 			cart.setQuantity(1);
 			cart.setGoodsId(goodsId);
 			cart.setCreatetime(TimeUtils.getCurrentTime());
-			cart.setUpdatetime(TimeUtils.getCurrentTime());
 			cartDao.insertSelective(cart);
 		}
+		
 	}
 
 	public void deleteGoodInCard(int cartId) {
@@ -133,13 +167,16 @@ public class CartService {
 	}
 	
 
-	public void deleteAllGoodInCard(int customerId) {
-		cartDao.deleteCartListByCustomerId(customerId);
+	public void deleteAllGoodInCard(int customerId,String sessionId) {
+		if(customerId >0){
+			cartDao.deleteCartListByCustomerId(customerId);
+		}
+		cartDao.deleteCartListBySessionId(sessionId);
 	}
 
-	public MakeOrderTable makeOrder(int customerId, int deliveryId, String mark,
+	public MakeOrderTable makeOrder(int customerId,String sessionId, int deliveryId, String mark,
 			int paymentMode) {
-		List<Cart> cartList = cartDao.selectCartListByCustomerId(customerId);
+		List<Cart> cartList = cartDao.selectCartListBySessionId(sessionId);
 		MakeOrderTable table = new MakeOrderTable();
 
 		if (!cartList.isEmpty()) {
