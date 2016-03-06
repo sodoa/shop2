@@ -553,6 +553,9 @@
   		<if test="typeLevel2!=null">
   			and type_level2 = #{typeLevel2}
   		</if>
+  		<if test="theme_type!=null">
+  			and theme_type = #{theme_type}
+  		</if>  		
   		
   		<if test="fashion!=null">
   			and fashion = #{fashion}
@@ -586,6 +589,9 @@
   		<if test="type_level2!=null">
   			and type_level2 = #{type_level2}
   		</if>
+  		<if test="theme_type!=null">
+  			and theme_type  =#{theme_type}
+  		</if>  		
   		
   		<if test="fashion!=null">
   			and fashion = #{fashion}

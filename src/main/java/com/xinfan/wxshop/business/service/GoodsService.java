@@ -148,13 +148,15 @@ public class GoodsService {
 		return list;
 	}
 	
-	public List<Goods> getGoodsKeyWordsSerchList(String keywords, Pagination page) {
+	public List<Goods> getGoodsKeyWordsSerchList(String keywords, String theme,Pagination page) {
 		
 		keywords = StringUtils.stringFilter(keywords);
+		theme = StringUtils.stringFilter(theme);
 		
 		DataMap param = new DataMap();
 		param.put("goodsStatus", "1");
 		param.put("goodsName", keywords);
+		param.put("theme", theme);
 		List<Goods> list = goodsDao.pageBeanList(param, page);
 
 		return list;

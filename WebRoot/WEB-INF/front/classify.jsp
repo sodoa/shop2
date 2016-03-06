@@ -68,14 +68,15 @@ function panel_search_form(){
 	var w = $("#panel_search_word").val();
 	//if(w.length>0){
 	var encode_w = encodeURIComponent(w);
-	window.location.href="g-s.html?w="+encode_w;
+	window.location.href="g-s.html?w="+encode_w+"&theme="+theme;
 	//}
 }
+
+var theme = "${theme}";
 
 $(function(){
 
 	var ch=$(".category").height();
-
 	var hh=$(".header").height();
 
 	//分类框动画
@@ -126,7 +127,7 @@ $(function(){
 
 	      $.ajax({type:"POST",
 	             url:"/g-s-more.html",
-	             data:{'page':pageNo,'w':cur},
+	             data:{'page':pageNo,'w':cur,'theme':theme},
 	             dataType:"json",
 	             success:function(data){
 					if(data.result == 0){

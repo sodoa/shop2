@@ -207,12 +207,12 @@
 
 	<ul class="focus">
 		<!-- 此处由于inline-block属性BUG a标签结束标签必须分行写 -->
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus1.png"></a></li> 
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus2.png">
+		<li><a href="g-s.html?theme=1"><img src="/theme/images/index/focus1.png"></a></li> 
+		<li><a href="g-s.html?theme=4"><img src="/theme/images/index/focus2.png">
 		</a></li> 
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus3.png">
+		<li><a href="g-s.html?theme=2"><img src="/theme/images/index/focus3.png">
 		</a></li> 
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus4.png">
+		<li><a href="g-s.html?theme=3"><img src="/theme/images/index/focus4.png">
 		</a></li> 
 		<li><a href="/ac.html"><img src="/theme/images/index/focus5.png">
 		</a></li> 

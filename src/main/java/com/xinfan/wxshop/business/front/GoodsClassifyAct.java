@@ -42,13 +42,19 @@ public class GoodsClassifyAct {
 		ModelAndView mv = new ModelAndView("/front/classify");
 		Pagination page = RequestUtils.getPagination(request);
 		String w = request.getParameter("w");
+		String theme = request.getParameter("theme");
+		
+		if(theme == null || theme.length()==0){
+			theme = "1";
+		}
 		
 		page.setPageSize(5);
 
-		List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,page);
+		List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,theme,page);
 		
 		mv.addObject("page", page);
 		mv.addObject("w", w);
+		mv.addObject("theme", theme);
 		
 		return mv;
 	}
@@ -63,10 +69,16 @@ public class GoodsClassifyAct {
 
 			Pagination page = RequestUtils.getPagination(request);
 			String w = request.getParameter("w");
+			String theme = request.getParameter("theme");
+			
+			if(theme == null || theme.length()==0){
+				theme = "1";
+			}
+			
 			
 			page.setPageSize(5);
 
-			List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,page);
+			List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,theme,page);
 			
 			result = JSONResult.success();
 			result.putValue("list", list);

@@ -178,6 +178,8 @@ public class GoodsAction {
 
 		String goods_des = request.getParameter("goods_des");
 		String summary = request.getParameter("summary");
+		
+		String theme_type = request.getParameter("theme_type");
 
 		String time = request.getParameter("time");
 
@@ -199,6 +201,7 @@ public class GoodsAction {
 		goods.setGoodsStatus(1);
 		goods.setGoodsDes(goods_des);
 		goods.setSupplier(supplier);
+		goods.setThemeType(theme_type);
 
 		Goods existGoods = this.GoodsService.getGoods(Integer.parseInt(goodsId));
 
@@ -282,6 +285,7 @@ public class GoodsAction {
 		String final_prices = request.getParameter("final_prices");
 		String orgin_prices = request.getParameter("orgin_prices");
 		String keywords = request.getParameter("keywords");
+		String theme_type = request.getParameter("theme_type");
 
 		String goods_des = request.getParameter("goods_des");
 		String summary = request.getParameter("summary");
@@ -306,6 +310,7 @@ public class GoodsAction {
 		goods.setGoodsStatus(1);
 		goods.setGoodsDes(goods_des);
 		goods.setSupplier(supplier);
+		goods.setThemeType(theme_type);
 
 		try {
 			String path = FilePathHelper.getGoodsSummaryHtmlPath();
@@ -499,11 +504,12 @@ public class GoodsAction {
 		RequestUtils.getRequestQueryParamter(request, paramter, "type_level2");
 		RequestUtils.getRequestQueryParamter(request, paramter, "goods_status");
 		RequestUtils.getRequestQueryParamter(request, paramter, "goods_name");
+		RequestUtils.getRequestQueryParamter(request, paramter, "theme_type");
 
 		page = GoodsService.getManageGoodsSearchList(paramter, page);
 
 		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw), page, new Object[] { "goods_id", "goods_name", "goods_lname", "final_prices",
-				"release_date", "goods_status", "hot", "burst", "fashion" });
+				"release_date", "goods_status", "hot", "burst", "fashion","theme_type" });
 
 		return grid;
 	}
