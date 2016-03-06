@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Cart extends BaseEntity {
+public class Cart extends BaseEntity{
     private Integer cartId;
 
     private Integer customerId;
