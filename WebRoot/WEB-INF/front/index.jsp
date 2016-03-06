@@ -216,7 +216,7 @@
 		</a></li> 
 		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus5.png">
 		</a></li> 
-		<li><a href="g-s.html?init=12"><img src="/theme/images/index/focus6.png">
+		<li><a href="/sh.html"><img src="/theme/images/index/focus6.png">
 		</a></li> 
 	</ul>
 <script type="text/javascript">

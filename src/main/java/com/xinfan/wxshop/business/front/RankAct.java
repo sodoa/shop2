@@ -33,5 +33,14 @@ public class RankAct {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/sh.html")
+	public ModelAndView sh() {
+		ModelAndView mv = new ModelAndView("/front/share");
+		
+		return mv;
+	}
+	
+	//
 
 }
