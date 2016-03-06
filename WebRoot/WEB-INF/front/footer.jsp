@@ -8,10 +8,8 @@
 <ul class="footer" style="z-index:2">
 	<li><a href="/"><img src="/theme/images/index_in.png">
 		<p>首页</p></a></li>
-	<li><a href="/goods-burst.html"><img src="/theme/images/hot.png">
+	<li><a href="/g-s.html?theme=1"><img src="/theme/images/hot.png">
 		<p>折扣多</p></a></li>
-	<li><a href="/goods-burst.html"><img src="/theme/images/hot.png">
-		<p>抢红包</p></a></li>		
 	<li><a href="/rk.html"><img src="/theme/images/rank.png">
 		<p>分销榜</p></a></li>
 	<li><a href="/center/my_center2.html"><img src="/theme/images/my.png">

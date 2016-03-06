@@ -214,9 +214,9 @@
 		</a></li> 
 		<li><a href="g-s.html?theme=3"><img src="/theme/images/index/focus4.png">
 		</a></li> 
-		<li><a href="/ac.html"><img src="/theme/images/index/focus5.png">
+		<li><a href=""><img src="/theme/images/index/focus5.png">
 		</a></li> 
-		<li><a href="/sh.html"><img src="/theme/images/index/focus6.png">
+		<li><a href="/ac.html"><img src="/theme/images/index/focus6.png">
 		</a></li> 
 	</ul>
 <script type="text/javascript">
@@ -279,7 +279,7 @@
 		$(function(){
 			
 			$("#search_word").bind("focusin",function(){
-				window.location.href= "/g-s.html";
+				window.location.href= "/g-s.html?theme=1";
 			});
 			
 		});
