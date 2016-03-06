@@ -7,24 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xinfan.wxshop.business.service.CartService;
+import com.xinfan.wxshop.business.entity.IncomeRank;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
-import com.xinfan.wxshop.business.service.GoodsService;
-import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.service.RankingService;
-import com.xinfan.wxshop.business.vo.RankList;
 
 @Controller
 public class RankAct {
-
-	@Autowired
-	private GoodsService GoodsService;
-
-	@Autowired
-	private CartService CartService;
-
-	@Autowired
-	private OrderService OrderService;
 	
 	@Autowired
 	private RankingService RankingService;
@@ -36,8 +24,12 @@ public class RankAct {
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("/front/rank");
 		
-		List<RankList> list = RankingService.getRankingTopList(100);
-		mv.addObject("list", list);
+		List<IncomeRank> weeklist = RankingService.getWeekIncomeRankList();
+		List<IncomeRank> monthlist = RankingService.getMonthIncomeRankList();
+		List<IncomeRank> yearlist = RankingService.getYearIncomeRankList();
+		mv.addObject("weeklist", weeklist);
+		mv.addObject("monthlist", monthlist);
+		mv.addObject("yearlist", yearlist);
 		
 		return mv;
 	}
