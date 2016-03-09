@@ -130,4 +130,8 @@
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>		
 
+	<bean id="GoodsLimitDao" class="com.xinfan.wxshop.business.dao.GoodsLimitDao">
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.GoodsLimitMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>		
 </beans>
