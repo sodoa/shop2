@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.xinfan.wxshop.business.constants.SequenceConstants;
 import com.xinfan.wxshop.business.dao.GoodsDao;
 import com.xinfan.wxshop.business.dao.GoodsImageDao;
+import com.xinfan.wxshop.business.dao.GoodsLimitDao;
 import com.xinfan.wxshop.business.dao.GoodsTypeDao;
 import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsImage;
+import com.xinfan.wxshop.business.entity.GoodsLimit;
 import com.xinfan.wxshop.business.entity.GoodsType;
 import com.xinfan.wxshop.business.util.StringUtils;
 import com.xinfan.wxshop.common.base.DataMap;
@@ -24,6 +26,9 @@ public class GoodsService {
 
 	@Autowired
 	private GoodsDao goodsDao;
+	
+	@Autowired
+	private GoodsLimitDao goodsLimitDao;
 
 	@Autowired
 	private GoodsTypeDao goodsTypeDao;
@@ -231,6 +236,14 @@ public class GoodsService {
 		goods.setGoodsId(sequenceDao.getSequence(SequenceConstants.SEQ_GOODS));
 		
 		this.goodsDao.insertSelective(goods);
+	}
+	
+	
+	public void addGoodsLimit(GoodsLimit goods){
+		
+		goods.setSellAmount(0);
+		
+		this.goodsLimitDao.insertSelective(goods);
 	}
 	
 	public void updateGoodsThumdUrl(int id,String url){
