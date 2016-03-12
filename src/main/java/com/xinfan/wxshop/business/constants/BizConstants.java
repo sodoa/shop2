@@ -49,4 +49,8 @@ public class BizConstants {
 	
 	public static final String SESSION_REDIRECT_VAR_KEY = "#session_p";
 	
+	public static final String GOODS_THEME_TYPE_LIMIT = "20";
+	
+	public static final int GOODS_TIME_LIMIT_TYPE_BY_TIME = 1;
+	public static final int GOODS_TIME_LIMIT_TYPE_BY_COUNT = 2;
 }

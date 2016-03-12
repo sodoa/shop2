@@ -21,6 +21,7 @@ import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.business.vo.CartInfoVo;
 import com.xinfan.wxshop.business.vo.MakeOrderTable;
+import com.xinfan.wxshop.common.base.BizException;
 import com.xinfan.wxshop.common.base.DataMap;
 
 @Controller
@@ -53,6 +54,9 @@ public class CartAct {
 			
 			result = JSONResult.success();
 
+		}catch (BizException e) {
+			e.printStackTrace();
+			result = JSONResult.error(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = JSONResult.error();

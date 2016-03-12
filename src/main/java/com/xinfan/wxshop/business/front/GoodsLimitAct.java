@@ -1,29 +1,34 @@
 package com.xinfan.wxshop.business.front;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.xinfan.wxshop.business.cache.utils.GoodsTypeUtils;
+import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.entity.Goods;
-import com.xinfan.wxshop.business.entity.GoodsType;
+import com.xinfan.wxshop.business.entity.GoodsImage;
+import com.xinfan.wxshop.business.entity.GoodsLimit;
+import com.xinfan.wxshop.business.helper.FilePathHelper;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
 import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.util.RequestUtils;
-import com.xinfan.wxshop.common.base.DataMap;
+import com.xinfan.wxshop.business.vo.GoodsVsLimitVO;
 import com.xinfan.wxshop.common.page.Pagination;
+import com.xinfan.wxshop.common.util.TimeUtils;
 
 @Controller
-public class GoodsLimitAct {
+public class GoodsLimitAct  extends BaseFrontAct{
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -75,10 +80,9 @@ public class GoodsLimitAct {
 				theme = "1";
 			}
 			
-			
 			page.setPageSize(5);
 
-			List<Goods> list = GoodsService.getGoodsKeyWordsSerchList(w,theme,page);
+			List<GoodsVsLimitVO> list = GoodsService.getGoodsLimitKeyWordsSerchList(w,theme,page);
 			
 			result = JSONResult.success();
 			result.putValue("list", list);
@@ -89,7 +93,50 @@ public class GoodsLimitAct {
 		}
 
 		return result;
+	}
+	
+	@RequestMapping("/gl-{goodsId}.html")
+	public ModelAndView goods(@PathVariable Integer goodsId,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/front/goods_limit_info");
 
+		Goods goods = GoodsService.getGoods(goodsId);
+		
+		if(goods.getGoodsStatus() == 0){
+			return this.includeError("该商品已下架", request);
+		}
+		
+		if(!BizConstants.GOODS_THEME_TYPE_LIMIT.equals(goods.getThemeType())){
+			return this.includeError("该商品不是特价", request);
+		}
+		
+		if(goods!=null){
+			String html = FilePathHelper.getGoodsSummaryHtml(request, goods.getSummary());
+			mv.addObject("html", html);
+		}
+		
+		GoodsLimit goodslimit = GoodsService.getGoodsLimit(goodsId);
+		
+		List<GoodsImage> gImages = GoodsService.getGoodsImageList(goodsId, 1, 5);
+
+		mv.addObject("goods", goods);
+		mv.addObject("goodslimit", goodslimit);
+		mv.addObject("gImages", gImages);
+		mv.addObject("timelimit", goodslimit.getTimeLimit().getTime());
+		
+		Date current = TimeUtils.getCurrentTime();
+		boolean timeout = !current.before(goodslimit.getTimeLimit());
+		
+		boolean canBuy = false;
+		
+		if(goodslimit.getLimitType()==BizConstants.GOODS_TIME_LIMIT_TYPE_BY_COUNT){
+			canBuy = !(goodslimit.getSellAmount()>=goodslimit.getTotalAmount() || timeout);
+		}
+		else if(goodslimit.getLimitType()==BizConstants.GOODS_TIME_LIMIT_TYPE_BY_TIME){
+			canBuy = !(timeout);
+		}
+		
+		mv.addObject("canBuy", canBuy);
+		return mv;
 	}
 
 }

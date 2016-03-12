@@ -16,6 +16,7 @@ import com.xinfan.wxshop.business.entity.GoodsImage;
 import com.xinfan.wxshop.business.entity.GoodsLimit;
 import com.xinfan.wxshop.business.entity.GoodsType;
 import com.xinfan.wxshop.business.util.StringUtils;
+import com.xinfan.wxshop.business.vo.GoodsVsLimitVO;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.cache.CacheHolder;
 import com.xinfan.wxshop.common.cache.CacheProvider;
@@ -167,6 +168,20 @@ public class GoodsService {
 		return list;
 	}
 	
+	public List<GoodsVsLimitVO> getGoodsLimitKeyWordsSerchList(String keywords, String theme,Pagination page) {
+		
+		keywords = StringUtils.stringFilter(keywords);
+		theme = StringUtils.stringFilter(theme);
+		
+		DataMap param = new DataMap();
+		param.put("goodsStatus", "1");
+		param.put("goodsName", keywords);
+		param.put("theme_type", theme);
+		List<GoodsVsLimitVO> list = goodsDao.getGoodsLimitKeyWordsSerchList(param, page);
+
+		return list;
+	}
+	
 
 	public List<Goods> getGoodsBurstList(DataMap param, Pagination page) {
 
@@ -293,6 +308,11 @@ public class GoodsService {
 
 	public Goods getGoods(int goodsId) {
 		Goods goods = goodsDao.selectByPrimaryKey(goodsId);
+		return goods;
+	}
+
+	public GoodsLimit getGoodsLimit(int goodsId) {
+		GoodsLimit goods = goodsLimitDao.selectByPrimaryKey(goodsId);
 		return goods;
 	}
 	

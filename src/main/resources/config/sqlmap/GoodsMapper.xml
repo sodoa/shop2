@@ -565,6 +565,75 @@
   </select>
   
   
+  
+  <resultMap id="GoodsLimitBaseResultMap" type="com.xinfan.wxshop.business.vo.GoodsVsLimitVO" >
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_lname" property="goodsLname" jdbcType="VARCHAR" />
+    <result column="goods_des" property="goodsDes" jdbcType="VARCHAR" />
+    <result column="goods_status" property="goodsStatus" jdbcType="INTEGER" />
+    <result column="thumbnail_url" property="thumbnailUrl" jdbcType="VARCHAR" />
+    <result column="orgin_prices" property="orginPrices" jdbcType="REAL" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="final_prices" property="finalPrices" jdbcType="REAL" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="release_date" property="releaseDate" jdbcType="TIMESTAMP" />
+    <result column="hot" property="hot" jdbcType="INTEGER" />
+    <result column="burst" property="burst" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="type_level1" property="typeLevel1" jdbcType="VARCHAR" />
+    <result column="type_level2" property="typeLevel2" jdbcType="VARCHAR" />
+    <result column="sellcount" property="sellcount" jdbcType="INTEGER" />
+    <result column="fashion" property="fashion" jdbcType="INTEGER" />
+    <result column="fashion_template" property="fashionTemplate" jdbcType="VARCHAR" />
+    <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+    <result column="supplier" property="supplier" jdbcType="VARCHAR" />
+    <result column="goods_area" property="goodsArea" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="theme_type" property="themeType" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
+    <result column="sell_amount" property="sellAmount" jdbcType="INTEGER" />
+    <result column="buy_limit" property="buyLimit" jdbcType="INTEGER" />
+    <result column="time_limit" property="timeLimit" jdbcType="TIMESTAMP" />
+    <result column="limit_type" property="limitType" jdbcType="INTEGER" />
+  </resultMap>
+  
+   <select id="getGoodsLimitKeyWordsSerchList" parameterType="com.xinfan.wxshop.common.base.DataMap" resultMap="GoodsLimitBaseResultMap">
+  	
+  		select g.*,l.total_amount,l.sell_amount,l.buy_limit,l.time_limit,l.limit_type from t_goods g,t_goods_limit l where g.goods_id = l.goods_id 
+  		<if test="goodsStatus!=null">
+  			and goods_status in (${goodsStatus})
+  		</if>
+  		
+  		<if test="goodsName!=null">
+  			and (goods_name like '%${goodsName}%' or goods_lname like '%${goodsName}%')
+  		</if>
+  		
+  		<if test="burst!=null">
+  			and burst  = #{burst}
+  		</if>
+  		
+  		<if test="hot!=null">
+  			and hot  =  #{hot}
+  		</if>
+  		<if test="typeLevel1!=null">
+  			and type_level1  =#{typeLevel1}
+  		</if>
+  		<if test="typeLevel2!=null">
+  			and type_level2 = #{typeLevel2}
+  		</if>
+  		<if test="theme_type!=null">
+  			and theme_type = #{theme_type}
+  		</if>  		
+  		
+  		<if test="fashion!=null">
+  			and fashion = #{fashion}
+  		</if>
+  		 		
+  		order by release_date desc 		
+  </select>
+  
+  
    <select id="getManageGoodsSearchList" parameterType="com.xinfan.wxshop.common.base.DataMap"  resultType="com.xinfan.wxshop.common.base.DataMap">
   	
   		select * from t_goods where 1=1 

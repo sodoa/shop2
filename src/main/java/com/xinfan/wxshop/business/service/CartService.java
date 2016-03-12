@@ -10,16 +10,19 @@ import com.xinfan.wxshop.business.constants.SequenceConstants;
 import com.xinfan.wxshop.business.dao.CartDao;
 import com.xinfan.wxshop.business.dao.DeliveryAddressDao;
 import com.xinfan.wxshop.business.dao.GoodsDao;
+import com.xinfan.wxshop.business.dao.GoodsLimitDao;
 import com.xinfan.wxshop.business.dao.OrderDao;
 import com.xinfan.wxshop.business.dao.OrderDetailDao;
 import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.Cart;
 import com.xinfan.wxshop.business.entity.DeliveryAddress;
 import com.xinfan.wxshop.business.entity.Goods;
+import com.xinfan.wxshop.business.entity.GoodsLimit;
 import com.xinfan.wxshop.business.entity.Order;
 import com.xinfan.wxshop.business.entity.OrderDetail;
 import com.xinfan.wxshop.business.vo.CartInfoVo;
 import com.xinfan.wxshop.business.vo.MakeOrderTable;
+import com.xinfan.wxshop.common.base.BizException;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.page.Pagination;
 import com.xinfan.wxshop.common.util.TimeUtils;
@@ -34,6 +37,9 @@ public class CartService {
 
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private GoodsLimitDao goodsLimitDao;
 
 	@Autowired
 	private OrderDetailDao orderDetailDao;
@@ -149,6 +155,16 @@ public class CartService {
 	public void addGoodInCart(String sessionId, int goodsId) {
 		
 		List<Cart> list = cartDao.selectCartListBySessionIdIdAndGoodsId(sessionId, goodsId);
+		
+		Goods goods = this.goodsDao.selectByPrimaryKey(goodsId);
+		
+		if(goods.getThemeType().equals(BizConstants.GOODS_THEME_TYPE_LIMIT)){
+			GoodsLimit goodsLimit = goodsLimitDao.selectByPrimaryKey(goodsId);
+			String msg = GoodsHelper.canBuyGoods(goodsLimit);
+			if(msg !=null){
+				throw new BizException(msg);
+			}
+		}
 		
 		if (list.isEmpty()) {
 			Cart cart = new Cart();

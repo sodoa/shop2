@@ -6,6 +6,7 @@ package com.xinfan.wxshop.business.dao;
 import java.util.List;
 
 import com.xinfan.wxshop.business.entity.Goods;
+import com.xinfan.wxshop.business.vo.GoodsVsLimitVO;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.dal.SqlSessionDaoSupport;
 import com.xinfan.wxshop.common.page.Pagination;
@@ -18,6 +19,10 @@ public class GoodsDao extends SqlSessionDaoSupport {
 	
 	public List<Goods> pageBeanList(DataMap map ,Pagination page) {
 		return getSqlSession().selectList(wrapCommand("pageBeanList"), map,page);
+	}
+
+	public List<GoodsVsLimitVO> getGoodsLimitKeyWordsSerchList(DataMap map ,Pagination page) {
+		return getSqlSession().selectList(wrapCommand("getGoodsLimitKeyWordsSerchList"), map,page);
 	}
 	
 	public List<Goods> getManageGoodsSearchList(DataMap map ,Pagination page) {
