@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xinfan.wxshop.business.entity.Customer;
+import com.xinfan.wxshop.business.entity.Wallet;
 import com.xinfan.wxshop.business.model.DataTableDataGrid;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.CustomerService;
@@ -54,7 +55,10 @@ public class CustomerAction {
 		String customerId = request.getParameter("id");
 		
 		Customer bean  = this.CustomerService.getById(Integer.parseInt(customerId));
+		Wallet wallet  = this.CustomerService.getWalletByCustomerId(Integer.parseInt(customerId));
+		
 		mv.addObject("bean", bean);
+		mv.addObject("wallet", wallet);
 		
 		return mv;
 	}
