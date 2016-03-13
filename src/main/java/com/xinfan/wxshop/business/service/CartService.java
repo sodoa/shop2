@@ -158,7 +158,7 @@ public class CartService {
 		
 		Goods goods = this.goodsDao.selectByPrimaryKey(goodsId);
 		
-		if(goods.getThemeType().equals(BizConstants.GOODS_THEME_TYPE_LIMIT)){
+		if(goods.getThemeType()!=null &&goods.getThemeType().equals(BizConstants.GOODS_THEME_TYPE_LIMIT)){
 			GoodsLimit goodsLimit = goodsLimitDao.selectByPrimaryKey(goodsId);
 			String msg = GoodsHelper.canBuyGoods(goodsLimit);
 			if(msg !=null){

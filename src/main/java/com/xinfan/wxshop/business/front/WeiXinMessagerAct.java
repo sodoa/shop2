@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thoughtworks.xstream.XStream;
 import com.xinfan.wxshop.business.entity.RedRecord;
+import com.xinfan.wxshop.business.pay.weixin.utils.MenuUtils;
 import com.xinfan.wxshop.business.pay.weixin.utils.Sha1Util;
 import com.xinfan.wxshop.business.service.RedPacketService;
 import com.xinfan.wxshop.business.util.SerializeXmlUtil;
@@ -42,6 +43,22 @@ public class WeiXinMessagerAct {
 	 * <Content><![CDATA[this is a test]]></Content>
 	 * <MsgId>1234567890123456</MsgId> </xml>
 	 */
+	
+	@RequestMapping("/weixin/menu")
+	public void createmenu(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String message = "";
+		
+		String opt = request.getParameter("opt");
+		if("create".equals(opt)){
+			MenuUtils.createMenu();
+		}
+		else if("del".equals(opt)){
+			MenuUtils.deleteMenu();
+		}else {
+			response.getOutputStream().println("error code");
+		}
+	}
 
 	@RequestMapping("/weixin/messger")
 	public void weixin1(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -150,6 +167,10 @@ public class WeiXinMessagerAct {
 
 		// 取得消息类型
 		String msgType = inputMsg.getMsgType();
+		String event = inputMsg.getEvent();
+		
+		String responseXml = "";
+		
 		// 根据消息类型获取对应的消息内容
 		if (msgType.equals("text") && inputMsg.getContent().contains("红包")) {
 			// 文本消息
@@ -182,11 +203,26 @@ public class WeiXinMessagerAct {
 			str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
 			str.append("<Content><![CDATA[" + msgContent + "]]></Content>");
 			str.append("</xml>");
-			logger.info(str.toString());
 			
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().write(str.toString());
+			responseXml = str.toString();
 		}
+		else if("subscribe".equals(event)){
+			StringBuffer str = new StringBuffer();
+			str.append("<xml>");
+			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
+			str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
+			str.append("<CreateTime>" + returnTime + "</CreateTime>");
+			str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
+			str.append("<Content><![CDATA[" + MenuUtils.getSubscribeContent() + "]]></Content>");
+			str.append("</xml>");
+			
+			responseXml = str.toString();
+		}
+		
+		logger.info(responseXml);
+		
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(responseXml);
 	}
 
 }
