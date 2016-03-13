@@ -230,8 +230,28 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>theme</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
 	</tag>
 
+	<tag>
+		<name>goods_theme_option_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.GoodsThemeOptionTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>theme</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>	
+		<attribute>
+			<name>value</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>			
+	</tag>
 
 	<tag>
 		<name>dict_label_tag</name>
