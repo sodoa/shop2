@@ -32,7 +32,7 @@ public class MenuUtils {
 
 			StringBuffer bufferUrl = new StringBuffer(create_url);
 			bufferUrl.append("?").append("access_token=").append(accessToken);
-			JSONObject result = CommonUtil.httpsRequest(create_url, "post", menuJson);
+			JSONObject result = CommonUtil.httpsRequest(bufferUrl.toString(), "POST", menuJson);
 
 			if (result != null) {
 				logger.debug(result.toString());
@@ -58,7 +58,7 @@ public class MenuUtils {
 		StringBuffer bufferUrl = new StringBuffer(delete_url);
 		bufferUrl.append("?").append("access_token=").append(accessToken);
 
-		JSONObject result = CommonUtil.httpsRequest(delete_url, "post", "");
+		JSONObject result = CommonUtil.httpsRequest(bufferUrl.toString(), "POST", "");
 
 		if (result != null) {
 			logger.debug(result.toString());

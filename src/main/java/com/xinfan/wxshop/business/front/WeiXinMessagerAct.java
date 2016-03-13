@@ -212,7 +212,7 @@ public class WeiXinMessagerAct {
 			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
 			str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
 			str.append("<CreateTime>" + returnTime + "</CreateTime>");
-			str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
+			str.append("<MsgType><![CDATA[text]]></MsgType>");
 			str.append("<Content><![CDATA[" + MenuUtils.getSubscribeContent() + "]]></Content>");
 			str.append("</xml>");
 			

@@ -127,8 +127,6 @@ public class MoneyUtils {
 	 * System.out.println(getOrderNo()); }
 	 */
 
-	final static String KEYSTORE_FILE = "E:/apiclient_cert.p12";
-	final static String KEYSTORE_PASSWORD = "10035097";
 	
 	public static String createXML(Map<String, Object> map){
 		String xml = "<xml>";
@@ -137,6 +135,7 @@ public class MoneyUtils {
 		while(i.hasNext()){
 			String str = i.next();
 			xml+="<"+str+">"+"<![CDATA["+map.get(str)+"]]>"+"</"+str+">";
+			//xml+="<"+str+">"+map.get(str)+"</"+str+">";
 		}
 		xml+="</xml>";
 		return xml;

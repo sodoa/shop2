@@ -55,6 +55,9 @@ public class CommonUtil {
 			conn.setUseCaches(false);
 			// 设置请求方式（GET/POST）
 			conn.setRequestMethod(requestMethod);
+			
+			System.out.println("**************"+requestUrl);
+			System.out.println("**************"+requestMethod);
 
 			// 当outputStr不为null时向输出流写数据
 			if (null != outputStr) {

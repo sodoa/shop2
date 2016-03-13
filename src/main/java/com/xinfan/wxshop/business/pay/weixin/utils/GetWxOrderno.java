@@ -30,6 +30,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.springframework.core.io.ClassPathResource;
 
 import com.xinfan.wxshop.business.pay.weixin.utils.http.HttpClientConnectionManager;
 
@@ -47,7 +48,7 @@ public class GetWxOrderno {
 	// HTTP请求器
 	private static CloseableHttpClient httpclient;
 	
-	private static String KEY_VERSIONS = "1278720001";
+	private static String KEY_VERSIONS = "1319785801";
 	
 	private static String KEY_PATH = "/keys/apiclient_cert.p12"	;
 
@@ -57,8 +58,18 @@ public class GetWxOrderno {
 		FileInputStream instream = null;// 加载本地的证书进行https加密传输
 		try {
 			keyStore = KeyStore.getInstance("PKCS12");
-			instream = new FileInputStream(new File(KEY_PATH));// 加载本地的证书进行https加密传输
+			
+			System.out.println("*****************"+KEY_VERSIONS);
+			
+			ClassPathResource loader = new ClassPathResource("/config/apiclient_cert.p12");
+			
+			instream = new FileInputStream(loader.getFile());// 加载本地的证书进行https加密传输
+			
+			System.out.println("*****************"+instream);
+			
 			keyStore.load(instream, KEY_VERSIONS.toCharArray());// 设置证书密码
+			
+			
 
 			// Trust own CA and all self-signed certs
 			SSLContext sslcontext = SSLContexts.custom()

@@ -78,7 +78,7 @@ public class RedPacketService {
 		map.put("mch_billno", orderNNo);//商户订单
 		map.put("mch_id", partner);//商户号
 		map.put("wxappid", appid);//商户appid
-		map.put("nick_name", "新帆科技");//提供方名称
+		//map.put("nick_name", "新帆科技");//提供方名称
 		map.put("send_name", "果然逗红包");//用户名
 		map.put("re_openid", record.getFromusername());//用户openid
 		map.put("total_amount", record.getAmount());//付款金额
