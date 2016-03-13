@@ -1,4 +1,10 @@
 <configuration>
+
+	<!-- 日志文件名 -->
+	<property name="logName" value="wxshop"/>
+	<!-- 日志目录 -->
+	<property name="logBase" value="logs" />
+
 	<!-- 控制台输出 -->
 	<appender name="stdout"
 		class="ch.qos.logback.core.ConsoleAppender">
@@ -14,17 +20,17 @@
 	<appender name="wxshop"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<!-- 指定输出文件路径、序号 -->
-		<File>/logs/wxshop.log</File>
+		<File>${logBase}/${logName}.log</File>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
 			<FileNamePattern>/logs/wxshop.%i.log</FileNamePattern>
 			<MinIndex>1</MinIndex>
-			<MaxIndex>10</MaxIndex>
+			<MaxIndex>50</MaxIndex>
 		</rollingPolicy>
 		<!-- 指定输出文件大小 -->
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>20MB</MaxFileSize>
+			<MaxFileSize>50MB</MaxFileSize>
 		</triggeringPolicy>
 		<!-- 指定输出格式 -->
 		<layout class="ch.qos.logback.classic.PatternLayout">
@@ -43,17 +49,17 @@
 			<onMismatch>DENY</onMismatch>
 		</filter>		
 		<!-- 指定输出文件路径、序号 -->
-		<File>/logs/wxshop-error.log</File>
+		<File>${logBase}/${logName}-error.log</File>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
 			<FileNamePattern>/logs/wxshop-error.%i.log</FileNamePattern>
 			<MinIndex>1</MinIndex>
-			<MaxIndex>10</MaxIndex>
+			<MaxIndex>50</MaxIndex>
 		</rollingPolicy>
 		<!-- 指定输出文件大小 -->
 		<triggeringPolicy
 			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>20MB</MaxFileSize>
+			<MaxFileSize>50MB</MaxFileSize>
 		</triggeringPolicy>
 		<!-- 指定输出格式 -->
 		<layout class="ch.qos.logback.classic.PatternLayout">
