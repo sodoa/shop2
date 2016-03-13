@@ -83,7 +83,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
 			<a href="/"><img src="/theme/images/back.png" style="width:12px"></a>
 		</div>
 		<div  class="top_center1">
-			商品详情
+			活动商品
 		</div>
 		<div class="top_right1" >
 			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px"></a>
