@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thoughtworks.xstream.XStream;
 import com.xinfan.wxshop.business.entity.RedRecord;
-import com.xinfan.wxshop.business.pay.weixin.MenuUtils;
+import com.xinfan.wxshop.business.pay.weixin.MenuManger;
 import com.xinfan.wxshop.business.pay.weixin.Sha1Util;
 import com.xinfan.wxshop.business.service.RedPacketService;
 import com.xinfan.wxshop.business.util.SerializeXmlUtil;
@@ -51,10 +51,10 @@ public class WeiXinMessagerAct {
 		
 		String opt = request.getParameter("opt");
 		if("create".equals(opt)){
-			MenuUtils.createMenu();
+			MenuManger.createMenu();
 		}
 		else if("del".equals(opt)){
-			MenuUtils.deleteMenu();
+			MenuManger.deleteMenu();
 		}else {
 			response.getOutputStream().println("error code");
 		}
@@ -213,7 +213,7 @@ public class WeiXinMessagerAct {
 			str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
 			str.append("<CreateTime>" + returnTime + "</CreateTime>");
 			str.append("<MsgType><![CDATA[text]]></MsgType>");
-			str.append("<Content><![CDATA[" + MenuUtils.getSubscribeContent() + "]]></Content>");
+			str.append("<Content><![CDATA[" + MenuManger.getSubscribeContent() + "]]></Content>");
 			str.append("</xml>");
 			
 			responseXml = str.toString();

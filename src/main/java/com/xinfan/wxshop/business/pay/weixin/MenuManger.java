@@ -1,19 +1,18 @@
 package com.xinfan.wxshop.business.pay.weixin;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.io.ClassPathResource;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xinfan.wxshop.business.util.WeiXinSessionManager;
+import com.xinfan.wxshop.common.config.ClassPathFileConfig;
 
-public class MenuUtils {
+public class MenuManger {
 
-	private static final Logger logger = LoggerFactory.getLogger(MenuUtils.class);
+	private static final Logger logger = LoggerFactory.getLogger(MenuManger.class);
 
 	private static String create_url = "https://api.weixin.qq.com/cgi-bin/menu/create";// ?access_token=ACCESS_TOKEN
 
@@ -21,11 +20,10 @@ public class MenuUtils {
 
 	public static String createMenu() {
 
-		ClassPathResource loader = new ClassPathResource("/config/weixin_menu.json");
 		String msg = null;
 
 		try {
-			String menuJson = FileUtils.readFileToString(loader.getFile());
+			String menuJson = FileUtils.readFileToString(ClassPathFileConfig.getClassPathFile("/config/weixin_menu.json"));
 			logger.info("weixin menu json : " + menuJson);
 
 			String accessToken = WeiXinSessionManager.getAccessToken();
@@ -72,11 +70,10 @@ public class MenuUtils {
 
 	public static String getSubscribeContent() {
 
-		ClassPathResource loader = new ClassPathResource("/config/weixin_subscribe.json");
 		String msg = null;
 
 		try {
-			String menuJson = FileUtils.readFileToString(loader.getFile());
+			String menuJson = FileUtils.readFileToString(ClassPathFileConfig.getClassPathFile("/config/weixin_subscribe.json"));
 			logger.info("weixin menu json : " + menuJson);
 			msg = menuJson;
 
