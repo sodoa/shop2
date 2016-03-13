@@ -112,11 +112,11 @@
 
 	<div class="clear"></div>
 	<div class="block2">
-		<a href="tel:18673119686">
+		<a href="tel:<sp:config id="service.telphone"></sp:config>">
 		<div>
 			<img src="/theme/images/myCenter/8.png" style="width: 16px; height: 18px">
 		</div>
-		<p class="name">客服(400-8888-1652)</p>
+		<p class="name">客服(<sp:config id="service.telphone"></sp:config>)</p>
 		<p class="to">
 			<img src="/theme/images/myCenter/right.png">
 		</p>
