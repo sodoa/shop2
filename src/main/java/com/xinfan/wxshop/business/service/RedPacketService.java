@@ -17,7 +17,7 @@ import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.RedPacket;
 import com.xinfan.wxshop.business.entity.RedRecord;
 import com.xinfan.wxshop.business.pay.hongbao.MoneyUtils;
-import com.xinfan.wxshop.business.pay.weixin.utils.GetWxOrderno;
+import com.xinfan.wxshop.business.pay.weixin.GetWxOrderno;
 import com.xinfan.wxshop.common.config.FileConfig;
 import com.xinfan.wxshop.common.util.JSONUtils;
 import com.xinfan.wxshop.common.util.TimeUtils;

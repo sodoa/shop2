@@ -1,4 +1,4 @@
-package com.xinfan.wxshop.business.pay.weixin.utils.http;
+package com.xinfan.wxshop.business.pay.weixin.http;
 
 /*
  * Alipay.com Inc.

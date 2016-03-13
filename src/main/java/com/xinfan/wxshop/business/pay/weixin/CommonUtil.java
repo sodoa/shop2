@@ -1,4 +1,4 @@
-package com.xinfan.wxshop.business.pay.weixin.utils;
+package com.xinfan.wxshop.business.pay.weixin;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

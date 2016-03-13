@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.xinfan.wxshop.business.pay.weixin.utils.CommonUtil;
-import com.xinfan.wxshop.business.pay.weixin.utils.GetWxOrderno;
-import com.xinfan.wxshop.business.pay.weixin.utils.RequestHandler;
-import com.xinfan.wxshop.business.pay.weixin.utils.Sha1Util;
-import com.xinfan.wxshop.business.pay.weixin.utils.TenpayUtil;
+import com.xinfan.wxshop.business.pay.weixin.CommonUtil;
+import com.xinfan.wxshop.business.pay.weixin.GetWxOrderno;
+import com.xinfan.wxshop.business.pay.weixin.RequestHandler;
+import com.xinfan.wxshop.business.pay.weixin.Sha1Util;
+import com.xinfan.wxshop.business.pay.weixin.TenpayUtil;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;

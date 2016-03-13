@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thoughtworks.xstream.XStream;
 import com.xinfan.wxshop.business.entity.RedRecord;
-import com.xinfan.wxshop.business.pay.weixin.utils.MenuUtils;
-import com.xinfan.wxshop.business.pay.weixin.utils.Sha1Util;
+import com.xinfan.wxshop.business.pay.weixin.MenuUtils;
+import com.xinfan.wxshop.business.pay.weixin.Sha1Util;
 import com.xinfan.wxshop.business.service.RedPacketService;
 import com.xinfan.wxshop.business.util.SerializeXmlUtil;
 import com.xinfan.wxshop.business.vo.InputMessage;

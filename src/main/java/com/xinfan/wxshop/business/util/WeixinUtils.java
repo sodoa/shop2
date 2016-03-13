@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
-import com.xinfan.wxshop.business.pay.weixin.utils.CommonUtil;
+import com.xinfan.wxshop.business.pay.weixin.CommonUtil;
 import com.xinfan.wxshop.business.vo.OAuthInfo;
 import com.xinfan.wxshop.business.vo.UserInfo;
 

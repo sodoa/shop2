@@ -1,4 +1,4 @@
-package com.xinfan.wxshop.business.pay.weixin.utils;
+package com.xinfan.wxshop.business.pay.weixin;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -32,7 +32,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.springframework.core.io.ClassPathResource;
 
-import com.xinfan.wxshop.business.pay.weixin.utils.http.HttpClientConnectionManager;
+import com.xinfan.wxshop.business.pay.weixin.http.HttpClientConnectionManager;
 
 public class GetWxOrderno {
 

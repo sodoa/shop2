@@ -1,4 +1,4 @@
-package com.xinfan.wxshop.business.pay.weixin.utils;
+package com.xinfan.wxshop.business.pay.weixin;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
