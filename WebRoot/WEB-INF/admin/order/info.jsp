@@ -11,7 +11,7 @@
 <body>
 		<div class="responsive">
 			<div class="row cl">
-				<div class="col-lg-12" style="padding: 5px;">
+				<div class="col-lg-12" style="padding: 5px;margin: 5px;">
 					<c:if test="${order.status ==1}">
 						<button id="process_order_btn" type="button" class="btn btn-outline btn-primary">处理定单</button>
 					</c:if>
@@ -39,12 +39,12 @@
 			</div>
 			<div class="row cl">
 				<div class="col-lg-6">
-					<div class="panel panel-default">
+					<div class="panel panel-default" style="margin: 5px;">
 						<div class="panel-header">定单信息</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
 							<div class="table-responsive" >
-								<table class="table table-striped table-bordered table-hover ">
+								<table class="table table-striped table-bordered table-hover " >
 									<tbody>
 										<tr>
 											<td>定单号：</td>
@@ -76,7 +76,7 @@
 						<!-- /.panel-body -->
 					</div>
 
-					<div class="panel panel-default">
+					<div class="panel panel-default" style="margin: 5px;">
 						<div class="panel-header">送货信息</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
@@ -110,7 +110,7 @@
 				</div>
 				<!-- /.col-lg-6 -->
 				<div class="col-lg-6">
-					<div class="panel panel-default">
+					<div class="panel panel-default" style="margin: 5px;">
 						<div class="panel-header">客户信息</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
@@ -147,7 +147,7 @@
 
 			<div class="row cl">
 				<div class="col-lg-12">
-					<div class="panel panel-default">
+					<div class="panel panel-default" style="margin: 5px;">
 						<div class="panel-header">定单详单</div>
 						<!-- /.panel-heading -->
 						<div class="panel-body">
