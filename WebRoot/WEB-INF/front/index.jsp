@@ -13,21 +13,6 @@
 	<script type="text/javascript" src="/theme/js/jquery.touchSlider.js"></script>
 </head>
 <body>
-	<div class="header">
-		<div class="top_left">
-			<a href="#" style="position: absolute;top: 5px;left: 5px;"><img src="/theme/images/logo/logo.png" width="60" height="42"> </a>
-		</div>
-		<div class="top_center">
-			<a href="#"><img src="/theme/images/Search.png"></a>
-			<input name="search_word" id="search_word" placeholder="输入商品名称或关键字" maxlength="20" />
-		</div>
-
-		<div class="top_right">
-			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px">
-			</a>
-		</div>
-	</div>
-
 	<script>
 
 		function frame_animation() {
