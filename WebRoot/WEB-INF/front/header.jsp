@@ -15,6 +15,7 @@
 
 <script type="text/javascript" src="/theme/js/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="/theme/js/common.js"></script>
+<script type="text/javascript" src="/jslib/uiadmin/lib/lazyload/lazyload.min.js"></script>
 <script type="text/javascript" src="/resource/js/common.js"></script>
 <script type="text/javascript" src="/theme/js/wx.js"></script>
 <script type="text/javascript" src="/theme/js/jweixin-1.0.0.js"></script>
@@ -36,5 +37,13 @@ $(document).ajaxStart(function() {
 		indicatorID : indicatorID
 	});
 }); 
+
+$(function() {
+    $("img").lazyload({ 
+   		   placeholder : "images/loading.gif",
+           effect: "fadeIn"
+     });  
+});
+
 </script>
 
