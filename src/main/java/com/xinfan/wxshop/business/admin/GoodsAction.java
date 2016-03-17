@@ -508,7 +508,7 @@ public class GoodsAction {
 
 		page = GoodsService.getManageGoodsSearchList(paramter, page);
 
-		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw), page, new Object[] { "goods_id", "goods_name", "goods_lname", "final_prices",
+		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw), page, new Object[] { "goods_id", "goods_name",  "final_prices",
 				"release_date", "goods_status", "hot", "burst", "fashion","theme_type" });
 
 		return grid;
