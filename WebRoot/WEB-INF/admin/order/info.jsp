@@ -56,11 +56,15 @@
 											<td>定单日期：</td>
 											<td><sp:dateformat time="${order.orderDate}" /></td>
 											<td>定单状态：</td>
-											<td>${order.status}</td>
+											<td>
+												<sp:dict_label_tag type="order_state" value="${order.status}"></sp:dict_label_tag>
+											</td>
 										</tr>
 										<tr>
 											<td>支付方式：</td>
-											<td>${order.paymentMode}</td>
+											<td>
+												<sp:dict_label_tag type="payment_mode" value="${order.paymentMode}"></sp:dict_label_tag>
+											</td>
 											<td>是否分享</td>
 											<td>${order.shared}</td>
 										</tr>
