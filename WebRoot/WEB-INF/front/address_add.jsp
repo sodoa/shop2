@@ -7,13 +7,12 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<script type="text/javascript"
-	src="/jslib/address/GlobalProvinces_main.js"></script>
-<script type="text/javascript"
-	src="/jslib/address/GlobalProvinces_extend.js"></script>
+<script type="text/javascript" src="/jslib/address/GlobalProvinces_main.js"></script>
+<script type="text/javascript" src="/jslib/address/GlobalProvinces_extend.js"></script>
 <script type="text/javascript" src="/jslib/address/initLocation.js"></script>
-<script src="/jslib/html5val/jquery-html5Validate.js"></script>
+<script src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.js"></script>
 <link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
+<link href="/jslib/uiadmin/lib/Validform/5.3.2/style.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
 	$(function() {
@@ -32,8 +31,6 @@ width:100px;height:30px;border:1px solid #eee;
 </style>
 
 <style>
-
-	input, textarea{font-size:100%;}
 	.w50{width:50px;}
 	.w320{width:320px;}
 	.w460{width:460px;}
@@ -43,6 +40,7 @@ width:100px;height:30px;border:1px solid #eee;
 	.bar_btn:hover{background-color:#f5f5f5;}
 	.bar_btn:after{display:block; content:attr(data-content);}
 	.submit{width:100px; height:32px;}
+	input{height:30px;border: 1px solid #eee;}
 </style>
 
 </head>
@@ -63,20 +61,20 @@ width:100px;height:30px;border:1px solid #eee;
 	<div class="clear"></div>
 
 	<div class="block4">
-	<form action="" id="submit_form" >
+	<form action="address_save.html" id="submit_form" >
 		<input type="hidden" name="deliveryId" value="${bean.deliveryId}"/>
 		<input type="hidden" name="from" value="${from}"/>
 		<ul>
-			<li class=""><div>收货人</div><input id="receiverName" name="receiverName" type="text" width="70%" placeholder="请输入收货人名称"   required value="${bean.receiverName}" /></li>
-			<li><div>手机号码</div> <input name="receiverPhone" type="text"  placeholder="请输入收货人名称" value="${bean.receiverPhone}" /></li>
+			<li class=""><div>收货人</div><input id="receiverName" name="receiverName" datatype="s1-10" errormsg="请输出正确的收货人"  type="text" width="70%" placeholder="请输入收货人名称"   required value="${bean.receiverName}" /></li>
+			<li><div>手机号码</div> <input name="receiverPhone" type="text" datatype="n8-15" errormsg="请输出正确的联系方式" placeholder="请输入收货人名称" value="${bean.receiverPhone}" /></li>
 			<li><div>省市地址</div><span> <select 
-						id="sheng" name="province">
-					</select> 省 <select id="shi" name="city">
-					</select> 市 <select id="xian" name="county">
+						id="sheng" name="province" datatype="*" >
+					</select> 省 <select id="shi" name="city" datatype="*" >
+					</select> 市 <select id="xian" name="county" datatype="*" >
 					</select> 县
 				</span></li>
 			<li><div>详细地址</div><input
-						name="street" type="text" width="70%" value="${bean.street}" required  placeholder="请输入收货人名称" /></li>
+						name="street" type="text" width="70%" datatype="s1-30" errormsg="请输出正确的详细地址" value="${bean.street}" required  placeholder="请输入收货人名称" /></li>
 		</ul>
 		</form>
 	</div>
@@ -88,7 +86,19 @@ width:100px;height:30px;border:1px solid #eee;
 		var from = '${from}';
 	
 		$(function() {
-
+			
+			$("#submit_form").Validform({
+				ajaxPost:true,
+				tiptype:4, 
+				callback:function(data){
+					if (data.result == 0) {
+						window.location.href = "/center/address_list.html";
+					} else {
+						layer.msg("添加失败：" + data.message);
+					}
+				}
+			});
+	
 			$(".address_select").click(function() {
 				if (!$(this).hasClass("address_cur")) {
 					$(".address_select").removeClass("address_cur");
@@ -97,31 +107,8 @@ width:100px;height:30px;border:1px solid #eee;
 			});
 
 			$("#btn_complate").click(function() {
-								var _data = $("#submit_form").serializeObject();
-								
-								//$("#submit_form").submit();
-								
-								//$("#submit_form").html5Validate();
-								
-								//$("#submit_form").html5Validate(function() {
-									$.ajax({
-										type : "POST",
-										url : "/center/address_save.html?t="
-												+ new Date().getTime(),
-										data : _data,
-										dataType : "json",
-										success : function(data) {
-											if (data.result == 0) {
-												window.location.href = "/center/address_list.html";
-											} else {
-												alert("添加失败："
-														+ data.message);
-											}
-										}
-									});
-								//},{});
-								
-							});
+				$("#submit_form").submit();
+			});
 
 		});
 		
