@@ -49,7 +49,7 @@ public class FrontAct {
 	
 	@RequestMapping("/center.html")
 	public ModelAndView center() {
-		ModelAndView mv = new ModelAndView("redirect:/center/my_center2.html");
+		ModelAndView mv = new ModelAndView("redirect:/center/my_center.html");
 
 		return mv;
 	}

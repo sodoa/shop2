@@ -69,7 +69,7 @@ public class LoginAct {
 			if (p != null && p.trim().length() > 0 && p.contains(".html")) {
 				mv = new ModelAndView("redirect:" + p);
 			} else {
-				mv = new ModelAndView("redirect:/center/my_center2.html");
+				mv = new ModelAndView("redirect:/center/my_center.html");
 			}
 
 			return mv;

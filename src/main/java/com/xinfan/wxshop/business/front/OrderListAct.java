@@ -2,6 +2,8 @@ package com.xinfan.wxshop.business.front;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xinfan.wxshop.business.entity.Appraise;
 import com.xinfan.wxshop.business.entity.DeliveryAddress;
+import com.xinfan.wxshop.business.service.AppraiseService;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
@@ -23,6 +27,8 @@ import com.xinfan.wxshop.common.page.Pagination;
 
 @Controller
 public class OrderListAct {
+	
+	private static final Logger logger = LoggerFactory.getLogger(OrderListAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -36,6 +42,9 @@ public class OrderListAct {
 	@Autowired
 	private CustomerService CustomerService;
 
+	@Autowired
+	private AppraiseService AppraiseService;	
+	
 	@Autowired
 	private DeliveryAddressService DeliveryAddressService;
 
@@ -75,8 +84,7 @@ public class OrderListAct {
 			String li = request.getParameter("li");
 			Integer id = LoginSessionUtils.getCustomerIdFromUserSessionMap();
 			
-			page = this.CustomerService.getCustomerCenterOrderPageList(id, li,
-					page);
+			page = this.CustomerService.getCustomerCenterOrderPageList(id, li,page);
 			
 			mv.addObject("list", page.getList());
 
@@ -106,6 +114,29 @@ public class OrderListAct {
 		return mv;
 	}
 	
+	@RequestMapping("/center/order-comment-view.html")
+	public ModelAndView orderCommentView(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/front/order-comment-view");
+		try {
+
+			String li = request.getParameter("li");
+			String id = request.getParameter("id");
+			
+			Appraise bean  =this.AppraiseService.get(Integer.parseInt(id));
+			
+			mv.addObject("li", li);
+			mv.addObject("id", id);
+			mv.addObject("bean", bean);
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+
+		return mv;
+	}	
+	
+	
+	
 	@RequestMapping("/center/save-order-comment.html")
 	public ModelAndView saveOrderComment(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
@@ -119,7 +150,7 @@ public class OrderListAct {
 			OrderService.updateOrderCommented(Integer.parseInt(id),customerId,comment);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 		
 		mv.setViewName("redirect:/center/order_list.html?li="+li);
