@@ -6,6 +6,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.xinfan.wxshop.business.front.AliPayAct;
+
 /* *
  *类名：AlipayNotify
  *功能：支付宝通知处理类
@@ -20,6 +25,9 @@ import java.util.Map;
  *调试通知返回时，可查看或改写log日志的写入TXT里的数据，来检查通知返回是否正常
  */
 public class AlipayNotify {
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(AlipayNotify.class);
 
     /**
      * 支付宝消息验证地址
@@ -48,6 +56,8 @@ public class AlipayNotify {
         //写日志记录（若要调试，请取消下面两行注释）
         //String sWord = "responseTxt=" + responseTxt + "\n isSign=" + isSign + "\n 返回回来的参数：" + AlipayCore.createLinkString(params);
 	    //AlipayCore.logResult(sWord);
+	    
+	    logger.info("responseTxt :" + responseTxt +",sign : "+ isSign);
 
         if (isSign && responseTxt.equals("true")) {
             return true;
@@ -70,7 +80,16 @@ public class AlipayNotify {
         //获得签名验证结果
         boolean isSign = false;
         if(AlipayConfig.sign_type.equals("MD5") ) {
+        	
+        	if(logger.isDebugEnabled()){
+        		logger.debug("preSignStr: "	+preSignStr);
+        		logger.debug("sign: "	+sign);
+        		logger.debug("AlipayConfig.key: "	+AlipayConfig.key);
+        		logger.debug("AlipayConfig.input_charset: "	+AlipayConfig.input_charset);
+        	}
+        	
         	isSign = MD5.verify(preSignStr, sign, AlipayConfig.key, AlipayConfig.input_charset);
+        	logger.debug("isSign: "	+isSign);
         }
         return isSign;
     }

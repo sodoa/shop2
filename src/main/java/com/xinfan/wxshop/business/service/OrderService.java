@@ -146,45 +146,50 @@ public class OrderService {
 				if (uplineId != null && uplineId != 0) {
 
 					float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
-					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 10) / 10;
+					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
 
 					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
-
-					Distribution distribution = new Distribution();
-					distribution.setCharge(order.getTotalAmount());
-					distribution.setRate(distribution_rate);
-					distribution.setChargeName(order.getOrderNo());
-					distribution.setConsumeDate(TimeUtils.getCurrentTime());
-					distribution.setDistributionId(distributionId);
-					distribution.setDownlineId(order.getCustomerId());
-					distribution.setUplineId(uplineId);
-					distribution.setDownlineName(level1Customer.getAccount());
-					distribution.setIncome(income);
-					distribution.setOrderId(order.getOrderId());
-					distribution.setResult(1);
-					distributionDao.insertSelective(distribution);
-
-					if (level1Customer.getUplineId() != null) {
-						Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
-						if (level2Customer.getUplineId() != null && level2Customer.getUplineId() != 0) {
-							float distribution_rate2 = Float.parseFloat(ParamterUtils.getString("distribution.level2.rate", "0.01"));
-							float income2 = (float) Math.floor(order.getTotalAmount() * distribution_rate * 10) / 10;
-
-							int distributionId2 = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
-
-							Distribution distribution2 = new Distribution();
-							distribution2.setCharge(order.getTotalAmount());
-							distribution2.setRate(distribution_rate2);
-							distribution2.setChargeName(order.getOrderNo());
-							distribution2.setConsumeDate(TimeUtils.getCurrentTime());
-							distribution2.setDistributionId(distributionId2);
-							distribution2.setDownlineId(level2Customer.getCustomerId());
-							distribution2.setUplineId(level2Customer.getCustomerId());
-							distribution2.setDownlineName(level2Customer.getAccount());
-							distribution2.setIncome(income2);
-							distribution2.setOrderId(order.getOrderId());
-							distribution2.setResult(1);
-							distributionDao.insertSelective(distribution2);
+					
+					if(income >=0.1){
+	
+						Distribution distribution = new Distribution();
+						distribution.setCharge(order.getTotalAmount());
+						distribution.setRate(distribution_rate);
+						distribution.setChargeName(order.getOrderNo());
+						distribution.setConsumeDate(TimeUtils.getCurrentTime());
+						distribution.setDistributionId(distributionId);
+						distribution.setDownlineId(order.getCustomerId());
+						distribution.setUplineId(uplineId);
+						distribution.setDownlineName(level1Customer.getAccount());
+						distribution.setIncome(income);
+						distribution.setOrderId(order.getOrderId());
+						distribution.setResult(1);
+						distributionDao.insertSelective(distribution);
+	
+						if (level1Customer.getUplineId() != null) {
+							Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
+							if (level2Customer.getUplineId() != null && level2Customer.getUplineId() != 0) {
+								float distribution_rate2 = Float.parseFloat(ParamterUtils.getString("distribution.level2.rate", "0.01"));
+								float income2 = (float) Math.floor(order.getTotalAmount() * distribution_rate * 10) / 10;
+								
+								if(income2 >=0.1){
+									int distributionId2 = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
+		
+									Distribution distribution2 = new Distribution();
+									distribution2.setCharge(order.getTotalAmount());
+									distribution2.setRate(distribution_rate2);
+									distribution2.setChargeName(order.getOrderNo());
+									distribution2.setConsumeDate(TimeUtils.getCurrentTime());
+									distribution2.setDistributionId(distributionId2);
+									distribution2.setDownlineId(level2Customer.getCustomerId());
+									distribution2.setUplineId(level2Customer.getCustomerId());
+									distribution2.setDownlineName(level2Customer.getAccount());
+									distribution2.setIncome(income2);
+									distribution2.setOrderId(order.getOrderId());
+									distribution2.setResult(1);
+									distributionDao.insertSelective(distribution2);
+								}
+							}
 						}
 					}
 				}

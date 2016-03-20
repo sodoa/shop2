@@ -95,7 +95,7 @@ public class CartAct {
 	public String cartDel(HttpServletRequest request) {
 		String cid = request.getParameter("cid");
 		CartService.deleteGoodInCard(Integer.parseInt(cid));
-		return "redirect:/center/cart.html";
+		return "redirect:/cart.html";
 	}
 	
 	@RequestMapping("/empty_cart.html")
