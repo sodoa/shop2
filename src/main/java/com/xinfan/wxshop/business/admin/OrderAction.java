@@ -85,20 +85,6 @@ public class OrderAction {
 		return grid;
 	}
 
-	@RequestMapping("/wait-order.jspx")
-	public ModelAndView waitOrder(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/m_waitorder");
-
-		Pagination page = RequestUtils.getPagination(request);
-
-		// page = OrderService.pageSelectOrderList(1, page);
-
-		mv.addObject("page", page);
-
-		return mv;
-	}
-	
-
 	@RequestMapping("/order-info.jspx")
 	public ModelAndView orderDetail(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/admin/order/info");
