@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Article extends BaseEntity {
+public class Article extends BaseEntity{
     private Integer id;
 
     private String title;
@@ -20,6 +20,8 @@ public class Article extends BaseEntity {
     private String img;
 
     private Date releasedate;
+
+    private Integer sharecnt;
 
     public Integer getId() {
         return id;
@@ -83,5 +85,13 @@ public class Article extends BaseEntity {
 
     public void setReleasedate(Date releasedate) {
         this.releasedate = releasedate;
+    }
+
+    public Integer getSharecnt() {
+        return sharecnt;
+    }
+
+    public void setSharecnt(Integer sharecnt) {
+        this.sharecnt = sharecnt;
     }
 }

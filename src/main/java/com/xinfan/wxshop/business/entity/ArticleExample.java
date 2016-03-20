@@ -2,7 +2,6 @@ package com.xinfan.wxshop.business.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class ArticleExample {
@@ -104,32 +103,6 @@ public class ArticleExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -623,52 +596,112 @@ public class ArticleExample {
         }
 
         public Criteria andReleasedateEqualTo(Date value) {
-            addCriterionForJDBCDate("releasedate =", value, "releasedate");
+            addCriterion("releasedate =", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("releasedate <>", value, "releasedate");
+            addCriterion("releasedate <>", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateGreaterThan(Date value) {
-            addCriterionForJDBCDate("releasedate >", value, "releasedate");
+            addCriterion("releasedate >", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("releasedate >=", value, "releasedate");
+            addCriterion("releasedate >=", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateLessThan(Date value) {
-            addCriterionForJDBCDate("releasedate <", value, "releasedate");
+            addCriterion("releasedate <", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("releasedate <=", value, "releasedate");
+            addCriterion("releasedate <=", value, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateIn(List<Date> values) {
-            addCriterionForJDBCDate("releasedate in", values, "releasedate");
+            addCriterion("releasedate in", values, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("releasedate not in", values, "releasedate");
+            addCriterion("releasedate not in", values, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("releasedate between", value1, value2, "releasedate");
+            addCriterion("releasedate between", value1, value2, "releasedate");
             return (Criteria) this;
         }
 
         public Criteria andReleasedateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("releasedate not between", value1, value2, "releasedate");
+            addCriterion("releasedate not between", value1, value2, "releasedate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntIsNull() {
+            addCriterion("sharecnt is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntIsNotNull() {
+            addCriterion("sharecnt is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntEqualTo(Integer value) {
+            addCriterion("sharecnt =", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntNotEqualTo(Integer value) {
+            addCriterion("sharecnt <>", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntGreaterThan(Integer value) {
+            addCriterion("sharecnt >", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sharecnt >=", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntLessThan(Integer value) {
+            addCriterion("sharecnt <", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntLessThanOrEqualTo(Integer value) {
+            addCriterion("sharecnt <=", value, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntIn(List<Integer> values) {
+            addCriterion("sharecnt in", values, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntNotIn(List<Integer> values) {
+            addCriterion("sharecnt not in", values, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntBetween(Integer value1, Integer value2) {
+            addCriterion("sharecnt between", value1, value2, "sharecnt");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharecntNotBetween(Integer value1, Integer value2) {
+            addCriterion("sharecnt not between", value1, value2, "sharecnt");
             return (Criteria) this;
         }
     }

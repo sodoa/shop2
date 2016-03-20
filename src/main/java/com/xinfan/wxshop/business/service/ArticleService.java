@@ -25,7 +25,7 @@ public class ArticleService {
 		}
 		return ArticleDao.selectByClassify(classify);
 	}
-	
+
 	public List<Article> getShareList(int pagesize) {
 		return ArticleDao.selectAll();
 	}
@@ -35,6 +35,7 @@ public class ArticleService {
 		int id = SequenceDao.getSequence(SequenceConstants.SEQ_ARTICLE);
 		record.setId(id);
 		record.setReleasedate(TimeUtils.getCurrentTime());
+		record.setSharecnt(0);
 
 		ArticleDao.insertSelective(record);
 
@@ -54,6 +55,20 @@ public class ArticleService {
 
 	public void updateByPrimaryKey(Article record) {
 		ArticleDao.updateByPrimaryKey(record);
+	}
+
+	public void updateShareCount(Integer id) {
+
+		Article exist = this.ArticleDao.selectByPrimaryKey(id);
+		if (exist == null) {
+			return;
+		}
+
+		Article bean = new Article();
+		bean.setId(id);
+		bean.setSharecnt(exist.getSharecnt() + 1);
+
+		ArticleDao.updateByPrimaryKey(bean);
 	}
 
 }
