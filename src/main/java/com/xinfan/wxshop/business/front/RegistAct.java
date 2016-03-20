@@ -8,6 +8,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,8 @@ import com.xinfan.wxshop.common.util.CookieUtils;
 
 @Controller
 public class RegistAct {
+	
+	private static final Logger logger = LoggerFactory.getLogger(RegistAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -101,7 +105,7 @@ public class RegistAct {
 			}
 		}
 		catch(BizException e){
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage()+new java.util.Date().getTime());
 		}
 		
@@ -145,7 +149,7 @@ public class RegistAct {
 			RequestUtils.getSession().removeAttribute(BizConstants.CUSTOMER_USER_REGIST_KEY);
 		}
 		catch(BizException e){
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage()+new java.util.Date().getTime());
 		}
 		finally{
@@ -186,7 +190,7 @@ public class RegistAct {
 			}
 		}
 		catch(BizException e){
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage()+new java.util.Date().getTime());
 		}
 		
@@ -262,7 +266,7 @@ public class RegistAct {
 			
 		}
 		catch(BizException e){
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage()+new java.util.Date().getTime());
 		}
 		finally{

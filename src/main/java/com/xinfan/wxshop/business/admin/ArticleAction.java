@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,8 @@ import com.xinfan.wxshop.business.service.ArticleService;
 @Controller
 @RequestMapping("/admin/article")
 public class ArticleAction {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ArticleAction.class);
 
 	@Autowired
 	private ArticleService ArticleService;
@@ -85,7 +89,7 @@ public class ArticleAction {
 			ArticleService.insertSelective(record);
 			mv.addObject("msg", "操作成功");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			mv.addObject("msg", e.getMessage());
 		}
 		
@@ -147,7 +151,7 @@ public class ArticleAction {
 			mv.addObject("msg", "操作成功");
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			mv.addObject("msg", e.getMessage());
 		}
 		

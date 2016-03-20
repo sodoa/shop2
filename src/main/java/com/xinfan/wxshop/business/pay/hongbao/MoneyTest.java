@@ -29,7 +29,6 @@ public class MoneyTest {
 		try {
 			//result = MoneyUtils.doSendMoney(url, MoneyUtils.createXML(map));
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		System.out.println("result:"+result);
 	}

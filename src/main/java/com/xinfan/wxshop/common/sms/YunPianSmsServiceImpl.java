@@ -29,7 +29,6 @@ public class YunPianSmsServiceImpl implements SmsService{
 						logger.error("发送注册验证码失败,"+rs);
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
 					logger.error("发送注册短信异常",e);
 				}
 			}
@@ -51,7 +50,6 @@ public class YunPianSmsServiceImpl implements SmsService{
 						logger.error("发送修改密码验证码失败,"+rs);
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
 					logger.error("发送修改密码短信异常",e);
 				}
 			}
@@ -76,7 +74,6 @@ public class YunPianSmsServiceImpl implements SmsService{
 							logger.error("发送定单提示失败,"+rs);
 						}
 					} catch (IOException e) {
-						e.printStackTrace();
 						logger.error("发送注册短信异常",e);
 					}
 				}

@@ -1,7 +1,6 @@
 package com.xinfan.wxshop.business.pay.weixin;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,23 +17,23 @@ import javax.net.ssl.SSLContext;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.params.ClientPNames;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
-import com.xinfan.wxshop.business.pay.weixin.http.HttpClientConnectionManager;
-
 public class GetWxOrderno {
+	
+	private static final Logger logger = LoggerFactory.getLogger(GetWxOrderno.class);
 
 	// 连接超时时间，默认10秒
 	private static int socketTimeout = 10000;
@@ -90,13 +89,13 @@ public class GetWxOrderno {
 					.setConnectTimeout(connectTimeout).build();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		} finally {
 			if (instream != null) {
 				try {
 					instream.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(e.getMessage(),e);
 				}
 			}
 		}
@@ -124,7 +123,7 @@ public class GetWxOrderno {
 			prepay_id = (String) map.get("prepay_id");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		return prepay_id;
 	}
@@ -148,7 +147,7 @@ public class GetWxOrderno {
 			return map;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 
 		return null;

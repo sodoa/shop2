@@ -11,6 +11,8 @@ import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,8 @@ import com.xinfan.wxshop.common.util.CookieUtils;
 
 @Controller
 public class DistributionAct {
+	
+	private static final Logger logger = LoggerFactory.getLogger(DistributionAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -123,7 +127,7 @@ public class DistributionAct {
 			try {
 				params = new String(DesUtils.decrypt(data, desPassword),"UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(),e);
 			}
 			Map<String,String[]> mapParam = RequestUtils.getQueryParamMap(params);
 			String customerId = mapParam.get("customerId")[0];
@@ -159,7 +163,7 @@ public class DistributionAct {
 			response.getOutputStream().write(out1.toByteArray());
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 	}
 

@@ -13,6 +13,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.alibaba.fastjson.JSONObject;
 
 
@@ -24,6 +27,8 @@ import com.alibaba.fastjson.JSONObject;
  * @date 2013-10-17
  */
 public class CommonUtil {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CommonUtil.class);
 
 	// 凭证获取（GET）
 	public final static String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
@@ -85,9 +90,9 @@ public class CommonUtil {
 			conn.disconnect();
 			jsonObject = JSONObject.parseObject(buffer.toString());
 		} catch (ConnectException ce) {
-			ce.printStackTrace();
+			logger.error(ce.getMessage(),ce);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		return jsonObject;
 	}
@@ -112,7 +117,7 @@ public class CommonUtil {
 		try {
 			result = java.net.URLEncoder.encode(source, "utf-8");
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		return result;
 	}

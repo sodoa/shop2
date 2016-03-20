@@ -3,7 +3,6 @@ package com.xinfan.wxshop.business.front;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.SortedMap;
@@ -248,7 +247,7 @@ public class WeinXinPayAct {
 			allParameters = reqHandler.genPackage(packageParams);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		String createOrderURL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 		String prepay_id = "";

@@ -14,15 +14,19 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSONObject;
+import com.xinfan.wxshop.common.sms.YunpianSmsBean;
 
 public class HttpUtils {
+	
+	private static final Logger logger = LoggerFactory.getLogger(YunpianSmsBean.class);
 
 	public static String httpaddress = "http://localhost:7001/blue/MainService";
 	
 	public static HttpClient httpclient = new DefaultHttpClient();
-
 
 	public static JSONObject httpInvokerJson(Map params) {
 

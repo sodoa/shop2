@@ -2,6 +2,8 @@ package com.xinfan.wxshop.business.front;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import com.xinfan.wxshop.common.sms.SmsService;
 
 @Controller
 public class SettingAct {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SettingAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -73,7 +77,7 @@ public class SettingAct {
 			LoginSessionUtils.setExpireCustomerSessionMap();
 
 		} catch (BizException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage());
 		} finally {
 		}

@@ -11,6 +11,8 @@ import java.util.Map;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.httpclient.methods.multipart.FilePartSource;
 import org.apache.commons.httpclient.methods.multipart.PartSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /* *
  *类名：AlipayFunction
@@ -24,6 +26,8 @@ import org.apache.commons.httpclient.methods.multipart.PartSource;
  */
 
 public class AlipayCore {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AlipayCore.class);
 
     /** 
      * 除去数组中的空值和签名参数
@@ -86,13 +90,13 @@ public class AlipayCore {
             writer = new FileWriter(AlipayConfig.log_path + "alipay_log_" + System.currentTimeMillis()+".txt");
             writer.write(sWord);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         } finally {
             if (writer != null) {
                 try {
                     writer.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error(e.getMessage(),e);
                 }
             }
         }

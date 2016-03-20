@@ -7,8 +7,12 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FilePathHelper {
+	
+	private static final Logger logger = LoggerFactory.getLogger(FilePathHelper.class);
 
 	public static String getImageListUploadPath(HttpServletRequest request) {
 		String time = request.getParameter("time");
@@ -70,7 +74,7 @@ public class FilePathHelper {
 			try {
 				html = FileUtils.readFileToString(file, "UTF-8");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 			return html;
 		}
@@ -87,7 +91,7 @@ public class FilePathHelper {
 			try {
 				html = FileUtils.readFileToString(file, "UTF-8");
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(), e);
 			}
 			return html;
 		}

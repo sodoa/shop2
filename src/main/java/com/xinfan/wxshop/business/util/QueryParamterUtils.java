@@ -30,7 +30,6 @@ public class QueryParamterUtils {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			map.remove(endTimeName);
 			map.remove(startTimeName);
 		}

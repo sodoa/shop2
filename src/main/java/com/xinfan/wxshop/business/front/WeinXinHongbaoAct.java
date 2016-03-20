@@ -209,7 +209,7 @@ public class WeinXinHongbaoAct {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			msg = "红包失败";
 		}
 		

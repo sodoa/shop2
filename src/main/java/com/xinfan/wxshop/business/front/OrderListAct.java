@@ -89,7 +89,7 @@ public class OrderListAct {
 			mv.addObject("list", page.getList());
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 
 		return mv;
@@ -108,7 +108,7 @@ public class OrderListAct {
 			mv.addObject("id", id);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 
 		return mv;

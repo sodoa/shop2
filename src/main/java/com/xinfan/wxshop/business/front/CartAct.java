@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +28,8 @@ import com.xinfan.wxshop.common.base.DataMap;
 
 @Controller
 public class CartAct {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CartAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -55,10 +59,10 @@ public class CartAct {
 			result = JSONResult.success();
 
 		}catch (BizException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error(e.getMessage());
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error();
 		}
 
@@ -201,7 +205,7 @@ public class CartAct {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			mv.setViewName("/front/order_error");
 			mv.addObject("msg", e.getMessage());
 		}
@@ -250,7 +254,7 @@ public class CartAct {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			mv.setViewName("/front/order_error");
 			mv.addObject("msg", e.getMessage());
 		}
@@ -273,7 +277,7 @@ public class CartAct {
 			result.putValue("list", list);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error();
 		}
 

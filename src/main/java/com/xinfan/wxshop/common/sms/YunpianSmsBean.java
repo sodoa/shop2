@@ -16,12 +16,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.xinfan.wxshop.common.config.ParamtersFileConfig;
 import com.xinfan.wxshop.common.util.HttpUtils;
 
 public class YunpianSmsBean {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(YunpianSmsBean.class);
 	
 	public static final long REGISTER_TPL_ID;
 	
@@ -86,7 +89,7 @@ public class YunpianSmsBean {
 	        
 			return EntityUtils.toString(entity);  
 		}catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -136,7 +139,7 @@ public class YunpianSmsBean {
 		
 		 // Post请求  
         HttpPost httppost = new HttpPost(URI_TPL_SEND_SMS);  
-         httppost.setEntity(new UrlEncodedFormEntity(params));   
+        httppost.setEntity(new UrlEncodedFormEntity(params));   
         // 发送请求  
         HttpResponse httpresponse = httpClient.execute(httppost);  
         // 获取返回数据  

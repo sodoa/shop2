@@ -8,7 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 class Sign {
+	
+	private static final Logger logger = LoggerFactory.getLogger(Sign.class);
+	
     public static void main(String[] args) {
         String jsapi_ticket = "jsapi_ticket";
 
@@ -43,11 +49,11 @@ class Sign {
         }
         catch (NoSuchAlgorithmException e)
         {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
         catch (UnsupportedEncodingException e)
         {
-            e.printStackTrace();
+            logger.error(e.getMessage(),e);
         }
 
         ret.put("url", url);

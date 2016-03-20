@@ -235,13 +235,13 @@ public class GoodsAction {
 					FileUtils.copyFile(thumdImage, new File(FilePathHelper.getRealPath(request) + newPath));
 					GoodsService.updateGoodsThumdUrl(goods.getGoodsId(), newPath);
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.error(e.getMessage(),e);
 				}
 			}
 			try {
 				FileUtils.deleteDirectory(new File(FilePathHelper.getRealPath(request) + existGoods.getSummary()));
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(),e);
 			}
 		}
 
@@ -334,7 +334,7 @@ public class GoodsAction {
 				FileUtils.copyFile(thumdImage, new File(FilePathHelper.getRealPath(request) + newPath));
 				GoodsService.updateGoodsThumdUrl(goods.getGoodsId(), newPath);
 			} catch (IOException e) {
-				e.printStackTrace();
+				logger.error(e.getMessage(),e);
 			}
 		}
 
@@ -363,7 +363,7 @@ public class GoodsAction {
 		 * goodsImage.setImageUrl(newPath);
 		 * GoodsService.insertGoodsImageList(goodsImage);
 		 * 
-		 * } catch (IOException e) { e.printStackTrace(); }
+		 * } catch (IOException e) { logger.error(e.getMessage(),e); }
 		 * 
 		 * }
 		 */
@@ -621,7 +621,7 @@ public class GoodsAction {
 			this.GoodsService.insertGoodsImageList(image);
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			logger.error(e.getMessage(),e);
 			mv.addObject("msg", "添加失败");
 		}

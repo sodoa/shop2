@@ -192,11 +192,9 @@ public class AliPayAct {
 				}
 			}
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		} catch (IOException e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error(e.getMessage(),e);
 		}
 		return "fail";
 	}

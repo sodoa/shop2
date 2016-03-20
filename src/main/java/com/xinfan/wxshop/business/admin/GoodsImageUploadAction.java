@@ -46,14 +46,14 @@ public class GoodsImageUploadAction {
 			result.put("code", 200);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result.put("code", 500);
 		}
 
 		try {
 			response.getWriter().println(JSONUtils.toJSONString(result));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 	}
 	
@@ -77,14 +77,14 @@ public class GoodsImageUploadAction {
 			result.put("code", 200);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result.put("code", 500);
 		}
 
 		try {
 			response.getWriter().println(JSONUtils.toJSONString(result));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 		}
 		
 	}

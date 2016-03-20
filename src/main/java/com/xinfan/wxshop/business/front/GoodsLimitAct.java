@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +31,8 @@ import com.xinfan.wxshop.common.util.TimeUtils;
 
 @Controller
 public class GoodsLimitAct  extends BaseFrontAct{
+	
+	private static final Logger logger = LoggerFactory.getLogger(GoodsLimitAct.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -88,7 +92,7 @@ public class GoodsLimitAct  extends BaseFrontAct{
 			result.putValue("list", list);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(),e);
 			result = JSONResult.error();
 		}
 
