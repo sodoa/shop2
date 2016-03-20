@@ -21,7 +21,7 @@
 		</c:forEach>
 		
 		<div class="order_cost">
-			<p>共1件商品</p>
+			<p>共${item.order.totalQuantity}件商品</p>
 			<p>实付&yen;${item.order.totalAmount}</p>
 			<p></p>
 		</div>
@@ -44,7 +44,9 @@
 				</div>				
 			</c:when>
 			<c:when test="${item.order.status == 3}">
-			
+				<div class="count_order">
+					<p style="cursor: pointer;" onclick="seeComment(${item.order.orderId})">查看评论</p>
+				</div>					
 			</c:when>
 		</c:choose>
 		

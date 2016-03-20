@@ -83,6 +83,9 @@
 		window.location.href="/center/order-comment.html?id="+id+"&li="+li;		
 	}
 	
+	function seeComment(id){
+		window.location.href="/center/order-comment-view.html?id="+id+"&li="+li;		
+	}
 	
 	
 	</script>
