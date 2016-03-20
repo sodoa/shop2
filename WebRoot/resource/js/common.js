@@ -407,3 +407,9 @@ function isWeiXinBrowser(){
         }
 	return false;
 }
+
+window.alert = function(msg){
+	layer.msg(msg,{
+		  time: 2000
+		});
+}
