@@ -99,7 +99,7 @@
 					</c:otherwise>
 				</c:choose>
 			</li>
-			<li><p > <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
+			<li><p> <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
 		</ul>
 	</c:if>
 	
