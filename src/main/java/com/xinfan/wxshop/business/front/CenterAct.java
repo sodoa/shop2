@@ -42,7 +42,7 @@ public class CenterAct {
 	@Autowired
 	private DeliveryAddressService DeliveryAddressService;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
+/*	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
 	public ModelAndView center(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/my_center");
 
@@ -61,10 +61,10 @@ public class CenterAct {
 
 		return mv;
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center2.html")
+*/	
+	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
 	public ModelAndView center2(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/front/my_center2");
+		ModelAndView mv = new ModelAndView("/front/my_center");
 
 		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
 		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));

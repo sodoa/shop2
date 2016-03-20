@@ -41,7 +41,7 @@
 			<li><a href="order_list.html?li=4"><img src="/theme/images/myCenter/3.png">
 				<p>待收货</p></a></li>
 			<li><a href="order_list.html?li=5"><img src="/theme/images/myCenter/4.png">
-				<p>待评价</p></a></li>
+				<p>已评价</p></a></li>
 		</ul>
 	</div>
 

@@ -15,7 +15,7 @@
 
 	<div class="header">
 		<div class="top_left1">
-			<a href="/center/my_center2.html"><img src="/theme/images/back.png" style="width: 12px"></a>
+			<a href="/center/my_center.html"><img src="/theme/images/back.png" style="width: 12px"></a>
 		</div>
 		<div class="top_center1">分层信息</div>
 		<div class="top_right1">

@@ -14,6 +14,6 @@
 		<p>购物车</p></a></li>		
 	<li><a href="/rk.html"><img src="/theme/images/rank.png">
 		<p>分销榜</p></a></li>
-	<li><a href="/center/my_center2.html"><img src="/theme/images/my.png">
+	<li><a href="/center/my_center.html"><img src="/theme/images/my.png">
 		<p>我的</p></a></li>
 </ul>

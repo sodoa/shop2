@@ -1,7 +1,7 @@
 package com.xinfan.wxshop.business.constants;
 
 public enum OrderStateEnum {
-	UNPAY("未支付", 0), PAYED("已支付", 1), SHIPPED("已出货", 2), COMMENT("已评价", 3);
+	UNPAY("未支付", 0), PAYED("待出货", 1), SHIPPED("待收货", 2), COMMENT("已评价", 3);
 	// 成员变量
 	private String name;
 	private int index;

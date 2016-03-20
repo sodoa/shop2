@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="header">
-		<div class="top_left1" ><a href="/center/my_center2.html"><img src="/theme/images/back.png" style="width:12px"></a></div>
+		<div class="top_left1" ><a href="/center/my_center.html"><img src="/theme/images/back.png" style="width:12px"></a></div>
 		<div  class="top_center1">
 			订单详情
 		</div>
@@ -32,7 +32,7 @@
 
 			<a href="order_list.html?li=4"><li><p <c:if test="${li=='4'}">class="cur"</c:if>>待收货</p></li></a>
 
-			<a href="order_list.html?li=5"><li><p <c:if test="${li=='5'}">class="cur"</c:if>>待评价</p></li></a>
+			<a href="order_list.html?li=5"><li><p <c:if test="${li=='5'}">class="cur"</c:if>>已评价</p></li></a>
 
 		</ul>
 

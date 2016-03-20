@@ -33,7 +33,7 @@
 
 		<div id="fakeloader"></div>
 		<div style="margin-top: 20px;margin-bottom:20px;text-align: center;">
-			<a href="/center/my_center2.html" style="padding: 5px;border: 1px solid #eee;">返回用户中心</a>
+			<a href="/center/my_center.html" style="padding: 5px;border: 1px solid #eee;">返回用户中心</a>
 			<a href="/" style="padding: 5px;border: 1px solid #eee;">返回首页</a>
 		</div>
 		
