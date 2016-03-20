@@ -77,6 +77,10 @@ public class CustomerService {
 		if (customer == null) {
 			throw new BizException(100, "用户不存在");
 		}
+		
+		if (customer.getState() != 1) {
+			throw new BizException(102, "帐户状态异常");
+		}
 
 		Md5PwdEncoder encoder = new Md5PwdEncoder();
 
