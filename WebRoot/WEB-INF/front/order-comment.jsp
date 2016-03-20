@@ -6,6 +6,7 @@
 <!doctype html>
 <html class="no-js">
 <head>
+  <jsp:include page="header.jsp"></jsp:include>
   <link rel="stylesheet" href="/assets/css/amazeui.min.css">
   <link rel="stylesheet" href="/assets/css/common.css">
   <link rel="stylesheet" href="/assets/css/register.css">

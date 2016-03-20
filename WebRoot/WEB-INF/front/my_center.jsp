@@ -25,7 +25,7 @@
 		<table style="width: 100%;margin-left: 10px;margin-right: 10px;">
 			<tr><td>帐号信息：</td><td>${customer.displayname} /<b>${customer.account}</td><td rowspan="4"><a class="example-image-link" href="/center/distri-image.html" data-lightbox="example-1"><img id="example2" class="example-image" width="120" height="120" src="/center/distri-image.html" ></a></td></tr>
 			<tr><td>帐号金额：</td><td style="color: red;">${wallet.balance}&yen;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<a href="./tranfer.html" style="font-size: 11px;color: orange;">领取红包</a></td><td></td></tr>
-			<tr><td>累计提层：</td><td style="color: red;">${wallet.distrBalance}&yen;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<a href="./distri-tip.html" style="font-size: 11px;color: orange;">提层说明</a></td><td></td></tr>
+			<tr><td>累计提层：</td><td style="color: red;">${wallet.distrBalance}&yen;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<a href="./distri-tip.html" style="font-size: 11px;color: orange;">分销说明</a></td><td></td></tr>
 		</table>
 	</div>
 

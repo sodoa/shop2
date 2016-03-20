@@ -6,12 +6,13 @@
 <!doctype html>
 <html class="no-js">
 <head>
+<jsp:include page="header.jsp"></jsp:include>
   <link rel="stylesheet" href="/assets/css/amazeui.min.css">
   <link rel="stylesheet" href="/assets/css/common.css">
   <link rel="stylesheet" href="/assets/css/register.css">
   <script src="/assets/js/jquery.min.js"></script>
   <script src="/assets/js/amazeui.min.js"></script>
-    <script type="text/javascript" src="/resource/js/common.js"></script>
+  <script type="text/javascript" src="/resource/js/common.js"></script>
 </head>
 <body>
 
