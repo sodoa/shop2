@@ -100,7 +100,7 @@ public class CartAct {
 	
 	@RequestMapping("/empty_cart.html")
 	public ModelAndView emptyCart(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("redirect:/center/cart.html");
+		ModelAndView mv = new ModelAndView("redirect:/cart.html");
 		
 		int customerId = 0;
 		String sessionId = LoginSessionUtils.getCustomerSessionId();;
