@@ -59,7 +59,7 @@ public class HttpClientUtils {
 			UrlEncodedFormEntity formEntiry = new UrlEncodedFormEntity(mapToPostParam(paramMap), "UTF-8");
 			// post.addHeader("Content-type",
 			// "application/x-www-form-urlencoded");
-			post.setHeader("Content-Type", "text/html;charset=UTF-8");
+			post.setHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
 			post.setEntity(formEntiry);
 			HttpResponse response = client.execute(post);
 
