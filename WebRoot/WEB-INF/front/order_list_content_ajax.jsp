@@ -23,7 +23,7 @@
 		<div class="order_cost">
 			<p>共1件商品</p>
 			<p>实付&yen;${item.order.totalAmount}</p>
-			<p>运费&yen;</p>
+			<p></p>
 		</div>
 		
 		

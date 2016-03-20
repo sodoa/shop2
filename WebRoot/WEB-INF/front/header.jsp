@@ -11,7 +11,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 <link href="/theme/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/jslib/showloading/css/showLoading.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript" src="/theme/js/jquery-1.11.2.js"></script>
 <script type="text/javascript" src="/jslib/uiadmin/lib/lazyload/lazyload.min.js"></script>
