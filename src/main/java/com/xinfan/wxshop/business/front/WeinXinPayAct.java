@@ -181,7 +181,7 @@ public class WeinXinPayAct {
 		// 总金额以分为单位，不带小数点
 		int total_fee = intMoney;
 		
-		total_fee = 1;
+		//total_fee = 1;
 		
 		// 订单生成的机器 IP
 		String spbill_create_ip = request.getRemoteAddr();
