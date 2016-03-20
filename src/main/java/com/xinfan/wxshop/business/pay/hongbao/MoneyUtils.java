@@ -9,32 +9,20 @@ import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.xinfan.wxshop.common.config.FileConfig;
+import com.xinfan.wxshop.business.pay.weixin.MD5Util;
+import com.xinfan.wxshop.business.pay.weixin.TenpayUtil;
 
 
 public class MoneyUtils {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MoneyUtils.class);
-	
-	private static String appid = " ";// 应用ID
-	private static String appsecret = " ";// 应用密钥
-	private static String partner = "";// 微信支付商户号
-	private static String partnerkey = " ";// 财付通初始密�?
+
 	private static String charset = "UTF-8";
 	
-	static {
-		partnerkey = FileConfig.getInstance().getString("weixin.appsecret");
-		appid = FileConfig.getInstance().getString("weixin.appid");
-		appsecret = partnerkey;
-		partner =  FileConfig.getInstance().getString("weixin.mch_id");
-	}
-
 	/**
 	 * 随机16为数值
 	 * 
@@ -55,38 +43,9 @@ public class MoneyUtils {
 	}
 
 	/**
-	 * 获取ip
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public static String getIpAddr(HttpServletRequest request) {
-		String ip = request.getHeader("x-forwarded-for");
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("PRoxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		if (null == ip) {
-			ip = "";
-		}
-		if (StringUtils.isNotEmpty(ip)) {
-			String[] ipArr = ip.split(",");
-			if (ipArr.length > 1) {
-				ip = ipArr[0];
-			}
-		}
-		return ip;
-	}
-
-	/**
 	 * 创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。 sign
 	 */
-	public static String createSign(Map<String, Object> map) {
+	public static String createSign(Map<String, Object> map,String partnerkey) {
 		SortedMap<String, String> packageParams = new TreeMap<String, String>();
 		for (Map.Entry<String, Object> m : map.entrySet()) {
 			packageParams.put(m.getKey(), m.getValue().toString());
@@ -112,9 +71,8 @@ public class MoneyUtils {
 		return sign;
 	}
 
-	public static String getOrderNo() {
-		String order = partner
-				+ new SimpleDateFormat("yyyyMMdd").format(new Date());
+	public static String getOrderNo(String id,String partner) {
+		String order = partner + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + id ;
 		Random r = new Random();
 		for (int i = 0; i < 10; i++) {
 			order += r.nextInt(9);

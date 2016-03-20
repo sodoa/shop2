@@ -17,7 +17,7 @@ import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.RedPacket;
 import com.xinfan.wxshop.business.entity.RedRecord;
 import com.xinfan.wxshop.business.pay.hongbao.MoneyUtils;
-import com.xinfan.wxshop.business.pay.weixin.GetWxOrderno;
+import com.xinfan.wxshop.business.pay.weixin.WxHttpsUtils;
 import com.xinfan.wxshop.common.config.FileConfig;
 import com.xinfan.wxshop.common.util.JSONUtils;
 import com.xinfan.wxshop.common.util.TimeUtils;
@@ -58,6 +58,7 @@ public class RedPacketService {
 		record.setCreatedate(TimeUtils.getCurrentTime());
 		record.setRdid(sequenceDao.getSequence(SequenceConstants.SEQ_RED_RECORD));
 		record.setAmount(packet.getAmount());
+		record.setLined(lined);
 		redRecordDao.insertSelective(record);
 		
 		RedPacket updatePacket = new RedPacket();
@@ -72,7 +73,7 @@ public class RedPacketService {
 
 		String url = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";
 		
-		String orderNNo =  MoneyUtils.getOrderNo() ; 
+		String orderNNo =  MoneyUtils.getOrderNo(String.valueOf(record.getRdid()),partner); 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("nonce_str", MoneyUtils.buildRandom());//随机字符串
 		map.put("mch_billno", orderNNo);//商户订单
@@ -90,9 +91,9 @@ public class RedPacketService {
 		map.put("act_name", "日常红包");//活动名称
 		map.put("remark", "果然逗日常红包，天天有领");//备注
 		
-		map.put("sign", MoneyUtils.createSign(map));//签名
+		map.put("sign", MoneyUtils.createSign(map,appsecret));//签名
 			
-		Map<String,String> resultMap = GetWxOrderno.getSSLResult(url, MoneyUtils.createXML(map));
+		Map<String,String> resultMap = WxHttpsUtils.SSLPostXmlWithResult(url, MoneyUtils.createXML(map));
 		if(resultMap!=null){
 			String return_code = resultMap.get("return_code");
 			String return_msg = resultMap.get("return_msg");

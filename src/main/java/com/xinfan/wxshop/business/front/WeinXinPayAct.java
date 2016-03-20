@@ -23,10 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xinfan.wxshop.business.pay.weixin.CommonUtil;
-import com.xinfan.wxshop.business.pay.weixin.GetWxOrderno;
+import com.xinfan.wxshop.business.pay.weixin.GetWxOrderNo;
 import com.xinfan.wxshop.business.pay.weixin.RequestHandler;
 import com.xinfan.wxshop.business.pay.weixin.Sha1Util;
 import com.xinfan.wxshop.business.pay.weixin.TenpayUtil;
+import com.xinfan.wxshop.business.pay.weixin.WxHttpsUtils;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
@@ -252,7 +253,7 @@ public class WeinXinPayAct {
 		String createOrderURL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 		String prepay_id = "";
 		try {
-			prepay_id = new GetWxOrderno().getPayNo(createOrderURL, xml);
+			prepay_id = new GetWxOrderNo().getPayNo(createOrderURL, xml);
 			if (prepay_id.equals("")) {
 				request.setAttribute("ErrorMsg", "统一支付接口获取预支付订单出错");
 				response.sendRedirect("error.html");
@@ -353,7 +354,7 @@ public class WeinXinPayAct {
 	            sb.append(line);
 	        }
 	        
-	        SortedMap<String,String> resultMap = GetWxOrderno.doXMLParse(sb.toString());
+	        SortedMap<String,String> resultMap = WxHttpsUtils.doXMLParse(sb.toString());
 			String return_code = resultMap.get("return_code");
 			String return_msg = resultMap.get("return_msg");
 			String result_code = resultMap.get("result_code");

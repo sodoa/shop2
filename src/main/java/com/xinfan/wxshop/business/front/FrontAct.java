@@ -1,5 +1,6 @@
 package com.xinfan.wxshop.business.front;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,9 @@ import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
 import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
+import com.xinfan.wxshop.common.cache.CacheData;
+import com.xinfan.wxshop.common.cache.ExpireCacheHolder;
+import com.xinfan.wxshop.common.cache.FitData;
 
 @Controller
 public class FrontAct {
@@ -37,10 +41,28 @@ public class FrontAct {
 	@RequestMapping("/index.html")
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("/front/index");
-
-		List<Goods> burstList = this.GoodsService.getTopBurstGoodsList();
-		List<Goods> hotList = this.GoodsService.getTopHotGoodsList();
-
+		
+		HashMap cacheMap = (HashMap)ExpireCacheHolder.getExpireCacheObject("index_expirecache", new FitData() {
+			
+			public CacheData refresh() {
+				List<Goods> burstList = GoodsService.getTopBurstGoodsList();
+				List<Goods> hotList = GoodsService.getTopHotGoodsList();
+				
+				HashMap map  =new HashMap();
+				map.put("burstList", burstList);
+				map.put("hotList", hotList);
+				
+				CacheData data = new  CacheData();
+				data.setData(map);
+				data.setExp(10);
+				
+				return data;
+			}
+		});
+		
+		List<Goods> burstList = (List<Goods>)cacheMap.get("burstList");
+		List<Goods> hotList = (List<Goods>)cacheMap.get("hotList");
+		
 		mv.addObject("burstList", burstList);
 		mv.addObject("hotList", hotList);
 

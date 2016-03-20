@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +30,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 
-public class GetWxOrderno {
+public class WxHttpsUtils {
 	
-	private static final Logger logger = LoggerFactory.getLogger(GetWxOrderno.class);
+	private static final Logger logger = LoggerFactory.getLogger(WxHttpsUtils.class);
 
 	// 连接超时时间，默认10秒
 	private static int socketTimeout = 10000;
@@ -101,35 +100,11 @@ public class GetWxOrderno {
 		}
 	}
 
-	public static String getPayNo(String url, String xmlParam) {
-		System.out.println("xml是:" + xmlParam);
-
-		HttpPost httpost = new HttpPost(url);
+	public static Map<String, String> SSLPostXmlWithResult(String url, String xmlParam) {
 		
-		String prepay_id = "";
-		try {
-			httpost.setEntity(new StringEntity(xmlParam, "UTF-8"));
-			HttpResponse response = httpclient.execute(httpost);
-			String jsonStr = EntityUtils
-					.toString(response.getEntity(), "UTF-8");
-			Map<String, Object> dataMap = new HashMap<String, Object>();
-			System.out.println("json是:" + jsonStr);
-
-			if (jsonStr.indexOf("FAIL") != -1) {
-				return prepay_id;
-			}
-			Map map = doXMLParse(jsonStr);
-			String return_code = (String) map.get("return_code");
-			prepay_id = (String) map.get("prepay_id");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			logger.error(e.getMessage(),e);
+		if(logger.isDebugEnabled()){
+			logger.debug("xml是:" + xmlParam);
 		}
-		return prepay_id;
-	}
-
-	public static Map<String, String> getSSLResult(String url, String xmlParam) {
-		System.out.println("xml是:" + xmlParam);
 		
 		HttpPost httpost = new HttpPost(url);
 		try {
@@ -137,13 +112,15 @@ public class GetWxOrderno {
 			HttpResponse response = httpclient.execute(httpost);
 			String jsonStr = EntityUtils
 					.toString(response.getEntity(), "UTF-8");
-			System.out.println("json是:" + jsonStr);
+			
+			if(logger.isDebugEnabled()){
+				logger.debug("json是:" + jsonStr);
+			}
 
 			if (jsonStr.indexOf("FAIL") != -1) {
 				return null;
 			}
 			Map map = doXMLParse(jsonStr);
-
 			return map;
 
 		} catch (Exception e) {

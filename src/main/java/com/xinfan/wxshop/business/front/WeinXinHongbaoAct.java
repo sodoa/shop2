@@ -21,8 +21,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.xinfan.wxshop.business.entity.Wallet;
 import com.xinfan.wxshop.business.pay.hongbao.MoneyUtils;
 import com.xinfan.wxshop.business.pay.weixin.CommonUtil;
-import com.xinfan.wxshop.business.pay.weixin.GetWxOrderno;
 import com.xinfan.wxshop.business.pay.weixin.RequestHandler;
+import com.xinfan.wxshop.business.pay.weixin.WxHttpsUtils;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
@@ -79,6 +79,7 @@ public class WeinXinHongbaoAct {
 		}
 		
 		request.setAttribute("money", money);
+		request.setAttribute("customerId", customerId);
 		return new ModelAndView("forward:/center/weixin_hongbao_auth.html");
 	}
 	
@@ -103,8 +104,9 @@ public class WeinXinHongbaoAct {
 		String backUri = FileConfig.getInstance().getString("weixin.hongbao.backurl");
 		
 		Float money =Float.parseFloat(String.valueOf(request.getAttribute("money")));
+		Integer customerId = Integer.parseInt(String.valueOf(request.getAttribute("customerId")));
 		
-		String body = "money="+money;
+		String body = "money="+money+"&customerId="+customerId;
 		
 		String desPassword = FileConfig.getInstance().getString("weixin.des.password");
 		String decData = Base64.encodeBase64String(DesUtils.encrypt(body.getBytes("UTF-8"), desPassword));
@@ -138,8 +140,9 @@ public class WeinXinHongbaoAct {
 		Map<String,String[]> paramterMap = RequestUtils.getQueryParamMap(decData);
 		
 		int money = Float.valueOf(paramterMap.get("money")[0]).intValue();
-		String code = request.getParameter("code");
+		Integer customerId = Integer.valueOf(paramterMap.get("customerId")[0]);
 		
+		String code = request.getParameter("code");
 
 		// 商户相关资料
 		String appid = FileConfig.getInstance().getString("weixin.appid");
@@ -161,7 +164,7 @@ public class WeinXinHongbaoAct {
 		
 		String url = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack";
 		
-		String orderNNo =  MoneyUtils.getOrderNo() ; 
+		String orderNNo =  MoneyUtils.getOrderNo(String.valueOf(customerId),partner) ; 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("nonce_str", MoneyUtils.buildRandom());//随机字符串
 		map.put("mch_billno", orderNNo);//商户订单
@@ -174,16 +177,15 @@ public class WeinXinHongbaoAct {
 		//map.put("min_value", money *100);//最小红包
 		//map.put("max_value", money *100);//最大红包
 		map.put("total_num", 1);//红包发送总人数
-		map.put("wishing", "果然逗红包提层红包");//红包祝福语
+		map.put("wishing", "果然逗提层红包");//红包祝福语
 		map.put("client_ip", request.getRemoteHost());//ip地址
 		map.put("act_name", "红包");//活动名称
 		map.put("remark", "继续加油哦");//备注
 		
 		logger.debug("weixin_hongbao_pay sign map :" + JSONUtils.toJSONString(map));
 		
-		map.put("sign", MoneyUtils.createSign(map));//签名
+		map.put("sign", MoneyUtils.createSign(map,appsecret));//签名
 		
-		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
 		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);
 		
 		if(wallet.getBalance()<=money){
@@ -194,14 +196,14 @@ public class WeinXinHongbaoAct {
 		
 		try {
 			
-			Map<String,String> resultMap = GetWxOrderno.getSSLResult(url, MoneyUtils.createXML(map));
-			if(resultMap!=null){
+			Map<String,String> resultMap = WxHttpsUtils.SSLPostXmlWithResult(url, MoneyUtils.createXML(map));
+			if (resultMap != null) {
 				String return_code = resultMap.get("return_code");
 				String return_msg = resultMap.get("return_msg");
 				
 				if("SUCCESS".equalsIgnoreCase(return_code)){
 					CustomerService.updateWalletBalance(customerId, money,orderNNo,openId,request.getRemoteHost());
-					mv.addObject("msg", "发送红外成功");
+					mv.addObject("msg", "发送红包成功，请在维信当中获取，过期不退!");
 					return mv;
 				}
 				
