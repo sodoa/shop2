@@ -77,6 +77,7 @@
 		    imgUrl: imgUrl, // 分享图标
 		    success: function () { 
 		    	alert('分享成功');
+		    	updateShareCnt();
 		    },
 		    cancel: function () { 
 		    	alert('分享失败');
@@ -98,6 +99,7 @@
 		    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
 		    success: function () { 
 		    	alert('分享成功');
+		    	updateShareCnt();
 		    },
 		    cancel: function () { 
 		    	alert('分享失败');
@@ -118,11 +120,22 @@
 		    imgUrl: imgUrl, // 分享图标
 		    success: function () { 
 		    	alert('分享成功');
+		    	updateShareCnt();
 		    },
 		    cancel: function () { 
 		    	alert('分享失败');
 		    }
 		};
+	}
+	
+	function updateShareCnt(){
+		
+		var id = '${bean.title}';
+	     $.ajax({type:"POST",
+	             url:"accreate.html?t="+new Date().getTime(),
+	             data:{"id":id},
+	             dataType:"json"
+		 });
 	}
 	
 	</script>
