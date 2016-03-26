@@ -72,9 +72,9 @@ public class MoneyUtils {
 	}
 
 	public static String getOrderNo(String id,String partner) {
-		String order = partner + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + id ;
+		String order = partner + new SimpleDateFormat("yyyyMMdd").format(new Date()) + id ;
 		Random r = new Random();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			order += r.nextInt(9);
 		}
 		return order;
