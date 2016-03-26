@@ -127,10 +127,9 @@ public class RegistAct {
 		String key = account+"#forget";
 		
 		try{
+			String cacheCode  = (String)CacheHolder.getInstance().getCacheProvider(BizConstants.PROVIDER_EXP_CACHE).getAttribute(key);
 			
-			String cacheCode  = String.valueOf(CacheHolder.getInstance().getCacheProvider(BizConstants.PROVIDER_EXP_CACHE).getAttribute(key));
-			
-			if(cacheCode == null || cacheCode.length() == 0){
+			if(cacheCode == null || cacheCode.length() == 0 || "null".equals(cacheCode)){
 				result = JSONResult.error("验证码已过期");
 				return result;
 			}
@@ -213,10 +212,9 @@ public class RegistAct {
 		String key = account+"#regist";
 		
 		try{
+			String cacheCode  = (String)CacheHolder.getInstance().getCacheProvider(BizConstants.PROVIDER_EXP_CACHE).getAttribute(key);
 			
-			String cacheCode  = String.valueOf(CacheHolder.getInstance().getCacheProvider(BizConstants.PROVIDER_EXP_CACHE).getAttribute(key));
-			
-			if(cacheCode == null || cacheCode.length() == 0){
+			if(cacheCode == null || cacheCode.length() == 0 || "null".equals(cacheCode)){
 				result = JSONResult.error("验证码已过期");
 				return result;
 			}
