@@ -35,12 +35,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			request.setAttribute("contextpath", contextPath);
 		}
-		
-		//wx share id
-		String wxsid = request.getParameter("wxsid");
-		if(wxsid!=null && wxsid.length()>0){
-			CookieUtils.addCookie(request, response, "wxsid", wxsid, 24*60*60, "/");
-		}
 
 		if (uri.startsWith("/admin")) {
 

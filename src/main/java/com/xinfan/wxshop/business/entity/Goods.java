@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Goods{
+public class Goods implements java.io.Serializable{
     private Integer goodsId;
 
 	private String goodsName;

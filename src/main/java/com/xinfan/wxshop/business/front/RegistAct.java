@@ -229,6 +229,8 @@ public class RegistAct {
 				return result;
 			}
 			
+			System.out.println(1);
+			
 			Cookie cookie = CookieUtils.getCookie(request, "share_id");
 			if(cookie!=null){
 				String share_id = cookie.getValue();
