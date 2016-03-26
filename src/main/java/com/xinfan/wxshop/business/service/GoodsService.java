@@ -131,6 +131,7 @@ public class GoodsService {
 		DataMap map = new DataMap();
 		map.put("host", "1");
 		map.put("goodsStatus", "1");
+		map.put("no_theme_type", "20");
 		List<Goods> list = goodsDao.pageBeanList(map, page);
 		return list;
 	}
@@ -142,6 +143,7 @@ public class GoodsService {
 		DataMap map = new DataMap();
 		map.put("burst", "1");
 		map.put("goodsStatus", "1");
+		map.put("no_theme_type", "20");
 		List<Goods> list = goodsDao.pageBeanList(map, page);
 		return list;
 	}
