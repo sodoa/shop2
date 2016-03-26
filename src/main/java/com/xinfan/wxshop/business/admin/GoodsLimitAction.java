@@ -180,6 +180,7 @@ public class GoodsLimitAction {
 		String final_prices = request.getParameter("final_prices");
 		String orgin_prices = request.getParameter("orgin_prices");
 		String keywords = request.getParameter("keywords");
+		String weight = request.getParameter("weight");
 
 		String goods_des = request.getParameter("goods_des");
 		String summary = request.getParameter("summary");
@@ -215,6 +216,7 @@ public class GoodsLimitAction {
 		goods.setGoodsDes(goods_des);
 		goods.setSupplier(supplier);
 		goods.setThemeType(theme_type);
+		goods.setWeight(weight);
 
 		Goods existGoods = this.GoodsService.getGoods(Integer.parseInt(goodsId));
 
@@ -312,6 +314,7 @@ public class GoodsLimitAction {
 		String final_prices = request.getParameter("final_prices");
 		String orgin_prices = request.getParameter("orgin_prices");
 		String keywords = request.getParameter("keywords");
+		String weight = request.getParameter("weight");
 
 		String goods_des = request.getParameter("goods_des");
 		String summary = request.getParameter("summary");
@@ -345,6 +348,7 @@ public class GoodsLimitAction {
 		goods.setSupplier(supplier);
 		goods.setThemeType(theme_type);
 		goods.setGoodsArea(goods_area);
+		goods.setWeight(weight);
 
 		try {
 			String path = FilePathHelper.getGoodsSummaryHtmlPath();
