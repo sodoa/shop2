@@ -571,7 +571,10 @@
   		</if>
   		<if test="theme_type!=null">
   			and theme_type = #{theme_type}
-  		</if>  		
+  		</if>  
+  		<if test="no_theme_type!=null">
+  			and theme_type not in (${no_theme_type})
+  		</if>  
   		
   		<if test="fashion!=null">
   			and fashion = #{fashion}
