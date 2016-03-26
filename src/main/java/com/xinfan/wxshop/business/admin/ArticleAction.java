@@ -147,7 +147,7 @@ public class ArticleAction {
 			record.setKeywords(keywords);
 			record.setSummary(summary);
 			
-			ArticleService.insertSelective(record);
+			ArticleService.updateByPrimaryKeySelective(record);
 			mv.addObject("msg", "操作成功");
 			
 		} catch (Exception e) {
