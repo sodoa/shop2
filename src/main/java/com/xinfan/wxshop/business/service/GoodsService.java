@@ -253,6 +253,11 @@ public class GoodsService {
 		this.goodsDao.insertSelective(goods);
 	}
 	
+
+	public void updateGoodsLimit(GoodsLimit goods){
+		goodsLimitDao.updateByPrimaryKeySelective(goods);
+	}
+	
 	
 	public void addGoodsLimit(GoodsLimit goods){
 		

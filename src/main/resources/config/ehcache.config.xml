@@ -10,7 +10,7 @@
 	<cache name="common_cache" maxElementsInMemory="50000" eternal="true"
 		timeToIdleSeconds="1200"  overflowToDisk="true" diskPersistent="false"  />
 		
-	<cache name="exp_cache" maxElementsInMemory="50000" eternal="true"
+	<cache name="exp_cache" maxElementsInMemory="50000" eternal="false"
 		timeToIdleSeconds="1200"  overflowToDisk="true" diskPersistent="false"  />		
 	
 </ehcache>

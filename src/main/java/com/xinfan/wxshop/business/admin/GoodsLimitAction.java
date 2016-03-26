@@ -62,7 +62,7 @@ public class GoodsLimitAction {
 	
 	@RequestMapping("/goods-image-save.jspx")
 	public ModelAndView goodsImageAdd(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/tip");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/tip");
 		
 		String goodsId = request.getParameter("id");
 		
@@ -116,7 +116,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-image-list.jspx")
 	public ModelAndView goodsImageList(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/image-list");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/image-list");
 		String id = request.getParameter("id");
 
 		List<GoodsImage> list = GoodsService.getGoodsImageList(Integer.parseInt(id), 1, 20);
@@ -141,15 +141,17 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-update.jspx")
 	public ModelAndView productGoodsUpdate(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/update");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/update");
 
 		String id = request.getParameter("id");
 		String time = String.valueOf(new Date().getTime());
 
 		Goods goods = GoodsService.getGoods(Integer.parseInt(id));
+		GoodsLimit goodsLimit = GoodsService.getGoodsLimit(Integer.parseInt(id));
 
 		mv.addObject("bean", goods);
 		mv.addObject("time", time);
+		mv.addObject("goodsLimit", goodsLimit);
 
 		String html = FilePathHelper.getGoodsSummaryHtml(request, goods.getSummary());
 		mv.addObject("html", html);
@@ -159,7 +161,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-save-update.jspx")
 	public ModelAndView productSaveUpdate(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/tip");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/tip");
 
 		DataMap paramter = RequestUtils.getRequestDataMap();
 
@@ -185,6 +187,13 @@ public class GoodsLimitAction {
 		String theme_type = request.getParameter("theme_type");
 
 		String time = request.getParameter("time");
+		
+		//////////////////////////////////////////////////////////////
+		String time_limit = request.getParameter("time_limit");
+		String buy_limit = request.getParameter("buy_limit");
+		String total_amount = request.getParameter("total_amount");
+		String goods_limit_type = request.getParameter("goods_limit_type");
+		/////////////////////////////////////////////////////////////////////////
 
 		Goods goods = new Goods();
 		goods.setBurst(paramter.getInt("burst", 0));
@@ -198,6 +207,7 @@ public class GoodsLimitAction {
 		goods.setFashionTemplate(fashion_template);
 		goods.setSummary(summary);
 		goods.setUnit(unit);
+		goods.setGoodsArea(goods_area);
 		goods.setFinalPrices(paramter.getFloat("final_prices"));
 		goods.setOrginPrices(paramter.getFloat("orgin_prices"));
 		goods.setKeywords(keywords);
@@ -247,6 +257,20 @@ public class GoodsLimitAction {
 				logger.error(e.getMessage(),e);
 			}
 		}
+		
+
+		try {
+			GoodsLimit goodsLimit = new GoodsLimit();
+			goodsLimit.setGoodsId(goods.getGoodsId());
+			goodsLimit.setLimitType(Integer.parseInt(goods_limit_type));
+			goodsLimit.setTotalAmount(Integer.parseInt(total_amount));
+			goodsLimit.setBuyLimit(Integer.parseInt(buy_limit));
+			goodsLimit.setTimeLimit(DateUtils.parseDate(time_limit, new String[]{"yyyy-MM-dd HH:mm"}));
+			GoodsService.updateGoodsLimit(goodsLimit);
+			
+		} catch (ParseException e) {
+			logger.error(e.getMessage(), e);
+		}
 
 		mv.addObject("msg", "修改成功");
 		return mv;
@@ -254,7 +278,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-detail.jspx")
 	public ModelAndView productGoodsDetail(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/detail");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/detail");
 
 		String id = request.getParameter("id");
 
@@ -270,7 +294,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-save.jspx")
 	public ModelAndView productSave(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/tip");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/tip");
 
 		DataMap paramter = RequestUtils.getRequestDataMap();
 
@@ -320,6 +344,7 @@ public class GoodsLimitAction {
 		goods.setGoodsDes(goods_des);
 		goods.setSupplier(supplier);
 		goods.setThemeType(theme_type);
+		goods.setGoodsArea(goods_area);
 
 		try {
 			String path = FilePathHelper.getGoodsSummaryHtmlPath();
@@ -515,7 +540,7 @@ public class GoodsLimitAction {
 	
 	@RequestMapping("/goods-fashion-list.jspx")
 	public ModelAndView fashionlist(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/fashion-list");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/fashion-list");
 		String id = request.getParameter("id");
 
 		List<GoodsImage> list = GoodsService.getGoodsImageList(Integer.parseInt(id), BizConstants.IMAGE_TYPE_FASHION, 20);
@@ -528,7 +553,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-fashion-add.jspx")
 	public ModelAndView fashionadd(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/fashion-add");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/fashion-add");
 
 		String time = String.valueOf(new Date().getTime());
 		mv.addObject("time", time);
@@ -595,7 +620,7 @@ public class GoodsLimitAction {
 
 	@RequestMapping("/goods-fashion-save.jspx")
 	public ModelAndView fashionSave(@RequestParam("file") MultipartFile file,HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/admin/goods/tip");
+		ModelAndView mv = new ModelAndView("/admin/goodslimit/tip");
 		
 		String goodsId = request.getParameter("id");
 		
