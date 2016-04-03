@@ -88,12 +88,14 @@ function validate() {
 			}
 		},
 		tiptype : function(msg, o, cssctl) {
-			var objtip = $("#login_error_msg_group");
-			cssctl(objtip, o.type);
-			objtip.text(msg);
-			objtip.fadeIn(2000, function() {
-				objtip.hide();
-			});
+			if(o.type == 3){
+				var objtip = $("#login_error_msg_group");
+				cssctl(objtip, o.type);
+				objtip.text(msg);
+				objtip.fadeIn(2000, function() {
+					objtip.hide();
+				});
+			}
 		}
 	});
 }

@@ -10,6 +10,7 @@
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 <link type="text/css" rel="stylesheet" href="/jslib/uiadmin/lib/Validform/5.3.2/style.css" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.min.js"></script>
+
 </head>
 <body>
 	<div class="g-doc">
@@ -59,11 +60,7 @@
 				if (data.result == 0) {
 					layer.msg('评论成功');
 					window.setTimeout(function(){
-						if (p != null && p.length > 0) {
-							window.location.href = "" + p;
-						} else {
-							window.location.href = "/";
-						}
+						window.location.href = "/center/order_list.html?li=${li}";
 					},1000);
 					
 					return true;
