@@ -119,7 +119,6 @@ public class CartService {
 
 			totalAmount += (cart.getQuantity() * goods.getFinalPrices());
 			orginAmount += (cart.getQuantity() * goods.getOrginPrices());
-
 		}
 
 		saveAmount = (orginAmount - totalAmount);
@@ -136,7 +135,10 @@ public class CartService {
 
 		return info;
 	}
-	
+
+	public int getCartNumBySessionId(String sessionId) {
+		return cartDao.selectCartNumBySessionId(sessionId);
+	}	
 
 	public void updateGoodsNumberInCart(int cartId,int number) {
 		

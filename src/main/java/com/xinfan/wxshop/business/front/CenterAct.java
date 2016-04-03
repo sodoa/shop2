@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xinfan.wxshop.business.entity.Customer;
-import com.xinfan.wxshop.business.entity.DeliveryAddress;
 import com.xinfan.wxshop.business.entity.Order;
 import com.xinfan.wxshop.business.entity.OrderDetail;
 import com.xinfan.wxshop.business.entity.Wallet;
@@ -68,16 +67,27 @@ public class CenterAct {
 
 		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
 		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
+		
+		
+		String li = request.getParameter("li");
+		if(li == null || li.length() ==0){
+			li = "2";
+		}
 
 		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);  
 		//List<DataMap> distList = CustomerService.getCustomerTopDistributionList(customerId);
 		//List<Order> orderList = CustomerService.getCustomerTopOrderList(customerId);
 		Customer customer = CustomerService.getById(customerId);
+		
+		int unPayCount = OrderService.getUnPayOrderCount(customerId);
 
 		request.setAttribute("wallet", wallet);
 		//request.setAttribute("distList", distList);
 		//request.setAttribute("orderList", orderList);
 		request.setAttribute("customer", customer);
+		request.setAttribute("li", null);
+		request.setAttribute("unPayCount", unPayCount);
+		request.setAttribute("menu_hit", 4);
 
 		return mv;
 	}

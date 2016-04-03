@@ -70,6 +70,7 @@ public class DistributionAct {
 				page);
 
 		mv.addObject("page", page);
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}

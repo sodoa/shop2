@@ -65,6 +65,7 @@ public class FrontAct {
 		
 		mv.addObject("burstList", burstList);
 		mv.addObject("hotList", hotList);
+		mv.addObject("menu_hit", "1");
 
 		return mv;
 	}

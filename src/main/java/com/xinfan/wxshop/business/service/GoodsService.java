@@ -127,7 +127,7 @@ public class GoodsService {
 	public List<Goods> getTopHotGoodsList(){
 		Pagination page = new Pagination();
 		page.setPageNo(1);
-		page.setPageSize(6);
+		page.setPageSize(10);
 		DataMap map = new DataMap();
 		map.put("host", "1");
 		map.put("goodsStatus", "1");
@@ -139,7 +139,7 @@ public class GoodsService {
 	public List<Goods> getTopBurstGoodsList(){
 		Pagination page = new Pagination();
 		page.setPageNo(1);
-		page.setPageSize(6);
+		page.setPageSize(10);
 		DataMap map = new DataMap();
 		map.put("burst", "1");
 		map.put("goodsStatus", "1");

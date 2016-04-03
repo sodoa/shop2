@@ -55,7 +55,7 @@
         <property name="frontLoginUrl" value="/login"></property>
     </bean> 
     
-    <bean id="shareInterceptor" class="com.xinfan.wxshop.business.web.ShareInterceptor">
+    <bean id="shareInterceptor" class="com.xinfan.wxshop.business.web.GobalInterceptor">
     </bean>     
     
     <mvc:interceptors> 

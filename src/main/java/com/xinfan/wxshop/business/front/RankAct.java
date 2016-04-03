@@ -32,15 +32,28 @@ public class RankAct {
 	private ArticleService ArticleService;
 
 	@RequestMapping("/rk.html")
-	public ModelAndView index() {
+	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/rank");
 
-		List<IncomeRank> weeklist = RankingService.getWeekIncomeRankList();
-		List<IncomeRank> monthlist = RankingService.getMonthIncomeRankList();
-		List<IncomeRank> yearlist = RankingService.getYearIncomeRankList();
-		mv.addObject("weeklist", weeklist);
-		mv.addObject("monthlist", monthlist);
-		mv.addObject("yearlist", yearlist);
+		String l = request.getParameter("l");
+		if (l == null || l.length() == 0) {
+			l = "1";
+		}
+
+		List<IncomeRank> list = null;
+
+		if ("1".equals(l)) {
+			list = RankingService.getWeekIncomeRankList();
+		} else if ("2".equals(l)) {
+			list = RankingService.getMonthIncomeRankList();
+		} else if ("3".equals(l)) {
+			list = RankingService.getYearIncomeRankList();
+		}
+
+		mv.addObject("list", list);
+		mv.addObject("l", l);
+
+		mv.addObject("menu_hit", "3");
 
 		return mv;
 	}

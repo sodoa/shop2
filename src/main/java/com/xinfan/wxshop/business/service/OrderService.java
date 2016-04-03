@@ -116,29 +116,29 @@ public class OrderService {
 		if (order.getStatus() != OrderStateEnum.UNPAY.getIndex()) {
 			throw new RuntimeException("order state is leggel");
 		}
-		
-		//更新订单状态
+
+		// 更新订单状态
 		Order updateOrder = new Order();
 		updateOrder.setOrderId(order.getOrderId());
 		updateOrder.setStatus(OrderStateEnum.PAYED.getIndex());
 
 		orderDao.updateByPrimaryKeySelective(updateOrder);
-		
-		//更新商品数量
-		
-		try{
+
+		// 更新商品数量
+
+		try {
 			List<OrderDetail> details = orderDetailDao.selectByOrderId(order.getOrderId());
-			for(OrderDetail detail : details){
-				
+			for (OrderDetail detail : details) {
+
 				Goods updateGoodsSellerCount = new Goods();
 				updateGoodsSellerCount.setGoodsId(detail.getGoodsId());
 				updateGoodsSellerCount.setSellcount(detail.getQuantity());
 				goodsDao.updateGoodsSellCountByPrimaryKey(updateGoodsSellerCount);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-		
+
 		try {
 			Customer level1Customer = customerDao.selectByPrimaryKey(order.getCustomerId());
 			if (level1Customer != null) {
@@ -149,9 +149,9 @@ public class OrderService {
 					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
 
 					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
-					
-					if(income >=0.1){
-	
+
+					if (income >= 0.1) {
+
 						Distribution distribution = new Distribution();
 						distribution.setCharge(order.getTotalAmount());
 						distribution.setRate(distribution_rate);
@@ -165,16 +165,16 @@ public class OrderService {
 						distribution.setOrderId(order.getOrderId());
 						distribution.setResult(1);
 						distributionDao.insertSelective(distribution);
-	
+
 						if (level1Customer.getUplineId() != null) {
 							Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
 							if (level2Customer.getUplineId() != null && level2Customer.getUplineId() != 0) {
 								float distribution_rate2 = Float.parseFloat(ParamterUtils.getString("distribution.level2.rate", "0.01"));
 								float income2 = (float) Math.floor(order.getTotalAmount() * distribution_rate * 10) / 10;
-								
-								if(income2 >=0.1){
+
+								if (income2 >= 0.1) {
 									int distributionId2 = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
-		
+
 									Distribution distribution2 = new Distribution();
 									distribution2.setCharge(order.getTotalAmount());
 									distribution2.setRate(distribution_rate2);
@@ -319,6 +319,10 @@ public class OrderService {
 		List<DataMap> list = orderDao.pageList(map, page);
 
 		return list;
+	}
+
+	public int getUnPayOrderCount(int customerId) {
+		return orderDao.getUnPayOrderCount(customerId, OrderStateEnum.UNPAY.getIndex());
 	}
 
 	public OrderBean getOrderDetailInfo(int orderId, int customerId) {

@@ -50,12 +50,14 @@ public class SettingAct {
 	@RequestMapping("/center/about.html")
 	public ModelAndView about(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/about");
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/center/setpassword.html")
 	public ModelAndView setpassword(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/setpassword");
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 

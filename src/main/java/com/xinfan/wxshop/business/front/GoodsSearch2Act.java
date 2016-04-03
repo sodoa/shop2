@@ -22,9 +22,9 @@ import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.common.page.Pagination;
 
 @Controller
-public class GoodsClassifyAct {
+public class GoodsSearch2Act {
 	
-	private static final Logger logger = LoggerFactory.getLogger(GoodsClassifyAct.class);
+	private static final Logger logger = LoggerFactory.getLogger(GoodsSearch2Act.class);
 
 	@Autowired
 	private GoodsService GoodsService;
@@ -40,7 +40,7 @@ public class GoodsClassifyAct {
 
 	@RequestMapping("/g-s.html")
 	public ModelAndView index(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/front/classify");
+		ModelAndView mv = new ModelAndView("/front/goods-search");
 		Pagination page = RequestUtils.getPagination(request);
 		String w = request.getParameter("w");
 		String theme = request.getParameter("theme");
@@ -56,6 +56,7 @@ public class GoodsClassifyAct {
 		mv.addObject("page", page);
 		mv.addObject("w", w);
 		mv.addObject("theme", theme);
+		mv.addObject("menu_hit", "2");
 		
 		return mv;
 	}

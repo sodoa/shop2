@@ -58,6 +58,12 @@ public class RegistAct {
 		return mv;
 	}
 	
+	@RequestMapping( method=RequestMethod.GET, value="/protocol.html")
+	public ModelAndView protocol() {
+		ModelAndView mv = new ModelAndView("/front/protocol");
+		return mv;
+	}
+	
 	@RequestMapping( method=RequestMethod.GET, value="/regist.html")
 	public ModelAndView regist(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/regist");

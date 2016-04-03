@@ -57,7 +57,7 @@ public class AddressAct {
 
 		List<DeliveryAddress> list = DeliveryAddressService.getCustomerDeliveryAddressList(customerId);
 		mv.addObject("list", list);
-		
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}
@@ -113,6 +113,7 @@ public class AddressAct {
 		
 		String from = request.getParameter("from");
 		mv.addObject("from", from);//from = 1 订单
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}
@@ -161,7 +162,7 @@ public class AddressAct {
 		mv.addObject("bean", bean);
 		String from = request.getParameter("from");
 		mv.addObject("from", from);//from = 1 订单
-
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 

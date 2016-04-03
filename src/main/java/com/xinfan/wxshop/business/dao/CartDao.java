@@ -58,6 +58,14 @@ public class CartDao extends SqlSessionDaoSupport {
 				example);
 	}
 	
+	public int selectCartNumBySessionId(String id) {
+
+		CartExample example = new CartExample();
+		example.createCriteria().andSessionidEqualTo(id);
+		return getSqlSession().selectOne(wrapCommand("countByExample"),
+				example);
+	}
+	
 	public int deleteCartListByCustomerId(int id) {
 
 		CartExample example = new CartExample();

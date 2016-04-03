@@ -32,6 +32,8 @@ public class LayerAct {
 
 		mv.addObject("list1", list1);
 		mv.addObject("list2", list2);
+		
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}
