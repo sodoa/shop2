@@ -1,266 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sp" uri="http://mos.xinfan.com/"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
 <!doctype html>
 <html class="no-js">
 <head>
-	<jsp:include page="header.jsp"></jsp:include>
-	
-	<link href="/theme/css/index.css" type="text/css" rel="stylesheet" />
-	<link type="text/css" href="/theme/css/slider.css" rel="stylesheet" />
-	<script type="text/javascript" src="/theme/js/jquery.touchSlider.js"></script>
+<jsp:include page="header.jsp"></jsp:include>
 </head>
 <body>
-	<script>
-
-		function frame_animation() {
-			var className = $("#frame")[0].className;
-			if (className == 'frame') {
-				$("#frame").removeClass("frame");
-				$("#frame").addClass("frame_down");
-			}
-
-			if (className == 'frame_down') {
-				$("#frame").removeClass("frame_down");
-				$("#frame").addClass("frame_up");
-			}
-
-			if (className == 'frame_up') {
-				$("#frame").removeClass("frame_up");
-				$("#frame").addClass("frame_down");
-			}
-		}
-
-	</script>
-
-	<!--
-
-轮播
-
-	     
-
--->
-	<script type="text/javascript">
-
-		$(document).ready(
-
-				function() {
-					$dragBln = false;
-					$(".main_image").touchSlider(
-							{
-
-								flexible : true,
-
-								speed : 200,
-
-								btn_prev : $("#btn_prev"),
-
-								btn_next : $("#btn_next"),
-
-								paging : $(".flicking_con a"),
-
-								counter : function(e) {
-
-									$(".flicking_con a").removeClass("on").eq(
-
-											e.current - 1).addClass("on");
-
-								}
-
-							});
-
-
-
-					$(".main_image").bind("mousedown", function() {
-
-						$dragBln = false;
-
-					});
-
-
-
-					$(".main_image").bind("dragstart", function() {
-
-						$dragBln = true;
-
-					});
-
-
-
-					$(".main_image a").click(function() {
-
-						if ($dragBln) {
-
-							return false;
-
-						}
-
-					});
-
-
-
-					timer = setInterval(function() {
-
-						$("#btn_next").click();
-
-					}, 5000);
-
-
-
-					$(".main_visual").hover(function() {
-
-						clearInterval(timer);
-
-					}, function() {
-
-						timer = setInterval(function() {
-
-							$("#btn_next").click();
-
-						}, 5000);
-
-					});
-
-
-
-					$(".main_image").bind("touchstart", function() {
-
-						clearInterval(timer);
-
-					}).bind("touchend", function() {
-
-						timer = setInterval(function() {
-
-							$("#btn_next").click();
-
-						}, 5000);
-
-					});
-
-
-				});
-		
-	</script>
-
-	<div class="main_visual">
-
-		<div class="flicking_con">
-
-			<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>
-
-			<a href="#">5</a>
-
-		</div>
-
-		<div class="main_image">
-
-			<ul>
-
-				<li><img src="/theme/images/slider/1.png"
-
-					style="width:100%;height:100%;" /></li>
-
-				<li><img src="/theme/images/slider/1.png"
-
-					style="width:100%;height:100%;" /></li>
-
-				<li><img src="/theme/images/slider/1.png"
-
-					style="width:100%;height:100%;" /></li>
-
-				<li><img src="/theme/images/slider/1.png"
-
-					style="width:100%;height:100%;" /></li>
-
-				<li><img src="/theme/images/slider/1.png"
-
-					style="width:100%;height:100%;" /></li>
-
-			</ul>
-
-			<a href="javascript:;" id="btn_prev"></a> <a href="javascript:;"
-
-				id="btn_next"></a>
-
-		</div>
-
-	</div>
-
-	
-
-	<ul class="focus">
-		<!-- 此处由于inline-block属性BUG a标签结束标签必须分行写 -->
-		<li><a href="g-s.html?theme=1"><img src="/theme/images/index/focus1.png"></a></li> 
-		<li><a href="g-s.html?theme=4"><img src="/theme/images/index/focus2.png">
-		</a></li> 
-		<li><a href="g-s.html?theme=2"><img src="/theme/images/index/focus3.png">
-		</a></li> 
-		<li><a href="g-s.html?theme=3"><img src="/theme/images/index/focus4.png">
-		</a></li> 
-		<li><a href="g-l.html?theme=20"><img src="/theme/images/index/focus5.png">
-		</a></li> 
-		<li><a href="/ac.html"><img src="/theme/images/index/focus6.png">
-		</a></li> 
-	</ul>
-<script type="text/javascript">
-	$(function(){
-		
-		$(".focus").css("height",($(".focus").width()/3)*(122/162)*2);
-	});
-	
-</script>
-	
-
-	<div class=" focus3">
-
-		<div class="bao"><p>爆品</p></div>
-		<c:forEach var="item" items="${burstList}">
-			<div class="shop"><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage">
-				<span><p class="discount" >${item.discount}折</p><p class="name" style="overflow: hidden;width:60%">${item.goodsLname}</p></span>
+	<div class="g-doc">
+		<div class="top-fxied">
+			<header class="index-top-bar">
+				<div class="s-input-select">
+					<form method="get" class="searchForm">
+						<div class="text-area">
+							<input id="search_word" type="text" name="keyword" class="text" maxlength="18" id="keyword" value="搜索您想要的宝贝" >
+						</div>
+						<input type="submit" class="btn-sub">
+					</form>
+				</div>
+				<a href="/cart.html" class="top-bar-cart">
+					<div class="icons-cart">
+						<i class="cart-sales-nums">0</i>
+					</div>
 				</a>
-			</div>
-		</c:forEach>
-	</div>
-
-
-	<div class="focus3">
-
-		<div class="hot"><p>热卖</p></div>
-		<c:forEach var="item" items="${hotList}">
-			<div class="shop"><a href="/goods-${item.goodsId}.html"><img src="${item.thumbnailUrl}"  onerror="imagerror(this)" width="694" height="284">
-				<span><p class="discount">${item.discount}折</p><p class="name" style="overflow: hidden;width:60%">${item.goodsLname}</p></span>				
-				</a>
-			</div>
-		</c:forEach>
-	</div>
-	
-	<script type="text/javascript">
-	$(function(){
-		var obj=$(".focus3 .discount");
-		$.each(obj,function(i,item){
-			
-			var h1=$(".focus3 .discount").eq(i).height();
-			var h2=$(".focus3 .name").eq(i).height();			
-			if(h2>h1){
-				$(".focus3 .discount").eq(i).css("margin-top",(h2-h1)/2)
-				$(".focus3 .discount").eq(i).css("margin-bottom",(h2-h1)/2);
-				$(".focus3 .shop").eq(i).css("padding-bottom",h2+20);
-			}
-		});
-	});
-	
-</script>
-	<a href="/cart.html">
-		<div class="cart_btn for_gaq" data-for-gaq="进入购物车;店铺页">
-			<span></span>
+			</header>
 		</div>
-	</a>
+		<div class="scroll-content" style="margin: 0.75rem auto 0.83rem">
+			<!-- 内容区域 -->
+			<div class="scrollview">
+				<!-- 焦点图 -->
+				<div class="m-slider">
+					<div class="m-slider-con-wrap" id="JslideWrap" style="display: block;">
+						<div class="m-slider-con">
+							<a class="m-slider-item" href="javascript:void(0);">
+								<img src="/theme/newest/images/index-pic1.jpg" />
+							</a>
+							<a class="m-slider-item" href="javascript:void(0);">
+								<img src="/theme/newest/images/index-pic2.jpg" />
+							</a>
+						</div>
+					</div>
+					<div class="m-slider-nav" id="JslideNav"></div>
+				</div>
+				<!-- 菜单选择 -->
+				<div class="m-block m-menu">
+					<div class="m-labels">
+						<a href="g-s.html?theme=1" class="ico-fruit">全部水果</a>
+						<a href="g-s.html?theme=4" class="ico-girlfriend">送女友</a>
+						<a href="g-s.html?theme=2" class="ico-parents">孝敬爸妈</a>
+					</div>
+					<div class="m-labels">
+						<a href="g-s.html?theme=3" class="ico-player">游戏玩家</a>
+						<a href="g-l.html?theme=20" class="ico-activity">火爆活动</a>
+						<a href="ac.html" class="ico-money">分销赚钱</a>
+					</div>
+				</div>
+			</div>
+			<!-- 火爆单品 -->
+			<div class="m-block">
+				<div class="m-index-th">爆品</div>
+				<div class="m-con">
+					<ul class="list-pic">
+						<c:forEach var="item" items="${burstList}">
+							<li>
+								<a href="/goods-${item.goodsId}.html">
+									<img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage"> <span><p class="discount">${item.discount}折</p>
+										<p class="name" style="overflow: hidden; width: 60%">${item.goodsLname}</p></span>
+								</a>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<jsp:include page="scrollup.jsp"></jsp:include>
+		<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 	
-	
-	<script type="text/javascript">
-			
+	<script type="text/javascript" src="/theme/js/wap.js"></script>
+		<script type="text/javascript">
 		$(function(){
 			
 			$("#search_word").bind("focusin",function(){
@@ -268,11 +86,6 @@
 			});
 			
 		});
-	
 	</script>
-	
-	<jsp:include page="scrollup.jsp"></jsp:include>
-	<jsp:include page="footer.jsp"></jsp:include>
-
 </body>
 </html>

@@ -1,19 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-	
-<div style="height:80px;"></div>
 
-
-<ul class="footer" style="z-index:2">
-	<li><a href="/"><img src="/theme/images/index_in.png">
-		<p>首页</p></a></li>
-	<li><a href="/g-s.html?theme=1"><img src="/theme/images/hot.png">
-		<p>折扣多</p></a></li>
-	<li><a href="/cart.html"><img src="/theme/images/hot.png">
-		<p>购物车</p></a></li>		
-	<li><a href="/rk.html"><img src="/theme/images/rank.png">
-		<p>分销榜</p></a></li>
-	<li><a href="/center/my_center.html"><img src="/theme/images/my.png">
-		<p>我的</p></a></li>
-</ul>
+<!-- 底部 -->
+<div class="bottom-fxied">
+	<footer>
+         <a href="/" class="current"><span class="home"></span>首页</a>
+         <a href="/g-s.html?theme=1"><span class="discount"></span>折扣多</a>
+         <a href="/rk.html"><span class="list"></span>分销榜</a>
+         <a href="/center/my_center.html"><span class="my"></span>我的</a>
+    </footer>
+</div>
