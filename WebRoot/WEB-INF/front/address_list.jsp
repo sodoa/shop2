@@ -7,69 +7,45 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 </head>
 <body>
 
-	<div class="header">
-		<div class="top_left1">
-			<a href="/center/my_center.html"><img src="/theme/images/back.png" style="width: 12px"></a>
-		</div>
-		<div class="top_center1">收货地址管理</div>
-		<div class="top_right1">
-			<p><a href="/center/address_add.html?from=${from}">新增</a></p>
-		</div>
-	</div>
-
-	<div class="clear"></div>
-
-	<c:forEach var="item" items="${list}">
-		<div class="block3">
-			<table>
-				<tr>
-					<td>收件人：${item.receiverName}</td>
-					<td>${item.receiverPhone}</td>
-				</tr>
-				<tr>
-					<td>${item.address}</td>
-				</tr>
-			</table>
-			<div>
-				<ul>
-					<li class="address_select  <c:if test='${item.isdefault==1}'>address_cur</c:if>" >
-						
-						<a href="/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}">
-							<c:choose>
-								<c:when test="${opt==1}">选择收货地址</c:when>
-								<c:otherwise>
-									选择默认地址
-								</c:otherwise>
-							</c:choose>
-						</a>
-						
-					</li>
-					
-					<li class="address_edit"><a href="/center/address_edit.html?id=${item.deliveryId}&from=${from}">编辑</a></li>
-					
-					<li class="address_delete" data="${item.deliveryId}"><a class="am-icon-close">删除</a></li>
-				</ul>
-			</div>
-		</div>
-	</c:forEach>
-
-	<div style="height: 80px;"></div>
+<div class="g-doc">
+    <div class="top-fxied">
+        <header class="header"> 
+            <div class="back"><a href="/center/my_center.html"><span class="icon-back"></span></a></div> 
+            <div class="title">收货地址管理</div> 
+            <div class="subMark"><p><a href="/center/address_add.html?from=${from}">新增</a></p></div> 
+        </header>
+    </div>
+    
+    <div class="scroll-content">
+        	<ul class="m-order-addresslist">
+        		<c:forEach var="item" items="${list}" varStatus="s">
+            	<li data="${item.deliveryId}"> 
+                     <div class="m-order-address">
+                         	${item.receiverName} &nbsp;&nbsp;&nbsp;&nbsp; ${item.receiverPhone}
+                         <p>${item.address}</p>
+                         
+                         	<input id="chk${s.index}" type="checkbox" style="cursor: pointer;"  onclick="go_check('/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}')"  <c:if test='${item.isdefault==1}'>checked='checked'</c:if> />
+                         	<label for="chk${s.index}" style="cursor: pointer;" ><c:choose> <c:when test="${opt==1}">选择收货地址</c:when> <c:otherwise> 选择默认地址 </c:otherwise> </c:choose></label>
+                     </div>
+                      
+                 	 <a href="/center/address_edit.html?id=${item.deliveryId}&from=${from}" class="m-order-address-edit"></a>
+                  	 <a href="javascript:void(0)" data="${item.deliveryId}" class="m-order-address-delete address_delete" ></a>
+         		 </li>
+         		 </c:forEach>
+            </ul>
+    </div>
+    
+    <jsp:include page="footer.jsp"></jsp:include>
+    
+</div>
 	
 	<script type="text/javascript">
 		
-		
 		$(function(){
-			
-			$(".address_select").click(function(){
-					if(!$(this).hasClass("address_cur")){
-						$(".address_select").removeClass("address_cur");
-						$(this).addClass("address_cur");
-					}
-			});
 			
 			$(".address_delete").click(function(){
 				var _this=$(this);
@@ -78,13 +54,13 @@
 				});
 			});
 			
-		})
+		});
 		
-		
+		function go_check(url){
+			window.location.href= url;
+		}
 	</script>
-		
-
-	<jsp:include page="footer.jsp"></jsp:include>
+	
 
 
 </body>

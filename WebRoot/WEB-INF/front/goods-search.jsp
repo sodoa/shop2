@@ -7,52 +7,71 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/search.css" />
 <link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
 
 </head>
 <body>
-	
-	<div class="header">
-		<div class="top_left1">
-			<a href="/"><img src="/theme/images/back.png" style="width: 12px"></a>
-		</div>
-		<div class="top_center">
-			<a href="#"><img src="/theme/images/Search.png"></a>
-			<input name="search_word"  id="search_word" placeholder="输入商品名称或关键字" maxlength="20" value="${w}" />
-		</div>
-		<div class="top_right1">
-			<a href="javascript:void(0)" onclick="GoCenterUrl('/cart.html')"><img
-				src="/theme/images/spc.png" style="width: 29px; height: 29px">
-			</a>
 
-		</div>
-	</div>
+<div class="g-doc">
+	<div class="category" style="display: none;z-index: 9999;position: fixed;height: 100%;width: 100%;background-color: white;max-width: 640px;">
+	    <div class="top-fxied">
+	            <header class="header"> 
+	                <div class="back"><a href="javascript:void(0);" onclick="panel_close_search()"><span class="icon-back"></span></a></div> 
+	                <div class="m-seach">
+	                    <form method="get" class="searchForm">
+	                    <div class="text-area"><input  name="panel_search_word" id="panel_search_word" value="${w}"  type="text"  class="text" maxlength="18"  value="搜索您想要的宝贝" >
+	                    </div>
+	                    <input type="button" class="btn-sub"  onclick="panel_search_form()" >
+	                    </form>
 	
-	<div class="category" style="display: none;position:absolute;z-index: 9999;width: 100%;height: 100%;top: 0px;">
-		<div style="clear: both;width: 100%;display: inline-block;padding: 10px;margin: 10px;padding-left: 15px;">
-			<input style="height: 32px;border:1px solid #eee;width:50%;" name="panel_search_word" id="panel_search_word" value="${w}"  placeholder="输入商品名称或关键字" maxlength="20">
-			<a href="javascript:void(0);" onclick="panel_search_form()"><img src="/theme/images/Search.png" width="20" height="20"></a>
-			<a style="padding: 5px;cursor: pointer;float: right;margin-right: 30px;" type="button" value="查询" onclick="panel_close_search()">关闭</a>
-		</div>
-		<div style="display: inline-block;width: 100%;padding: 10px;margin: 10px;border-top: 1px solid #eee;">
-			<sp:search_words_list_tag>
-				<c:forEach var="item" items="${list}">
-					<a onclick="panel_pickup_words('${item.words}')" style="padding:5px;padding-right:10px;padding-top:5px;padding-bottom:5px;border:1px solid #eee;margin:5px;cursor: pointer;">${item.words}</a>
-				</c:forEach>
-			</sp:search_words_list_tag>
-		</div>
+	                </div> 
+	            </header>
+	 	</div>
+	    <div class="scroll-content">
+	    	<div class="m-search-tit">热门关键字</div>
+	        <ul class="m-search-con">
+	        	<sp:search_words_list_tag>
+					<c:forEach var="item" items="${list}">
+						<li><a onclick="panel_pickup_words('${item.words}')" style="padding:5px;padding-right:10px;padding-top:5px;padding-bottom:5px;border:1px solid #eee;margin:5px;cursor: pointer;">${item.words}</a></li>
+					</c:forEach>
+				</sp:search_words_list_tag>
+	        </ul>
+	    </div>
 	</div>
-	
-	<div class="conter" style="z-index:1;width:100%;">
+</div>
+
+<div class="g-doc">
+		<div class="top-fxied">
+			<header class="index-top-bar">
+				<div class="s-input-select">
+					<form method="get" class="searchForm">
+						<div class="text-area">
+							<input type="text" name="keyword" class="text" maxlength="18" id="search_word"  value="${w}"  placeholder="搜索您想要的宝贝">
+						</div>
+						<input type="submit" class="btn-sub">
+					</form>
+				</div>
+				<a href="#" class="top-bar-cart">
+					<div class="icons-cart">
+						<i class="cart-sales-nums">3</i>
+					</div>
+				</a>
+			</header>
+		</div>
+		<div class="conter" style="z-index:1;width:100%;">
 		<div class="block">
 			<ul id="page-comtain">
 			</ul>
 		</div>
 		<div id="page-next"></div>
 	</div>
+	<jsp:include page="scrollup.jsp"></jsp:include>
+	<jsp:include page="footer.jsp"></jsp:include>	
 	
+</div>	
+
 <script>
 
 function panel_close_search(){
@@ -171,10 +190,6 @@ $(function(){
 });
 
 </script>
-
-<jsp:include page="scrollup.jsp"></jsp:include>
-<jsp:include page="footer.jsp"></jsp:include>
-
 
 </body>
 </html>

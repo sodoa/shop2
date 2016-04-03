@@ -269,4 +269,11 @@
 		</attribute>
 	</tag>
 
+	<tag>
+		<name>cart_num_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.CartNumTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+
+
 </taglib>

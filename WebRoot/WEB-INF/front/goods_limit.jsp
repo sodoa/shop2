@@ -7,46 +7,41 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
 <link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="/jslib/timecountdown/timeCountDown.js"></script>
-
-<style type="text/css">
-.countime{
-	border:1px solid #eee;
-	padding-left:5px;
-	padding-right:5px;
-}
-
-.shop{
-	border:1px solid #eee;
-}
-</style>
-
 </head>
 <body>
+
+<div class="g-doc">
+<div class="top-fxied">
+<header class="header"> 
+                <div class="back"><a href="/"><span class="icon-back"></span></a></div> 
+                <div class="title">火爆活动</div> 
+                <div class="subMark"><p></p></div> 
+            </header>
+</div>
+
+<div class="scroll-content">
+
+<!-- 火爆单品 -->
+<div class="m-block">
+    <div class="m-con">
+       <ul class="list-pic" id="page-comtain">
+
+       </ul> 
+       <div id="page-next"></div>
+    </div>
+</div>
+
+
+</div>
+
+<jsp:include page="scrollup.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
+
+</div>
 	
-	<div class="header">
-		<div class="top_left1">
-			<a href="/"><img src="/theme/images/back.png" style="width: 12px;"></a>
-		</div>
-		<div class="top_center1">火爆活动
-		</div>
-		<div class="top_right1">
-			<a href="javascript:void(0)" onclick="GoCenterUrl('/cart.html')"><img
-				src="/theme/images/spc.png" style="width: 29px; height: 29px">
-			</a>
-		</div>
-	</div>
-	
-	<div class="conter" style="z-index:1;width:100%;background-color: white;padding-top: 10px;">
-		<div class="block">
-			<ul id="page-comtain">
-			</ul>
-		</div>
-		<div id="page-next"></div>
-	</div>
 	
 <script>
 
@@ -132,14 +127,14 @@ $(function(){
       	
       	var clockid = item.goodsId;
       	
-      	htmlArray.push('<div class="shop" > ');
-      	htmlArray.push('<a href="/gl-'+item.goodsId+'.html"><img ');
-      	htmlArray.push('	src="'+item.thumbnailUrl+'" onerror="imagerror(this)" ');
-      	htmlArray.push('	width="694" height="284" defimage="defimage"> <span style="float:left;width:100%;"><p class="discount" style="display:block;">'+item.discount+'折 &nbsp;<span>'+item.finalPrices+'</span>&nbsp;元</p> ');
-      	htmlArray.push('		 ');
-      	htmlArray.push('		<p class="name" style="overflow: hidden; width: 60%">'+item.goodsLname+'</p> <p id="'+clockid+'"> <span class="day countime" >33</span>天<span class="hour countime" ></span>时<span class="mini countime" ></span>分 <span class="sec countime" ></span>秒</p></span>');
-      	htmlArray.push('</a>');
-      	htmlArray.push(' </div>');
+      	
+    	htmlArray.push('<li> ');
+    	htmlArray.push('   <a href="/gl-'+item.goodsId+'.html"><img style="width:100%;height:35%;" height="35%" width="100%" src="'+item.thumbnailUrl+'" alt=""  /><span>'+item.goodsLname+'</span></a> ');
+    	htmlArray.push('   <div class="toolbar"> ');
+    	htmlArray.push('   	<div class="time" id="'+clockid+'">仅剩<em class="day countime">04</em> 天<em class="hour countime">01</em>  时<em class="mini countime">05</em> 分<em class="sec countime">01</em> 秒</div> ');
+    	htmlArray.push('       <div class="count">已有<em>'+item.sellcount+'</em>人抢购</div> ');
+    	htmlArray.push('   </div> ');
+    	htmlArray.push('</li> ');
       	
 		var d = new Date(parseFloat(item.timeLimit));
 		
@@ -161,8 +156,7 @@ $(function(){
 
 </script>
 
-<jsp:include page="scrollup.jsp"></jsp:include>
-<jsp:include page="footer.jsp"></jsp:include>
+
 
 
 </body>

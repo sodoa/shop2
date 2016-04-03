@@ -9,37 +9,35 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/common.css" type="text/css" rel="stylesheet" />
-<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
-
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 </head>
 <body>
-	<div  style="background-color: white;padding-top: 5px;padding-left: 5px;padding-right: 5px;widht:92%;    margin: 2% 4%;">
-			<b>分享下面文章可以为您带来收益用户
-			</b>
-	</div>	
-	
-	<div class="block">
 
-		<ul>
-			<c:forEach var="item" items="${list}">
+<div class="g-doc">
+    <div class="scroll-content" style="margin-top: 1px;">
+    	<div class="banner"><img src="/theme/newest/images/banner.png" alt=""></div>
+        <ul class="pic-art-list">
+        
+        	<c:forEach var="item" items="${list}">
 				<li>
 					<a href="/ac-${item.id}.html">
-					<div class="block-image">
-						<img src="${item.img}" width="200" height="200"
-							style="width: 100%">
-					</div>
-
-					<div class="block-titel">${item.title}</div>
-					</a>
+					<p><img src="${item.img}" width="200px" height="200px"></p>
+                	<p class="p-tit">
+                		<span class="txt">${item.title}</span>
+                		<a href="/ac-${item.id}.html"><span class="btn">分享</span></a>
+                	</p>
+                	</a>
 				</li>
 			</c:forEach>
-		</ul>
+        
+        </ul>
+    </div>
+    
+    <jsp:include page="footer.jsp"></jsp:include>
+    
+</div>
 
-	</div>
 
-
-	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 </html>

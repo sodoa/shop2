@@ -7,48 +7,46 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 </head>
 <body>
 
-	<div class="header">
-		<div class="top_left1">
-			<a href="/center/my_center.html"><img src="/theme/images/back.png" style="width: 12px"></a>
-		</div>
-		<div class="top_center1">分销下级用户</div>
-		<div class="top_right1">
-			
-		</div>
-	</div>
-
-	<div class="clear"></div>
-
-	<c:forEach var="item" items="${list1}">
-			<div class="block3" style="border: 0px">
-				<table style="border: 0px">
-					<tr>
-						<td>【一级】：${item.displayname}</td>
-						<td>${item.account}</td>
-					</tr>
-				</table>
-			</div>
-	</c:forEach>
-	
-	<c:forEach var="item" items="${list2}">
-			<div class="block3" style="border: 0px">
-				<table style="border: 0px">
-					<tr>
-						<td>【二级】：${item.displayname}</td>
-						<td>${item.account}</td>
-					</tr>
-				</table>
-			</div>
-	</c:forEach>	
-
-	<div style="height: 80px;"></div>
-
-	<jsp:include page="footer.jsp"></jsp:include>
-
+<div class="g-doc">
+    <div class="top-fxied">
+            <header class="header"> 
+                <div class="back"><a href="/center/my_center.html"><span class="icon-back"></span></a></div> 
+                <div class="title">分销下级用户</div> 
+                <div class="subMark"><p></p></div> 
+            </header>
+  	</div>
+  	  
+    <div class="scroll-content">
+       <div class="m-block">
+         <div class="o-user-grade">
+         	<span class="second-ico">二级用户</span>
+         </div>
+         <div class="o-user-tit">
+         	<c:forEach var="item" items="${list1}">
+         		<P><span>${item.displayname}</span><span>${item.account}</span></P>
+			</c:forEach>	
+         </div>
+       </div>
+       
+       <div class="m-block">
+         <div class="o-user-grade">
+         	<span class="third-ico">三级用户</span>
+         </div>
+         <div class="o-user-tit">
+        	<c:forEach var="item" items="${list2}">
+				<P><span>${item.displayname}</span><span>${item.account}</span></P>
+			</c:forEach>					
+         </div>
+       </div>
+    </div>
+    
+    <jsp:include page="footer.jsp"></jsp:include>
+    
+</div>
 
 </body>
 </html>

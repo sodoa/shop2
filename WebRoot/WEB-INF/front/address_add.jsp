@@ -7,11 +7,11 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 <script type="text/javascript" src="/jslib/address/GlobalProvinces_main.js"></script>
 <script type="text/javascript" src="/jslib/address/GlobalProvinces_extend.js"></script>
 <script type="text/javascript" src="/jslib/address/initLocation.js"></script>
 <script src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.js"></script>
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
 <link href="/jslib/uiadmin/lib/Validform/5.3.2/style.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript">
@@ -25,61 +25,62 @@
 </script>
 
 <style type="text/css">
-select{
-width:100px;height:30px;border:1px solid #eee;
+
+.address_select{
+	width:100%;height:30px;border:1px solid #eee; height: 0.48rem;
 }
 </style>
-
-<style>
-	.w50{width:50px;}
-	.w320{width:320px;}
-	.w460{width:460px;}
-	.co{color:#f30;}
-	.bar_bg{display:inline-block; width:200px; height:16px; background-color:#e0e0e0;}
-	.bar_btn{width:20px; height:20px; line-height:20px; margin-top:-3px; margin-left:-10px; border:1px solid #ccc; background-color:#fff; text-align:center; font-size:10px; position:absolute; cursor:pointer;}
-	.bar_btn:hover{background-color:#f5f5f5;}
-	.bar_btn:after{display:block; content:attr(data-content);}
-	.submit{width:100px; height:32px;}
-	input{height:30px;border: 1px solid #eee;}
-</style>
-
 </head>
-<body>
-	<div class="header">
-		<div class="top_left1">
-			<a href="/center/address_list.html"><img
-				src="/theme/images/back.png" style="width: 12px"></a>
-		</div>
-		<div class="top_center1">新增收货地址</div>
-		<div class="top_right1">
-			<p>
-				<a id="btn_complate">完成</a>
-			</p>
-		</div>
-	</div>
-
-	<div class="clear"></div>
-
-	<div class="block4">
-	<form action="address_save.html" id="submit_form" >
-		<input type="hidden" name="deliveryId" value="${bean.deliveryId}"/>
-		<input type="hidden" name="from" value="${from}"/>
-		<ul>
-			<li class=""><div>收货人</div><input id="receiverName" name="receiverName" datatype="s1-10" errormsg="请输出正确的收货人"  type="text" width="70%" placeholder="请输入收货人名称"   required value="${bean.receiverName}" /></li>
-			<li><div>手机号码</div> <input name="receiverPhone" type="text" datatype="n8-15" errormsg="请输出正确的联系方式" placeholder="请输入收货人名称" value="${bean.receiverPhone}" /></li>
-			<li><div>省市地址</div><span> <select 
-						id="sheng" name="province" datatype="*" >
-					</select> 省 <select id="shi" name="city" datatype="*" >
-					</select> 市 <select id="xian" name="county" datatype="*" >
-					</select> 县
-				</span></li>
-			<li><div>详细地址</div><input
-						name="street" type="text" width="70%" datatype="s1-30" errormsg="请输出正确的详细地址" value="${bean.street}" required  placeholder="请输入收货人名称" /></li>
-		</ul>
-		</form>
-	</div>
-
-	<div style="height: 80px;"></div>
+<div class="g-doc">
+    <div class="top-fxied">
+        <header class="header"> 
+            <div class="back"><a href="/center/address_list.html"><span class="icon-back"></span></a></div> 
+            <div class="title">新增收货地址</div> 
+            <div class="subMark"><p><a id="btn_complate" href="javascript:void(0)">完成</a></p></div> 
+        </header>
+    </div>
+    
+    <div class="scroll-content">
+    	<div class="m-block-form">
+        	<form class="form-horizontal m-order-address-form" id="submit_form" action="address_save.html">
+             <div class="form-group">
+                <label for="name" class="col-xs-3">手机号</label>
+                <div class="col-xs-9">
+                 	<input name="receiverPhone" type="text" datatype="n8-15" errormsg="请输出正确的联系方式" placeholder="请输出正确的联系方式" value="${bean.receiverPhone}" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-xs-3">省份</label>
+                <div class="col-xs-9">
+                 	<select class="address_select"  id="sheng" name="province" datatype="*" errormsg="请选择省份" ></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-xs-3">市/县</label>
+                <div class="col-xs-9">
+                   <select id="shi" class="address_select" name="city" datatype="*" errormsg="请选择市/县" ></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-xs-3">区/乡</label>
+                <div class="col-xs-9">
+                 	<select id="xian" class="address_select" name="county" datatype="*"  errormsg="请选择区/乡"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="col-xs-3">详细地址</label>
+                <div class="col-xs-9">
+                 	<input name="street" type="text" width="70%" datatype="s1-30" errormsg="请输出正确的详细地址" value="${bean.street}" required  placeholder="请输入正确的详细地址" />
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+    
+	<jsp:include page="footer.jsp"></jsp:include>
+    
+</div>
+	
 
 	<script type="text/javascript">
 		
@@ -89,13 +90,16 @@ width:100px;height:30px;border:1px solid #eee;
 			
 			$("#submit_form").Validform({
 				ajaxPost:true,
-				tiptype:4, 
+				tiptype:2, 
 				callback:function(data){
 					if (data.result == 0) {
 						window.location.href = "/center/address_list.html";
 					} else {
 						layer.msg("添加失败：" + data.message);
 					}
+				},
+				tiptype:function(msg,o,cssctl){
+					layer.msg(msg);
 				}
 			});
 	
@@ -112,12 +116,7 @@ width:100px;height:30px;border:1px solid #eee;
 
 		});
 		
-		
-		
 	</script>
-
-
-	<jsp:include page="footer.jsp"></jsp:include>
 
 
 </body>

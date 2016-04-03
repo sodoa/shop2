@@ -1,0 +1,190 @@
+body,dl,dd,ul,ol,h1,h2,h3,h4,h5,h6,pre,form,input,textarea,p,hr,thead,tbody,tfoot,th,td{margin:0;padding:0;}
+ul,ol{list-style:none;}
+a{text-decoration:none;color:#333333;}a:visited{color:333333;}a:hover{color:333333;}a:active{color:333333;}
+html{-ms-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none;font-size:62.5%;}
+body{font-size:16px;line-height:1.5em;color:#333333; }
+body,button,input,select,textarea{font-family:Microsoft YaHei,Microsoft JhengHei}
+b,strong{font-weight:bold;}
+i,em{font-style:normal;}
+table{border-collapse:collapse;border-spacing:0;}
+table th,table td{border:1px solid #ddd;padding:5px;}
+table th{font-weight:inherit;border-bottom-width:2px;border-bottom-color:#ccc;}
+img{border:0 none;width:auto\9;max-width:100%;vertical-align:top;}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0;vertical-align:baseline;}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer;}
+button[disabled],input[disabled]{cursor:default;}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0;}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;}
+input[type="search"]::-webkit-search-decoration{-webkit-appearance:none;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+input{line-height:normal!important;}
+}
+select[size],select[multiple],select[size][multiple]{border:1px solid #AAA;padding:0;}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}
+audio,canvas,video,progress{display:inline-block;}
+body{background-color:#ededed;}
+.g-doc{margin:0 auto;overflow:hidden;}
+.txtOrange{color:#eb6100}
+@media only screen and (min-width:640px){
+.g-doc{max-width:640px;}
+.bottom-fxied{max-width:640px;}
+.top-fxied{max-width:640px;}
+}
+
+.banner img{width:100%}
+.lazy_img{background:#eae9e9 url(../images/loading.png) no-repeat center center;-webkit-background-size:contain;-moz-background-size:contain;background-size:contain;}
+.m-block{background:#fff;padding:0.16rem;border:1px solid #dedddd;border-left:none;border-right:none;margin-bottom:0.31rem}
+.scroll-content{margin:0.9rem 0}
+.order-scroll-content{margin-top:1.8rem}
+.alert-danger{height:1.1rem;line-height:1.1rem;text-align:center}
+.alert-danger .s-form-tips{background-color:#8e8e8e;padding:0.15rem 0.9rem;-webkit-border-radius: 5px;font-size:0.2rem;
+    -moz-border-radius: 5px;
+    -ms-border-radius:5px;
+    border-radius: 5px;
+	color:#fff;
+	}
+.ft-right{float:right}
+.txt-center{text-align:center}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance:none;
+  cursor:pointer;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  background:url(../images/nocheck.png) no-repeat;
+  background-size:contain;
+  height: 0.3rem;
+  vertical-align: middle;
+  width:0.3rem;
+}
+input[type="checkbox"]:checked {
+  background:url(../images/selection.png) no-repeat;
+}
+input[type="checkbox"]:focus,input[type="checkbox"]:hover {outline: none;}
+
+.cart-sales-nums {
+    position: absolute;
+    top:0;
+    right: -2px;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 50%;
+    background: #ff6c00;
+    font-style: normal;
+    font-size: 12px;
+    color: #fff;
+    z-index: 10;
+}
+
+/* 澶撮儴 */
+.header{height:0.85rem;line-height:0.85rem;background:#fff;display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+    display: box;
+	display: flex;
+	}
+.header>div{-webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+   flex:1;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-box;
+    display: -o-box;
+    display: box;}
+.header>div:first-child {
+  text-align: left;
+  margin-left: 0.26rem;
+}
+.header .back a{
+	display:block;
+	margin-top:0.25rem;
+	height:0.32rem;
+ 
+}
+.icon-back:before {
+	content: '';
+    width: 0.32rem;
+    height: 0.32rem;
+	display:block;
+    background-size:0.32rem!important;
+	background-image:url(../images/back.png);
+	
+}
+.header .title{font-size:0.32rem;
+ -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-box-pack: center;
+    -o-box-pack: center;
+    box-pack: center;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-box-align: center;
+    -o-box-align: center;
+    box-align: center;
+}
+.header .subMark{text-align: right;margin-right: 0.26rem;}
+.header .subMark p{width:100%;}
+.header .subMark,.header .subMark a{color:#ff4f01;font-size:0.2rem}
+/* 搴曢儴 */
+.top-fxied{position:fixed;z-index:100; max-width: 640px;width:100%;}
+.bottom-fxied{bottom: 0px; width: 100%; position:fixed;z-index:100; max-width: 640px;}
+footer{
+    padding:0.07rem 0;
+	border-top:1px solid #dedddd;
+	background-color: rgba(255,255,255,0.8);
+	display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-box-align: center;
+    -moz-box-align: justify;
+    -ms-flex-align: center;
+    justify-content: space-between;
+    align-content: center;
+}
+footer a{
+	-webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+    color: #fff;
+    text-align: center;
+    line-height: 14px;
+    color: #666;
+    font-size:0.2rem;
+}
+footer a.current{color:#ff4f01}
+
+
+footer span{
+    display: block;
+    width: 0.48rem;
+    height:0.48rem;
+    margin: 0 auto 3px;
+	background-size:0.48rem;
+	background-repeat:no-repeat;
+}
+footer .home{ background-image:url(../images/footer_icon/home.png); }
+footer .current .home{ background-image:url(../images/footer_icon/home_hover.png);}
+footer .discount{background-image:url(../images/footer_icon/discount.png);}
+footer .current .discount{background-image:url(../images/footer_icon/discount_hover.png);}
+footer .list{background-image:url(../images/footer_icon/list.png);}
+footer .current .list{background-image:url(../images/footer_icon/list_hover.png);}
+footer .my{background-image:url(../images/footer_icon/my.png); }
+footer .current .my{background-image:url(../images/footer_icon/my_hover.png);}
