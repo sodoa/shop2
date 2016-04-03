@@ -6,64 +6,82 @@
 <!doctype html>
 <html class="no-js">
 <head>
-  <jsp:include page="header.jsp"></jsp:include>
-  <link rel="stylesheet" href="/assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="/assets/css/common.css">
-  <link rel="stylesheet" href="/assets/css/register.css">
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/amazeui.min.js"></script>
-    <script type="text/javascript" src="/resource/js/common.js"></script>
+<jsp:include page="header.jsp"></jsp:include>
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
+<link type="text/css" rel="stylesheet" href="/jslib/uiadmin/lib/Validform/5.3.2/style.css" />
+<script type="text/javascript" src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.min.js"></script>
 </head>
 <body>
-
-<body class="chongzhi"> 
-<form id="regist_form" class="am-form am-form-horizontal data-am-validator" method="post" action="/center/save-order-comment.html">
-<input type="hidden" name="li" value="${li}"/>
-<input type="hidden" name="id" value="${id}"/>
-<div class="title">
-    <div class="title1">
-    <a href="/center/order_list.html?li=${li}"><img src="/assets/i/title.png"></a>
-    </div>
-    <div class="title2">
-    <h2>评论商品</h2>
-    </div> 
-</div>
-
-<div class="blank" style="height: 10px;">
-</div>
-
-<div class="Textpassword" style="height: 140px;">
-<textarea rows="6" cols="" style="width: 100%" name="comment" placeholder="请输入评论，不超过200个字" required  maxlength="200"></textarea>
-</div>
-
-<div class="Reg">
-    <button style="" class="am-btn am-btn-default am-radius">提交评论</button>
-</div>
-</form>
+	<div class="g-doc">
+		<div class="top-fxied">
+			<header class="header">
+				<div class="back">
+					<a href="/center/order_list.html?li=${li}">
+						<span class="icon-back"></span>
+					</a>
+				</div>
+				<div class="title">评论商品</div>
+				<div class="subMark">
+					<p></p>
+				</div>
+			</header>
+		</div>
 	
-	<script type="text/javascript">
-		$(function(){
+		<form id="regist_form"  method="post" action="/center/save-order-comment.html">
+		<input type="hidden" name="li" value="${li}"/>
+		<input type="hidden" name="id" value="${id}"/>
+		
+		<div class="scroll-content" style="height: 140px;padding: 10px;padding-top:20px;background-color: white;">
+			<textarea rows="6"  cols="" style="width: 100%;border: 1px solid #eee;" name="comment" placeholder="请输入评论，不超过200个字" required  maxlength="300"></textarea>
+			<div class="order-btn-logout"> <a href="javascript:void(0)" onclick="regist_submit()">提交评论</a> </div>	
+		</div>
 			
-			  validate();
+		</form>
+		
+		<jsp:include page="footer.jsp"></jsp:include>
+	</div>
+
+<script type="text/javascript">
+	$(function(){
+		  validate();
+	});
+
+	function regist_submit() {
+		$("#regist_form").submit();
+	}
+			
+	function validate() {
+		
+		$("#regist_form").Validform({
+			ajaxPost : true,
+			tiptype : 2,
+			callback : function(data) {
+				if (data.result == 0) {
+					layer.msg('评论成功');
+					window.setTimeout(function(){
+						if (p != null && p.length > 0) {
+							window.location.href = "" + p;
+						} else {
+							window.location.href = "/";
+						}
+					},1000);
+					
+					return true;
+				} else {
+					layer.msg(data.message);
+					return false;
+				}
+			},
+			tiptype : function(msg, o, cssctl) {
+				if(o.type==3){
+					layer.msg(msg);
+				}
+			}
 		});
-				
+		
 
-		function validate() {
-
-			$('#regist_form')
-					.validator(
-							{
-								submit : function() {
-									var formValidity = this.isFormValid();
-									if (formValidity) {
-										return true;
-									}
-
-									return false;
-								}
-							});
-		}
-	</script>
+	}
+</script>
 
 </body>
 </html>

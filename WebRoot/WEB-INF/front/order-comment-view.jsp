@@ -7,33 +7,29 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-  <link rel="stylesheet" href="/assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="/assets/css/common.css">
-  <link rel="stylesheet" href="/assets/css/register.css">
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/amazeui.min.js"></script>
-  <script type="text/javascript" src="/resource/js/common.js"></script>
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 </head>
 <body>
-
-<body class="chongzhi"> 
-<div class="title">
-    <div class="title1">
-    <a href="/center/order_list.html?li=${li}"><img src="/assets/i/title.png"></a>
-    </div>
-    <div class="title2">
-    <h2>评论商品</h2>
-    </div> 
-</div>
-
-<div class="blank" style="height: 10px;">
-</div>
-
-<div class="Textpassword" style="height: 140px;padding-left: 30px;" >
-	${bean.context}
-</div>
-
-	
+	<div class="g-doc">
+		<div class="top-fxied">
+			<header class="header">
+				<div class="back">
+					<a href="/center/order_list.html?li=${li}">
+						<span class="icon-back"></span>
+					</a>
+				</div>
+				<div class="title">评论商品</div>
+				<div class="subMark">
+					<p></p>
+				</div>
+			</header>
+		</div>
+		<div class="scroll-content" style="height: 140px;padding-left: 30px;padding-top:30px;background-color: white;">
+				${bean.context}
+		</div>
+		
+		<jsp:include page="footer.jsp"></jsp:include>
+	</div>
 
 </body>
 </html>

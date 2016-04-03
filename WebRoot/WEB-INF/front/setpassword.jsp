@@ -6,121 +6,85 @@
 <!doctype html>
 <html class="no-js">
 <head>
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-  <link rel="stylesheet" href="/assets/css/amazeui.min.css">
-  <link rel="stylesheet" href="/assets/css/common.css">
-  <link rel="stylesheet" href="/assets/css/register.css">
-  <script src="/assets/js/jquery.min.js"></script>
-  <script src="/assets/js/amazeui.min.js"></script>
-    <script type="text/javascript" src="/resource/js/common.js"></script>
+<jsp:include page="header.jsp"></jsp:include>
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
+<link type="text/css" rel="stylesheet" href="/jslib/uiadmin/lib/Validform/5.3.2/style.css" />
+<script type="text/javascript" src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.min.js"></script>
 </head>
-<body>
+<body > 
+	<div class="g-doc">
+		<div class="top-fxied">
+			<header class="header">
+				<div class="back">
+					<a href="/center/setting.html">
+						<span class="icon-back"></span>
+					</a>
+				</div>
+				<div class="title">修改密码</div>
+				<div class="subMark">
+					<p></p>
+				</div>
+			</header>
+		</div>
+		<div class="scroll-content">
+			<div class="m-block-form">
+				<form class="form-horizontal m-order-address-form" id="regist_form" action="/center/setpassword.html" method="post">
+					<div class="form-group">
+						<label for="name" class="col-xs-3">旧密码</label>
+						<div class="col-xs-9">
+							<input type="password" id="orgi_password" name="orgi_password" datatype="n1-30" errormsg="请输入旧密码" placeholder="请输入旧密码" required maxlength="30">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name" class="col-xs-3">新密码</label>
+						<div class="col-xs-9">
+							<input type="password" id="password" name="password" datatype="n1-30" errormsg="请输入新密码" placeholder="请输入新密码" required maxlength="30">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="wenz" id="login_error_msg_group" style="display: none;">
+							<p></p>
+						</div>
+					</div>
+  					<div class="order-btn-logout"> <a href="javascript:void(0)" onclick="regist_submit()">重置密码</a> </div>
+				</form>
+			</div>
+		</div>
+	</div>
 
-<body class="chongzhi"> 
-<form id="regist_form" class="am-form am-form-horizontal data-am-validator">
-
-<div class="title">
-    <div class="title1">
-    <a href="/center/setting.html"><img src="/assets/i/title.png"></a>
-    </div>
-    <div class="title2">
-    <h2>修改密码</h2>
-    </div> 
-</div>
-
-<div class="blank">
-</div>
-
-<div class="Textpassword">
-    <div class="left">
-    <img src="/assets/i/yan2.PNG">
-    </div>
-     <input type="text" name="orgi_password"  style="width: 85%;height:88px;border: 0px;" placeholder="原始密码" required maxlength="30">
-</div>
-<div class="password">
-     <div class="left">
-     <img src="/assets/i/pass.png">
-     </div>
-     <input type="text" name="password"  style="width: 85%;height:88px;border: 0px;" placeholder="新密码" required maxlength="30">
-</div>
-<div id="login_error_msg_group" class="am-alert am-alert-secondary" data-am-alert style="display: none;">
-	<p></p>
-</div>
-
-<div class="Reg">
-    <button style="" class="am-btn am-btn-default am-radius">重置密码</button>
-</div>
-</form>
 	
-	<script type="text/javascript">
-		$(function(){
-			
-			  if ($.AMUI && $.AMUI.validator) {
-			     $.AMUI.validator.patterns.mobile = /^\s*1\d{10}\s*$/;
-			  }
-			  
-			  validate();
-		});
-				
+<script type="text/javascript">
+	$(function(){
+		  validate();
+	});
+	
+	function regist_submit() {
+		$("#regist_form").submit();
+	}
+
+	function validate() {
 		
-		function showloading() {
-			$('.btn-loading-example').button('loading');
-		}
-
-		function resetloading() {
-			$('.btn-loading-example').button('reset');
-		}
-
-		function validate() {
-
-			$('#regist_form')
-					.validator(
-							{
-
-								submit : function() {
-									var formValidity = this.isFormValid();
-
-									if (formValidity) {
-
-										var _data = $("#regist_form").serializeObject();
-
-										showloading();
-
-										$
-												.ajax({
-													type : "POST",
-													url : "/center/setpassword.html?t="
-															+ new Date()
-																	.getTime(),
-													data : _data,
-													dataType : "json",
-													success : function(data) {
-														resetloading();
-														if (data.result == 0) {
-															window.location.href = "/login.html";
-														} else {
-															$(
-																	'#login_error_msg_group')
-																	.show();
-															$(
-																	"#login_error_msg_group  p")
-																	.text(
-																			data.message);
-															$("#login_error_msg_group").fadeOut(3000);
-														}
-													}
-												});
-									}
-
-									return false;
-								}
-							});
-		}
-	</script>
+		$("#regist_form").Validform({
+			ajaxPost : true,
+			tiptype : 4,
+			callback : function(data) {
+				if (data.result == 0) {
+					layer.msg('修改成功');
+					window.location.href = "/login.html";
+					return true;
+				} else {
+					layer.msg(data.message);
+					return false;
+				}
+			},
+			tiptype : function(msg, o, cssctl) {
+				if(o.type == 3){
+					layer.msg(msg);
+				}
+			}
+		});
+	}
+</script>
 
 </body>
 </html>

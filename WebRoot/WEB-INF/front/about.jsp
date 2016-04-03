@@ -12,7 +12,7 @@
 		<div class="top-fxied">
 			<header class="header">
 				<div class="back">
-					<a href="/center/my_center.html">
+					<a href="/center/setting.html">
 						<span class="icon-back"></span>
 					</a>
 				</div>

@@ -8,104 +8,102 @@
 <head>
 <jsp:include page="header.jsp"></jsp:include>
 <link href="/jslib/uiadmin/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
-<link href="/theme/css/order.css" type="text/css" rel="stylesheet" />
+<link href="/theme/newest/css/order.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/icheck/jquery.icheck.min.js"></script> 
 <script type="text/javascript" src="/jslib/uiadmin/lib/Validform/5.3.2/Validform.min.js"></script> 
-
 </head>
-<body class="order">
-	
-	<form action="/center/take-order.html" id="order_form" method="post">
-	
-	<div class="header">
-		<div class="top_left1" ><a href="/" ><img src="/theme/images/back.png" style="width:12px"></a></div>
-		<div  class="top_center1">
-			下订单
-		</div>
-		<div class="top_right1"></div>
-	</div>
+<body>
 
-	<div class="clear"></div>
-	
-	<div class="shop_orderist">
-		<input type="hidden" name="deliveryId" value="${address.deliveryId}" />
-		<div class="address">
-		    <div class="left"><img src="/assets/i/dingdanxiang/01.png"></div>
-		    <div class="right">
-			    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
-			    <p>${address.address}</p>
-		    </div>
-		    <div class="edit">
-		    	<p><a href="javascript:void();" onclick="selectAddress()">编辑</a></p>
-		    </div>     
-		</div>
-	</div>
-	
-	<div class="shop_orderist2" style="height: 100px;background-color: #fff;" >
-		<div class="address2">
-		     <div class="left"><img src="/assets/i/dingdanxiang/03.PNG"></div>
-		     <div class="right" style="margin-top: 10px;">
-		     	<input type="hidden"  value="2" name="paytype" id="paytype" />
-  
-		     	
-				<ul id="paytype_div">
-					<li style="padding: 10px;margin:5px;border:1px solid #eee;cursor: pointer;">
-						<span value="1"><img width="16" height="16" src="/theme/images/radio_no.png"></span><label>&nbsp;&nbsp;&nbsp;维信支付</label>
-					</li>
-					<li style="padding: 10px;margin:5px;border:1px solid #eee;cursor: pointer;">
-						<span value="2"><img width="16" height="16" src="/theme/images/radio_yes.png"></span><label>&nbsp;&nbsp;&nbsp;支付宝支付</label>
-					</li>
-				</ul>
-		     </div>
-	     </div>
-	</div>
-		
-	<div class="order_paylist">
-		<div class="order_li">
-			<c:if test="${CartInfoVo.hasGoods}">
-				<c:forEach items="${CartInfoVo.carts}" var="cartitem" varStatus="st">
-					<ul>
-						<li style="width: 20%"><a href="/goods-${CartInfoVo.goods[st.index].goodsId}.html"><img src="${CartInfoVo.goods[st.index].thumbnailUrl}"
-							style="width: 80px; height: 80px"></a></li>
-						<li style="width: 70%">
-							<p>${CartInfoVo.goods[st.index].goodsName}</p>
-							<p style="word-break:break-all;overflow: hidden;word-wrap:break-word;">${CartInfoVo.goods[st.index].goodsDes }</p>
-							<p>&yen;${CartInfoVo.goods[st.index].finalPrices}</p>
-							<p>x ${CartInfoVo.carts[st.index].quantity}</p>  
-						</li>
-					</ul>
-				</c:forEach>
-			</c:if>				
-		</div>
-	</div>
-	
-	<div style="background-color:#fff;padding: 2px 10px 2px 10px;clear:both;" >
+<div class="g-doc">
+    <div class="top-fxied">
+            <header class="header"> 
+                <div class="back"><a href="#"><span class="icon-back"></span></a></div> 
+                <div class="title">下订单</div> 
+                <div class="subMark"><p></p></div> 
+            </header>
+  </div>
+    <form action="/center/take-order.html" id="order_form" method="post">
+    <div class="scroll-content">
+    	<ul class="m-order-addresslist">       
+                 <li>
+					<input type="hidden" name="deliveryId" value="${address.deliveryId}" />
+					<div class="m-order-address">
+					    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
+					    <p>${address.address}</p>
+					</div>                 
+               		<a href="javascript:void();"  class="m-order-address-edit" onclick="selectAddress()">编辑</a>  
+         		 </li>
+            </ul>
+            
+        <div class="order-manage"> 
+               <ul class="m-cartlist bgWhite">
+               		<c:if test="${CartInfoVo.hasGoods}">
+						<c:forEach items="${CartInfoVo.carts}" var="cartitem" varStatus="st">
+		               		<li>
+		                    	<div class="m-tab-list">
+	                                   <div class="m-cartlist-img"><img src="${CartInfoVo.goods[st.index].thumbnailUrl}" style="width: 80px; height: 80px"></div>
+	                                   <div class="m-cartlist-info">
+	                                       <h3>${CartInfoVo.goods[st.index].goodsName}</h3>
+	                                       <h4>${CartInfoVo.goods[st.index].goodsLname}</h4>
+	                                       <h5>&yen;${CartInfoVo.goods[st.index].finalPrices} <span class="m-cartlist-nums">x ${CartInfoVo.carts[st.index].quantity}</span></h5>
+	                                   </div>
+		                      </div> 
+		                    </li>
+						</c:forEach>
+					</c:if>	
+               </ul>	 
+         </div>
+        
+        <div class="m-trade-pay">
+        	<div class="pay-cell">
+                <div class="pay-hd"><input type="checkbox" class="cartList-check" name="checkbox1" checked="checked"></div>
+                <div class="pay-bd"><span class="zIcon"></span></div>
+                <div class="pay-ft">
+      				<span value="1"><img width="16" height="16" src="/theme/images/radio_no.png"></span><label>&nbsp;&nbsp;&nbsp;维信支付</label>          
+               	</div>
+            </div>
+            <div class="pay-cell">
+                <div class="pay-hd"><input type="checkbox" class="cartList-check" name="checkbox1" value="2"></div>
+                <div class="pay-bd"><span class="wIcon"></span></div>
+                <div class="pay-ft"><span value="2"><img width="16" height="16" src="/theme/images/radio_yes.png"></span><label>&nbsp;&nbsp;&nbsp;支付宝支付</label></div>
+            </div>
+        </div>
+ 
+        <div class="m-trade-pay">
 			<p style="float">给卖家留言:&emsp;</p>	
 			<textarea  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
-	</div >
+        </div> 
+      
+       <div class="m-cells-title">
+       <p style="float">给卖家留言:&emsp;</p>	
+			<textarea  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
+       </div>
+       <div class="">
+       
+	       	<c:if test="${CartInfoVo.hasGoods}">
+				<ul class="shop_carTopay">
+					<li style="cursor: pointer;">
+						<c:choose>
+							<c:when test="${empty address}">
+								<p style="color: gray;">去结算</p>
+							</c:when>
+							<c:otherwise>
+								<p onclick="sumibtForm()">去结算</p>
+							</c:otherwise>
+						</c:choose>
+					</li>
+					<li><p> <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
+				</ul>
+			</c:if>
 	
-	
-	<c:if test="${CartInfoVo.hasGoods}">
-		<ul class="shop_carTopay">
-			<li style="cursor: pointer;">
-				<c:choose>
-					<c:when test="${empty address}">
-						<p style="color: gray;">去结算</p>
-					</c:when>
-					<c:otherwise>
-						<p onclick="sumibtForm()">去结算</p>
-					</c:otherwise>
-				</c:choose>
-			</li>
-			<li><p> <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
-		</ul>
-	</c:if>
-	
-	</form>
-	
-	<div style="height: 60px;"></div>
+       </div>
+    </div>
+    </form>
+    
+    <div style="height: 60px;"></div>
+    
+</div>
+
 	
 <script type="text/javascript">
 			
