@@ -9,10 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.xinfan.wxshop.business.entity.Appraise;
 import com.xinfan.wxshop.business.entity.DeliveryAddress;
+import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.AppraiseService;
 import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.CustomerService;
@@ -70,7 +72,8 @@ public class OrderListAct {
 
 		mv.addObject("page", page);
 		mv.addObject("li", li);
-
+		mv.addObject("menu_hit", 4);
+		
 		return mv;
 	}
 	
@@ -127,6 +130,7 @@ public class OrderListAct {
 			mv.addObject("li", li);
 			mv.addObject("id", id);
 			mv.addObject("bean", bean);
+			mv.addObject("menu_hit", 4);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -138,8 +142,9 @@ public class OrderListAct {
 	
 	
 	@RequestMapping("/center/save-order-comment.html")
-	public ModelAndView saveOrderComment(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
+	public @ResponseBody JSONResult saveOrderComment(HttpServletRequest request) {
+		JSONResult result = null;
+		
 		String li = request.getParameter("li");
 		String id = request.getParameter("id");
 		String comment = request.getParameter("comment");
@@ -148,14 +153,15 @@ public class OrderListAct {
 			int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
 			
 			OrderService.updateOrderCommented(Integer.parseInt(id),customerId,comment);
-
+			
+			result = JSONResult.success();
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
+			result = JSONResult.error("评论异常");
 		}
-		
-		mv.setViewName("redirect:/center/order_list.html?li="+li);
 
-		return mv;
+		return result;
 	}
 	
 	
@@ -169,6 +175,7 @@ public class OrderListAct {
 		DeliveryAddress address = DeliveryAddressService.getDeliverAddress(orderBean.getOrder().getDeliveryId());
 		mv.addObject("address", address);
 		mv.addObject("bean", orderBean);
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}

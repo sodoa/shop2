@@ -95,7 +95,7 @@ public class DistributionAct {
 	@RequestMapping("/center/distri-tip.html")
 	public ModelAndView distriTip(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/distri-tip");
-
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 	
@@ -108,7 +108,7 @@ public class DistributionAct {
 		
 		Wallet wallet = this.CustomerService.getWalletByCustomerId(customerId);
 		mv.addObject("wallet", wallet);
-		
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 	

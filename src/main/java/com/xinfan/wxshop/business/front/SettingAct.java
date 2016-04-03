@@ -43,6 +43,7 @@ public class SettingAct {
 	@RequestMapping(method = RequestMethod.GET, value = "/center/setting.html")
 	public ModelAndView setting(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/setting");
+		mv.addObject("menu_hit", 4);
 
 		return mv;
 	}

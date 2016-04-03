@@ -41,26 +41,6 @@ public class CenterAct {
 	@Autowired
 	private DeliveryAddressService DeliveryAddressService;
 
-/*	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
-	public ModelAndView center(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView("/front/my_center");
-
-		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
-		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
-
-		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);  
-		List<DataMap> distList = CustomerService.getCustomerTopDistributionList(customerId);
-		List<Order> orderList = CustomerService.getCustomerTopOrderList(customerId);
-		Customer customer = CustomerService.getById(customerId);
-
-		request.setAttribute("wallet", wallet);
-		request.setAttribute("distList", distList);
-		request.setAttribute("orderList", orderList);
-		request.setAttribute("customer", customer);
-
-		return mv;
-	}
-*/	
 	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
 	public ModelAndView center2(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/my_center");
@@ -101,7 +81,7 @@ public class CenterAct {
 
 		mv.addObject("order", order);
 		mv.addObject("list", list);
-
+		mv.addObject("menu_hit", 4);
 		return mv;
 	}
 
