@@ -42,7 +42,9 @@
     
     <div class="scroll-content">
     	<div class="m-block-form">
-        	<form class="form-horizontal m-order-address-form" id="submit_form" action="address_save.html">
+        	<form class="form-horizontal m-order-address-form" id="submit_form" action="address_esave.html">
+        		<input type="hidden" name="deliveryId" value="${bean.deliveryId}"/>
+				<input type="hidden" name="from" value="${from}" />
             	<div class="form-group">
                 <label for="name" class="col-xs-3">收货人</label>
                 <div class="col-xs-9">
