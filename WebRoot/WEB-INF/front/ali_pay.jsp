@@ -7,29 +7,26 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/jslib/uiadmin/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
-
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
-<link href="/theme/css/order.css" type="text/css" rel="stylesheet" />
+<link href="/theme/newest/css/order.css" type="text/css" rel="stylesheet" />
 
 </head>
-<body class="order">
-	
-	<div class="header">
-		<div class="top_left1" ><a href="/" ><img src="/theme/images/back.png" style="width:12px"></a></div>
-		<div  class="top_center1">
-			支付宝支付
-		</div>
-		<div class="top_right1"></div>
-	</div>
+<body>
 
-	<div class="clear"></div>
-	
-	<div class="shop_orderist">
-			${html}
-	</div>
-	
-	<div style="height: 60px;"></div>
+<div class="g-doc">
+    <div class="top-fxied">
+            <header class="header"> 
+                <div class="back"><a href="/"><span class="icon-back"></span></a></div> 
+                <div class="title">支付宝支付</div> 
+                <div class="subMark"><p></p></div> 
+            </header>
+  </div>
+    <div class="scroll-content">
+		<div id="tipmsg" class="" style="border: 1px solid #eee;padding-top: 10px;padding-bottom: 10px;padding-left: 30px;text-align: center;">
+				${html}		
+		</div>
+   </div>
+    
+</div>
 	
 </body>
 </html>

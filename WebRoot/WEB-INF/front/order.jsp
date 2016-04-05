@@ -17,7 +17,7 @@
 <div class="g-doc">
     <div class="top-fxied">
             <header class="header"> 
-                <div class="back"><a href="#"><span class="icon-back"></span></a></div> 
+                <div class="back"><a href="/"><span class="icon-back"></span></a></div> 
                 <div class="title">下订单</div> 
                 <div class="subMark"><p></p></div> 
             </header>
