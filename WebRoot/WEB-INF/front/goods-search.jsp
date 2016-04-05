@@ -53,9 +53,9 @@
 						<input type="submit" class="btn-sub">
 					</form>
 				</div>
-				<a href="#" class="top-bar-cart">
+				<a href="/cart.html" class="top-bar-cart">
 					<div class="icons-cart">
-						<i class="cart-sales-nums">3</i>
+						<i class="cart-sales-nums"><sp:cart_num_tag></sp:cart_num_tag></i>
 					</div>
 				</a>
 			</header>

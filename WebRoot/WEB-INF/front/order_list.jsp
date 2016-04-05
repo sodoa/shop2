@@ -28,7 +28,7 @@
 					<span class="ico-all"></span>全部
 				</a>
 				<a <c:if test="${li=='2'}">class="current"</c:if> href="order_list.html?li=2"> 
-					<span class="ico-bank"><i class="cart-sales-nums">3</i></span>待付款
+					<span class="ico-bank"></span>待付款
 				</a>
 				<a <c:if test="${li=='3'}">class="current"</c:if> href="order_list.html?li=3"> 
 					<span class="ico-bag"></span>待发货

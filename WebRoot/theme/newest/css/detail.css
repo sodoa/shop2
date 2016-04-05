@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* 倒计时栏 */
+.toolbar{height:0.4rem;line-height:0.4rem;background:#ffecb7;padding:0.1rem;font-size:0.18rem}
+.toolbar .time {float:left;}
+.toolbar .time em{background-color:#8b8b8b;color:#fff;padding:0.02rem 0.05rem;margin:0 0.05rem;
+-webkit-border-radius: 5px;
+    -moz-border-radius:5px;
+    -ms-border-radius: 5px;
+    border-radius:5px;
+}
+.toolbar .count{float:right;}
+.toolbar em{color:#f83130}
+.col-xs-3 {
+    width: 24%;
+	float: left;
+	border-left:1px solid #dedddd;
+}
+.col-xs-9 {
+    width: 75%;
+	float: left;
+	
+}
+.m-txt{font-size:0.28rem;min-height:0.36rem;line-height:0.36rem}
+.m-change{font-size:0.5rem;color:#ff4f01;margin-right:0.1rem;height:0.5rem;padding:0.1rem 0}
+.m-change .discount,.m-change .old{font-size:0.24rem;color:#999;margin-right:0.1rem}
+.m-change .discount{padding:0 0.05rem;background:#ff4f01;color:#fff}
+.btn {
+    display:block;
+    margin: 0.05rem 0.05rem 0.2rem;
+    text-align: center;
+}
+.favorite-btn:before {
+    content: "";
+    display: block;
+    width: 0.32rem;
+    height: 0.32rem;
+    clear: both;
+    margin: 0 auto;
+    background-size: 0.32rem;
+    background-image: url(../images/star.png);
+    background-repeat: no-repeat;
+}
+.share-btn:before {
+    content: "";
+    display: block;
+    width: 0.28rem;
+    height: 0.3rem;
+    clear: both;
+    margin: 0 auto;
+    background-size:contain;
+	background-image:url(../images/fenxiang2.png);
+    
+    background-repeat: no-repeat;
+}
+/*切换*/
+.m-tabs{position:relative; overflow: hidden;background:#fff;padding:0.2rem;border:1px solid #dedddd;border-left:none;border-right:none}
+.m-tabs-con{overflow:hidden;padding:0.2rem 0}
+.m-tabs-item:not(:first-child){display:none;}
+.m-tabs-nav{height:0.55rem;line-height:0.55rem;border:1px solid #999;border-radius:.05rem;
+display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.m-tabs-nav a{color:#999;font-size:0.24rem;
+-webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    box-sizing: border-box;
+    display: block;
+}
+.m-tabs-nav .current{background:#999; color:#fff;}

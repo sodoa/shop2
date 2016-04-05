@@ -1,86 +1,7 @@
 @charset "utf-8";
-.index-top-bar{padding: 10px 4% 10px;background-color: rgba(255,255,255,0.8);
-display: -webkit-box;
-display: -moz-box;
-display: -ms-flexbox;
-display: flex;}
-.index-top-bar .s-input-select{-webkit-box-flex: 1; -moz-box-flex: 1;	flex:1;margin: 0 8px;}
 
-.index-top-bar .searchForm {
-    height:0.53rem;
-    overflow: hidden;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    border-radius: 20px;
-    background-color:#ededed;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    -webkit-transform: translate(0, 0) translateZ(0);
-	width:100%;
-}
 
-.index-top-bar .text-area {
-    margin-left:0.42rem;
-    -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-}
-.index-top-bar .text {
-    height:0.46rem;
-	font-size:0.24rem;
-    width: 100%;
-    border: none;
-    -webkit-appearance: none;
-    background: transparent;
-    outline: none;
-    color: #717171;
-    font-size:0.29rem;
-}
-.index-top-bar .btn-sub {
-    width: 0.3rem;
-    height:0.3rem;
-    margin: 9px 11px 0 0;
-    background:url(../images/search.png) no-repeat 0 0;
-    -webkit-background-size: contain;
-    -moz-background-size: contain;
-    background-size: contain;
-    border: none;
-    text-indent: -999px;
-    overflow: hidden;
-    cursor: pointer;
-    outline: none;
-}
 
-.index-top-bar .top-bar-cart {
-    width: 0.60rem;
-    height:0.41rem;
-	margin-top:4px;
-    display: block;
-    overflow: hidden;
-	-webkit-box-flex:0 0 0.6rem; -moz-box-flex:0 0 0.6rem;flex:0 0 0.6rem;	
-}
-.index-top-bar .icons-cart{position:relative;}
-.icons-cart {
-    background:url(../images/cart.png) no-repeat;
-	-webkit-background-size: contain;
-    -moz-background-size: contain;
-    width: 0.45rem;
-    height:0.41rem;
-}
-
- /* 焦点图 */
-.m-slider{margin:0 auto;position:relative;}
-.m-slider-con{overflow:hidden;}
-.m-slider-item:not(:first-child){display:none;}
-.m-slider-item img{width:100%;}
-.m-slider-nav{width:auto;height:10px;position:absolute;bottom:10px;left:50%;text-align:right;}
-.m-slider-nav span{display:inline-block;width:10px;height:10px;background-color:#d0d0d0;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;border-radius:5px;margin:0 2px;font: 0/0 a;color:transparent;vertical-align:top;}
-.m-slider-nav .current{background-color:#f9bb14;}
 
 /* 菜单选择 */
 .m-menu{padding-top:0.2rem}
@@ -125,7 +46,11 @@ display: flex;}
 .list-pic li{width:100%;margin-bottom:0.2rem;overflow:hidden}
 .list-pic li a{position:relative;display:block}
 .list-pic li img{width:100%;}
-.list-pic span{width:95%;height:0.5rem;display:block;position:absolute;bottom:0;left:0;line-height:0.5rem;padding:0 0.47rem;background-color: rgba(0,0,0,0.5);color:#fff;font-size:0.2rem}
+.list-pic .tit{width:95%;height:0.5rem;position:absolute;bottom:0;left:0;line-height:0.5rem;padding:0 0.47rem;background-color: rgba(0,0,0,0.5);color:#fff;font-size:0.2rem}
+.list-pic .discount,.list-pic .price{position:absolute;background:#ff0101;color:#fff;}
+.list-pic .discount{top:0;right:25px;padding:0.05rem;line-height:0.3rem;font-size:0.24rem;}
+.list-pic .price{font-size:0.16px;left:0.1rem;top:0.05rem; border-radius:100px;width:0.8rem;height:0.65rem;line-height:0.22rem;padding-top:0.15rem;text-align:center}
+.list-pic .price .big{font-size:0.24rem}
 
 /* 火爆活动 */
 .toolbar{height:0.4rem;line-height:0.4rem;background:#eee;padding:0 0.1rem;font-size:0.18rem}
