@@ -30,8 +30,8 @@
 					<div class="m-order-address">
 					    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
 					    <p>${address.address}</p>
-					</div>                 
-               		<a href="javascript:void();"  class="m-order-address-edit" onclick="selectAddress()">编辑</a>  
+					</div>            
+					 <a href="javascript:void();"  onclick="selectAddress()" class="m-order-address-edit"></a>     
          		 </li>
             </ul>
             
@@ -55,48 +55,45 @@
          </div>
         
         <div class="m-trade-pay">
-        	<div class="pay-cell">
-                <div class="pay-hd"><input type="checkbox" class="cartList-check" name="checkbox1" checked="checked"></div>
-                <div class="pay-bd"><span class="zIcon"></span></div>
-                <div class="pay-ft">
-      				<span value="1"><img width="16" height="16" src="/theme/images/radio_no.png"></span><label>&nbsp;&nbsp;&nbsp;维信支付</label>          
-               	</div>
-            </div>
-            <div class="pay-cell">
-                <div class="pay-hd"><input type="checkbox" class="cartList-check" name="checkbox1" value="2"></div>
-                <div class="pay-bd"><span class="wIcon"></span></div>
-                <div class="pay-ft"><span value="2"><img width="16" height="16" src="/theme/images/radio_yes.png"></span><label>&nbsp;&nbsp;&nbsp;支付宝支付</label></div>
-            </div>
+        
+	        <div class="m-trade-pay" id="paytype_div">
+	        	<div class="pay-cell">
+	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" checked="checked" value="1"></div>
+	                <div class="pay-bd"><span class="zIcon"></span></div>
+	                <div class="pay-ft">维信支付</div>
+	            </div>
+	            <div class="pay-cell">
+	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" value="2"></div>
+	                <div class="pay-bd"><span class="wIcon"></span></div>
+	                <div class="pay-ft">支付宝支付</div>
+	            </div>
+	        </div>
         </div>
  
-        <div class="m-trade-pay">
-			<p style="float">给卖家留言:&emsp;</p>	
-			<textarea  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
-        </div> 
-      
-       <div class="m-cells-title">
-       <p style="float">给卖家留言:&emsp;</p>	
-			<textarea  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
-       </div>
-       <div class="">
+       <div class="m-block mt20">
+           <div class="m-cell-title">给卖家留言</div>
+           <div class="m-cell-primary">
+           	<div style="padding:0.1rem">
+           <textarea class="m-textarea"  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
+           </div>
+           </div>
+       </div> 
        
-	       	<c:if test="${CartInfoVo.hasGoods}">
-				<ul class="shop_carTopay">
-					<li style="cursor: pointer;">
-						<c:choose>
+       	<c:if test="${CartInfoVo.hasGoods}">
+		     <div class="bottom-fxied">
+		     	<c:choose>
 							<c:when test="${empty address}">
-								<p style="color: gray;">去结算</p>
+								<div class="m-btn" style="color: gray;"> <a href="javascript:void(0)" class="orange-btn">确认支付（${CartInfoVo.totalAmount}元）</a> </div>
 							</c:when>
 							<c:otherwise>
-								<p onclick="sumibtForm()">去结算</p>
+								<div class="m-btn"  onclick="sumibtForm()"> <a href="javascript:void(0)" class="orange-btn">确认支付（${CartInfoVo.totalAmount}元）</a> </div>
 							</c:otherwise>
-						</c:choose>
-					</li>
-					<li><p> <span  style="font-size: 16px;color: red;"> 合计：&yen;${CartInfoVo.totalAmount} </span> &nbsp; 原价：<del>&yen;${CartInfoVo.orginAmount}</del></p></li>
-				</ul>
-			</c:if>
-	
-       </div>
+				</c:choose>
+						
+		 		
+		 	</div>
+	 	</c:if>
+       
     </div>
     </form>
     
@@ -121,8 +118,8 @@
 		//alert(typeof WeixinJSBridge);
 		
 		if (!isWeiXinBrowser()){
-			$("#paytype_div>li:last").click();
-			$("#paytype_div>li:first").remove();
+			$("#paytype_div>div:last").click();
+			$("#paytype_div>div:first").remove();
 		}
 		
 	});
@@ -147,24 +144,7 @@
 				//parent.layer.close(index);
 			}
 		});
-		
-		
-		$("#paytype_div li").click(function(){
-			var selectedValue = $(this).find("span").attr("value");
-			$("#paytype").val(selectedValue);
-			$(this).parent().find("span").each(function(){
-				
-				var listValue = $(this).attr("value");
-				if(listValue == selectedValue){
-					$(this).find("img").attr("src","/theme/images/radio_yes.png");
-				}
-				else{
-					$(this).find("img").attr("src","/theme/images/radio_no.png");
-				}
-				
-			});
-		});
-	});
+	});	
 	
 </script>
 	

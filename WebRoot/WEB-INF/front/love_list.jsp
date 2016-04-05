@@ -7,49 +7,40 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 
 </head>
 <body>
 
-	<div class="header">
-		<div class="top_left1">
-			<a href="/center/my_center.html"><img src="/theme/images/back.png" style="width: 12px"></a>
-		</div>
-
-		<div class="top_center1">商品收藏</div>
-
-		<div class="top_right1">
-
-		</div>
-
-	</div>
-
-	<div class="block">
-
-		<ul>
-			<c:forEach var="item" items="${list}">
-				<li><div class="block-image">
-						<img src="${item.thumbnail_url}" width="200" height="200" style="width: 100%"> 
-					</div>
-	
-					<div class="block-titel">${item.goods_lname}</div>
-					<div class="block-price">
-						<p>&yen;${item.final_prices}</p>
-						<p>
-							<s>&yen;${item.orgin_prices }</s>
-						</p>
-						<p>${item.discount}折</p>
-						<a href="javascript:;" onclick="del(this,'${item.love_id}')">删除收藏</a>
-					</div></li>
-				</c:forEach>
-
-		</ul>
-
-	</div>
-
-
-	<jsp:include page="footer.jsp"></jsp:include>
+<div class="g-doc">
+    <div class="top-fxied">
+            <header class="header"> 
+                <div class="back"><a href="/center/my_center.html"><span class="icon-back"></span></a></div> 
+                <div class="title">我的收藏</div>
+                <div class="subMark"><p></p></div>
+            </header>
+            
+  </div>
+    
+    <div class="scroll-content">
+        <ul class="pic-product-list">
+       		<c:forEach var="item" items="${list}">
+	        	<li>
+	            	<div class="d-img"><img src="${item.thumbnail_url}"></div>
+	                <div class="d-tit">${item.goods_lname}</div>
+	                <div class="d-subMark">
+	                	<p class="price">&yen;${item.final_prices}</p>
+	                    <p class="change"><del>&yen;${item.orgin_prices}111</del><br/><span class="discount">${item.discount}折</span></p>
+	                    <p class="btn close" onclick="del(this,'${item.love_id}')"><span class="close-btn"></span></p>
+	                </div>
+	            </li>
+            </c:forEach>
+        </ul>
+    </div>
+    
+    <jsp:include page="footer.jsp"></jsp:include>
+    
+</div>
 
 <script type="text/javascript">
 function del(obj,id){
