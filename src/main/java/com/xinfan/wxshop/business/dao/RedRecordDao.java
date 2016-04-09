@@ -29,9 +29,9 @@ public class RedRecordDao extends SqlSessionDaoSupport {
 		return getSqlSession().insert(wrapCommand("insertSelective"), record);
 	}
 
-	public List<RedRecord> selectByMsgId(RedRecord record) {
+	public List<RedRecord> selectByFromusename(RedRecord record) {
 		RedRecordExample example = new RedRecordExample();
-		example.createCriteria().andMsgidEqualTo(record.getMsgid()).andLinedEqualTo(record.getLined());
+		example.createCriteria().andFromusernameEqualTo(record.getFromusername()).andLinedEqualTo(record.getLined());
 		return getSqlSession().selectList(wrapCommand("selectByExample"), example);
 	}
 

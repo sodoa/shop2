@@ -164,6 +164,7 @@ public class OrderService {
 						distribution.setIncome(income);
 						distribution.setOrderId(order.getOrderId());
 						distribution.setResult(1);
+						distribution.setLevel(2);
 						distributionDao.insertSelective(distribution);
 
 						if (level1Customer.getUplineId() != null) {
@@ -187,6 +188,7 @@ public class OrderService {
 									distribution2.setIncome(income2);
 									distribution2.setOrderId(order.getOrderId());
 									distribution2.setResult(1);
+									distribution2.setLevel(3);
 									distributionDao.insertSelective(distribution2);
 								}
 							}

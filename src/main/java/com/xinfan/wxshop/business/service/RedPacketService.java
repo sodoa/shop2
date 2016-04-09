@@ -49,8 +49,8 @@ public class RedPacketService {
 
 		RedRecord search = new RedRecord();
 		search.setLined(lined);
-		search.setMsgid(record.getMsgid());
-		List<RedRecord> pickupList = redRecordDao.selectByMsgId(search);
+		search.setFromusername(record.getFromusername());
+		List<RedRecord> pickupList = redRecordDao.selectByFromusename(search);
 		if (!pickupList.isEmpty()) {
 			return "今天的红包已经领过了";
 		}

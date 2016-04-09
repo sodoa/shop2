@@ -44,6 +44,8 @@ public class GoodsSearch2Act {
 		Pagination page = RequestUtils.getPagination(request);
 		String w = request.getParameter("w");
 		String theme = request.getParameter("theme");
+		String show = request.getParameter("show");
+		
 		
 		if(theme == null || theme.length()==0){
 			theme = "1";
@@ -57,6 +59,7 @@ public class GoodsSearch2Act {
 		mv.addObject("w", w);
 		mv.addObject("theme", theme);
 		mv.addObject("menu_hit", "2");
+		mv.addObject("show", show);
 		
 		return mv;
 	}
