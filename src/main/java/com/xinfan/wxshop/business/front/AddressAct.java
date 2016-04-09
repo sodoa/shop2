@@ -81,6 +81,9 @@ public class AddressAct {
 		}
 		
 		if(from!=null && from.trim().length()>0){
+			request.getSession(true).removeAttribute("from");
+			request.getSession(true).removeAttribute("opt");
+			
 			return "redirect:"+from;
 		}
 		
