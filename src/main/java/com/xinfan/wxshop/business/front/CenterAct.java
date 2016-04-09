@@ -44,7 +44,16 @@ public class CenterAct {
 	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
 	public ModelAndView center2(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/my_center");
-
+		
+		String from = request.getParameter("from");
+		if(from == null || from.length() ==0 || "null".equals(from)){
+			from = (String)request.getSession().getAttribute("from");
+		}
+		
+		if(from!=null && from.trim().length()>0){
+			return new ModelAndView("redirect:"+from);
+		}
+		
 		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
 		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
 		

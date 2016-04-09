@@ -10,6 +10,7 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.xinfan.wxshop.business.service.CartService;
+import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.common.context.AppContextHolder;
 
 /**
@@ -22,7 +23,7 @@ public class CartNumTag extends SimpleTagSupport {
 
 		int num = 0;
 
-		String session = ((PageContext) super.getJspContext()).getSession().getId();
+		String session =  LoginSessionUtils.getCustomerSessionId();
 		if (session != null) {
 			CartService bean = AppContextHolder.getBean(CartService.class);
 			num = bean.getCartNumBySessionId(session);
