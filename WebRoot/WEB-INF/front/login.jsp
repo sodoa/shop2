@@ -36,7 +36,7 @@
 					<div class="form-group">
 						<label for="name" class="col-xs-3">密码</label>
 						<div class="col-xs-9">
-							<input type="password" id="login_password" name="password" datatype="n1-30" errormsg="请输入密码" placeholder="请输入密码" required maxlength="30">
+							<input type="password" id="login_password" name="password" datatype="*1-30" errormsg="请输入密码" placeholder="请输入密码" required maxlength="30">
 						</div>
 					</div>
 					<div class="form-group">
