@@ -13,20 +13,23 @@
 <link href="/theme/css/order.css" type="text/css" rel="stylesheet" />
 
 </head>
-<body class="order">
-	
-	<div class="header">
-		<div class="top_left1" ><a href="/" ><img src="/theme/images/back.png" style="width:12px"></a></div>
-		<div  class="top_center1">
-			订单异常
-		</div>
-		<div class="top_right1"></div>
-	</div>
+<body >
 
-	<div class="clear"></div>
-	
-	<div>${msg}</div>
-	
+<div class="g-doc">
+    <div class="top-fxied">
+            <header class="header"> 
+                <div class="back"><a href="/"><span class="icon-back"></span></a></div> 
+                <div class="title">订单异常</div> 
+                <div class="subMark"><p></p></div> 
+            </header>
+  </div>
+    <div class="scroll-content">
+		<div id="tipmsg" class="" style="border: 1px solid #eee;padding-top: 10px;padding-bottom: 10px;padding-left: 30px;text-align: center;">
+				${html}		
+		</div>
+   </div>
+    
+</div>
 	
 </body>
 </html>

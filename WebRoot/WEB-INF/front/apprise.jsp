@@ -7,7 +7,6 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
 <link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
 <style type="text/css">
