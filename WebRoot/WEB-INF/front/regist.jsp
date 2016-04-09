@@ -45,6 +45,7 @@
 		<div class="scroll-content">
 			<div class="m-block-form">
 				<form class="form-horizontal m-order-address-form" id="regist_form" action="regist.html" method="post">
+					<input type="hidden" name="wx_id" value="${openid}"/>
 					<div class="form-group">
 						<label for="name" class="col-xs-3">账号</label>
 						<div class="col-xs-9">
