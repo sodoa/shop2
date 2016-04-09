@@ -177,16 +177,33 @@ $(function(){
       	 htmlArray.push('<div class="d-subMark"> ');
       	 htmlArray.push('	<p class="price">&yen;'+item.finalPrices+'</p> ');
       	 htmlArray.push('    <p class="change"><del>&yen;'+item.orginPrices+'</del><br/><span class="discount">'+item.discount+'折</span></p> ');
-      	 htmlArray.push('    <p class="btn"><a href="#"></a></p> ');
+      	 htmlArray.push('    <p class="btn"><a href="javascript:void(0);" onclick="put_goods_to_order('+item.goodsId+');"></a></p> ');
       	 htmlArray.push('</div> ');
       	 htmlArray.push('</li> ');
       }
       
       $('#page-comtain').append(htmlArray.join(""));
 	}
-	
 
 });
+
+
+function put_goods_to_order(current_goods_id){
+
+	$.ajax({type:"POST",
+         url:"/put-goods-cart.html",
+         data:{"goodsId" : current_goods_id},
+         dataType:"json",
+         success:function(data){
+         	if(data.result ==0){
+        		alert('添加成功');
+        	}
+        	else{
+        		alert('添加失败');
+        	}
+         }
+	});
+}
 
 </script>
 
