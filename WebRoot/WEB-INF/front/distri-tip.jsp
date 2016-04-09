@@ -37,7 +37,7 @@
 		<div class="scroll-content">
 				<div style="height: 100%">
 					<div style="width:100%;">
-						<img alt="" src="/theme/images/share.jpg" width="49%" >
+						<img alt="" src="/theme/newest/images/share.jpg" width="49%" >
 						<img id="example2" class="example-image" width="49%" src="/center/distri-image.html"  >
 					</div>
 					<div style="padding: 10px;" class="desc">通过扫描上方的“我的二维码”，赶快让朋友们注册“果然逗”，享受优质绿色的水果同时，轻松挣钱吧！</div>

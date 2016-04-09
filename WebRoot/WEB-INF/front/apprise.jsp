@@ -50,7 +50,7 @@
 
 	<div class="order_paylist">
 
-		<div class="order_li" style="margin:0" id="page-comtain">
+		<div class="order_li" style="margin:0;background-color: white;" id="page-comtain">
 		
 		</div>
 		<div id="page-next"></div>
@@ -109,7 +109,7 @@
 	        	var beanObj = dataList[i];
 	        
 		        htmlArray.push('<div class="order_address">');
-		        htmlArray.push('	<div class="myPhoto"><img src="/theme/images/3.png" style="width:100%"/></div>');
+		        htmlArray.push('	<div class="myPhoto"><img src="/theme/newest/images/3.png" style="width:100%"/></div>');
 		        htmlArray.push('	<p  class="myName">');
 		        htmlArray.push(beanObj.customerName);
 		        htmlArray.push('</p></br>');

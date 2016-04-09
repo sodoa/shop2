@@ -91,7 +91,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
         <div class="m-tabs-item">
 				<c:forEach var="item" items="${list}">
 					<div class="order_address">
-						<div class="myPhoto"><img src="/theme/images/3.png" /></div>
+						<div class="myPhoto"><img src="/theme/newest/images/3.png" /></div>
 						<p  class="myName">${item.customerName}</p>		
 						</br>
 						<p class="myAssess">${item.context}</p>					

@@ -275,5 +275,17 @@
 		<body-content>scriptless</body-content>
 	</tag>
 
+	<tag>
+		<name>phone_hidden_part_tag</name>
+		<tag-class>com.xinfan.wxshop.business.tag.PhoneHiddenPartTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>value</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>		
+	</tag>	
+	
+
 
 </taglib>

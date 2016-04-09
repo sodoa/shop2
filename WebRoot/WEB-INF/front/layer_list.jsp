@@ -27,7 +27,7 @@
          </div>
          <div class="o-user-tit">
          	<c:forEach var="item" items="${list1}">
-         		<P><span>${item.displayname}</span><span>${item.account}</span></P>
+         		<P><span>${item.displayname}</span><span><sp:phone_hidden_part_tag value="${item.account}"></sp:phone_hidden_part_tag></span></P>
 			</c:forEach>	
          </div>
        </div>
@@ -38,7 +38,7 @@
          </div>
          <div class="o-user-tit">
         	<c:forEach var="item" items="${list2}">
-				<P><span>${item.displayname}</span><span>${item.account}</span></P>
+				<P><span>${item.displayname}</span><span><sp:phone_hidden_part_tag value="${item.account}"></sp:phone_hidden_part_tag></span></P>
 			</c:forEach>					
          </div>
        </div>

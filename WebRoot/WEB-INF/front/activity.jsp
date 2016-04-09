@@ -15,7 +15,7 @@
 
 <div class="g-doc">
     <div class="scroll-content" style="margin-top: 1px;">
-    	<div class="banner"><img src="/theme/newest/images/banner.png" alt=""></div>
+    	<div class="banner"><img src="/theme/newest/images/banner.jpg" alt=""></div>
         <ul class="pic-art-list">
         
         	<c:forEach var="item" items="${list}">

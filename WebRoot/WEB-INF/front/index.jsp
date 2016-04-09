@@ -85,7 +85,7 @@
 		$(function(){
 			
 			$("#search_word").bind("focusin",function(){
-				window.location.href= "/g-s.html?theme=1";
+				window.location.href= "/g-s.html?theme=1&show=1";
 			});
 			
 		});

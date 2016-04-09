@@ -14,6 +14,16 @@
 
 <style type="text/css">
 .pic-product-list .d-img{margin:0rem 0rem;} 
+.pic-product-list li{
+	width:100%;
+	float:none;
+}
+.pic-product-list .d-tit {
+	text-align: left;
+}
+.pic-product-list .price{
+	margin: 0px;
+}
 </style>
 </head>
 <body>
@@ -98,12 +108,16 @@ function panel_search_form(){
 }
 
 var theme = "${theme}";
+var show = "${show}";
 
 $(function(){
 
 	var ch=$(".category").height();
 	var hh=$(".header").height();
-
+	
+	if(show =="1"){
+		$(".category").show();
+	}
 	//分类框动画
 
 	$("#search_word").bind("focusin",function(){
@@ -176,7 +190,7 @@ $(function(){
       	 htmlArray.push('<div class="d-tit">'+item.goodsLname+'</div> ');
       	 htmlArray.push('<div class="d-subMark"> ');
       	 htmlArray.push('	<p class="price">&yen;'+item.finalPrices+'</p> ');
-      	 htmlArray.push('    <p class="change"><del>&yen;'+item.orginPrices+'</del><br/><span class="discount">'+item.discount+'折</span></p> ');
+      	 htmlArray.push('    <p class="change"><del>&yen;'+item.orginPrices+'</del>&nbsp;&nbsp;&nbsp;<span class="discount">'+item.discount+'折</span></p> ');
       	 htmlArray.push('    <p class="btn"><a href="javascript:void(0);" onclick="put_goods_to_order('+item.goodsId+');"></a></p> ');
       	 htmlArray.push('</div> ');
       	 htmlArray.push('</li> ');

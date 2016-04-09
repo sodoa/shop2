@@ -18,7 +18,7 @@
 	<div class="conter" style="background:#fff;padding-bottom:10px">
 		
 			<div class="rank">
-				<img alt="" src="/theme/images/share.jpg" width="100%">
+				<img alt="" src="/theme/newest/images/share.jpg" width="100%">
 			</div>
 			
 			<div style="background-color: #eee;width: 99%;text-align: center;">
