@@ -3,7 +3,9 @@ package com.xinfan.wxshop.business.front;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +27,7 @@ import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.common.base.BizException;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.sms.SmsService;
+import com.xinfan.wxshop.common.util.CookieUtils;
 
 @Controller
 public class LoginAct {
@@ -59,7 +62,33 @@ public class LoginAct {
 		}
 
 		mv.addObject("p", p);
+		
+		
+		
+		Cookie cookie_account = CookieUtils.getCookie(request, "cookie_account");
+		Cookie cookie_password = CookieUtils.getCookie(request, "cookie_password");
+		if (cookie_account != null && cookie_password != null) {
+			try {
+				Map attributes = new HashMap();
+				Customer customer = CustomerService.login(cookie_account.getValue(), cookie_password.getValue(), attributes);
 
+				DataMap sessionMap = new DataMap();
+				sessionMap.put("account", customer.getAccount());
+				sessionMap.put("displayname", customer.getDisplayname());
+				sessionMap.put("customerid", customer.getCustomerId());
+				LoginSessionUtils.setCustomerUserSessionMap(sessionMap);
+				
+				if(p!=null && p.length()>0&&!"null".equals(p)){
+					return new ModelAndView("redirect:"+p);
+				}
+				
+				return new ModelAndView("redirect:/center/my_center.html");
+
+			} catch (BizException e) {
+				logger.error(e.getMessage(),e);
+			}
+		}
+		
 		return mv;
 	}
 
@@ -85,7 +114,7 @@ public class LoginAct {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/login.html")
 	public @ResponseBody
-	JSONResult login(HttpServletRequest request) {
+	JSONResult login(HttpServletRequest request,HttpServletResponse response) {
 
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
@@ -103,6 +132,8 @@ public class LoginAct {
 			sessionMap.put("customerid", customer.getCustomerId());
 
 			LoginSessionUtils.setCustomerUserSessionMap(sessionMap);
+			CookieUtils.addCookie(request, response, "cookie_account", account, 24*60*60*30, null);
+			CookieUtils.addCookie(request, response, "cookie_password", password, 24*60*60*30, null);
 
 			result = JSONResult.success();
 		} catch (BizException e) {
@@ -114,9 +145,13 @@ public class LoginAct {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/logout.html")
-	public ModelAndView logout(HttpServletRequest request) {
+	public ModelAndView logout(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView("redirect:/login.html");
 		LoginSessionUtils.setExpireCustomerSessionMap();
+		
+		CookieUtils.cancleCookie(request, response, "cookie_account", null);
+		CookieUtils.cancleCookie(request, response, "cookie_password", null);
+		
 		return mv;
 	}
 

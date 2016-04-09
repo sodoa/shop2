@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.xinfan.wxshop.business.constants.BizConstants;
-import com.xinfan.wxshop.common.cache.CacheHelper;
-import com.xinfan.wxshop.common.util.CookieUtils;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
