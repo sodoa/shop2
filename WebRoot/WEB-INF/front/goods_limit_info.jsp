@@ -36,6 +36,11 @@
 
 iframe{ height:100%; width:100%; overflow:auto; }   
 
+#htmlwrap img{
+ width:100%;
+ overflow:hidden;
+}
+
 </style>
 </head>
 <body>

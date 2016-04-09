@@ -1,6 +1,6 @@
 @charset "utf-8";
 /* 头部 */
-.activity-header{height:0.64rem;margin:0.1rem 0.2rem 0;max-width: 960px;width: 100%;}
+.activity-header{height:0.64rem;margin:0.1rem 0.2rem 0;max-width: 960px;}
 .activity-header .back,.activity-header .shopping,.activity-header .home,.activity-header .search,.activity-header .cart{float:left}
 .activity-header .back{margin-right:3.8rem}
 .activity-header .shopping{margin-right:0.24rem}

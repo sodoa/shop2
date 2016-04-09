@@ -35,8 +35,13 @@
 
 .order_cost p:nth-child(3){float:right;padding:0 15px}
 
-
 iframe{ height:100%; width:100%; overflow:auto; }   
+
+
+#htmlwrap img{
+ width:100%;
+ overflow:hidden;
+}
 
 </style>
 
@@ -85,7 +90,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
         <div class="m-tabs-con">
         <div class="m-tabs-item">
 			<div style="clear: both;word-wrap:break-word;overflow-wrap:break-word;"  id="htmlwrap">
-					<iframe id="htmlframe" name="htmlframe" onload="setIframeHeight(this)" style="z-index: 9999" frameborder="0" scrolling="no" src="/goods-html.html?s=${goods.summary}" width="100%"  ></iframe>
+					${html}
 			</div>
          </div>
         <div class="m-tabs-item">
