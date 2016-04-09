@@ -92,10 +92,13 @@ public class DistributionAct {
 		return mv;
 	}
 
-	@RequestMapping("/center/distri-tip.html")
+	@RequestMapping("/distri-tip.html")
 	public ModelAndView distriTip(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/distri-tip");
+		
+		String id = request.getParameter("id");
 		mv.addObject("menu_hit", 4);
+		mv.addObject("id", id);
 		return mv;
 	}
 	
@@ -139,6 +142,7 @@ public class DistributionAct {
 		return mv;
 	}
 
+	
 	@RequestMapping("/center/distri-image.html")
 	public void distriImage(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -167,5 +171,7 @@ public class DistributionAct {
 			logger.error(e.getMessage(),e);
 		}
 	}
+
+
 
 }

@@ -77,6 +77,7 @@ public class CenterAct {
 		request.setAttribute("li", null);
 		request.setAttribute("unPayCount", unPayCount);
 		request.setAttribute("menu_hit", 4);
+		request.setAttribute("customerId", customer.getCustomerId());
 
 		return mv;
 	}

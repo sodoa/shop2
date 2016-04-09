@@ -1,9 +1,15 @@
 package com.xinfan.wxshop.business.front;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.xinfan.wxshop.business.cache.utils.ParamterUtils;
 import com.xinfan.wxshop.business.entity.Article;
 import com.xinfan.wxshop.business.entity.IncomeRank;
 import com.xinfan.wxshop.business.helper.FilePathHelper;
@@ -19,6 +26,8 @@ import com.xinfan.wxshop.business.service.ArticleService;
 import com.xinfan.wxshop.business.service.RankingService;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.common.base.DataMap;
+import com.xinfan.wxshop.common.config.FileConfig;
+import com.xinfan.wxshop.common.security.DesUtils;
 
 @Controller
 public class RankAct {
@@ -91,10 +100,61 @@ public class RankAct {
 		} else {
 			login = 1;
 		}
+		
+		String customerId = "";
+		String wxsid = request.getParameter("wxsid");
+		
+		if(LoginSessionUtils.isCustomerLogin()){
+			customerId = LoginSessionUtils.getCustomerSessionId();
+		}
+		else{
+			if(wxsid!=null && wxsid.length()>0){
+				customerId = wxsid;
+			}
+		}
 
 		mv.addObject("bean", article);
 		mv.addObject("login", login);
+		mv.addObject("wxsid", customerId);
 		return mv;
+	}
+	
+
+	@RequestMapping("/distri-image2.html")
+	public void distriImage2(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			String customerId = "";
+			
+			String wxsid = request.getParameter("wxsid");
+			
+			if(LoginSessionUtils.isCustomerLogin()){
+				customerId = LoginSessionUtils.getCustomerSessionId();
+			}
+			else{
+				if(wxsid!=null && wxsid.length()>0){
+					customerId = wxsid;
+				}
+			}
+
+			String content = "customerId=" + customerId;
+
+			String desPassword = FileConfig.getInstance().getString(
+					"image.des.password", "password12345678");
+			String decData = Base64.encodeBase64String(DesUtils.encrypt(
+					content.getBytes("UTF-8"), desPassword));
+
+			String domain = ParamterUtils.getString("web.domain",
+					"http://11grand.cn") +"/share.html";
+
+			domain += "?s=" + decData;
+
+			ByteArrayOutputStream out1 = QRCode.from(domain).to(ImageType.PNG).withSize(300, 300)
+					.stream();
+			response.getOutputStream().write(out1.toByteArray());
+
+		} catch (Exception e) {
+			logger.error(e.getMessage(),e);
+		}
 	}
 
 	@RequestMapping("/accreate.html")

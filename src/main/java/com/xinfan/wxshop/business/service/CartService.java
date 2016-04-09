@@ -259,7 +259,8 @@ public class CartService {
 				this.orderDetailDao.insertSelective(orderDetail);
 			}
 
-			this.cartDao.deleteCartListByCustomerId(customerId);
+			//this.cartDao.deleteCartListByCustomerId(customerId);
+			this.cartDao.deleteCartListBySessionId(sessionId);
 			
 			return table;
 		}
