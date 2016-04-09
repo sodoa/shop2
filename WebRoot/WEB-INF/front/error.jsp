@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	
-	<div class="detailsBlock11">
+	<div class="detailsBlock11"  style="background-color: white;padding: 20px;">
 			<div style="padding:10px;text-align: center;margin-top: 30px;margin-bottom: 30px;border: 1px solid #eee;">${msg}</div>
 	</div>
 

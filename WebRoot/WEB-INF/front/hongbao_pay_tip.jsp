@@ -22,7 +22,7 @@
                 <div class="subMark"><p></p></div> 
             </header>
   	</div>
-    <div class="scroll-content">
+    <div class="scroll-content"  style="background-color: white;padding: 20px;">
 		<div id="tipmsg" class="" style="border: 1px solid #eee;padding-top: 10px;padding-bottom: 10px;padding-left: 30px;text-align: center;">
 				${msg}				
 		</div>
