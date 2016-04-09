@@ -85,7 +85,7 @@ public class WeiXinAutoLoginAct {
 		
 		String appid = FileConfig.getInstance().getString("weixin.appid");
 		String appsecret = FileConfig.getInstance().getString("weixin.appsecret");
-
+		
 		if (null != code && !"".equals(code)) {
 			logger.info("==============[OAuthServlet]获取网页授权code不为空，code=" + code);
 			// 根据code换取openId

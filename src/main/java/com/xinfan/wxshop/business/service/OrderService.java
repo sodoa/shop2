@@ -138,7 +138,7 @@ public class OrderService {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-
+		
 		try {
 			Customer level1Customer = customerDao.selectByPrimaryKey(order.getCustomerId());
 			if (level1Customer != null) {

@@ -35,6 +35,14 @@ public class RequestUtils {
 		return request;
 	}
 
+	public static boolean ifWecatRequest() {
+		String ua = getRequest().getHeader("user-agent").toLowerCase();
+		if (ua != null && ua.indexOf("micromessenger") > 0) {// 是微信浏览器
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * 获取会话对象.
 	 * 
@@ -57,11 +65,10 @@ public class RequestUtils {
 		StringBuffer requestUrl = request.getRequestURL();
 		return requestUrl.toString();
 	}
-	
-	
-	public static void getRequestQueryParamter(HttpServletRequest request,DataMap paramter,String name) {
+
+	public static void getRequestQueryParamter(HttpServletRequest request, DataMap paramter, String name) {
 		String value = request.getParameter(name);
-		if(StringUtils.isNotEmpty(value)){
+		if (StringUtils.isNotEmpty(value)) {
 			paramter.put(name, value);
 		}
 	}
@@ -103,9 +110,9 @@ public class RequestUtils {
 			return null;
 		}
 	}
-	
-	public static Map<String,String[]> getQueryParamMap(String s) {
-		
+
+	public static Map<String, String[]> getQueryParamMap(String s) {
+
 		if (StringUtils.isBlank(s)) {
 			return null;
 		}
@@ -114,8 +121,8 @@ public class RequestUtils {
 		} catch (UnsupportedEncodingException e) {
 			logger.error("encoding UTF-8 not support?", e);
 		}
-		
-		Map<String,String[]> values = parseQueryString(s);
+
+		Map<String, String[]> values = parseQueryString(s);
 		return values;
 	}
 
@@ -321,17 +328,16 @@ public class RequestUtils {
 			try {
 				page.setPageNo(Integer.parseInt(pageno));
 			} catch (Exception e) {
-				//logger.error(e.getMessage(), e);
+				// logger.error(e.getMessage(), e);
 			}
 			try {
 				page.setPageSize(Integer.parseInt(pagesize));
 			} catch (Exception e) {
-				//logger.error(e.getMessage(), e);
+				// logger.error(e.getMessage(), e);
 			}
 		}
 		return page;
 	}
-	
 
 	public static Pagination getDataTablePagination(HttpServletRequest request) {
 		Pagination page = new Pagination();
@@ -343,12 +349,12 @@ public class RequestUtils {
 
 		if (start != null) {
 			try {
-				
+
 				int startInt = Integer.parseInt(start);
 				int pagesizeInt = Integer.parseInt(pagesize);
-				
-				page.setPageNo(startInt/pagesizeInt+1);
-				
+
+				page.setPageNo(startInt / pagesizeInt + 1);
+
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
 			}
@@ -361,7 +367,6 @@ public class RequestUtils {
 		return page;
 	}
 
-
 	public static DataMap getUserSessionMap() {
 		DataMap sessionMap = (DataMap) getSession().getAttribute("sessionMap");
 		return sessionMap;
@@ -371,7 +376,6 @@ public class RequestUtils {
 		DataMap sessionMap = getUserSessionMap();
 		return sessionMap.getString("userid");
 	}
-
 
 	public static boolean isQtMultipartContent(HttpServletRequest request) {
 		if (!"post".equalsIgnoreCase(request.getMethod())) {
@@ -405,9 +409,9 @@ public class RequestUtils {
 
 		return false;
 	}
-	
-	public static DataMap getConsumerSessionMap(){
-		return (DataMap)getSession().getAttribute(BizConstants.CUSTOMER_USER_SESSION_KEY);
+
+	public static DataMap getConsumerSessionMap() {
+		return (DataMap) getSession().getAttribute(BizConstants.CUSTOMER_USER_SESSION_KEY);
 	}
 
 }
