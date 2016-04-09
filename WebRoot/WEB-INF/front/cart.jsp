@@ -16,7 +16,7 @@
 <div class="g-doc">
     <div class="top-fxied">
             <header class="header"> 
-                <div class="back"><a href="javascript:void(0);" onclick="return_prepage();"><span class="icon-back"></span></a></div> 
+                <div class="back"><a href="/" ><span class="icon-back"></span></a></div> 
                 <div class="title">购物车</div> 
                 <div class="subMark"><p><a href="javascript:void(0)" onclick="empty_cart()">清空</a></p></div> 
             </header>
