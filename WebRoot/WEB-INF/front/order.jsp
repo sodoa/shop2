@@ -58,13 +58,13 @@
         
 	        <div class="m-trade-pay" id="paytype_div">
 	        	<div class="pay-cell">
-	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" checked="checked" value="1"></div>
-	                <div class="pay-bd"><span class="zIcon"></span></div>
+	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype"  value="1"></div>
+	                <div class="pay-bd"><span class="wIcon"></span></div>
 	                <div class="pay-ft">维信支付</div>
 	            </div>
 	            <div class="pay-cell">
-	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" value="2"></div>
-	                <div class="pay-bd"><span class="wIcon"></span></div>
+	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" checked="checked" value="2"></div>
+	                <div class="pay-bd"><span class="zIcon"></span></div>
 	                <div class="pay-ft">支付宝支付</div>
 	            </div>
 	        </div>

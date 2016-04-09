@@ -14,7 +14,7 @@
 <div class="g-doc">
     <div class="top-fxied">
         <header class="header"> 
-            <div class="back"><a href="/center/my_center.html"><span class="icon-back"></span></a></div> 
+            <div class="back"><a href="/center/my_center.html?from=${from}&opt=${opt}"><span class="icon-back"></span></a></div> 
             <div class="title">收货地址管理</div> 
             <div class="subMark"><p><a href="/center/address_add.html?from=${from}">新增</a></p></div> 
         </header>

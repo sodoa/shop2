@@ -1,5 +1,21 @@
 @charset "utf-8";
+/* 头部 */
+.activity-header{height:0.64rem;margin:0.1rem 0.2rem 0;max-width: 960px;width: 100%;}
+.activity-header .back,.activity-header .shopping,.activity-header .home,.activity-header .search,.activity-header .cart{float:left}
+.activity-header .back{margin-right:3.8rem}
+.activity-header .shopping{margin-right:0.24rem}
+.activity-header .search{margin-right:0.24rem}
+.activity-header .cart{margin-right:0.24rem}
+
+.activity-header .back a,.activity-header .shopping a,.activity-header .home a,.activity-header .search a, .activity-header .cart a{width:0.64rem;height:0.64rem; background-size:cover; background-repeat:no-repeat;display:block}
+.activity-header .back a{ background-image:url(../images/left_arrow.png);}
+.activity-header .shopping a{background-image:url(../images/shopping.png);}
+.activity-header .home a{background-image:url(../images/home.png);}
+.activity-header .search a{background-image:url(../images/search_test.png);}
+.activity-header .cart a{background-image:url(../images/cart.png);}
+
 /* 倒计时栏 */
+
 .toolbar{height:0.4rem;line-height:0.4rem;background:#ffecb7;padding:0.1rem;font-size:0.18rem}
 .toolbar .time {float:left;}
 .toolbar .time em{background-color:#8b8b8b;color:#fff;padding:0.02rem 0.05rem;margin:0 0.05rem;
@@ -77,3 +93,20 @@ display: -webkit-box;
     display: block;
 }
 .m-tabs-nav .current{background:#999; color:#fff;}
+
+/* 底部 */
+.m-activity-footer{background:rgba(255,255,255,0.5);padding:0.1rem 0;border-top:1px solid #dedddd;}
+.m-activity-footer .m-activity-btn{-webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+	border:none;
+	overlfow:hidden;
+}
+.m-activity-btn div{
+width:48%;margin:1%;float:left;
+}
+.num-btn{height:38px;line-height:38px;width:100%;display:block;border:1px solid #c9c9c9;border-radius: .107rem;background:#FFF;}
+.num-btn .txtBig{font-size:20px;color:#ff4f01}
+.num-btn .icons-cart{position:relative;display:block;float:left;margin:0.15rem 0.2rem 0}
+.num-btn .cart-sales-nums{rigth:2rem}

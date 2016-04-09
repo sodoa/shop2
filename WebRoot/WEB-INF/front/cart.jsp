@@ -16,7 +16,7 @@
 <div class="g-doc">
     <div class="top-fxied">
             <header class="header"> 
-                <div class="back"><a href="/"><span class="icon-back"></span></a></div> 
+                <div class="back"><a href="javascript:void(0);" onclick="return_prepage();"><span class="icon-back"></span></a></div> 
                 <div class="title">购物车</div> 
                 <div class="subMark"><p><a href="javascript:void(0)" onclick="empty_cart()">清空</a></p></div> 
             </header>
@@ -25,17 +25,18 @@
     <div class="scroll-content">
     	
         <div class="order-manage"> 
-               <ul class="m-shoppinglist">
-               
-               		<c:if test="${!CartInfoVo.hasGoods}">
-						<div class="null_cart">
-							<p>亲,您还没有任何商品！</p>
-							<p>
-								<a href="/">马上去购物吧!</a>
-							</p>
-						</div>
-					</c:if>
-		
+              	<c:if test="${!CartInfoVo.hasGoods}">
+              		  <div class="o-error" id="error1" style="padding-top: 0.3rem;"> 
+	                    	<div> 
+	                        	<div class="img"><p><span class="icon-form"></span></p></div>  
+	                            <p class="txt">亲,您还没有任何商品！</p> 
+	                            <p class="txt" style="margin-top: 10px;">
+									<a href="/">马上去购物吧!</a>
+								</p>
+	                     	</div> 
+	                  </div> 
+				</c:if>
+				<ul class="m-shoppinglist">
 					<c:if test="${CartInfoVo.hasGoods}">
 						<c:forEach items="${CartInfoVo.carts}" var="cartitem" varStatus="st">
 		                    <li>
@@ -55,7 +56,7 @@
 		                                        </div>
 		
 		                          </div>
-		                          <div class="m-carlist-btn" onclick="deleteRow();" data="${cartitem.cartId}"><span class="close-btn" ></span></div> 
+		                          <div class="m-carlist-btn deleteRow"   data="${cartitem.cartId}"><span class="close-btn" ></span></div> 
 		                    </li>
 		                 </c:forEach>
                     </c:if>
@@ -106,7 +107,9 @@
 		});
 		
 		
-		$(".shopDelet").click(function(){
+		
+		
+		$(".deleteRow").click(function(){
 
 			var _this=$(this);
 

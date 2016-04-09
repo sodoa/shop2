@@ -10,7 +10,11 @@
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/search.css" />
 <link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
+<link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 
+<style type="text/css">
+.pic-product-list .d-img{margin:0rem 0rem;} 
+</style>
 </head>
 <body>
 
@@ -60,13 +64,15 @@
 				</a>
 			</header>
 		</div>
-		<div class="conter" style="z-index:1;width:100%;">
-		<div class="block">
-			<ul id="page-comtain">
-			</ul>
+		
+		<div class="scroll-content">
+			<div class="block">
+				 <ul class="pic-product-list" id="page-comtain">
+				</ul>
+			</div>
+			<div id="page-next"></div>
 		</div>
-		<div id="page-next"></div>
-	</div>
+		
 	<jsp:include page="scrollup.jsp"></jsp:include>
 	<jsp:include page="footer.jsp"></jsp:include>	
 	
@@ -164,23 +170,16 @@ $(function(){
       for(var i=0;i<dataList.length;i++){
       	
       	var item = dataList[i];
-      
-      	 htmlArray.push('<li> ');
-      	 htmlArray.push('	<div class="block-image">');
-      	 htmlArray.push('		<a href="goods-'+item.goodsId+'.html" ><img onerror="imagerror(this)"  src="'+item.thumbnailUrl+'"  style="width: 100%;height:200px;"> </a> ');
-      	 htmlArray.push('	</div>');
-
-      	 htmlArray.push('	<div class="block-titel">'+item.goodsLname+'</div>');
-      	 htmlArray.push('	<div class="block-price">');
-      	 htmlArray.push('		<p>&yen;'+item.finalPrices+'</p>');
-      	 htmlArray.push('		<p>');
-      	 htmlArray.push('			<s>&yen;'+item.orginPrices+'</s>');
-      	 htmlArray.push('		</p>');
-      	 htmlArray.push('		<p>'+item.discount+'折</p>');
-      	 htmlArray.push('		<a href=""></a>');
-      	 htmlArray.push('	</div>');
-      	 htmlArray.push('</li>');
-	      
+      	
+      	 htmlArray.push('<li>');
+      	 htmlArray.push('<div class="d-img"> <a href="goods-'+item.goodsId+'.html"><img onerror="imagerror(this)"   src="'+item.thumbnailUrl+'" style="width: 100%;height:200px;"> </a></div> ');
+      	 htmlArray.push('<div class="d-tit">'+item.goodsLname+'</div> ');
+      	 htmlArray.push('<div class="d-subMark"> ');
+      	 htmlArray.push('	<p class="price">&yen;'+item.finalPrices+'</p> ');
+      	 htmlArray.push('    <p class="change"><del>&yen;'+item.orginPrices+'</del><br/><span class="discount">'+item.discount+'折</span></p> ');
+      	 htmlArray.push('    <p class="btn"><a href="#"></a></p> ');
+      	 htmlArray.push('</div> ');
+      	 htmlArray.push('</li> ');
       }
       
       $('#page-comtain').append(htmlArray.join(""));

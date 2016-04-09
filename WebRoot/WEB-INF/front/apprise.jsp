@@ -10,19 +10,44 @@
 <link href="/theme/css/myCenter.css" type="text/css" rel="stylesheet" />
 <link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
+<style type="text/css">
 
+
+ .order_address{position:relative;border-top:#eee solid 1px;padding:10px}
+
+.order_address p:nth-child(1){display:inline;font-size:14px;font-weight:700;}
+
+.order_address p:nth-child(2){display:inline;}
+
+ .order_address p:nth-child(3){float:right;color:#B3B3B3;font-size:9px;text-align:right;padding:2px}
+
+ .order_address .myPhoto{width:38px;height:38px;border-radius:38px;position:relative;overflow:hidden;display:inline-block;vertical-align: middle;}
+
+ .order_address .myName{margin-left:10px;font-size}
+
+ .order_address .myAssess{margin:20px 0}
+
+.order_cost{height:18px;position:relative;border-top:#eee solid 1px;padding:10px}
+
+.order_cost p:nth-child(1){float:left}
+
+.order_cost p:nth-child(2){float:right;padding:0 15px}
+
+.order_cost p:nth-child(3){float:right;padding:0 15px}
+
+</style>
 </head>
 <body>
 
-	<div class="header">
-		<div class="top_left1">
-			<a href="/goods-${goodsId}.html"><img src="/theme/images/back.png" style="width:12px"></a>
-		</div>
-		<div  class="top_center1">
-			商品评论
-		</div>
+<div class="g-doc">
+	<div class="top-fxied">
+		<header class="header"> 
+	                <div class="back"><a href="/goods-${goodsId}.html"><span class="icon-back"></span></a></div> 
+	                <div class="title">商品评论</div> 
+	                <div class="subMark"><p></p></div> 
+	            </header>
 	</div>
-	
+
 
 	<div class="order_paylist">
 
@@ -32,9 +57,10 @@
 		<div id="page-next"></div>
 	</div>	
 
-	<jsp:include page="footer.jsp"></jsp:include>
-	
-	<script type="text/javascript" src="/jslib/swipe/jquery.touchSwipe.min.js"></script>
+<jsp:include page="scrollup.jsp"></jsp:include>
+
+</div>
+
 	
 	<script type="text/javascript">
 			

@@ -1,5 +1,4 @@
 /**
- * @name	jQuery.touchSlider
  * @version	201209_2
  * @since	201106
  * @param Object	settings	闋囨﹣姝ユ挨鈧澗?闉撱倠绗囬灊婵忓Ъ

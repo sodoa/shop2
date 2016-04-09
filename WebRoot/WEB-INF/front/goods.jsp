@@ -7,62 +7,34 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
-<link href="/theme/css/details.css" type="text/css" rel="stylesheet" />
-<link type="text/css" href="/theme/css/slider.css" rel="stylesheet" />
-<script type="text/javascript" src="/theme/js/jquery.touchSlider.js"></script>
+<link href="/theme/newest/css/detail.css" type="text/css" rel="stylesheet" />
+<script src="/theme/js/wap.js"></script>
 
 <style type="text/css">
 
-.shopcart{
-	clear:both;
-	padding-left:5px;
-	padding-right:5px;
-	min-width:30%;
-	height:40px;
-	background-color:#fff;
-	border:1px solid #eee;
-	position:fixed;
-	bottom:50px;
 
-	max-width: 340px;
-    min-width: 140px;
-} 
-.shopcart button{
-	margin-left:5px;
-	height:30px;
-	margin-top:5px;
-	background-color:#ff2d49;
-	border:0;
-	font-size:14px;
-	color:#FFF;
-	border-radius:5px;
-}
+ .order_address{position:relative;border-top:#eee solid 1px;padding:10px}
 
-.share{
-	margin-top:50px;
-	position: absolute;
-	top: 0px;
-	width:100%;
-	right: 0px;
-	z-index: 999;
-}
-.share ul{
-	
-}
-.share ul .wenz{
-	width:33.333333%;
-	height:100px;
-	float:left;
-	background-color:#ececec;
-	text-align:center;
-}
-.share ul .wenz img{
-	width:20%;
-	margin-top:15px;
-}
+.order_address p:nth-child(1){display:inline;font-size:14px;font-weight:700;}
 
-.detailsBlock11{width:100%;background-color:#fff}
+.order_address p:nth-child(2){display:inline;}
+
+ .order_address p:nth-child(3){float:right;color:#B3B3B3;font-size:9px;text-align:right;padding:2px}
+
+ .order_address .myPhoto{width:38px;height:38px;border-radius:38px;position:relative;overflow:hidden;display:inline-block;vertical-align: middle;}
+
+ .order_address .myName{margin-left:10px;font-size}
+
+ .order_address .myAssess{margin:20px 0}
+
+.order_cost{height:18px;position:relative;border-top:#eee solid 1px;padding:10px}
+
+.order_cost p:nth-child(1){float:left}
+
+.order_cost p:nth-child(2){float:right;padding:0 15px}
+
+.order_cost p:nth-child(3){float:right;padding:0 15px}
+
 
 iframe{ height:100%; width:100%; overflow:auto; }   
 
@@ -71,88 +43,83 @@ iframe{ height:100%; width:100%; overflow:auto; }
 </head>
 <body>
 
-	<div class="header">
-		<div class="top_left1">
-			<a href="/"><img src="/theme/images/back.png" style="width:12px"></a>
-		</div>
-		<div  class="top_center1">
-			商品详情
-		</div>
-		<div class="top_right1" >
-			<a href="/cart.html"><img src="/theme/images/spc.png" style="width:29px;height:29px"></a>
-		</div>
-	</div>
-	
-	<div class="detailsBlock1">
-		<div>
-			<div class="main_visual" style="height: 200px;">
-		
-				<div class="flicking_con">
-		
-					<a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>
-		
-					<a href="#">5</a>
-		
-				</div>
-		
-				<div class="main_image">
-		
-					<ul>
-						<c:forEach var="item" items="${gImages}">
-							<li><img  onerror="imagerror(this)" src="${item.imageUrl}" style="width:100%;height:100%;" /></li>
-						</c:forEach>
-					</ul>
-		
-					<a href="javascript:;" id="btn_prev"><</a> <a href="javascript:;"
-						id="btn_next">></a>
-				</div>
-			</div>
-		</div>
-		<div>
-			<p>${goods.goodsLname}</p>
-			<p>&yen;${goods.finalPrices}</p><p><s>&yen;${goods.orginPrices}</s></p><p>${goods.discount}折</p>
-			<div class="collection" style="cursor: pointer;" onclick="addLove(${goods.goodsId})">
-				<div><img src="/theme/images/details/love.png"></div>
-				<p>收藏</p>
-			</div>
-		</div>
-	</div>
-	
-	
-	<div class="clear"></div>
-	<div class="detailsBlock2">
-		<div class="nav">
-			<p style="cursor: pointer;" class="cur">详情</p>
-			<p style="cursor: pointer;">口碑</p>
-		</div>
-		<div class="detailsConter">
-						<div style="clear: both;word-wrap:break-word;overflow-wrap:break-word;"  id="htmlwrap">
-								<iframe id="htmlframe" name="htmlframe" onload="setIframeHeight(this)" style="z-index: 9999" frameborder="0" scrolling="no" src="/goods-html.html?s=${goods.summary}" width="100%"  ></iframe>
-						</div>
-		</div>
 
-		<div class="shopAssess"  style="display:none">
-			<c:forEach var="item" items="${list}">
-				<div>
-					<div class="myPhoto"><img src="/theme/images/3.png" style="width:100%"/></div>
-					<p  class="myName">${item.customerName}</p>		
-					</br>
-					<p class="myAssess">${item.context}</p>					
-				</div>
+<div class="g-doc">
+
+     <header class="activity-header" style="position:absolute;z-index:100"> 
+         <div class="back"><a href="javascript:void(0);" onclick="return_prepage();"></a></div> 
+         <div class="cart">
+         		<a href="/cart.html"><i class="cart-sales-nums" style="position: relative;padding: 5px;float: right;"><sp:cart_num_tag></sp:cart_num_tag></i></a>
+         </div>
+         <div class="home"><a href="/"></a></div>
+     </header>
+    	
+     <div class="m-slider" style="position:relative">
+         <div class="m-slider-con-wrap" id="JslideWrap">
+         <div class="m-slider-con" >
+        	<c:forEach var="item" items="${gImages}">
+        		<a class="m-slider-item" href="javascript:void(0);"><img style="max-width: 960px;" width="100%" height="60%"   src="${item.imageUrl}" /></a>
 			</c:forEach>
-			<p><a href="/apprise-${goods.goodsId}.html">查看更多评论</a></p>			
+         </div>
+         </div>
+         <div class="m-slider-nav" id="JslideNav"></div>
+     </div>
+       
+       	
+     <div class="m-block" style="overflow:hidden;border-top:none">
+     	<div class="col-xs-9">
+         <p class="m-txt">${goods.goodsLname}</p>
+         <p class="m-change">&yen;${goods.finalPrices} <span class="discount">${goods.discount}折</span><span class="old">原价：&yen;${goods.orginPrices}</span></p>
+         </div>
+         <div class="col-xs-3"><a href="javascript:void(0);" onclick="addLove(${goods.goodsId})"><span class="favorite-btn btn" >收藏</span></a>
+         </div>
+     </div>
+        
+        <!-- 详情 -->
+        <div class="m-tabs alter">
+			<div class="m-tabs-nav">
+                <a>商品详情</a>
+                <a>用户口碑</a>
+              </div>
+        <div class="m-tabs-con-wrap">
+        <div class="m-tabs-con">
+        <div class="m-tabs-item">
+			<div style="clear: both;word-wrap:break-word;overflow-wrap:break-word;"  id="htmlwrap">
+					<iframe id="htmlframe" name="htmlframe" onload="setIframeHeight(this)" style="z-index: 9999" frameborder="0" scrolling="no" src="/goods-html.html?s=${goods.summary}" width="100%"  ></iframe>
+			</div>
+         </div>
+        <div class="m-tabs-item">
+				<c:forEach var="item" items="${list}">
+					<div class="order_address">
+						<div class="myPhoto"><img src="/theme/images/3.png" /></div>
+						<p  class="myName">${item.customerName}</p>		
+						</br>
+						<p class="myAssess">${item.context}</p>					
+					</div>
+				</c:forEach>
+				<p style="text-align: center;"><a href="/apprise-${goods.goodsId}.html">查看更多评论</a></p>			
+        </div>
 		</div>
-	</div>
+		</div>
+		</div>
+       
+       
+      
+<!-- 底部 -->
+<div class="bottom-fxied">
+	<div class="m-activity-footer">
+    <div class="m-activity-btn">
+        <div><a  href="javascript:void(0)" class="red-btn" id="put_goods_to_order">马上抢</a></div>  
+     	<div><a  href="javascript:void(0)" class="orange-btn" id="put_goods_in_cart">加入购物车</a></div>    
+     </div>
+    </div>
+</div>
+
+
+<jsp:include page="scrollup.jsp"></jsp:include>
+
+</div>
 	
-	<div class="shopcart">
-		<button style="cursor: pointer;    font-family: 'Microsoft YaHei';width:90px;" id="put_goods_to_order">直接购买</button>
-		<button style="cursor: pointer;    font-family: 'Microsoft YaHei';width:90px;" id="put_goods_in_cart">加入购物车</button>
-	</div>
-	
-	<jsp:include page="scrollup.jsp"></jsp:include>
-	<jsp:include page="footer.jsp"></jsp:include>
-	
-	<script type="text/javascript" src="/jslib/swipe/jquery.touchSwipe.min.js"></script>
 	
 	<script type="text/javascript">
 
@@ -326,106 +293,6 @@ iframe{ height:100%; width:100%; overflow:auto; }
 
 	}
 	
-
-
-	$(document).ready(
-
-			function() {
-				$dragBln = false;
-				$(".main_image").touchSlider(
-						{
-
-							flexible : true,
-
-							speed : 200,
-
-							btn_prev : $("#btn_prev"),
-
-							btn_next : $("#btn_next"),
-
-							paging : $(".flicking_con a"),
-
-							counter : function(e) {
-
-								$(".flicking_con a").removeClass("on").eq(
-
-										e.current - 1).addClass("on");
-
-							}
-
-						});
-
-
-
-				$(".main_image").bind("mousedown", function() {
-
-					$dragBln = false;
-
-				});
-
-
-
-				$(".main_image").bind("dragstart", function() {
-
-					$dragBln = true;
-
-				});
-
-
-
-				$(".main_image a").click(function() {
-
-					if ($dragBln) {
-
-						return false;
-
-					}
-
-				});
-
-
-
-				timer = setInterval(function() {
-
-					$("#btn_next").click();
-
-				}, 2000);
-
-
-
-				$(".main_visual").hover(function() {
-
-					clearInterval(timer);
-
-				}, function() {
-
-					timer = setInterval(function() {
-
-						$("#btn_next").click();
-
-					}, 2000);
-
-				});
-
-
-
-				$(".main_image").bind("touchstart", function() {
-
-					clearInterval(timer);
-
-				}).bind("touchend", function() {
-
-					timer = setInterval(function() {
-
-						$("#btn_next").click();
-
-					}, 2000);
-
-				});
-
-
-
-			});
 	
 	</script>
 

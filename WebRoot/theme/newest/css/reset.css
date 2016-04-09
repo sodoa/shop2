@@ -97,6 +97,16 @@ input[type="checkbox"]:focus,input[type="checkbox"]:hover,input[type="radio"]:fo
     border-radius: .107rem;
     font-size:16px;
 }
+.red-btn {
+    display: block;
+    height:40px;
+    line-height:40px;
+    background: #ff0000;
+    text-align: center;
+    color: #fff;
+    border-radius: .107rem;
+    font-size:16px;
+}
 .close-btn{width:0.23rem;height:0.24rem;background-image:url(../images/del.png);background-size:contain;display:block}
 /* 头部 */
 .header{height:0.85rem;line-height:0.85rem;background:#fff;display: -webkit-box;
