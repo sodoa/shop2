@@ -32,13 +32,13 @@
 					<div class="form-group">
 						<label for="name" class="col-xs-3">旧密码</label>
 						<div class="col-xs-9">
-							<input type="password" id="orgi_password" name="orgi_password" datatype="n1-30" errormsg="请输入旧密码" placeholder="请输入旧密码" required maxlength="30">
+							<input type="password" id="orgi_password" name="orgi_password" datatype="*1-30" errormsg="请输入旧密码，1到30位之间" placeholder="请输入旧密码" required maxlength="30">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="name" class="col-xs-3">新密码</label>
 						<div class="col-xs-9">
-							<input type="password" id="password" name="password" datatype="n1-30" errormsg="请输入新密码" placeholder="请输入新密码" required maxlength="30">
+							<input type="password" id="password" name="password" datatype="*1-30" errormsg="请输入新密码，1到30位之间" placeholder="请输入新密码" required maxlength="30">
 						</div>
 					</div>
 					<div class="form-group">

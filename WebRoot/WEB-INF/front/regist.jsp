@@ -63,13 +63,13 @@
 		              <div class="form-group">
 		                <label for="name" class="col-xs-3">称&nbsp;&nbsp;&nbsp;呼</label>
 		                <div class="col-xs-9">
-		                  <input type="text" id="displayname" name="displayname"  datatype="n1-20" placeholder="请输入您的称呼">
+		                  <input type="text" id="displayname" name="displayname"  datatype="*1-20" placeholder="请输入您的称呼" errormsg="长度在1到20位">
 		                </div>
 		              </div>					
 					<div class="form-group">
 						<label for="name" class="col-xs-3">密码</label>
 						<div class="col-xs-9">
-							<input type="password" id="login_password" name="password" datatype="n1-30" errormsg="请输入密码" placeholder="请输入密码" required maxlength="30">
+							<input type="password" id="login_password" name="password" datatype="*1-30" errormsg="长度在1到30位" placeholder="请输入密码" required maxlength="30">
 						</div>
 					</div>
 					<div class="form-group">
