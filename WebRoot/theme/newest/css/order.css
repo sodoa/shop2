@@ -428,6 +428,12 @@ font-size: 0.26rem;
 color: #323232;	
 background:#fff;
 }
+.m-cells .m-cell-item a{
+display:inline-block;
+width: 100%;
+}
+
+
 .m-cells .m-cell-item>a:after {
     content: " ";
     display: inline-block;
