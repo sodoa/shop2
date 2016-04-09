@@ -21,8 +21,7 @@ public class AppraiseService {
 
 	public boolean add(Appraise pojo) {
 
-		Customer customer = customerDao
-				.selectByPrimaryKey(pojo.getCustomerId());
+		Customer customer = customerDao.selectByPrimaryKey(pojo.getCustomerId());
 		if (customer != null) {
 			pojo.setCustomerName(customer.getDisplayname());
 		}
@@ -35,6 +34,12 @@ public class AppraiseService {
 	public Appraise get(int id) {
 
 		return appraiseDao.selectByPrimaryKey(id);
+	}
+
+	public Appraise getByOrderId(int id) {
+		List<Appraise> list = appraiseDao.selectByOrderId(id);
+
+		return list.size() > 0 ? list.get(0) : null;
 	}
 
 	public boolean delete(int appraiseId) {

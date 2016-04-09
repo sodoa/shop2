@@ -125,7 +125,7 @@ public class OrderListAct {
 			String li = request.getParameter("li");
 			String id = request.getParameter("id");
 			
-			Appraise bean  =this.AppraiseService.get(Integer.parseInt(id));
+			Appraise bean  =this.AppraiseService.getByOrderId(Integer.parseInt(id));
 			
 			mv.addObject("li", li);
 			mv.addObject("id", id);

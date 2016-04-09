@@ -25,6 +25,11 @@ public class CustomerDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectList(
 				wrapCommand("pageSelectCustomerList"), map, page);
 	}
+	
+	public List<DataMap> pageSelectLayerCustomerList(DataMap map, Pagination page) {
+		return getSqlSession().selectList(
+				wrapCommand("pageSelectLayerCustomerList"), map, page);
+	}
 
 	public int updateByPrimaryKeySelective(Customer pojo) {
 		return getSqlSession().update(

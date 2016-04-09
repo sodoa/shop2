@@ -36,6 +36,12 @@ public class CustomerAction {
 		return mv;
 	}
 	
+	@RequestMapping("/customer-layer-list.jspx")
+	public ModelAndView customerLayerList(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/admin/customer/list-layer");
+		return mv;
+	}
+	
 
 	@RequestMapping("/customer-password.jspx")
 	public ModelAndView password(HttpServletRequest request) {
@@ -101,6 +107,38 @@ public class CustomerAction {
 		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw),
 				page, new String[] { "customer_id", "displayname", "account",
 						"regdate", "reg_type","state" });
+
+		return grid;
+	}
+	
+
+	@RequestMapping("/customer-listlayer-page.jspx")
+	public @ResponseBody
+	DataTableDataGrid listlayer(HttpServletRequest request) {
+
+		Pagination page = RequestUtils.getDataTablePagination(request);
+		String draw = request.getParameter("draw");
+		if (draw == null || draw.trim().length() == 0) {
+			draw = "1";
+		}
+		
+		DataMap map = new DataMap();
+		
+		String userPhone = request.getParameter("user_phone");
+		String level2Num = request.getParameter("level2Num");
+		
+		if(StringUtils.isNotEmpty(userPhone)){
+			map.put("account", userPhone);
+		}
+		if(StringUtils.isNotEmpty(level2Num)){
+			map.put("level2Num", level2Num);
+		}		
+		
+		page = CustomerService.pageSelectLayerCustomerList(map, page);
+
+		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw),
+				page, new String[] { "customer_id", "displayname", "account",
+						"regdate", "reg_type","level2" });
 
 		return grid;
 	}

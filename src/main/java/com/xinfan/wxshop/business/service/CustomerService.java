@@ -325,6 +325,16 @@ public class CustomerService {
 		return page;
 	}
 	
+	public Pagination pageSelectLayerCustomerList(DataMap map, Pagination page) {
+
+		QueryParamterUtils.addQueryTime(map, "startdate", "endate");
+
+		List list = this.customerDao.pageSelectLayerCustomerList(map, page);
+		page.setList(list);
+
+		return page;
+	}
+	
 	public List<Customer> listCustomerLayerUser(int customerId,int level) {
 		DataMap param = new DataMap();
 		param.put("customerId", customerId);
