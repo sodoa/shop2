@@ -9,8 +9,6 @@
 <html class="no-js">
 <head>
 	<jsp:include page="header.jsp"></jsp:include>
-	<link href="/theme/css/common.css" type="text/css" rel="stylesheet" />
-	<link href="/theme/css/shop.css" type="text/css" rel="stylesheet" />
 	
 </head>
 <body>
@@ -26,8 +24,6 @@
 			</div>
 
 	</div>
-		
-	<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 </html>
