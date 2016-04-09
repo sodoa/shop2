@@ -89,6 +89,68 @@
 			});
 			
 		});
+		
+		var title = '<sp:config id="goal.title"></sp:config>|<sp:config id="goal.description"></sp:config>'	;
+		var imgUrl = 'http://'+window.location.host+":"+window.location.port+"/theme/newest/logo/128x128.png";
+
+		function getMenuShareTimeline(wxsid){
+			
+			var shareid = wxsid;
+			var link = addUrlPara('wxsid',shareid);
+			
+			return {
+			    title: title, // 分享标题
+			    link: link, // 分享链接
+			    imgUrl: imgUrl, // 分享图标
+			    success: function () { 
+			    	alert('分享成功');
+			    },
+			    cancel: function () { 
+			    	alert('分享失败');
+			    }
+			};
+		}
+
+		function getMenuShareAppMessage(wxsid){
+			
+			var shareid = wxsid;
+			var link = addUrlPara('wxsid',shareid);
+			
+			return {
+			    title: title, // 分享标题
+			    desc: title, // 分享描述
+			    link: link, // 分享链接
+			    imgUrl: imgUrl, // 分享图标
+			    type: 'link', // 分享类型,music、video或link，不填默认为link
+			    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+			    success: function () { 
+			    	alert('分享成功');
+			    },
+			    cancel: function () { 
+			    	alert('分享失败');
+			    }
+			};
+		}
+
+		function getMenuShareQQ(wxsid){
+			
+			var shareid = wxsid;
+			var link = addUrlPara('wxsid',shareid);
+			
+			return {
+			    title: title, // 分享标题
+			    desc: title, // 分享描述
+			    link: link, // 分享链接
+			    imgUrl: imgUrl, // 分享图标
+			    success: function () { 
+			    	alert('分享成功');
+			    },
+			    cancel: function () { 
+			    	alert('分享失败');
+			    }
+			};
+		}
+		
 	</script>
 </body>
 </html>

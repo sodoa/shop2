@@ -240,36 +240,6 @@ iframe{ height:100%; width:100%; overflow:auto; }
 	  	}
 	};
 	
-	$(function(){
-		$(".detailsBlock2 .nav p:nth-child(1)").click(function(){
-			if(!$(this).hasClass("cur")){
-
-				$(".detailsBlock2 .nav p:nth-child(2)").removeClass("cur");
-
-				$(this).addClass("cur");
-
-				$(".detailsConter").css("display","block");
-
-				$(".shopAssess").css("display","none");
-			}
-		});
-
-		$(".detailsBlock2 .nav p:nth-child(2)").click(function(){
-			if(!$(this).hasClass("cur")){
-
-				$(".detailsBlock2 .nav p").removeClass("cur");
-
-				$(this).addClass("cur");
-
-				$(".shopAssess").css("display","block");
-
-				$(".detailsConter").css("display","none");
-			}
-		});
-
-	});
-	
-	
 	function addLove(gid){
 		
 		checkLogin(function(){

@@ -22,7 +22,7 @@
 					</p>
 					<p class="num" style="padding: 0.1rem 0.1rem;">
 						累计提层：${wallet.distrBalance}&yen;&nbsp;&nbsp;&nbsp;
-						<a href="./distri-tip.html" style="font-size: 14px; color: orange;">分销说明</a>
+						<a href="/distri-tip.html?id=${customerId}" style="font-size: 14px; color: orange;">分销说明</a>
 					</p>
 				</div>
 				<div class="userPic" style="margin-right: 0px; padding: 0.05rem">
