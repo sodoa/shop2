@@ -5,4 +5,5 @@
     right: 20px;
     width: 38px;    /* Width of image */
     height: 38px;   /* Height of image */
+    z-index: 999999;
 }
