@@ -378,7 +378,7 @@ function GoCenterUrl(url){
 }
 
 function imagerror(obj){
-	obj.src = "/theme/images/no-image-large.png";
+	obj.src = "/theme/newest/images/no-image-large.png";
 }
 
 function addUrlPara(name, value) {  

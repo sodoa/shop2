@@ -65,7 +65,7 @@
 							<li>
 								<a href="/goods-${item.goodsId}.html">
 									<img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage"> <span>
-										<p class="name" style="overflow: hidden; width: 60%">${item.goodsLname}</p></span>
+										<p class="name" style="overflow: hidden; ">${item.goodsLname}</p></span>
 								
 				                    <p class="discount">${item.discount}折</p>
 				                    <p class="price">火爆价<br/><span class="big">${item.finalPrices}</span>元</p>		
