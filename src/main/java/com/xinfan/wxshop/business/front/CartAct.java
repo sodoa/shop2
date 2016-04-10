@@ -21,10 +21,12 @@ import com.xinfan.wxshop.business.service.DeliveryAddressService;
 import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
+import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.business.vo.CartInfoVo;
 import com.xinfan.wxshop.business.vo.MakeOrderTable;
 import com.xinfan.wxshop.common.base.BizException;
 import com.xinfan.wxshop.common.base.DataMap;
+import com.xinfan.wxshop.common.context.AppContextHolder;
 
 @Controller
 public class CartAct {
@@ -57,6 +59,11 @@ public class CartAct {
 			CartService.addGoodInCart(sessionId,Integer.parseInt(goodsId));
 			
 			result = JSONResult.success();
+			
+			CartService bean = AppContextHolder.getBean(CartService.class);
+			int num = bean.getCartNumBySessionId(sessionId);
+			
+			result.putValue("num", num);
 
 		}catch (BizException e) {
 			logger.error(e.getMessage(),e);
@@ -133,6 +140,7 @@ public class CartAct {
 
 		CartInfoVo CartInfoVo = CartService.getCartInfoBySessionId(sessionId);
 		mv.addObject("CartInfoVo", CartInfoVo);
+		mv.addObject("wecat", RequestUtils.ifWecatRequest());
 
 		return mv;
 	}

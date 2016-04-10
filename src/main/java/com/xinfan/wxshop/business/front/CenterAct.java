@@ -51,6 +51,7 @@ public class CenterAct {
 		}
 		
 		if(from!=null && from.trim().length()>0){
+			request.getSession().removeAttribute("from");
 			return new ModelAndView("redirect:"+from);
 		}
 		

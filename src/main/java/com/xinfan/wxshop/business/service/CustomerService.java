@@ -27,6 +27,7 @@ import com.xinfan.wxshop.business.entity.Order;
 import com.xinfan.wxshop.business.entity.OrderDetail;
 import com.xinfan.wxshop.business.entity.Transfer;
 import com.xinfan.wxshop.business.entity.Wallet;
+import com.xinfan.wxshop.business.pay.weixin.WxNotifyUtils;
 import com.xinfan.wxshop.business.util.QueryParamterUtils;
 import com.xinfan.wxshop.business.vo.OrderBean;
 import com.xinfan.wxshop.common.base.BizException;
@@ -103,8 +104,11 @@ public class CustomerService {
 		}
 		
 		String share_id = attributes.getString("share_id");
-		if(share_id == null || share_id.length() ==0){
+		Customer shareCustomer = null;
+		if (share_id == null || share_id.length() == 0) {
 			share_id = "0";
+		} else {
+			shareCustomer = customerDao.selectByPrimaryKey(Integer.parseInt(share_id));
 		}
 		
 		String wxId = attributes.getString("wx_id");
@@ -136,6 +140,12 @@ public class CustomerService {
 		wallet.setDistrCount(0);
 
 		this.walletDao.insertSelective(wallet);
+		
+		if (shareCustomer != null) {
+			if(shareCustomer.getWxId()!=null && shareCustomer.getWxId().length()>1){
+				WxNotifyUtils.customerDownlineJoinNotify(shareCustomer.getWxId(), shareCustomer.getDisplayname(), "2");
+			}
+		}
 
 	}
 

@@ -21,6 +21,7 @@ import com.xinfan.wxshop.business.dao.GoodsDao;
 import com.xinfan.wxshop.business.dao.OrderDao;
 import com.xinfan.wxshop.business.dao.OrderDetailDao;
 import com.xinfan.wxshop.business.dao.SequenceDao;
+import com.xinfan.wxshop.business.dao.WalletDao;
 import com.xinfan.wxshop.business.entity.Appraise;
 import com.xinfan.wxshop.business.entity.Customer;
 import com.xinfan.wxshop.business.entity.DeliveryAddress;
@@ -28,6 +29,8 @@ import com.xinfan.wxshop.business.entity.Distribution;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.Order;
 import com.xinfan.wxshop.business.entity.OrderDetail;
+import com.xinfan.wxshop.business.entity.Wallet;
+import com.xinfan.wxshop.business.pay.weixin.WxNotifyUtils;
 import com.xinfan.wxshop.business.vo.MakeOrderTable;
 import com.xinfan.wxshop.business.vo.OrderBean;
 import com.xinfan.wxshop.business.vo.PurchaseGoodsVo;
@@ -63,6 +66,9 @@ public class OrderService {
 
 	@Autowired
 	private DeliveryAddressDao deliveryAddressDao;
+	
+	@Autowired
+	private WalletDao walletDao;
 
 	@Autowired
 	private SmsService smsService;
@@ -166,6 +172,18 @@ public class OrderService {
 						distribution.setResult(1);
 						distribution.setLevel(2);
 						distributionDao.insertSelective(distribution);
+					
+						if (level1Customer.getWxId() != null && level1Customer.getWxId().length() > 1) {
+
+							Wallet wallet = this.walletDao.selectByCustomerIdKey(level1Customer.getCustomerId());
+							String totalMoney = "";
+							if (wallet != null) {
+								totalMoney = String.valueOf(wallet.getBalance());
+							}
+							WxNotifyUtils.customerPointsJoinNotify(level1Customer.getWxId(), level1Customer.getDisplayname(), String.valueOf(income),
+									totalMoney, "2");
+						}
+						
 
 						if (level1Customer.getUplineId() != null) {
 							Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
@@ -190,6 +208,18 @@ public class OrderService {
 									distribution2.setResult(1);
 									distribution2.setLevel(3);
 									distributionDao.insertSelective(distribution2);
+									
+									if (level2Customer.getWxId() != null && level2Customer.getWxId().length() > 1) {
+
+										Wallet wallet = this.walletDao.selectByCustomerIdKey(level2Customer.getCustomerId());
+										String totalMoney = "";
+										if (wallet != null) {
+											totalMoney = String.valueOf(wallet.getBalance());
+										}
+										WxNotifyUtils.customerPointsJoinNotify(level2Customer.getWxId(), level2Customer.getDisplayname(), String.valueOf(income2),
+												totalMoney, "3");
+									}
+									
 								}
 							}
 						}

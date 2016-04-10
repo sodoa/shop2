@@ -176,6 +176,7 @@ public class OrderListAct {
 		mv.addObject("address", address);
 		mv.addObject("bean", orderBean);
 		mv.addObject("menu_hit", 4);
+		mv.addObject("wecat", RequestUtils.ifWecatRequest());
 
 		return mv;
 	}
