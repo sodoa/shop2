@@ -26,11 +26,18 @@
     <div class="scroll-content">
     	<ul class="m-order-addresslist">       
                  <li>
-					<input type="hidden" name="deliveryId" value="${address.deliveryId}" />
-					<div class="m-order-address">
-					    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
-					    <p>${address.address}</p>
-					</div>            
+					<input type="hidden" name="deliveryId"  datatype="*" nullmsg="请编辑收货地址" value="${address.deliveryId}" />
+					<c:if test="${empty address.deliveryId}">
+						<div class="m-order-address">
+						    <p style="cursor: pointer;" onclick="selectAddress()" >请编辑收货地址</span></p>
+						</div>            
+					</c:if>
+					<c:if test="${not empty address.deliveryId}">
+						<div class="m-order-address">
+						    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
+						    <p>${address.address}</p>
+						</div>            
+					</c:if>					
 					 <a href="javascript:void();"  onclick="selectAddress()" class="m-order-address-edit"></a>     
          		 </li>
             </ul>
@@ -57,13 +64,15 @@
         <div class="m-trade-pay">
         
 	        <div class="m-trade-pay" id="paytype_div">
-	        	<div class="pay-cell">
-	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype"  value="1"></div>
-	                <div class="pay-bd"><span class="wIcon"></span></div>
-	                <div class="pay-ft">维信支付</div>
-	            </div>
+	        	<c:if test="${wecat}">
+		        	<div class="pay-cell">
+		                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype"  <c:if test="${wecat}"> checked="checked" </c:if> value="1"></div>
+		                <div class="pay-bd"><span class="wIcon"></span></div>
+		                <div class="pay-ft">微信支付</div>
+		            </div>
+	            </c:if>
 	            <div class="pay-cell">
-	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" checked="checked" value="2"></div>
+	                <div class="pay-hd"><input type="radio" class="cartList-check" name="paytype" <c:if test="${!wecat}"> checked="checked" </c:if> value="2"></div>
 	                <div class="pay-bd"><span class="zIcon"></span></div>
 	                <div class="pay-ft">支付宝支付</div>
 	            </div>
@@ -74,23 +83,14 @@
            <div class="m-cell-title">给卖家留言</div>
            <div class="m-cell-primary">
            	<div style="padding:0.1rem">
-           <textarea class="m-textarea"  datatype="*0-100" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
+           <textarea class="m-textarea"  datatype="*0-180" errormsg="留言字数需要在100个以下" name="order_remark" rows="3" cols="30" style="width:99%;border: 1px solid #eee;"></textarea>
            </div>
            </div>
        </div> 
        
        	<c:if test="${CartInfoVo.hasGoods}">
 		     <div class="bottom-fxied">
-		     	<c:choose>
-							<c:when test="${empty address}">
-								<div class="m-btn" style="color: gray;"> <a href="javascript:void(0)" class="orange-btn">确认支付（${CartInfoVo.totalAmount}元）</a> </div>
-							</c:when>
-							<c:otherwise>
-								<div class="m-btn"  onclick="sumibtForm()"> <a href="javascript:void(0)" class="orange-btn">确认支付（${CartInfoVo.totalAmount}元）</a> </div>
-							</c:otherwise>
-				</c:choose>
-						
-		 		
+					<div class="m-btn"  onclick="sumibtForm()"> <a href="javascript:void(0)" class="orange-btn">确认支付（${CartInfoVo.totalAmount}元）</a> </div>
 		 	</div>
 	 	</c:if>
        
@@ -105,22 +105,12 @@
 <script type="text/javascript">
 			
 	$(function(){
-		
-		$("ul .toShowPayment").click(function(){
-			
-			//payment_li_current
-			$("ul .toShowPayment").removeClass("payment_li_current");
-			$(this).addClass("payment_li_current");
-			$("#order_payment_type").val($(this).attr("type"));
-			
-		});
-		
 		//alert(typeof WeixinJSBridge);
 		
-		if (!isWeiXinBrowser()){
-			$("#paytype_div>div:last").click();
-			$("#paytype_div>div:first").remove();
-		}
+		//if (!isWeiXinBrowser()){
+			//$("#paytype_div>div:last").click();
+			//$("#paytype_div>div:first").remove();
+		//}
 		
 	});
 	
@@ -142,6 +132,11 @@
 				form[0].submit();
 				//var index = parent.layer.getFrameIndex(window.name);
 				//parent.layer.close(index);
+			},
+			tiptype : function(msg, o, cssctl) {
+				if(o.type == 3){
+					layer.msg(msg);
+				}
 			}
 		});
 	});	

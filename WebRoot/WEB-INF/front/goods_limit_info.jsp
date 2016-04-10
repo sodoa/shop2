@@ -219,6 +219,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
 	             success:function(data){
 	            	if(data.result ==0){
 	            		alert('添加成功');
+	            		$(".cart-sales-nums").html(data.num);
 	            	}
 	            	else{
 	            		alert('添加失败:'+data.message);

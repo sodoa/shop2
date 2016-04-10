@@ -7,7 +7,7 @@
 <meta name="keywords" content="<sp:config id="goal.keywords"></sp:config>" />
 <meta name="description" content="<sp:config id="goal.description"></sp:config>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 

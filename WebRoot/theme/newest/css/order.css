@@ -127,8 +127,8 @@
 	line-height:0.78rem;
 }
 .other-link,.other-link a{color:#999;font-size:0.16rem}
-a.btn-register{color:#ff4f01;}
-.btn-register{margin-left:0.42rem;padding:0.09rem 0.23rem;border:1px solid #ff4f01; border-radius: .107rem;background-color:#fff }
+a.btn-register{color:#ff4f01;padding:0.09rem 0.23rem;}
+.btn-register{margin-left:0.42rem;border:1px solid #ff4f01; border-radius: .107rem;background-color:#fff }
 .m-order-address-form .form-group {
     padding:0.20rem 0.4rem;
     margin: 0;

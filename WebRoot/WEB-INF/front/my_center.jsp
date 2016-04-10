@@ -21,7 +21,7 @@
 						<a href="./tranfer.html" style="font-size: 14px; color: orange;">领取红包</a>
 					</p>
 					<p class="num" style="padding: 0.1rem 0.1rem;">
-						累计提层：${wallet.distrBalance}&yen;&nbsp;&nbsp;&nbsp;
+						累计收益：${wallet.distrBalance}&yen;&nbsp;&nbsp;&nbsp;
 						<a href="/distri-tip.html?id=${customerId}" style="font-size: 14px; color: orange;">分销说明</a>
 					</p>
 				</div>
@@ -54,10 +54,10 @@
 					<a href="/center/order_list.html" style="">订单列表 </a>
 				</div>
 				<div class="m-cell-item">
-					<a href="/center/distri.html">分层列表</a>
+					<a href="/center/distri.html">我的收益</a>
 				</div>
 				<div class="m-cell-item">
-					<a href="/center/layer_list.html">下线用户</a>
+					<a href="/center/layer_list.html">下级分销</a>
 				</div>
 				<div class="m-cell-item">
 					<a href="/center/love.html">我的收藏</a>

@@ -80,7 +80,7 @@
 					</div>
   					<div class="order-btn-logout"> <a href="javascript:void(0)" onclick="regist_submit()">注册</a> </div>
   					<div class="other-link" style="line-height: 0.18rem; height: 0.38rem;"><span class="ft-right">注册前请仔细阅读 <a href="/protocol.html" style="color:#666">果然逗服务协议</a></span></div>
-              		<div class="other-link txt-center" style="height:0.68rem">已有账号？ <a href="/login.html" class="btn-register">马上登录</a></div>
+              		<div class="other-link txt-center" style="height:0.68rem">已有账号？ <a href="/login.html" class="btn-register" >马上登录</a></div>
 				</form>
 			</div>
 		</div>

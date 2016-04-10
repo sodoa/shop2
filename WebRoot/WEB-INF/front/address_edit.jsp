@@ -107,7 +107,9 @@
 				}
 			},
 			tiptype:function(msg,o,cssctl){
-				layer.msg(msg);
+				if(o.type == 3){
+					layer.msg(msg);
+				}
 			}
 		});
 

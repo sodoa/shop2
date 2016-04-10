@@ -52,7 +52,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<div>请在下方输入您的提现金额，系统将以维信红包方式发送给您。</div>
+								<div>请在下方输入您的提现金额，系统将以微信红包方式发送给您。</div>
 								<div><input type="text" id="money" name="money" style="width: 60%; height: 38px; border: 1px solid red;" placeholder="红包金额" required maxlength="30">
 								（元）</div>
 							</div>
@@ -75,7 +75,7 @@
 			  if(!isWeiXinBrowser()){
 				  $("#submit_form").attr("disabled","disabled");
 				 // $("#money").attr("disabled","disabled");
-				  $("#money").val("红包只能在维信当中使用");
+				  $("#money").val("红包只能在微信当中使用");
 			  }
 		});
 
