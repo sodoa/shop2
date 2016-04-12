@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -295,18 +296,18 @@ public class RegistAct {
 			Cookie cookie = CookieUtils.getCookie(request, "share_id");
 			if (cookie != null) {
 				String share_id = cookie.getValue();
-				attributes.put("share_id", share_id);
+				attributes.put("share_id",  NumberUtils.isNumber(share_id) ? share_id : 0);
 			} else {
 				Cookie wxCookie = CookieUtils.getCookie(request, "wxsid");
 				if (wxCookie != null) {
 					String share_id = wxCookie.getValue();
-					attributes.put("share_id", share_id);
+					attributes.put("share_id", NumberUtils.isNumber(share_id) ? share_id : 0);
 				}
 			}
 
 			CustomerService.regist(account, password, displayname, attributes);
 
-			CookieUtils.cancleCookie(request, response, "share_id", null);
+			//CookieUtils.cancleCookie(request, response, "share_id", null);
 
 			result = JSONResult.success();
 

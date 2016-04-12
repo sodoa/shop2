@@ -153,6 +153,8 @@ public class OrderService {
 
 					float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
 					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
+					
+					income = 1;
 
 					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
 

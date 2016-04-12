@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +109,9 @@ public class CustomerService {
 		if (share_id == null || share_id.length() == 0) {
 			share_id = "0";
 		} else {
-			shareCustomer = customerDao.selectByPrimaryKey(Integer.parseInt(share_id));
+			 if(NumberUtils.isNumber(share_id)){
+				 shareCustomer = customerDao.selectByPrimaryKey(Integer.parseInt(share_id));
+			 }
 		}
 		
 		String wxId = attributes.getString("wx_id");
@@ -143,7 +146,7 @@ public class CustomerService {
 		
 		if (shareCustomer != null) {
 			if(shareCustomer.getWxId()!=null && shareCustomer.getWxId().length()>1){
-				WxNotifyUtils.customerDownlineJoinNotify(shareCustomer.getWxId(), shareCustomer.getDisplayname(), "2");
+				WxNotifyUtils.customerDownlineJoinNotify(shareCustomer.getWxId(), displayName, "2");
 			}
 		}
 

@@ -62,7 +62,7 @@ public class WxNotifyUtils {
 					// remark
 
 					String tokenUrl = url + "?access_token=" + WeiXinSessionManager.getAccessToken();
-					JSONObject jsonResult = CommonUtil.httpsRequest(url, "POST", jsonString);
+					JSONObject jsonResult = CommonUtil.httpsRequest(tokenUrl, "POST", jsonString);
 					if (logger.isDebugEnabled()) {
 						if (jsonResult != null) {
 							logger.debug("WxNotifyUtils:" + jsonResult.toString());
@@ -122,7 +122,7 @@ public class WxNotifyUtils {
 				// remark
 
 				String tokenUrl = url + "?access_token=" + WeiXinSessionManager.getAccessToken();
-				JSONObject jsonResult = CommonUtil.httpsRequest(url, "POST", jsonString);
+				JSONObject jsonResult = CommonUtil.httpsRequest(tokenUrl, "POST", jsonString);
 				if (logger.isDebugEnabled()) {
 					if (jsonResult != null) {
 						logger.debug("WxNotifyUtils:" + jsonResult.toString());
