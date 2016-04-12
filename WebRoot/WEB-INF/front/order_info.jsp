@@ -48,7 +48,6 @@
             
         <div class="order-manage"> 
                <ul class="m-cartlist bgWhite">
-               		<input type="hidden"  value="2" name="paytype" id="paytype" />
                		<c:forEach items="${bean.form}" var="cartitem" varStatus="st">
 		               		<li>
 		                    	<div class="m-tab-list">

@@ -15,7 +15,7 @@
 						<div class="text-area">
 							<input id="search_word" type="text" name="keyword" class="text" maxlength="18" id="keyword" value="搜索您想要的宝贝" >
 						</div>
-						<input type="submit" class="btn-sub">
+						<input type="button" class="btn-sub">
 					</form>
 				</div>
 				<a href="/cart.html" class="top-bar-cart">

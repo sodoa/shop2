@@ -4,15 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:forEach var="item" items="${list}">
-	<li>
+	<li style="margin-bottom: 5px;">
 		<c:forEach var="form" items="${item.form}">
 			<div class="m-tab-list">
 				<div class="m-cartlist-img">
 					<img src="${form.goods.thumbnailUrl}" />
 				</div>
 				<div class="m-cartlist-info">
-					<h3>${form.goods.goodsLname}</h3>
-					<h4>芒果 新鲜水果 小青芒 青皮芒果 越南特产玉芒 5斤包邮 预售</h4>
+					<h3>${form.goods.goodsName}</h3>
+					<h4>${form.goods.goodsLname}</h4>
 					<h5>
 						&yen;${form.detail.finalPrice} <span class="m-cartlist-nums">x ${form.detail.quantity}</span>
 					</h5>
