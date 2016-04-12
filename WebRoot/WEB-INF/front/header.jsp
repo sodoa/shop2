@@ -3,14 +3,14 @@
 <%@ taglib prefix="sp" uri="http://mos.xinfan.com/"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<title><sp:config id="goal.title"></sp:config></title>
+<title><sp:config id="goal.title"></sp:config>|<sp:config id="goal.description"></sp:config></title>
 <meta name="keywords" content="<sp:config id="goal.keywords"></sp:config>" />
 <meta name="description" content="<sp:config id="goal.description"></sp:config>" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-
+<link type="image/x-icon" rel="shortcut icon" href="/theme/newest/logo/128x128.png" />
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/reset.css" />
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/index.css" />
 

@@ -26,7 +26,7 @@
         			
 		            	<li data="${item.deliveryId}" style="cursor: pointer;<c:if test='${item.isdefault==1}' > border:1px solid red; </c:if>"  onclick="go_check('/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}')"   > 
 		                     <div class="m-order-address">
-		                         	${item.receiverName} &nbsp;&nbsp;&nbsp;&nbsp; ${item.receiverPhone}
+		                         	${item.receiverPhone}
 		                         <p>${item.address}</p>
 		                         
 		                         	<input id="chk${s.index}" type="checkbox" style="cursor: pointer;"  onclick="go_check('/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}')"  <c:if test='${item.isdefault==1}'>checked='checked'</c:if> />
