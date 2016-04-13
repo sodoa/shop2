@@ -52,7 +52,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
 <div class="g-doc">
 
      <header class="activity-header" style="position:absolute;z-index:100"> 
-         <div class="back"><a href="javascript:void(0);" onclick="return_prepage();"></a></div> 
+         <div class="back"><a href="/" ></a></div> 
          <div class="cart">
          		<a href="/cart.html"><i class="cart-sales-nums" style="position: relative;padding: 5px;float: right;"><sp:cart_num_tag></sp:cart_num_tag></i></a>
          </div>
