@@ -1,6 +1,7 @@
 package com.xinfan.wxshop.business.front;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,7 +106,7 @@ public class RankAct {
 		String wxsid = request.getParameter("wxsid");
 		
 		if(LoginSessionUtils.isCustomerLogin()){
-			customerId = LoginSessionUtils.getCustomerSessionId();
+			customerId = ""+LoginSessionUtils.getCustomerIdFromUserSessionMap();
 		}
 		else{
 			if(wxsid!=null && wxsid.length()>0){
@@ -116,6 +117,7 @@ public class RankAct {
 		mv.addObject("bean", article);
 		mv.addObject("login", login);
 		mv.addObject("wxsid", customerId);
+		mv.addObject("random", new Date().getTime());
 		return mv;
 	}
 	
@@ -128,7 +130,7 @@ public class RankAct {
 			String wxsid = request.getParameter("wxsid");
 			
 			if(LoginSessionUtils.isCustomerLogin()){
-				customerId = LoginSessionUtils.getCustomerSessionId();
+				customerId = ""+LoginSessionUtils.getCustomerIdFromUserSessionMap();
 			}
 			else{
 				if(wxsid!=null && wxsid.length()>0){
@@ -136,17 +138,12 @@ public class RankAct {
 				}
 			}
 
-			String content = "customerId=" + customerId;
-
-			String desPassword = FileConfig.getInstance().getString(
-					"image.des.password", "password12345678");
-			String decData = Base64.encodeBase64String(DesUtils.encrypt(
-					content.getBytes("UTF-8"), desPassword));
-
 			String domain = ParamterUtils.getString("web.domain",
 					"http://11grand.cn") +"/share.html";
 
-			domain += "?s=" + decData;
+			domain += "?c=" + customerId;
+			
+			logger.info("domain : " + domain);
 
 			ByteArrayOutputStream out1 = QRCode.from(domain).to(ImageType.PNG).withSize(300, 300)
 					.stream();

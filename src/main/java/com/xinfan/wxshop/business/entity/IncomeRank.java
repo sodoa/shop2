@@ -13,6 +13,8 @@ public class IncomeRank extends BaseEntity {
 
     private Integer rankType;
 
+    private String account;
+
     public String getRankDate() {
         return rankDate;
     }
@@ -51,5 +53,13 @@ public class IncomeRank extends BaseEntity {
 
     public void setRankType(Integer rankType) {
         this.rankType = rankType;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 }

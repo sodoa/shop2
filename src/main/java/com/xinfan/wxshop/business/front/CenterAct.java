@@ -1,5 +1,6 @@
 package com.xinfan.wxshop.business.front;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,6 +80,7 @@ public class CenterAct {
 		request.setAttribute("unPayCount", unPayCount);
 		request.setAttribute("menu_hit", 4);
 		request.setAttribute("customerId", customer.getCustomerId());
+		mv.addObject("random", new Date().getTime());
 
 		return mv;
 	}

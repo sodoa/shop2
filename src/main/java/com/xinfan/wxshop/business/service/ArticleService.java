@@ -68,7 +68,7 @@ public class ArticleService {
 		bean.setId(id);
 		bean.setSharecnt(exist.getSharecnt() + 1);
 
-		ArticleDao.updateByPrimaryKey(bean);
+		ArticleDao.updateByPrimaryKeySelective(bean);
 	}
 
 }

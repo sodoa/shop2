@@ -20,8 +20,8 @@ public class PhoneHiddenPartTag extends SimpleTagSupport {
 
 		String v = "";
 
-		if (value != null && value.length() >= 4) {
-			v = "*******"+value.substring(value.length() - 4, value.length());
+		if (value != null && value.length() >= 3) {
+			v = "***"+value.substring(value.length() - 3, value.length());
 		}
 
 		getJspContext().getOut().print(v);

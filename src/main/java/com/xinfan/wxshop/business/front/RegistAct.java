@@ -291,23 +291,15 @@ public class RegistAct {
 				return result;
 			}
 
-			System.out.println(1);
-
-			Cookie cookie = CookieUtils.getCookie(request, "share_id");
+			Cookie cookie = CookieUtils.getCookie(request, "wxsid");
+			
 			if (cookie != null) {
+				logger.info("regist cookie : " + cookie);
 				String share_id = cookie.getValue();
 				attributes.put("share_id",  NumberUtils.isNumber(share_id) ? share_id : 0);
-			} else {
-				Cookie wxCookie = CookieUtils.getCookie(request, "wxsid");
-				if (wxCookie != null) {
-					String share_id = wxCookie.getValue();
-					attributes.put("share_id", NumberUtils.isNumber(share_id) ? share_id : 0);
-				}
-			}
+			} 
 
 			CustomerService.regist(account, password, displayname, attributes);
-
-			//CookieUtils.cancleCookie(request, response, "share_id", null);
 
 			result = JSONResult.success();
 
@@ -321,6 +313,8 @@ public class RegistAct {
 			sessionMap.put("account", customer.getAccount());
 			sessionMap.put("displayname", customer.getDisplayname());
 			sessionMap.put("customerid", customer.getCustomerId());
+			
+			CookieUtils.cancleCookie(request, response, "wxsid", null);
 
 			LoginSessionUtils.setCustomerUserSessionMap(sessionMap);
 			// /////////////////////////////////////////////////////////////
