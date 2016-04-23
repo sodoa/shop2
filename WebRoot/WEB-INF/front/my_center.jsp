@@ -28,7 +28,7 @@
 				<div class="userPic" style="margin-right: 0px; padding: 0.05rem">
 					<p class="img">
 						<a class="example-image-link" href="/center/distri-image.html" data-lightbox="example-1">
-							我的二维码 <img id="example2" class="example-image" width="90%" height="90%" src="/center/distri-image.html">
+							我的二维码 <img id="example2" class="example-image" width="90%" height="90%" src="/center/distri-image.html?t=${random}">
 						</a>
 					</p>
 				</div>

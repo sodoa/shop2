@@ -52,8 +52,8 @@
             </div>
              <div class="ac-content-wrap" style="margin: 0px;padding: 0px;">
              	<c:if test="${not empty wxsid}">
-	             	<div style="padding: 10px;" class="desc">长按下方二维码成为果然逗分销成员！</div>
-	             	<img alt="" src="/distri-image2.html" width="100%">
+	             	<div style="padding: 10px;" class="desc">长按下方二维码成为果然逗分销成员！ ${current_wxsid}</div>
+	             	<img alt="" src="/distri-image2.html?t=${random}" width="100%">
              	</c:if>
              </div>
         </div>
@@ -146,7 +146,7 @@ function getMenuShareQQ(wxsid){
 
 function updateShareCnt(){
 	
-	var id = '${bean.title}';
+	var id = '${bean.id}';
      $.ajax({type:"POST",
              url:"accreate.html?t="+new Date().getTime(),
              data:{"id":id},

@@ -62,9 +62,9 @@
 						</div>
 					</div>
 		              <div class="form-group">
-		                <label for="name" class="col-xs-3">微信号</label>
+		                <label for="name" class="col-xs-3">昵称</label>
 		                <div class="col-xs-9">
-		                  <input type="text" id="displayname" name="displayname"  datatype="*1-60" placeholder="请输入您的微信号" errormsg="长度在1到60位">
+		                  <input type="text" id="displayname" name="displayname"  datatype="*1-60" placeholder="请输入您的昵称" errormsg="长度在1到60位">
 		                </div>
 		              </div>					
 					<div class="form-group">

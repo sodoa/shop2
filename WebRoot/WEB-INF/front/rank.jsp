@@ -33,7 +33,7 @@
 	     	<c:forEach items="${list}" var="item" varStatus="s" >
 				<li>
 				  	<div class="o-chart-tit">
-					  	<div class="NO">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${item.displayname}】</div>
+					  	<div class="NO">&nbsp;&nbsp;NO.${s.index+1 }&nbsp;【${item.displayname}/<sp:phone_hidden_part_tag value="${item.account}"></sp:phone_hidden_part_tag>】</div>
 					  	<div class="num">收入${item.totalIncome} 元</div>
 				  	</div>
 	                <div class="o-progress">
