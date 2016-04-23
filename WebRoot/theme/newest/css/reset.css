@@ -172,10 +172,10 @@ display: flex;}
 .index-top-bar .searchForm {
     height:0.53rem;
     overflow: hidden;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    border-radius: 20px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
     background-color:#ededed;
     display: -webkit-box;
     display: -moz-box;
