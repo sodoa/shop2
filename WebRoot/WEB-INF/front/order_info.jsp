@@ -101,8 +101,7 @@
     
     <div class="bottom-fxied">
 		<c:if test="${bean.order.status==0}"><div style="cursor: pointer;" class="orange-btn"><p onclick="sumibtForm()">去结算(&yen;${bean.order.totalAmount})</p></div></c:if>
-		<div style="cursor: pointer;" class="red-btn"><p onclick="delOrder(${bean.order.orderId})">删除订单</p></div>
-		<c:if test="${bean.order.status==3}"><div style="cursor: pointer;" class="orange-btn"><p onclick="toComment(${bean.order.orderId})">去评论</p></div></c:if>
+		<c:if test="${bean.order.status==3}"><div style="cursor: pointer;" class="orange-btn"><p onclick="toComment('${bean.order.orderId}')">去评论</p></div></c:if>
  	</div>
  	<div style="height: 20px;"></div>
     

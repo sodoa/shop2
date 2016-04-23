@@ -33,7 +33,7 @@
 					<div class="m-slider-con-wrap" id="JslideWrap" style="display: block;">
 						<div class="m-slider-con">
 							<a class="m-slider-item" href="javascript:void(0);">
-								<img src="/theme/newest/images/index-pic1.jpg" />
+								<img src="/theme/newest/images/index/ffzz.jpg" />
 							</a>
 							<a class="m-slider-item" href="javascript:void(0);">
 								<img src="/theme/newest/images/index-pic2.jpg" />
