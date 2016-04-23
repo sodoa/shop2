@@ -56,6 +56,7 @@
 			fireDelay: 150,
 			loader: "<br />Loading...<br />",
 			data: "",
+			fireInit : true,
 			insertAfter: "div:last",
 			resetCounter: function(){ return false; },
 			callback: function(){ return true; },
@@ -73,60 +74,66 @@
 			firing = false;
 		}
 		
-		if (firing === true)
-		{
-			$(window).scroll(function(){
-				if ($(document).height() - $(window).height() <= $(window).scrollTop() + options.bottomPixels)
+		var scroll = function(){
+			if ($(document).height() - $(window).height() <= $(window).scrollTop() + options.bottomPixels)
+			{
+				if ((options.fireOnce == false || (options.fireOnce == true && fired != true)))
 				{
-					if ((options.fireOnce == false || (options.fireOnce == true && fired != true)))
+					if(options.resetCounter.apply(this) === true)
 					{
-						if(options.resetCounter.apply(this) === true)
-						{
-							fireSequence = 0;
-						}
-						
-						fired = true;
-						fireSequence++;
+						fireSequence = 0;
+					}
+					
+					fired = true;
+					fireSequence++;
 
-						$(options.insertAfter).after("<div id=\"endless_scroll_loader\">" + options.loader + "</div>");
+					$(options.insertAfter).after("<div id=\"endless_scroll_loader\">" + options.loader + "</div>");
 
-						if (typeof options.data == 'function')
+					if (typeof options.data == 'function')
+					{
+						data = options.data.apply(this);
+					}
+					else
+					{
+						data = options.data;
+					}
+
+					if (data !== false)
+					{
+						$("div#endless_scroll_loader").remove();
+						$(options.insertAfter).after("<div id=\"endless_scroll_data\">" + data + "</div>");
+						$("div#endless_scroll_data").hide().fadeIn();
+						$("div#endless_scroll_data").removeAttr("id");
+
+						var args = new Array();
+						args[0] = fireSequence;
+						options.callback.apply(this, args);
+
+						if (options.fireDelay !== false || options.fireDelay !== 0)
 						{
-							data = options.data.apply(this);
+							// slight delay for preventing event firing twice
+							$("body").after("<div id=\"endless_scroll_marker\"></div>");
+							$("div#endless_scroll_marker").fadeTo(options.fireDelay, 1, function(){
+								$(this).remove();
+								fired = false;
+							});
 						}
 						else
 						{
-							data = options.data;
-						}
-
-						if (data !== false)
-						{
-							$("div#endless_scroll_loader").remove();
-							$(options.insertAfter).after("<div id=\"endless_scroll_data\">" + data + "</div>");
-							$("div#endless_scroll_data").hide().fadeIn();
-							$("div#endless_scroll_data").removeAttr("id");
-
-							var args = new Array();
-							args[0] = fireSequence;
-							options.callback.apply(this, args);
-
-							if (options.fireDelay !== false || options.fireDelay !== 0)
-							{
-								// slight delay for preventing event firing twice
-								$("body").after("<div id=\"endless_scroll_marker\"></div>");
-								$("div#endless_scroll_marker").fadeTo(options.fireDelay, 1, function(){
-									$(this).remove();
-									fired = false;
-								});
-							}
-							else
-							{
-								fired = false;
-							}
+							fired = false;
 						}
 					}
 				}
-			});
+			}
+		};
+		
+		if(options.fireInit === true){
+			scroll();
+		}
+		
+		if (firing === true)
+		{
+			$(window).scroll(scroll);
 		}
 	};
 	
