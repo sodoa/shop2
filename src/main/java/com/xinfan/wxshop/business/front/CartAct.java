@@ -212,6 +212,10 @@ public class CartAct {
 				mv.setViewName("/front/order_error");
 			}
 
+		}catch (BizException e) {
+			logger.error(e.getMessage(),e);
+			mv.setViewName("/front/order_error");
+			mv.addObject("msg", e.getMessage());
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);
 			mv.setViewName("/front/order_error");

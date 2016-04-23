@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.xinfan.wxshop.business.constants.BizConstants;
 import com.xinfan.wxshop.business.constants.SequenceConstants;
 import com.xinfan.wxshop.business.dao.CartDao;
+import com.xinfan.wxshop.business.dao.CustomerDao;
 import com.xinfan.wxshop.business.dao.DeliveryAddressDao;
 import com.xinfan.wxshop.business.dao.GoodsDao;
 import com.xinfan.wxshop.business.dao.GoodsLimitDao;
@@ -15,6 +16,7 @@ import com.xinfan.wxshop.business.dao.OrderDao;
 import com.xinfan.wxshop.business.dao.OrderDetailDao;
 import com.xinfan.wxshop.business.dao.SequenceDao;
 import com.xinfan.wxshop.business.entity.Cart;
+import com.xinfan.wxshop.business.entity.Customer;
 import com.xinfan.wxshop.business.entity.DeliveryAddress;
 import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsLimit;
@@ -37,7 +39,10 @@ public class CartService {
 
 	@Autowired
 	private OrderDao orderDao;
-	
+
+	@Autowired
+	private CustomerDao customerDao;
+
 	@Autowired
 	private GoodsLimitDao goodsLimitDao;
 
@@ -46,7 +51,6 @@ public class CartService {
 
 	@Autowired
 	private DeliveryAddressDao deliveryAddressDao;
-	
 
 	@Autowired
 	private SequenceDao SequenceDao;
@@ -102,7 +106,7 @@ public class CartService {
 
 		return info;
 	}
-	
+
 	public CartInfoVo getCartInfoBySessionId(String sessionId) {
 		List<Cart> cartList = cartDao.selectCartListBySessionId(sessionId);
 		List<Goods> goodsList = new ArrayList<Goods>();
@@ -138,36 +142,36 @@ public class CartService {
 
 	public int getCartNumBySessionId(String sessionId) {
 		return cartDao.selectCartNumBySessionId(sessionId);
-	}	
+	}
 
-	public void updateGoodsNumberInCart(int cartId,int number) {
-		
+	public void updateGoodsNumberInCart(int cartId, int number) {
+
 		Cart cart = cartDao.selectByPrimaryKey(cartId);
 		if (cart != null) {
 			int curretnQuantity = cart.getQuantity() + number;
-			if(curretnQuantity<=1){
+			if (curretnQuantity <= 1) {
 				curretnQuantity = 1;
 			}
 			cart.setQuantity(curretnQuantity);
-			
+
 			this.cartDao.updateByPrimaryKeySelective(cart);
 		}
 	}
 
 	public void addGoodInCart(String sessionId, int goodsId) {
-		
+
 		List<Cart> list = cartDao.selectCartListBySessionIdIdAndGoodsId(sessionId, goodsId);
-		
+
 		Goods goods = this.goodsDao.selectByPrimaryKey(goodsId);
-		
-		if(goods.getThemeType()!=null &&goods.getThemeType().equals(BizConstants.GOODS_THEME_TYPE_LIMIT)){
+
+		if (goods.getThemeType() != null && goods.getThemeType().equals(BizConstants.GOODS_THEME_TYPE_LIMIT)) {
 			GoodsLimit goodsLimit = goodsLimitDao.selectByPrimaryKey(goodsId);
 			String msg = GoodsHelper.canBuyGoods(goodsLimit);
-			if(msg !=null){
+			if (msg != null) {
 				throw new BizException(msg);
 			}
 		}
-		
+
 		if (list.isEmpty()) {
 			Cart cart = new Cart();
 			cart.setCustomerId(0);
@@ -177,30 +181,32 @@ public class CartService {
 			cart.setCreatetime(TimeUtils.getCurrentTime());
 			cartDao.insertSelective(cart);
 		}
-		
+
 	}
 
 	public void deleteGoodInCard(int cartId) {
 		cartDao.deleteByPrimaryKey(cartId);
 	}
-	
 
-	public void deleteAllGoodInCard(int customerId,String sessionId) {
-		if(customerId >0){
+	public void deleteAllGoodInCard(int customerId, String sessionId) {
+		if (customerId > 0) {
 			cartDao.deleteCartListByCustomerId(customerId);
 		}
 		cartDao.deleteCartListBySessionId(sessionId);
 	}
 
-	public MakeOrderTable makeOrder(int customerId,String sessionId, int deliveryId, String mark,
-			int paymentMode) {
+	public MakeOrderTable makeOrder(int customerId, String sessionId, int deliveryId, String mark, int paymentMode) {
 		List<Cart> cartList = cartDao.selectCartListBySessionId(sessionId);
 		MakeOrderTable table = new MakeOrderTable();
 
+		Customer customer = this.customerDao.selectByPrimaryKey(customerId);
+		if (customer == null) {
+			throw new BizException("用户帐号不存在");
+		}
+
 		if (!cartList.isEmpty()) {
 
-			DeliveryAddress address = deliveryAddressDao
-					.selectByPrimaryKey(deliveryId);
+			DeliveryAddress address = deliveryAddressDao.selectByPrimaryKey(deliveryId);
 
 			Order order = new Order();
 			List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
@@ -218,19 +224,19 @@ public class CartService {
 				detail.setFinalPrice(goods.getFinalPrices());
 				detail.setGoodsName(goods.getGoodsName());
 				orderDetailList.add(detail);
-				
+
 				totalQuantity += detail.getQuantity();
 
 				totalAmount += goods.getFinalPrices();
-				
+
 				table.setGoodsId(goods.getGoodsId());
 				table.setGoodsName(goods.getGoodsName());
 			}
-			
+
 			int orderId = SequenceDao.getSequence(SequenceConstants.SEQ_ORDER);
-			
+
 			String orderNo = OrderNoUtils.getOrderNo(orderId);
-			
+
 			order.setOrderId(orderId);
 			order.setOrderNo(orderNo);
 			order.setCustomerId(customerId);
@@ -246,7 +252,7 @@ public class CartService {
 			order.setReceiverName(address.getReceiverName());
 			order.setReceiverAddress(address.getAddress());
 			order.setReceiverPhone(address.getReceiverPhone());
-			
+
 			table.setFee(totalAmount);
 			table.setOrderNo(orderNo);
 			table.setOrderId(orderId);
@@ -259,12 +265,12 @@ public class CartService {
 				this.orderDetailDao.insertSelective(orderDetail);
 			}
 
-			//this.cartDao.deleteCartListByCustomerId(customerId);
+			// this.cartDao.deleteCartListByCustomerId(customerId);
 			this.cartDao.deleteCartListBySessionId(sessionId);
-			
+
 			return table;
 		}
-		
+
 		return null;
 	}
 

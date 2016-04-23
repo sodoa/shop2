@@ -35,7 +35,7 @@ public class CenterAct {
 
 	@Autowired
 	private OrderService OrderService;
-	
+
 	@Autowired
 	private CustomerService CustomerService;
 
@@ -45,36 +45,42 @@ public class CenterAct {
 	@RequestMapping(method = RequestMethod.GET, value = "/center/my_center.html")
 	public ModelAndView center2(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/my_center");
-		
+
 		String from = request.getParameter("from");
-		if(from == null || from.length() ==0 || "null".equals(from)){
-			from = (String)request.getSession().getAttribute("from");
-		}
-		
-		if(from!=null && from.trim().length()>0){
-			request.getSession().removeAttribute("from");
-			return new ModelAndView("redirect:"+from);
-		}
-		
-		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
-		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
-		
-		
-		String li = request.getParameter("li");
-		if(li == null || li.length() ==0){
-			li = "2";
+		if (from == null || from.length() == 0 || "null".equals(from)) {
+			from = (String) request.getSession().getAttribute("from");
 		}
 
-		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);  
-		//List<DataMap> distList = CustomerService.getCustomerTopDistributionList(customerId);
-		//List<Order> orderList = CustomerService.getCustomerTopOrderList(customerId);
+		if (from != null && from.trim().length() > 0) {
+			request.getSession().removeAttribute("from");
+			return new ModelAndView("redirect:" + from);
+		}
+
+		DataMap sessionMap = LoginSessionUtils.getCustomerUserSessionMap();
+		int customerId = Integer.parseInt(sessionMap.getString("CUSTOMERID"));
+
+		String li = request.getParameter("li");
+		if (li == null || li.length() == 0) {
+			li = "2";
+		}
 		Customer customer = CustomerService.getById(customerId);
-		
+
+		if (customer == null) {
+			LoginSessionUtils.setExpireCustomerSessionMap();
+			return new ModelAndView("redirect:/login.html");
+		}
+
+		Wallet wallet = CustomerService.getWalletByCustomerId(customerId);
+		// List<DataMap> distList =
+		// CustomerService.getCustomerTopDistributionList(customerId);
+		// List<Order> orderList =
+		// CustomerService.getCustomerTopOrderList(customerId);
+
 		int unPayCount = OrderService.getUnPayOrderCount(customerId);
 
 		request.setAttribute("wallet", wallet);
-		//request.setAttribute("distList", distList);
-		//request.setAttribute("orderList", orderList);
+		// request.setAttribute("distList", distList);
+		// request.setAttribute("orderList", orderList);
 		request.setAttribute("customer", customer);
 		request.setAttribute("li", null);
 		request.setAttribute("unPayCount", unPayCount);
