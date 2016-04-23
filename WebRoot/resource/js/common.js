@@ -439,9 +439,7 @@ function dialog1(titel,conter){
 }
 //返回上一页
 function return_prepage(){  
-  if(window.document.referrer!=""){  
-	window.location.href=window.document.referrer;  
-	}  
+	window.history.back();
 }  
 
 function close_window(){
