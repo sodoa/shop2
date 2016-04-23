@@ -461,7 +461,7 @@
 	<select id="getOrderGoodsStaticSummary" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
 		<![CDATA[ 
 			SELECT 
-			  SUM(quantity) AS cnt,
+			  SUM(quantity) AS cnt, sum(weight) as weight ,
 			  d.goods_id  AS gid
 			FROM
 			  t_order o,

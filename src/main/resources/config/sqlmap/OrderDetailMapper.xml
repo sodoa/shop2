@@ -9,6 +9,8 @@
     <result column="orgin_price" property="orginPrice" jdbcType="REAL" />
     <result column="final_price" property="finalPrice" jdbcType="REAL" />
     <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="weight" property="weight" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    detail_id, order_id, goods_id, quantity, orgin_price, final_price, goods_name
+    detail_id, order_id, goods_id, quantity, orgin_price, final_price, goods_name, weight, 
+    unit
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.OrderDetailExample" >
     select
@@ -104,10 +107,12 @@
   <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.OrderDetail" >
     insert into t_order_detail (detail_id, order_id, goods_id, 
       quantity, orgin_price, final_price, 
-      goods_name)
+      goods_name, weight, unit
+      )
     values (#{detailId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, 
       #{quantity,jdbcType=INTEGER}, #{orginPrice,jdbcType=REAL}, #{finalPrice,jdbcType=REAL}, 
-      #{goodsName,jdbcType=VARCHAR})
+      #{goodsName,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.OrderDetail" >
     insert into t_order_detail
@@ -133,6 +138,12 @@
       <if test="goodsName != null" >
         goods_name,
       </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="detailId != null" >
@@ -155,6 +166,12 @@
       </if>
       <if test="goodsName != null" >
         #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +205,12 @@
       <if test="record.goodsName != null" >
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +224,9 @@
       quantity = #{record.quantity,jdbcType=INTEGER},
       orgin_price = #{record.orginPrice,jdbcType=REAL},
       final_price = #{record.finalPrice,jdbcType=REAL},
-      goods_name = #{record.goodsName,jdbcType=VARCHAR}
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +252,12 @@
       <if test="goodsName != null" >
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
     </set>
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
@@ -237,11 +268,9 @@
       quantity = #{quantity,jdbcType=INTEGER},
       orgin_price = #{orginPrice,jdbcType=REAL},
       final_price = #{finalPrice,jdbcType=REAL},
-      goods_name = #{goodsName,jdbcType=VARCHAR}
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR}
     where detail_id = #{detailId,jdbcType=INTEGER}
   </update>
-  
-  
-
-  
 </mapper>
