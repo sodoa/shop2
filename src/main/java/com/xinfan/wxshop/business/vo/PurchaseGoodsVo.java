@@ -10,6 +10,16 @@ public class PurchaseGoodsVo {
 
 	private String unit;
 
+	private String weight;
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+
 	public int getGoodsId() {
 		return goodsId;
 	}

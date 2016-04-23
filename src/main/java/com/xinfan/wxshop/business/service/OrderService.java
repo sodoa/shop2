@@ -394,10 +394,12 @@ public class OrderService {
 		for (DataMap item : list) {
 			int gid = item.getInt("gid");
 			int cnt = item.getInt("cnt");
+			String weight = item.getString("weight");
 
 			PurchaseGoodsVo pGood = new PurchaseGoodsVo();
 			pGood.setCount(cnt);
 			pGood.setGoodsId(gid);
+			pGood.setWeight(weight);
 
 			Goods goods = this.goodsDao.selectByPrimaryKey(gid);
 			if (goods != null) {

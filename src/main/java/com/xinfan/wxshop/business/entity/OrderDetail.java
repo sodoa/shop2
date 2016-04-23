@@ -2,7 +2,7 @@ package com.xinfan.wxshop.business.entity;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class OrderDetail extends BaseEntity {
+public class OrderDetail extends BaseEntity{
     private Integer detailId;
 
     private Integer orderId;
@@ -16,6 +16,10 @@ public class OrderDetail extends BaseEntity {
     private Float finalPrice;
 
     private String goodsName;
+
+    private String weight;
+
+    private String unit;
 
     public Integer getDetailId() {
         return detailId;
@@ -71,5 +75,21 @@ public class OrderDetail extends BaseEntity {
 
     public void setGoodsName(String goodsName) {
         this.goodsName = goodsName == null ? null : goodsName.trim();
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public void setWeight(String weight) {
+        this.weight = weight == null ? null : weight.trim();
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit == null ? null : unit.trim();
     }
 }

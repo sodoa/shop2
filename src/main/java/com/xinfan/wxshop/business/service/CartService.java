@@ -223,6 +223,8 @@ public class CartService {
 				detail.setOrginPrice(goods.getOrginPrices());
 				detail.setFinalPrice(goods.getFinalPrices());
 				detail.setGoodsName(goods.getGoodsName());
+				detail.setWeight(goods.getWeight());
+				detail.setUnit(goods.getUnit());
 				orderDetailList.add(detail);
 
 				totalQuantity += detail.getQuantity();
