@@ -36,7 +36,7 @@
         <header class="header"> 
             <div class="back"><a href="/center/address_list.html?from=${from}"><span class="icon-back"></span></a></div> 
             <div class="title">修改收货地址</div> 
-            <div class="subMark"><p><a id="btn_complate" href="javascript:void(0)">完成</a></p></div> 
+            <div class="subMark"><p></p></div> 
         </header>
     </div>
     
@@ -45,12 +45,6 @@
         	<form class="form-horizontal m-order-address-form" id="submit_form" action="address_esave.html">
         		<input type="hidden" name="deliveryId" value="${bean.deliveryId}"/>
 				<input type="hidden" name="from" value="${from}" />
-            	<div class="form-group">
-                <label for="name" class="col-xs-3">收货人</label>
-                <div class="col-xs-9">
-                 	<input id="receiverName" name="receiverName" datatype="s1-10" errormsg="请输出正确的收货人"  type="text" width="70%" placeholder="请输入收货人名称"   required value="${bean.receiverName}" />
-                </div>
-              </div>
               <div class="form-group">
                 <label for="name" class="col-xs-3">手机号</label>
                 <div class="col-xs-9">
@@ -81,6 +75,7 @@
                  	<input name="street" type="text" width="70%" datatype="s1-30" errormsg="请输入正确的详细地址" value="${bean.street}" required value="${bean.street}"   placeholder="请输出正确的详细地址" />
                 </div>
               </div>
+               <div class="order-btn-logout"> <a href="javascript:void(0)" id="btn_complate">完成</a> </div>
             </form>
         </div>
     </div>

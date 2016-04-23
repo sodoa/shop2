@@ -36,7 +36,7 @@
         <header class="header"> 
             <div class="back"><a href="/center/address_list.html"><span class="icon-back"></span></a></div> 
             <div class="title">新增收货地址</div> 
-            <div class="subMark"><p><a id="btn_complate" href="javascript:void(0)">完成</a></p></div> 
+            <div class="subMark"><p></p></div> 
         </header>
     </div>
     
@@ -73,6 +73,7 @@
                  	<input name="street" type="text" width="70%" datatype="s1-30" errormsg="请输出正确的详细地址" value="${bean.street}" required  placeholder="请输入正确的详细地址" />
                 </div>
               </div>
+              <div class="order-btn-logout"> <a href="javascript:void(0)" id="btn_complate">完成</a> </div>
             </form>
         </div>
     </div>

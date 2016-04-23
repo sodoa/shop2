@@ -62,7 +62,7 @@
 	            if(res.err_msg == "get_brand_wcpay_request:ok"){  
 	                $("#tipmsg").html("微信支付成功!");
 	            }else if(res.err_msg == "get_brand_wcpay_request:cancel"){  
-	                $("#tipmsg").html("微信支付成功!");
+	                $("#tipmsg").html("微信支付取消，请在订单中心继续支付!");
 	            }else{  
 	            	$("#tipmsg").html("支付失败!" + res.err_msg);
 	            } 
