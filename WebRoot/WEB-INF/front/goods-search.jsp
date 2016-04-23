@@ -8,8 +8,7 @@
 <head>
 <jsp:include page="header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/search.css" />
-<link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/jslib/endless/jquery.endless-scroll-1.3.js"></script>
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/order.css" />
 
 <style type="text/css">
@@ -28,7 +27,7 @@
 </head>
 <body>
 
-<div class="g-doc">
+<div class="g-doc" style="overflow-y: scroll;">
 	<div class="category" style="display: none;z-index: 9999;position: fixed;height: 100%;width: 100%;background-color: white;max-width: 640px;">
 	    <div class="top-fxied">
 	            <header class="header"> 
@@ -82,7 +81,6 @@
 			</div>
 			<div id="page-next"></div>
 		</div>
-		
 	<jsp:include page="scrollup.jsp"></jsp:include>
 	<jsp:include page="footer.jsp"></jsp:include>	
 	
@@ -143,24 +141,17 @@ $(function(){
 	
 	var cur = '${w}';
 	var totalPage = '${page.totalPage}';
+	var page = 0;
 	
-	laypage({
-	    cont: 'page-next', //容器。值支持id名、原生dom对象，jquery对象,
-	    pages: '${page.totalPage}', //总页数
-	    groups: 0, //连续分数数0
-	    prev: false, //不显示上一页
-	    next: '查看更多',
-	    skin: 'flow', //设置信息流模式的样式
-	    jump: function(obj){
-	        if(obj.curr > totalPage){
-	            this.next = '没有更多了';
-	        }
-	        else{
-	        	ajaxPageContent(obj.curr);
-	        }
+	$('#page-comtain').endlessScroll({
+	    fireOnce: true,
+	    fireDelay: false,
+	    callback: function(){
+	    	if(page<totalPage){
+	    		ajaxPageContent(page++);
+	    	}
 	    }
 	});
-	
 	
 	function ajaxPageContent(pageNo){
 
@@ -171,8 +162,9 @@ $(function(){
 	             success:function(data){
 					if(data.result == 0){
 						parse(data.list);
-						document.body.scrollTop = document.body.scrollHeight;
+						//document.body.scrollTop = document.body.scrollHeight;
 					}
+					loading = false;
 	             }
 			});
 	}

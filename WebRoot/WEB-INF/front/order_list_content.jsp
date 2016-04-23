@@ -3,6 +3,7 @@
 <%@ taglib prefix="sp" uri="http://mos.xinfan.com/"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<script type="text/javascript" src="/jslib/endless/jquery.endless-scroll-1.3.js"></script>
 <ul class="m-cartlist" id="page-comtain">
 </ul>
 <div id="page-next"></div>
@@ -14,22 +15,15 @@ var li = '${li}';
 $(function(){
 	
 	var totalPage = '${page.totalPage}';
+	var page = 0;
 	
-	
-	laypage({
-	    cont: 'page-next', //容器。值支持id名、原生dom对象，jquery对象,
-	    pages: '${page.totalPage}', //总页数
-	    groups: 0, //连续分数数0
-	    prev: false, //不显示上一页
-	    next: '查看更多',
-	    skin: 'flow', //设置信息流模式的样式
-	    jump: function(obj){
-	        if(obj.curr > totalPage){
-	            this.next = '没有更多了';
-	        }
-	        else{
-	        	ajaxPageContent(obj.curr);
-	        }
+	$('#page-comtain').endlessScroll({
+	    fireOnce: true,
+	    fireDelay: false,
+	    callback: function(){
+	    	if(page<totalPage){
+	    		ajaxPageContent(page++);
+	    	}
 	    }
 	});
 	

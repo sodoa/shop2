@@ -7,8 +7,7 @@
 <html class="no-js">
 <head>
 <jsp:include page="header.jsp"></jsp:include>
-<link href="/jslib/uiadmin/lib/laypage/1.2/skin/laypage.css" type="text/css" rel="stylesheet" />
-<script type="text/javascript" src="/jslib/uiadmin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="/jslib/endless/jquery.endless-scroll-1.3.js"></script>
 <style type="text/css">
 
 
@@ -36,9 +35,9 @@
 
 </style>
 </head>
-<body>
+<body >
 
-<div class="g-doc">
+<div class="g-doc" >
 	<div class="top-fxied">
 		<header class="header"> 
 	                <div class="back"><a href="/goods-${goodsId}.html"><span class="icon-back"></span></a></div> 
@@ -48,7 +47,7 @@
 	</div>
 
 
-	<div class="order_paylist">
+	<div class="order_paylist" style="margin-top: 0.85rem;">
 
 		<div class="order_li" style="margin:0;background-color: white;" id="page-comtain">
 		
@@ -67,21 +66,15 @@
 		
 		var goodsId = '${goodsId}';
 		var totalPage = '${page.totalPage}';
+		var page = 0;
 		
-		laypage({
-		    cont: 'page-next', //容器。值支持id名、原生dom对象，jquery对象,
-		    pages: '${page.totalPage}', //总页数
-		    groups: 0, //连续分数数0
-		    prev: false, //不显示上一页
-		    next: '查看更多',
-		    skin: 'flow', //设置信息流模式的样式
-		    jump: function(obj){
-		        if(obj.curr > totalPage){
-		            this.next = '没有更多了';
-		        }
-		        else{
-		        	ajaxPageContent(obj.curr);
-		        }
+		$(window).endlessScroll({
+		    fireOnce: true,
+		    fireDelay: false,
+		    callback: function(){
+		    	if(page<totalPage){
+		    		ajaxPageContent(page++);
+		    	}
 		    }
 		});
 		

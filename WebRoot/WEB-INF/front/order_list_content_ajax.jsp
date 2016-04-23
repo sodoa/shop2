@@ -29,7 +29,7 @@
 			<c:choose>
 				<c:when test="${item.order.status == 0}">
 					<div class="count_order">
-						<a style="cursor: pointer;" class="" onclick="toPay(${item.order.orderId})">去结算</a>
+						<a style="cursor: pointer;" class="" onclick="toPay(${item.order.orderId})">去结算</a>&nbsp;&nbsp;&nbsp;
 						<a style="cursor: pointer;" class="h" onclick="toCancel(${item.order.orderId})">取消订单</a>
 					</div>
 				</c:when>
