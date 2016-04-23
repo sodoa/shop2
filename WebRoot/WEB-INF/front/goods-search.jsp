@@ -179,7 +179,7 @@ $(function(){
       	
       	 htmlArray.push('<li>');
       	 htmlArray.push('<div class="d-img"> <a href="goods-'+item.goodsId+'.html"><img onerror="imagerror(this)"   src="'+item.thumbnailUrl+'" style="width: 100%;height:200px;"> </a></div> ');
-      	 htmlArray.push('<div class="d-tit">'+item.goodsLname+'</div> ');
+      	 htmlArray.push('<div class="d-tit">【'+item.weight+item.unit+'】'+item.goodsLname+'</div> ');
       	 htmlArray.push('<div class="d-subMark"> ');
       	 htmlArray.push('	<p class="price">&yen;'+item.finalPrices+'</p> ');
       	 htmlArray.push('    <p class="change"><del>&yen;'+item.orginPrices+'</del>&nbsp;&nbsp;&nbsp;<span class="discount">'+item.discount+'折</span></p> ');

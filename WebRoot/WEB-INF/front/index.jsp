@@ -65,7 +65,7 @@
 							<li>
 								<a href="/goods-${item.goodsId}.html">
 									<img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage"> <span>
-										<p class="name" style="overflow: hidden; ">${item.goodsLname}</p></span>
+										<p class="name" style="overflow: hidden; ">【${item.weight}${item.unit}】${item.goodsLname}&nbsp;</p></span>
 								
 				                    <p class="discount">${item.discount}折</p>
 				                    <p class="price">火爆价<br/><span class="big">${item.finalPrices}</span>元</p>		
@@ -95,6 +95,7 @@
 
 		function getMenuShareTimeline(wxsid){
 			
+			window.alert(111111111);
 			var shareid = wxsid;
 			var link = addUrlPara('wxsid',shareid);
 			

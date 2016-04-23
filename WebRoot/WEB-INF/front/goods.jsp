@@ -73,7 +73,7 @@ iframe{ height:100%; width:100%; overflow:auto; }
        	
      <div class="m-block" style="overflow:hidden;border-top:none">
      	<div class="col-xs-9">
-         <p class="m-txt">${goods.goodsLname}</p>
+         <p class="m-txt">【${item.weight}${item.unit}】${goods.goodsLname}</p>
          <p class="m-change">&yen;${goods.finalPrices} <span class="discount">${goods.discount}折</span><span class="old">原价：&yen;${goods.orginPrices}</span></p>
          </div>
          <div class="col-xs-3"><a href="javascript:void(0);" onclick="addLove(${goods.goodsId})"><span class="favorite-btn btn" >收藏</span></a>

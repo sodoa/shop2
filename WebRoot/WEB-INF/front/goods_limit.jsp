@@ -122,7 +122,7 @@ $(function(){
       	
       	
     	htmlArray.push('<li> ');
-    	htmlArray.push('   <a href="/gl-'+item.goodsId+'.html"><img style="width:100%;height:35%;" height="35%" width="100%" src="'+item.thumbnailUrl+'" alt=""  /><span>'+item.goodsLname+'</span></a> ');
+    	htmlArray.push('   <a href="/gl-'+item.goodsId+'.html"><img style="width:100%;height:35%;" height="35%" width="100%" src="'+item.thumbnailUrl+'" alt=""  /><span>【'+item.weight+item.unit+'】'+item.goodsLname+'</span></a> ');
     	htmlArray.push('   <div class="toolbar"> ');
     	htmlArray.push('   	<div class="time" id="'+clockid+'">仅剩<em class="day countime">04</em> 天<em class="hour countime">01</em>  时<em class="mini countime">05</em> 分<em class="sec countime">01</em> 秒</div> ');
     	htmlArray.push('       <div class="count">库存：<em >'+item.totalAmount+'</em>&nbsp;&nbsp;</div> ');
