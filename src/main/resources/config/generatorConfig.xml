@@ -61,7 +61,7 @@
 			<table tableName="t_distribution" domainObjectName="Distribution"/> -->
 
 
-		<table tableName="t_goods" domainObjectName="Goods" />
+		<table tableName="t_income_rank" domainObjectName="IncomeRank" />
 	
 
 	</context>
