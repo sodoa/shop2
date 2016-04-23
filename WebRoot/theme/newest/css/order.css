@@ -575,7 +575,7 @@ padding:0.1rem;
 .list-header .back{width:0.9rem;float:left}
 .list-header .back a{display: block;margin-top: 0.25rem;height: 0.32rem;}
 .list-header .index-top-bar{background:none}
-.pic-product-list li{width: 47%;float: left;margin: 0%;overflow: hidden;background:#fff;border:1px solid #dedddd}
+.pic-product-list li{width: 47%;float: left;margin: 0%;overflow: hidden;background:#fff;border:1px solid #dedddd;margin-bottom: 1%;margin-top: 1%;}
 /*.pic-product-list .d-img{margin:0.3rem 0.5rem;} */
 .pic-product-list .d-img img{width:100%;}
 .pic-product-list .d-tit{font-size:0.2rem;line-height:0.36rem;height:0.36rem;overflow:hidden;margin:0.1rem;font-weight:bold;text-align:center;}
