@@ -15,8 +15,7 @@ import com.xinfan.wxshop.common.page.Pagination;
 public class GoodsImageDao extends SqlSessionDaoSupport {
 
 	public int updateByPrimaryKeySelective(GoodsImage pojo) {
-		return getSqlSession().update(
-				wrapCommand("updateByPrimaryKeySelective"), pojo);
+		return getSqlSession().update(wrapCommand("updateByPrimaryKeySelective"), pojo);
 	}
 
 	public int insertSelective(GoodsImage pojo) {
@@ -31,18 +30,24 @@ public class GoodsImageDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectOne(wrapCommand("selectByPrimaryKey"), id);
 	}
 
+	public List<GoodsImage> selectByGoodsImageList(int id) {
+		
+		GoodsImageExample example = new GoodsImageExample();
+		example.createCriteria().andGoodsIdEqualTo(id);
+		return getSqlSession().selectList(wrapCommand("selectByExample"),
+				example);
+	}
+
 	public List<GoodsImage> pageList(GoodsImage bean, Pagination page) {
 		GoodsImageExample example = new GoodsImageExample();
-		example.createCriteria().andGoodsIdEqualTo(bean.getGoodsId())
-				.andImageTypeEqualTo(bean.getImageType());
+		example.createCriteria().andGoodsIdEqualTo(bean.getGoodsId()).andImageTypeEqualTo(bean.getImageType());
 		example.setOrderByClause(" sort desc");
-		
+
 		Map map = new HashMap();
 		map.put("goodsId", bean.getGoodsId());
 		map.put("imageType", bean.getImageType());
-		
-		return getSqlSession().selectList(wrapCommand("pageList"),
-				bean);
+
+		return getSqlSession().selectList(wrapCommand("pageList"), bean);
 	}
 
 }

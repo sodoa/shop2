@@ -47,7 +47,7 @@ public class FilePathHelper {
 
 
 	public static String getImageThumdToSavePath(String realdir) {
-		String path = "/file/g/" + realdir + "/tb";
+		String path = "/file/g/" + realdir + "/tb/";
 		return path;
 	}
 	

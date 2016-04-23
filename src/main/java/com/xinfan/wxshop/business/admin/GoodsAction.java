@@ -84,6 +84,26 @@ public class GoodsAction {
 		
 		return mv;
 	}
+	
+	//goods-copy
+	@RequestMapping("/goods-copy.jspx")
+	public @ResponseBody
+	JSONResult goodsCopy(HttpServletRequest request) {
+
+		JSONResult result = new JSONResult();
+
+		try {
+			String id = request.getParameter("id");
+			if (StringUtils.isNotEmpty(id)) {
+				this.GoodsService.addCopyGoods(request,Integer.parseInt(id));
+			}
+			result = result.success();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			result = result.error("复制商品失败");
+		}
+		return result;
+	}	
 
 	@RequestMapping("/goods-image-del.jspx")
 	public @ResponseBody
