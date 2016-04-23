@@ -52,7 +52,7 @@
 					</div>
 					<div class="other-link txt-center" style="height: 0.68rem">
 						还没帐号?
-						<a href="/regist.html" class="btn-register">注册</a>
+						<a href="/regist.html?p=${p}" class="btn-register">注册</a>
 					</div>
 				</form>
 			</div>
