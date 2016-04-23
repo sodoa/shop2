@@ -35,8 +35,7 @@ function reg_vercode_event() {
 				if (data.result == 0) {
 					//$("#verycode").val(data.code);
 				} else {
-					$('#login_error_msg_group').show();
-					$("#login_error_msg_group  p").text(data.message);
+					layer.msg(data.message);
 				}
 			}
 		});
