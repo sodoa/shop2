@@ -2,11 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xinfan.wxshop.business.dao.IncomeRankMapper" >
   <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.IncomeRank" >
-    <id column="rank_date" property="rankDate" jdbcType="VARCHAR" />
+    <result column="rank_date" property="rankDate" jdbcType="VARCHAR" />
     <result column="displayname" property="displayname" jdbcType="VARCHAR" />
     <result column="customer_id" property="customerId" jdbcType="INTEGER" />
     <result column="total_income" property="totalIncome" jdbcType="REAL" />
     <result column="rank_type" property="rankType" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    rank_date, displayname, customer_id, total_income, rank_type
+    rank_date, displayname, customer_id, total_income, rank_type, account
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.IncomeRankExample" >
     select
@@ -83,16 +84,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_income_rank
-    where rank_date = #{rankDate,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from t_income_rank
-    where rank_date = #{rankDate,jdbcType=VARCHAR}
-  </delete>
   <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.IncomeRankExample" >
     delete from t_income_rank
     <if test="_parameter != null" >
@@ -101,9 +92,11 @@
   </delete>
   <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
     insert into t_income_rank (rank_date, displayname, customer_id, 
-      total_income, rank_type)
+      total_income, rank_type, account
+      )
     values (#{rankDate,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
-      #{totalIncome,jdbcType=REAL}, #{rankType,jdbcType=INTEGER})
+      #{totalIncome,jdbcType=REAL}, #{rankType,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
     insert into t_income_rank
@@ -123,6 +116,9 @@
       <if test="rankType != null" >
         rank_type,
       </if>
+      <if test="account != null" >
+        account,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="rankDate != null" >
@@ -139,6 +135,9 @@
       </if>
       <if test="rankType != null" >
         #{rankType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +165,9 @@
       <if test="record.rankType != null" >
         rank_type = #{record.rankType,jdbcType=INTEGER},
       </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,35 +179,10 @@
       displayname = #{record.displayname,jdbcType=VARCHAR},
       customer_id = #{record.customerId,jdbcType=INTEGER},
       total_income = #{record.totalIncome,jdbcType=REAL},
-      rank_type = #{record.rankType,jdbcType=INTEGER}
+      rank_type = #{record.rankType,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
-    update t_income_rank
-    <set >
-      <if test="displayname != null" >
-        displayname = #{displayname,jdbcType=VARCHAR},
-      </if>
-      <if test="customerId != null" >
-        customer_id = #{customerId,jdbcType=INTEGER},
-      </if>
-      <if test="totalIncome != null" >
-        total_income = #{totalIncome,jdbcType=REAL},
-      </if>
-      <if test="rankType != null" >
-        rank_type = #{rankType,jdbcType=INTEGER},
-      </if>
-    </set>
-    where rank_date = #{rankDate,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
-    update t_income_rank
-    set displayname = #{displayname,jdbcType=VARCHAR},
-      customer_id = #{customerId,jdbcType=INTEGER},
-      total_income = #{totalIncome,jdbcType=REAL},
-      rank_type = #{rankType,jdbcType=INTEGER}
-    where rank_date = #{rankDate,jdbcType=VARCHAR}
   </update>
 </mapper>

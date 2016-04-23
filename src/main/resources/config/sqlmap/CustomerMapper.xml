@@ -367,7 +367,7 @@
   		</if>
   		
   		<if test="level == 2">
-  			select * from t_customer t2 where t2.customer_id in (select customer_id from t_customer t where upline_id = #{customerId} )   order by regdate desc 
+  			select * from t_customer t2 where t2.upline_id in (select customer_id from t_customer t where upline_id = #{customerId} )   order by regdate desc 
   		</if>
   		
   	</select>
