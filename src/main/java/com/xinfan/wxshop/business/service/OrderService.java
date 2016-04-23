@@ -154,7 +154,7 @@ public class OrderService {
 					float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
 					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
 					
-					income = 1;
+					//income = 1;
 
 					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
 
@@ -296,12 +296,15 @@ public class OrderService {
 		}
 
 		DeliveryAddress address = this.deliveryAddressDao.selectByPrimaryKey(addressId);
+		
+		String orderNo = OrderNoUtils.getOrderNo(orderId);
 
 		order.setReceiverAddress(address.getAddress());
 		order.setReceiverName(address.getReceiverName());
 		order.setReceiverPhone(address.getReceiverPhone());
 		order.setPaymentMode(paymentMode);
 		order.setMark(mark);
+		order.setOrderNo(orderNo);
 
 		this.orderDao.updateByPrimaryKeySelective(order);
 

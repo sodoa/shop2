@@ -36,7 +36,7 @@ public class WxNotifyUtils {
 					json.put("url", click_url);
 
 					Map<String, WxTemplateData> data = new HashMap<String, WxTemplateData>();
-					WxTemplateData firstData = new WxTemplateData("下线代理加入通知", "#173177");
+					WxTemplateData firstData = new WxTemplateData("您有新的下级入队", "#173177");
 					data.put("first", firstData);
 
 					WxTemplateData keyword1Data = new WxTemplateData(wx, "#173177");

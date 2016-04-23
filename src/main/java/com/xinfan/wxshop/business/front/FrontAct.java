@@ -84,7 +84,7 @@ public class FrontAct {
 		
 		String msg = request.getParameter("msg");
 		if(msg == null || msg.trim().length()==0){
-			msg = String.valueOf(request.getAttribute("msg"));
+			msg = (String)request.getAttribute("msg");
 			
 			if(msg == null || msg.trim().length() ==0	){
 				msg ="未知错误";

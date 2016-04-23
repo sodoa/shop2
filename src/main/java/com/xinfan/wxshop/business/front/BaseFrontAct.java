@@ -12,10 +12,10 @@ public class BaseFrontAct {
 		return mv;
 	}
 	
-	public ModelAndView forwardError(String msg,HttpServletRequest request) {
+/*	public ModelAndView forwardError(String msg,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("forward:/error.html");
 		mv.addObject("msg", msg);
 		return mv;
-	}
+	}*/
 	
 }
