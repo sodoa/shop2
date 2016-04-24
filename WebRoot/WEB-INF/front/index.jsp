@@ -64,7 +64,7 @@
 						<c:forEach var="item" items="${burstList}">
 							<li>
 								<a href="/goods-${item.goodsId}.html">
-									<img src="${item.thumbnailUrl}" onerror="imagerror(this)" width="694" height="284" defimage="defimage"> <span>
+									<img src="${item.thumbnailUrl}" onerror="imagerror(this)"  height="200" defimage="defimage"> <span>
 										<p class="name" style="overflow: hidden; ">【${item.weight}${item.unit}】${item.goodsLname}&nbsp;</p></span>
 								
 				                    <p class="discount">${item.discount}折</p>
