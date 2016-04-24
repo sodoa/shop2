@@ -192,7 +192,7 @@ public class WeiXinMessagerAct {
 			}
 			catch(Exception e){
 				logger.error(e.getMessage(),e);
-				msgContent = "红包领取失败";
+				msgContent = "今天的红包已经被瓜分完毕，明天中午12点继续投放。";
 			}
 			
 			StringBuffer str = new StringBuffer();
