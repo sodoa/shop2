@@ -22,6 +22,9 @@ public class YunpianSmsBean {
 	public static final long ORDER_TPL_ID;
 
 	public static final long CHANGE_PASSWORD_TPL_ID;
+	
+	public static final long ORDER_CONFIRM_TPL_ID;
+	
 	/**
 	 * 服务http地址
 	 */
@@ -50,6 +53,8 @@ public class YunpianSmsBean {
 		ORDER_TPL_ID = ParamtersFileConfig.getInstance().getLong("yunpian_sms_order_tpl_id");
 		CHANGE_PASSWORD_TPL_ID = ParamtersFileConfig.getInstance().getLong("yunpian_sms_change_password_tpl_id");
 		AIP_KEY = ParamtersFileConfig.getInstance().getString("yunpian_sms_apikey");
+		ORDER_CONFIRM_TPL_ID = ParamtersFileConfig.getInstance().getLong("yunpian_sms_order_confirm_tpl_id");
+		
 	}
 
 	/**

@@ -66,7 +66,7 @@ public class OrderService {
 
 	@Autowired
 	private DeliveryAddressDao deliveryAddressDao;
-	
+
 	@Autowired
 	private WalletDao walletDao;
 
@@ -144,7 +144,7 @@ public class OrderService {
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-		
+
 		try {
 			Customer level1Customer = customerDao.selectByPrimaryKey(order.getCustomerId());
 			if (level1Customer != null) {
@@ -153,8 +153,8 @@ public class OrderService {
 
 					float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
 					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
-					
-					//income = 1;
+
+					// income = 1;
 
 					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
 
@@ -174,7 +174,7 @@ public class OrderService {
 						distribution.setResult(1);
 						distribution.setLevel(2);
 						distributionDao.insertSelective(distribution);
-					
+
 						if (level1Customer.getWxId() != null && level1Customer.getWxId().length() > 1) {
 
 							Wallet wallet = this.walletDao.selectByCustomerIdKey(level1Customer.getCustomerId());
@@ -185,7 +185,6 @@ public class OrderService {
 							WxNotifyUtils.customerPointsJoinNotify(level1Customer.getWxId(), level1Customer.getDisplayname(), String.valueOf(income),
 									totalMoney, "2");
 						}
-						
 
 						if (level1Customer.getUplineId() != null) {
 							Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
@@ -210,7 +209,7 @@ public class OrderService {
 									distribution2.setResult(1);
 									distribution2.setLevel(3);
 									distributionDao.insertSelective(distribution2);
-									
+
 									if (level2Customer.getWxId() != null && level2Customer.getWxId().length() > 1) {
 
 										Wallet wallet = this.walletDao.selectByCustomerIdKey(level2Customer.getCustomerId());
@@ -218,10 +217,10 @@ public class OrderService {
 										if (wallet != null) {
 											totalMoney = String.valueOf(wallet.getBalance());
 										}
-										WxNotifyUtils.customerPointsJoinNotify(level2Customer.getWxId(), level2Customer.getDisplayname(), String.valueOf(income2),
-												totalMoney, "3");
+										WxNotifyUtils.customerPointsJoinNotify(level2Customer.getWxId(), level2Customer.getDisplayname(),
+												String.valueOf(income2), totalMoney, "3");
 									}
-									
+
 								}
 							}
 						}
@@ -245,6 +244,15 @@ public class OrderService {
 			logger.error(e.getMessage(), e);
 		}
 
+	}
+
+	public void updateOrderIsConfirmed(int orderId) {
+
+		Order order = new Order();
+		order.setOrderId(orderId);
+		order.setShared(1);
+
+		orderDao.updateByPrimaryKeySelective(order);
 	}
 
 	public void updateOrderCommented(int orderId, int customerId, String comment) {
@@ -296,7 +304,7 @@ public class OrderService {
 		}
 
 		DeliveryAddress address = this.deliveryAddressDao.selectByPrimaryKey(addressId);
-		
+
 		String orderNo = OrderNoUtils.getOrderNo(orderId);
 
 		order.setReceiverAddress(address.getAddress());

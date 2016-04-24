@@ -81,4 +81,31 @@ public class YunPianSmsServiceImpl implements SmsService{
 		
 		}
 	}
+	
+
+	@Override
+	public void sendOrderConfirmMsg(final String mobile, final String message) {
+		
+		String ifOpen = ParamterUtils.getString("order_msg_tip", "1");
+		if("1".equals(ifOpen)){
+		
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						String rs = YunpianSmsBean.tplSendSms(YunpianSmsBean.ORDER_CONFIRM_TPL_ID, "#code#="+message, mobile);
+						JSONObject json = JSONObject.parseObject(rs);
+						if(json != null && "0".equals(json.getString("code"))){
+							logger.info("发送定单确认信息成功,"+rs);
+						}else{
+							logger.error("发送定单确认信息失败,"+rs);
+						}
+					} catch (IOException e) {
+						logger.error("发送定单确认信息异常",e);
+					}
+				}
+			}).start();
+		
+		}
+	}	
 }

@@ -20,4 +20,6 @@ public interface SmsService {
 	
 	
 	public void sendOderPaySms(String mobile,String message);
+	
+	public void sendOrderConfirmMsg(final String mobile, final String message);
 }

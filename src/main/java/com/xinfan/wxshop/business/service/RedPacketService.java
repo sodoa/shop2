@@ -40,11 +40,11 @@ public class RedPacketService {
 
 		RedPacket packet = redPacketDao.selectByPrimaryKey(lined);
 		if (packet == null) {
-			return "今天没有红包了";
+			return "今天的红包已经被瓜分完毕，明天中午12点继续投放";
 		}
 
 		if (packet.getPickup() >= packet.getTotal()) {
-			return "今天的红包领完了";
+			return "今天的红包已经被瓜分完毕，明天中午12点继续投放";
 		}
 
 		RedRecord search = new RedRecord();

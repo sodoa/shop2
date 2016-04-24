@@ -2,12 +2,7 @@
      "button":[
      {	
           "type":"view",
-          "name":"运输队",
+          "name":"果然逗商城",
           "url":"http://www.11grand.cn"
-      },
-      {
-          "type":"view",
-          "name":"掇赚钱",
-          "url":"http://11grand.cn/ac.html"
-       }]
+      }]
  }

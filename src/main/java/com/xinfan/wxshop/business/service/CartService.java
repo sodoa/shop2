@@ -1,6 +1,7 @@
 package com.xinfan.wxshop.business.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -254,6 +255,7 @@ public class CartService {
 			order.setReceiverName(address.getReceiverName());
 			order.setReceiverAddress(address.getAddress());
 			order.setReceiverPhone(address.getReceiverPhone());
+			order.setOrderDate(new Date());
 
 			table.setFee(totalAmount);
 			table.setOrderNo(orderNo);

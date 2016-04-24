@@ -26,23 +26,59 @@ import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.page.Pagination;
+import com.xinfan.wxshop.common.sms.SmsService;
 
 @Controller
 @RequestMapping("/admin")
 public class OrderAction {
 
 	private static final Logger logger = LoggerFactory.getLogger(OrderAction.class);
-	
+
 	@Autowired
 	private OrderService OrderService;
 
 	@Autowired
 	private CustomerService CustomerService;
 
+	@Autowired
+	private SmsService SmsService;
+
 	@RequestMapping("/order-list.jspx")
 	public ModelAndView listOrder(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/admin/order/list");
 		return mv;
+	}
+
+	@RequestMapping("/confirm-msg.jspx")
+	public ModelAndView confirmMsg(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/admin/order/confirm_msg");
+		String id = request.getParameter("id");
+		mv.addObject("id", id);
+		return mv;
+	}
+
+	@RequestMapping("/save-confirm-msg.jspx")
+	public @ResponseBody
+	JSONResult savConfirmMsg(HttpServletRequest request) {
+		JSONResult result = null;
+
+		String id = request.getParameter("id");
+		String msg = request.getParameter("msg");
+
+		try {
+
+			Order order = this.OrderService.getPayOrderInfo(0, Integer.parseInt(id));
+			if (order != null) {
+				SmsService.sendOrderConfirmMsg(order.getReceiverPhone(), msg);
+				OrderService.updateOrderIsConfirmed(Integer.parseInt(id));
+			}
+			result = JSONResult.success();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			result = JSONResult.error(e.getMessage());
+		}
+
+		return result;
 	}
 
 	@RequestMapping("/order-list-page.jspx")
@@ -84,7 +120,7 @@ public class OrderAction {
 		DataGridFormater stateFormater = new OrderStateDataGridFormater("status");
 
 		DataTableDataGrid grid = new DataTableDataGrid(Integer.parseInt(draw), page, new Object[] { "order_id", "receiver_name", "account", "order_date",
-				"total_amount", "status" });
+				"total_amount",  "status","shared" });
 
 		return grid;
 	}
@@ -139,7 +175,7 @@ public class OrderAction {
 			result = JSONResult.success();
 
 		} catch (Exception e) {
-			logger.error(e.getMessage(),e);
+			logger.error(e.getMessage(), e);
 			result = JSONResult.error();
 		}
 		return result;
