@@ -95,7 +95,6 @@
 
 		function getMenuShareTimeline(wxsid){
 			
-			window.alert(111111111);
 			var shareid = wxsid;
 			var link = addUrlPara('wxsid',shareid);
 			
