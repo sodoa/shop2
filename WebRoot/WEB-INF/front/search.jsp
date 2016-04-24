@@ -58,13 +58,13 @@ $(function(){
 	var w = '${w}';
 	
 	var totalPage = '${page.totalPage}';
-	var page = 0;
+	var page = 1;
 	
 	$('#page-comtain').endlessScroll({
 	    fireOnce: true,
 	    fireDelay: false,
 	    callback: function(){
-	    	if(page<totalPage){
+	    	if(page<=totalPage){
 	    		ajaxPageContent(page++);
 	    	}
 	    }

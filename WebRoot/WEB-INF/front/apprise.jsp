@@ -66,13 +66,13 @@
 		
 		var goodsId = '${goodsId}';
 		var totalPage = '${page.totalPage}';
-		var page = 0;
+		var page = 1;
 		
 		$(window).endlessScroll({
 		    fireOnce: true,
 		    fireDelay: false,
 		    callback: function(){
-		    	if(page<totalPage){
+		    	if(page<=totalPage){
 		    		ajaxPageContent(page++);
 		    	}
 		    }
