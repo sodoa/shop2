@@ -33,10 +33,10 @@
 					<div class="m-slider-con-wrap" id="JslideWrap" style="display: block;">
 						<div class="m-slider-con">
 							<a class="m-slider-item" href="javascript:void(0);">
-								<img src="/theme/newest/images/index/ffzz.jpg" />
+								<img src="/theme/images/1.jpg" />
 							</a>
 							<a class="m-slider-item" href="javascript:void(0);">
-								<img src="/theme/newest/images/index-pic2.jpg" />
+								<img src="/theme/images/2.jpg" />
 							</a>
 						</div>
 					</div>
