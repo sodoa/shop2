@@ -98,7 +98,7 @@ public class WxNotifyUtils {
 				WxTemplateData keyword2Data = new WxTemplateData(DateHelper.formatFull(new Date()), "#173177");
 				data.put("keyword2", keyword2Data);
 				// keyword3
-				WxTemplateData keyword3Data = new WxTemplateData("分层积分", "#173177");
+				WxTemplateData keyword3Data = new WxTemplateData("分红积分", "#173177");
 				data.put("keyword3", keyword3Data);
 
 				WxTemplateData keyword4Data = new WxTemplateData(money+" 元", "#173177");

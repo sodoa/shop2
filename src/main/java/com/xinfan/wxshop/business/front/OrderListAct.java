@@ -171,8 +171,9 @@ public class OrderListAct {
 
 		int customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
 		OrderBean orderBean = OrderService.getOrderDetailInfo(id, customerId);
-
-		DeliveryAddress address = DeliveryAddressService.getDeliverAddress(orderBean.getOrder().getDeliveryId());
+		
+		DeliveryAddress address = DeliveryAddressService.getSugestDeliverAddress(customerId);
+		
 		mv.addObject("address", address);
 		mv.addObject("bean", orderBean);
 		mv.addObject("menu_hit", 4);
