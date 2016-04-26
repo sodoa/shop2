@@ -230,7 +230,7 @@ public class CartService {
 
 				totalQuantity += detail.getQuantity();
 
-				totalAmount += goods.getFinalPrices();
+				totalAmount += (goods.getFinalPrices() * detail.getQuantity());
 
 				table.setGoodsId(goods.getGoodsId());
 				table.setGoodsName(goods.getGoodsName());

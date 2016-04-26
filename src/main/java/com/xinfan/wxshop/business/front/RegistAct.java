@@ -78,9 +78,17 @@ public class RegistAct {
 		ModelAndView mv = new ModelAndView("/front/regist");
 
 		String p = request.getParameter("p");
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug("share1 : "+request.getSession().getId());
+			Cookie cookie = CookieUtils.getCookie(request, "wxsid");
+			if(cookie !=null){
+				logger.debug("share1 : "+cookie.getValue());
+			}
+		}
 
 		if (p == null || p.length() == 0 || "null".equals(p)) {
-			Object sessionp = request.getSession(true).getAttribute(BizConstants.SESSION_REDIRECT_VAR_KEY);
+			Object sessionp = request.getSession().getAttribute(BizConstants.SESSION_REDIRECT_VAR_KEY);
 			if (sessionp != null) {
 				p = (String) sessionp;
 			}
@@ -98,19 +106,19 @@ public class RegistAct {
 				// 最好自己带上一个加密字符串将金额加上一个自定义的key用MD5签名或者自己写的签名,
 				// 比如 Sign = %3D%2F%CS%
 
-				String body = "p=" + p;
+				String body = "p=" + p ;
+				Cookie cookie = CookieUtils.getCookie(request, "wxsid");
+				if (cookie != null) {
+					body += "&wxsid=" + cookie.getValue();
+				}
 
-				String desPassword = FileConfig.getInstance().getString("weixin.des.password");
+				//String desPassword = FileConfig.getInstance().getString("weixin.des.password");
 
-				logger.debug("weixin_pay_auth despassword :" + desPassword);
+				logger.debug("weixin_pay_auth  :" + body);
 
-				String decData;
+				logger.debug("weixin_pay_auth decData :" + body);
 
-				decData = Base64.encodeBase64String(DesUtils.encrypt(body.getBytes("UTF-8"), desPassword));
-
-				logger.debug("weixin_pay_auth decData :" + decData);
-
-				backUri = backUri + "?data=" + decData;
+				backUri = backUri + "?" + body;
 				// URLEncoder.encode 后可以在backUri 的url里面获取传递的所有参数
 				backUri = URLEncoder.encode(backUri);
 
@@ -130,6 +138,14 @@ public class RegistAct {
 	@RequestMapping(method = RequestMethod.GET, value = "/wecat_regist.html")
 	public ModelAndView wecat_regist(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/front/regist");
+		
+		if (logger.isDebugEnabled()) {
+			logger.debug("share2 : "+request.getSession().getId());
+			Cookie cookie = CookieUtils.getCookie(request, "wxsid");
+			if(cookie !=null){
+				logger.debug("share2 : "+cookie.getValue());
+			}
+		}
 		
 		String code = request.getParameter("code");
 		
@@ -292,6 +308,8 @@ public class RegistAct {
 			}
 
 			Cookie cookie = CookieUtils.getCookie(request, "wxsid");
+			
+			logger.info("share : "+cookie);
 			
 			if (cookie != null) {
 				logger.info("regist cookie : " + cookie);

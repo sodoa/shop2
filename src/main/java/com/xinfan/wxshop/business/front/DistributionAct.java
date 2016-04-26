@@ -119,10 +119,13 @@ public class DistributionAct {
 
 		String c = request.getParameter("c");
 
-		logger.info(c);
 		if (c != null && c.length() > 0) {
 			String customerId = c;
 			CookieUtils.addCookie(request, response, "wxsid", customerId, 24 * 60 * 60, null);
+
+			if (logger.isDebugEnabled()) {
+				logger.info("share : " + customerId);
+			}
 		}
 
 		return mv;
