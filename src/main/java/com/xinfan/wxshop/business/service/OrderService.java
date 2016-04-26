@@ -290,16 +290,19 @@ public class OrderService {
 
 		Customer customer = this.customerDao.selectByPrimaryKey(customerId);
 		if (customer != null) {
-
-			int aid = this.sequenceDao.getSequence(SequenceConstants.SEQ_APPRAISE);
-			Appraise pojo = new Appraise();
-			pojo.setContext(comment);
-			pojo.setAppraiseId(aid);
-			pojo.setCreatedate(new Date());
-			pojo.setCustomerId(customerId);
-			pojo.setCustomerName(customer.getDisplayname());
-			pojo.setOrderId(orderId);
-			appraiseDao.insertSelective(pojo);
+			List<OrderDetail> details = this.orderDetailDao.selectByOrderId(order.getOrderId());
+			for (OrderDetail detail : details) {
+				int aid = this.sequenceDao.getSequence(SequenceConstants.SEQ_APPRAISE);
+				Appraise pojo = new Appraise();
+				pojo.setContext(comment);
+				pojo.setAppraiseId(aid);
+				pojo.setCreatedate(new Date());
+				pojo.setCustomerId(customerId);
+				pojo.setGoodsId(detail.getGoodsId());
+				pojo.setCustomerName(customer.getDisplayname());
+				pojo.setOrderId(orderId);
+				appraiseDao.insertSelective(pojo);
+			}
 		}
 
 	}
