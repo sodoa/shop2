@@ -44,9 +44,15 @@
     	<div class="m-block-form">
         	<form class="form-horizontal m-order-address-form" id="submit_form" action="address_save.html">
              <div class="form-group">
+                <label for="name" class="col-xs-3">收货人</label>
+                <div class="col-xs-9">
+                 	<input name="receiverName" type="text" datatype="*1-20" errormsg="请输入收货人姓名" placeholder="请输入收货人姓名" value="${bean.receiverName}" />
+                </div>
+              </div>        	
+             <div class="form-group">
                 <label for="name" class="col-xs-3">手机号</label>
                 <div class="col-xs-9">
-                 	<input name="receiverPhone" type="text" datatype="n8-15" errormsg="请输出正确的联系方式" placeholder="请输出正确的联系方式" value="${bean.receiverPhone}" />
+                 	<input name="receiverPhone" type="text" datatype="*8-15" errormsg="请输入正确的联系方式" placeholder="请输入正确的联系方式" value="${bean.receiverPhone}" />
                 </div>
               </div>
               <div class="form-group">
@@ -70,7 +76,7 @@
               <div class="form-group">
                 <label for="name" class="col-xs-3">详细地址</label>
                 <div class="col-xs-9">
-                 	<input name="street" type="text" width="70%" datatype="s1-30" errormsg="请输出正确的详细地址" value="${bean.street}" required  placeholder="请输入正确的详细地址" />
+                 	<input name="street" type="text" width="70%" datatype="*1-30" errormsg="请输入正确的详细地址" value="${bean.street}" required  placeholder="请输入正确的详细地址" />
                 </div>
               </div>
               <div class="order-btn-logout"> <a href="javascript:void(0)" id="btn_complate">完成</a> </div>

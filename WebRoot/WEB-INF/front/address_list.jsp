@@ -26,14 +26,14 @@
         			
 		            	<li data="${item.deliveryId}" style="cursor: pointer;<c:if test='${item.isdefault==1}' > border:1px solid red; </c:if>"  onclick="go_check('/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}')"   > 
 		                     <div class="m-order-address">
-		                         	${item.receiverPhone}
+		                     	${item.receiverName}&nbsp;&nbsp;${item.receiverPhone}
 		                         <p>${item.address}</p>
 		                         
 		                         	<input id="chk${s.index}" type="checkbox" style="cursor: pointer;"  onclick="go_check('/center/address_default.html?id=${item.deliveryId}&from=${from}&opt=${opt}')"  <c:if test='${item.isdefault==1}'>checked='checked'</c:if> />
 		                         	<label for="chk${s.index}" style="cursor: pointer;" ><c:choose> <c:when test="${opt==1}">选择收货地址</c:when> <c:otherwise> 选择默认地址 </c:otherwise> </c:choose></label>
 		                     </div>
 		                      
-		                 	 <a href="/center/address_edit.html?id=${item.deliveryId}&from=${from}" class="m-order-address-edit"></a>
+		                 	 <a href="/center/address_edit.html?id=${item.deliveryId}&from=${from}" style="margin-right: 20px;" class="m-order-address-edit"></a>
 		                  	 <a href="javascript:void(0)" data="${item.deliveryId}" class="m-order-address-delete address_delete" ></a>
 		         		 </li>
          		 </c:forEach>

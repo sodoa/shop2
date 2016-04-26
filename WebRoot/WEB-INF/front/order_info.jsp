@@ -38,7 +38,7 @@
 					</c:if>
 					<c:if test="${not empty address.deliveryId}">
 						<div class="m-order-address">
-						    <p>${address.receiverName}<span>${address.receiverPhone }</span></p>
+						    <p>${address.receiverName}<span>&nbsp;&nbsp;${address.receiverPhone}</span></p>
 						    <p>${address.address}</p>
 						</div>            
 					</c:if>		         
