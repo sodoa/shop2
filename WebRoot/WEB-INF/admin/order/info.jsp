@@ -65,8 +65,10 @@
 											<td>
 												<sp:dict_label_tag type="payment_mode" value="${order.paymentMode}"></sp:dict_label_tag>
 											</td>
-											<td>是否分享</td>
-											<td>${order.shared}</td>
+											<td>是否短信确认</td>
+											<td>
+												<sp:dict_label_tag type="shared_state" value="${order.shared}"></sp:dict_label_tag>
+											</td>
 										</tr>
 									</tbody>
 								</table>
