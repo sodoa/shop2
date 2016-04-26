@@ -65,7 +65,7 @@ public class DistributionAct {
 
 		Pagination page = new Pagination();
 		page.setPageNo(1);
-		page.setPageSize(5);
+		page.setPageSize(40);
 		page = DistributionService.pageNearCustomerDistributionList(customerId, page);
 
 		mv.addObject("page", page);

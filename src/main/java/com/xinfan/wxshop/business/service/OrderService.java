@@ -146,82 +146,94 @@ public class OrderService {
 		}
 
 		try {
-			Customer level1Customer = customerDao.selectByPrimaryKey(order.getCustomerId());
-			if (level1Customer != null) {
-				Integer uplineId = level1Customer.getUplineId();
+			Customer currentCustomer = customerDao.selectByPrimaryKey(order.getCustomerId());
+			if (currentCustomer != null) {
+				Integer uplineId = currentCustomer.getUplineId();
 				if (uplineId != null && uplineId != 0) {
+					Customer level1Customer = customerDao.selectByPrimaryKey(uplineId);
+					if (level1Customer != null) {
 
-					float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
-					float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
+						float distribution_rate = Float.parseFloat(ParamterUtils.getString("distribution.level1.rate", "0.01"));
+						float income = (float) Math.floor(order.getTotalAmount() * distribution_rate * 100) / 100;
 
-					// income = 1;
+						int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
 
-					int distributionId = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
+						if (income >= 0.1) {
 
-					if (income >= 0.1) {
+							Distribution distribution = new Distribution();
+							distribution.setCharge(order.getTotalAmount());
+							distribution.setRate(distribution_rate);
+							distribution.setChargeName(order.getOrderNo());
+							distribution.setConsumeDate(TimeUtils.getCurrentTime());
+							distribution.setDistributionId(distributionId);
+							distribution.setDownlineId(currentCustomer.getCustomerId());
+							distribution.setUplineId(level1Customer.getCustomerId());
+							distribution.setDownlineName(currentCustomer.getAccount());
+							distribution.setIncome(income);
+							distribution.setOrderId(order.getOrderId());
+							distribution.setResult(1);
+							distribution.setLevel(2);
+							distributionDao.insertSelective(distribution);
 
-						Distribution distribution = new Distribution();
-						distribution.setCharge(order.getTotalAmount());
-						distribution.setRate(distribution_rate);
-						distribution.setChargeName(order.getOrderNo());
-						distribution.setConsumeDate(TimeUtils.getCurrentTime());
-						distribution.setDistributionId(distributionId);
-						distribution.setDownlineId(order.getCustomerId());
-						distribution.setUplineId(uplineId);
-						distribution.setDownlineName(level1Customer.getAccount());
-						distribution.setIncome(income);
-						distribution.setOrderId(order.getOrderId());
-						distribution.setResult(1);
-						distribution.setLevel(2);
-						distributionDao.insertSelective(distribution);
+							if (level1Customer.getWxId() != null && level1Customer.getWxId().length() > 1) {
 
-						if (level1Customer.getWxId() != null && level1Customer.getWxId().length() > 1) {
+								Wallet wallet = this.walletDao.selectByCustomerIdKey(level1Customer.getCustomerId());
 
-							Wallet wallet = this.walletDao.selectByCustomerIdKey(level1Customer.getCustomerId());
-							String totalMoney = "";
-							if (wallet != null) {
-								totalMoney = String.valueOf(wallet.getBalance());
-							}
-							WxNotifyUtils.customerPointsJoinNotify(level1Customer.getWxId(), level1Customer.getDisplayname(), String.valueOf(income),
-									totalMoney, "2");
-						}
-
-						if (level1Customer.getUplineId() != null) {
-							Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
-							if (level2Customer.getUplineId() != null && level2Customer.getUplineId() != 0) {
-								float distribution_rate2 = Float.parseFloat(ParamterUtils.getString("distribution.level2.rate", "0.01"));
-								float income2 = (float) Math.floor(order.getTotalAmount() * distribution_rate * 10) / 10;
-
-								if (income2 >= 0.1) {
-									int distributionId2 = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
-
-									Distribution distribution2 = new Distribution();
-									distribution2.setCharge(order.getTotalAmount());
-									distribution2.setRate(distribution_rate2);
-									distribution2.setChargeName(order.getOrderNo());
-									distribution2.setConsumeDate(TimeUtils.getCurrentTime());
-									distribution2.setDistributionId(distributionId2);
-									distribution2.setDownlineId(level2Customer.getCustomerId());
-									distribution2.setUplineId(level2Customer.getCustomerId());
-									distribution2.setDownlineName(level2Customer.getAccount());
-									distribution2.setIncome(income2);
-									distribution2.setOrderId(order.getOrderId());
-									distribution2.setResult(1);
-									distribution2.setLevel(3);
-									distributionDao.insertSelective(distribution2);
-
-									if (level2Customer.getWxId() != null && level2Customer.getWxId().length() > 1) {
-
-										Wallet wallet = this.walletDao.selectByCustomerIdKey(level2Customer.getCustomerId());
-										String totalMoney = "";
-										if (wallet != null) {
-											totalMoney = String.valueOf(wallet.getBalance());
-										}
-										WxNotifyUtils.customerPointsJoinNotify(level2Customer.getWxId(), level2Customer.getDisplayname(),
-												String.valueOf(income2), totalMoney, "3");
-									}
-
+								if (wallet != null) {
+									float totalMoney = wallet.getBalance() + income;
+									Wallet update = new Wallet();
+									update.setWalletId(wallet.getWalletId());
+									update.setBalance(totalMoney);
+									walletDao.updateByPrimaryKeySelective(update);
+									WxNotifyUtils.customerPointsJoinNotify(level1Customer.getWxId(), level1Customer.getDisplayname(), String.valueOf(income),
+											String.valueOf(totalMoney), "2");
 								}
+							}
+
+							try {
+
+								if (level1Customer.getUplineId() != null) {
+									Customer level2Customer = customerDao.selectByPrimaryKey(level1Customer.getUplineId());
+									if (level2Customer.getUplineId() != null && level2Customer.getUplineId() != 0) {
+										float distribution_rate2 = Float.parseFloat(ParamterUtils.getString("distribution.level2.rate", "0.01"));
+										float income2 = (float) Math.floor(order.getTotalAmount() * distribution_rate2 * 10) / 10;
+
+										if (income2 >= 0.1) {
+											int distributionId2 = this.sequenceDao.getSequence(SequenceConstants.SEQ_DISTRIBUTION);
+
+											Distribution distribution2 = new Distribution();
+											distribution2.setCharge(order.getTotalAmount());
+											distribution2.setRate(distribution_rate2);
+											distribution2.setChargeName(order.getOrderNo());
+											distribution2.setConsumeDate(TimeUtils.getCurrentTime());
+											distribution2.setDistributionId(distributionId2);
+											distribution2.setDownlineId(currentCustomer.getCustomerId());
+											distribution2.setUplineId(level2Customer.getCustomerId());
+											distribution2.setDownlineName(currentCustomer.getAccount());
+											distribution2.setIncome(income2);
+											distribution2.setOrderId(order.getOrderId());
+											distribution2.setResult(1);
+											distribution2.setLevel(3);
+											distributionDao.insertSelective(distribution2);
+
+											if (level2Customer.getWxId() != null && level2Customer.getWxId().length() > 1) {
+
+												Wallet wallet = this.walletDao.selectByCustomerIdKey(level2Customer.getCustomerId());
+												if (wallet != null) {
+													float totalMoney = wallet.getBalance() + income2;
+													Wallet update = new Wallet();
+													update.setWalletId(wallet.getWalletId());
+													update.setBalance(totalMoney);
+													walletDao.updateByPrimaryKeySelective(update);
+													WxNotifyUtils.customerPointsJoinNotify(level2Customer.getWxId(), level2Customer.getDisplayname(),
+															String.valueOf(income2), String.valueOf(totalMoney), "3");
+												}
+											}
+										}
+									}
+								}
+							} catch (Exception e) {
+								logger.error(e.getMessage(), e);
 							}
 						}
 					}
