@@ -134,4 +134,15 @@
 		<property name="namespace" value="com.xinfan.wxshop.business.dao.GoodsLimitMapper" />
 		<property name="sqlSession" ref="sqlSession" />
 	</bean>		
+
+	<bean id="DistrRankDao" class="com.xinfan.wxshop.business.dao.DistrRankDao">
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.DistrRankMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>	
+	
+	<bean id="WxShareDao" class="com.xinfan.wxshop.business.dao.WxShareDao">
+		<property name="namespace" value="com.xinfan.wxshop.business.dao.WxShareMapper" />
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>		
+	
 </beans>

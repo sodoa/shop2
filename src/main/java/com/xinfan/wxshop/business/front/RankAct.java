@@ -26,6 +26,7 @@ import com.xinfan.wxshop.business.helper.FilePathHelper;
 import com.xinfan.wxshop.business.service.ArticleService;
 import com.xinfan.wxshop.business.service.RankingService;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
+import com.xinfan.wxshop.business.util.WxQrcodeUtils;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.config.FileConfig;
 import com.xinfan.wxshop.common.security.DesUtils;
@@ -138,16 +139,8 @@ public class RankAct {
 				}
 			}
 
-			String domain = ParamterUtils.getString("web.domain",
-					"http://11grand.cn") +"/share.html";
-
-			domain += "?c=" + customerId;
-			
-			logger.info("domain : " + domain);
-
-			ByteArrayOutputStream out1 = QRCode.from(domain).to(ImageType.PNG).withSize(300, 300)
-					.stream();
-			response.getOutputStream().write(out1.toByteArray());
+			byte[] images  = WxQrcodeUtils.getQrcode(request, Integer.parseInt(customerId));
+			response.getOutputStream().write(images);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(),e);

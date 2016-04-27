@@ -29,6 +29,7 @@ import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.business.util.RequestUtils;
+import com.xinfan.wxshop.business.util.WxQrcodeUtils;
 import com.xinfan.wxshop.common.config.FileConfig;
 import com.xinfan.wxshop.common.page.Pagination;
 import com.xinfan.wxshop.common.security.DesUtils;
@@ -144,15 +145,8 @@ public class DistributionAct {
 		try {
 
 			Integer customerId = LoginSessionUtils.getCustomerIdFromUserSessionMap();
-
-			String desPassword = FileConfig.getInstance().getString("image.des.password", "password12345678");
-
-			String domain = ParamterUtils.getString("web.domain", "http://11grand.cn") + "/share.html";
-
-			domain += "?c=" + customerId;
-
-			ByteArrayOutputStream out1 = QRCode.from(domain).to(ImageType.PNG).withSize(300, 300).stream();
-			response.getOutputStream().write(out1.toByteArray());
+			byte[] images = WxQrcodeUtils.getQrcode(request, customerId);
+			response.getOutputStream().write(images);
 
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

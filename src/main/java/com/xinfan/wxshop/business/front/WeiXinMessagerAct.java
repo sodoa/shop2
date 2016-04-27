@@ -23,7 +23,9 @@ import com.xinfan.wxshop.business.entity.RedRecord;
 import com.xinfan.wxshop.business.pay.weixin.MenuManger;
 import com.xinfan.wxshop.business.pay.weixin.Sha1Util;
 import com.xinfan.wxshop.business.service.RedPacketService;
+import com.xinfan.wxshop.business.service.WxShareService;
 import com.xinfan.wxshop.business.util.SerializeXmlUtil;
+import com.xinfan.wxshop.business.util.WeixinUtils;
 import com.xinfan.wxshop.business.vo.InputMessage;
 import com.xinfan.wxshop.business.vo.OutputMessage;
 import com.xinfan.wxshop.common.config.FileConfig;
@@ -36,6 +38,9 @@ public class WeiXinMessagerAct {
 	@Autowired
 	private RedPacketService RedPacketService;
 
+	@Autowired
+	private WxShareService WxShareService;
+
 	/**
 	 * <xml> <ToUserName><![CDATA[toUser]]></ToUserName>
 	 * <FromUserName><![CDATA[fromUser]]></FromUserName>
@@ -43,19 +48,18 @@ public class WeiXinMessagerAct {
 	 * <Content><![CDATA[this is a test]]></Content>
 	 * <MsgId>1234567890123456</MsgId> </xml>
 	 */
-	
+
 	@RequestMapping("/weixin/menu")
 	public void createmenu(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+
 		String message = "";
-		
+
 		String opt = request.getParameter("opt");
-		if("create".equals(opt)){
+		if ("create".equals(opt)) {
 			MenuManger.createMenu();
-		}
-		else if("del".equals(opt)){
+		} else if ("del".equals(opt)) {
 			MenuManger.deleteMenu();
-		}else {
+		} else {
 			response.getOutputStream().println("error code");
 		}
 	}
@@ -87,9 +91,9 @@ public class WeiXinMessagerAct {
 	}
 
 	private String access(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		String token = FileConfig.getInstance().getString("weixin.messager.token");
-		
+
 		// 验证URL真实性
 		System.out.println("进入验证access");
 		String signature = request.getParameter("signature");// 微信加密签名
@@ -100,9 +104,9 @@ public class WeiXinMessagerAct {
 		params.add(token);
 		params.add(timestamp);
 		params.add(nonce);
-		
+
 		logger.info(params.toString());
-		
+
 		// 1. 将token、timestamp、nonce三个参数进行字典序排序
 		Collections.sort(params, new Comparator<String>() {
 			@Override
@@ -124,9 +128,9 @@ public class WeiXinMessagerAct {
 		logger.info("失败 认证 echostr：" + echostr);
 		return null;
 	}
-	
-	public static void main(String[] args){
-		
+
+	public static void main(String[] args) {
+
 		String xml = "<xml><ToUserName><![CDATA[gh_46560b440d13]]></ToUserName><FromUserName><![CDATA[oVProsuNsZqTdBjfhcgvHcaz139o]]></FromUserName><CreateTime>1456566768</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA[计算机中]]></Content><MsgId>6255906633401811497</MsgId></xml> ";
 		// 将xml内容转换为InputMessage对象
 		XStream xs = SerializeXmlUtil.createXstream();
@@ -134,12 +138,12 @@ public class WeiXinMessagerAct {
 		xs.processAnnotations(OutputMessage.class);
 		xs.alias("xml", InputMessage.class);
 		InputMessage inputMsg = (InputMessage) xs.fromXML(xml.toString());
-		
+
 		System.out.println(inputMsg);
 	}
 
 	private void acceptMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+
 		// 处理接收消息
 		ServletInputStream in = request.getInputStream();
 		// 将POST流转换为XStream对象
@@ -154,9 +158,9 @@ public class WeiXinMessagerAct {
 		for (int n; (n = in.read(b)) != -1;) {
 			xmlMsg.append(new String(b, 0, n, "UTF-8"));
 		}
-		
-		logger.info("" +xmlMsg.toString());
-		
+
+		logger.info("" + xmlMsg.toString());
+
 		// 将xml内容转换为InputMessage对象
 		InputMessage inputMsg = (InputMessage) xs.fromXML(xmlMsg.toString());
 
@@ -168,9 +172,9 @@ public class WeiXinMessagerAct {
 		// 取得消息类型
 		String msgType = inputMsg.getMsgType();
 		String event = inputMsg.getEvent();
-		
+
 		String responseXml = "";
-		
+
 		// 根据消息类型获取对应的消息内容
 		if (msgType.equals("text") && inputMsg.getContent().contains("红包")) {
 			// 文本消息
@@ -179,22 +183,21 @@ public class WeiXinMessagerAct {
 			logger.info("消息创建时间：" + inputMsg.getCreateTime() + new Date(createTime * 1000l));
 			logger.info("消息内容：" + inputMsg.getContent());
 			logger.info("消息Id：" + inputMsg.getMsgId());
-			
+
 			String msgContent = "";
-			
-			try{
-				
+
+			try {
+
 				RedRecord record = new RedRecord();
 				record.setFromusername(inputMsg.getFromUserName());
 				record.setMsgid(String.valueOf(inputMsg.getMsgId()));
 				record.setClientIp(request.getRemoteAddr());
 				msgContent = RedPacketService.updatePickupRedPacket(record);
-			}
-			catch(Exception e){
-				logger.error(e.getMessage(),e);
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
 				msgContent = "今天的红包已经被瓜分完毕，明天中午12点继续投放。";
 			}
-			
+
 			StringBuffer str = new StringBuffer();
 			str.append("<xml>");
 			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
@@ -203,10 +206,9 @@ public class WeiXinMessagerAct {
 			str.append("<MsgType><![CDATA[" + msgType + "]]></MsgType>");
 			str.append("<Content><![CDATA[" + msgContent + "]]></Content>");
 			str.append("</xml>");
-			
+
 			responseXml = str.toString();
-		}
-		else if("subscribe".equals(event)){
+		} else if ("subscribe".equals(event)) {
 			StringBuffer str = new StringBuffer();
 			str.append("<xml>");
 			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
@@ -215,12 +217,42 @@ public class WeiXinMessagerAct {
 			str.append("<MsgType><![CDATA[text]]></MsgType>");
 			str.append("<Content><![CDATA[" + MenuManger.getSubscribeContent() + "]]></Content>");
 			str.append("</xml>");
-			
+
 			responseXml = str.toString();
+
+			try {
+				Integer fromId = WeixinUtils.getScanEventFromId(inputMsg.getEventKey());
+				if (fromId != null) {
+					WxShareService.addWxMapping(inputMsg.getFromUserName(), fromId);
+				}
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			}
+
+		} else if ("SCAN".equalsIgnoreCase(event)) {
+			StringBuffer str = new StringBuffer();
+			str.append("<xml>");
+			str.append("<ToUserName><![CDATA[" + custermname + "]]></ToUserName>");
+			str.append("<FromUserName><![CDATA[" + servername + "]]></FromUserName>");
+			str.append("<CreateTime>" + returnTime + "</CreateTime>");
+			str.append("<MsgType><![CDATA[text]]></MsgType>");
+			str.append("<Content><![CDATA[" + MenuManger.getSubscribeContent() + "]]></Content>");
+			str.append("</xml>");
+
+			responseXml = str.toString();
+
+			try {
+				Integer fromId = WeixinUtils.getScanEventFromId(inputMsg.getEventKey());
+				if (fromId != null) {
+					WxShareService.addWxMapping(inputMsg.getFromUserName(), fromId);
+				}
+			} catch (Exception e) {
+				logger.error(e.getMessage(), e);
+			}
 		}
-		
+
 		logger.info(responseXml);
-		
+
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(responseXml);
 	}

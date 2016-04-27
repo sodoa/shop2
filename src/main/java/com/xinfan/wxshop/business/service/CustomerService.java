@@ -37,8 +37,11 @@ import com.xinfan.wxshop.common.page.Pagination;
 import com.xinfan.wxshop.common.security.Md5PwdEncoder;
 
 public class CustomerService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(CustomerService.class);
+
+	@Autowired
+	private WxShareService WxShareService;
 
 	@Autowired
 	private GoodsDao goodsDao;
@@ -63,7 +66,7 @@ public class CustomerService {
 
 	@Autowired
 	private SequenceDao sequenceDao;
-	
+
 	@Autowired
 	private TransferDao transferDao;
 
@@ -79,7 +82,7 @@ public class CustomerService {
 		if (customer == null) {
 			throw new BizException(100, "用户不存在");
 		}
-		
+
 		if (customer.getState() != 1) {
 			throw new BizException(102, "帐户状态异常");
 		}
@@ -94,8 +97,7 @@ public class CustomerService {
 		return customer;
 	}
 
-	public void regist(String account, String password, String displayName,
-			DataMap attributes) {
+	public void regist(String account, String password, String displayName, DataMap attributes) {
 
 		account = account.trim();
 
@@ -103,26 +105,34 @@ public class CustomerService {
 		if (sex == null || sex.trim().length() == 0) {
 			sex = "1";
 		}
-		
+
 		String share_id = attributes.getString("share_id");
 		Customer shareCustomer = null;
 		if (share_id == null || share_id.length() == 0) {
 			share_id = "0";
 		} else {
-			 if(NumberUtils.isNumber(share_id)){
-				 shareCustomer = customerDao.selectByPrimaryKey(Integer.parseInt(share_id));
-			 }
+			if (NumberUtils.isNumber(share_id)) {
+				shareCustomer = customerDao.selectByPrimaryKey(Integer.parseInt(share_id));
+			}
 		}
-		
+
 		String wxId = attributes.getString("wx_id");
+
+		if (wxId != null && wxId.length() > 0 ) {
+			if(share_id == null || share_id.length() ==0 || share_id.equals("0")){
+				Integer fromId = WxShareService.getWxMapping(wxId);
+				if (fromId != null) {
+					share_id = String.valueOf(fromId);
+				}
+			}
+		}
 
 		Customer exist = customerDao.selectByAccount(account);
 		if (exist != null) {
 			throw new BizException("用户名已存在");
 		}
 
-		int customerId = this.sequenceDao
-				.getSequence(SequenceConstants.SEQ_CUSTOMER);
+		int customerId = this.sequenceDao.getSequence(SequenceConstants.SEQ_CUSTOMER);
 
 		Customer bean = new Customer();
 		bean.setAccount(account.trim());
@@ -144,8 +154,10 @@ public class CustomerService {
 
 		this.walletDao.insertSelective(wallet);
 		
+		WxShareService.delWxMapping(wxId);
+
 		if (shareCustomer != null) {
-			if(shareCustomer.getWxId()!=null && shareCustomer.getWxId().length()>1){
+			if (shareCustomer.getWxId() != null && shareCustomer.getWxId().length() > 1) {
 				WxNotifyUtils.customerDownlineJoinNotify(shareCustomer.getWxId(), displayName, "2");
 			}
 		}
@@ -156,7 +168,7 @@ public class CustomerService {
 		Customer bean = customerDao.selectByAccount(account.trim());
 		return bean;
 	}
-	
+
 	public Customer getByWeixinId(String account) {
 		Customer bean = customerDao.selectByWxId(account.trim());
 		return bean;
@@ -171,14 +183,13 @@ public class CustomerService {
 		Wallet bean = walletDao.selectByCustomerIdKey(id);
 		return bean;
 	}
-	
-	
-	public void updateWalletBalance(int id,float balance,String orderNo,String openId,String clientIp){
+
+	public void updateWalletBalance(int id, float balance, String orderNo, String openId, String clientIp) {
 		Wallet wallet = this.walletDao.selectByCustomerIdKey(id);
-		wallet.setBalance(wallet.getBalance()-balance);
+		wallet.setBalance(wallet.getBalance() - balance);
 		this.walletDao.updateByPrimaryKeySelective(wallet);
-		
-		try{
+
+		try {
 			Transfer transfer = new Transfer();
 			int transferId = this.sequenceDao.getSequence(SequenceConstants.SEQ_TRANSFER);
 			transfer.setTransferId(transferId);
@@ -191,39 +202,33 @@ public class CustomerService {
 			transfer.setWxOpenid(openId);
 			transfer.setClientIp(clientIp);
 			transferDao.insertSelective(transfer);
-		}catch(Exception e){
+		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-		
+
 	}
 
 	public List<Order> getCustomerTopOrderList(int id) {
 		return orderDao.selectTopListByExample(id, 5);
 	}
 
-	public Pagination getCustomerCenterOrderPageList(int customerId,String type,
-			Pagination page) {
+	public Pagination getCustomerCenterOrderPageList(int customerId, String type, Pagination page) {
 
 		List<OrderBean> list = new ArrayList<OrderBean>();
-		
+
 		Map param = new HashMap();
 		param.put("customerId", customerId);
-		if("1".equals(type)){
-		
-		}
-		else if("2".equals(type)){
+		if ("1".equals(type)) {
+
+		} else if ("2".equals(type)) {
 			param.put("status", OrderStateEnum.UNPAY.getIndex());
-		}
-		else if("3".equals(type)){
+		} else if ("3".equals(type)) {
 			param.put("status", OrderStateEnum.PAYED.getIndex());
-		}
-		else if("4".equals(type)){
+		} else if ("4".equals(type)) {
 			param.put("status", OrderStateEnum.SHIPPED.getIndex());
-		}
-		else if("5".equals(type)){
+		} else if ("5".equals(type)) {
 			param.put("status", OrderStateEnum.COMMENT.getIndex());
-		}		
-		
+		}
 
 		page = orderDao.getCustomerCenterOrderPageList(param, page);
 
@@ -233,17 +238,15 @@ public class CustomerService {
 			bean.setOrder(order);
 			List<Map> gList = new ArrayList<Map>();
 
-			List<OrderDetail> detailList = orderDetailDao.selectByOrderId(order
-					.getOrderId());
+			List<OrderDetail> detailList = orderDetailDao.selectByOrderId(order.getOrderId());
 			for (OrderDetail detail : detailList) {
-				Goods goods = this.goodsDao.selectByPrimaryKey(detail
-						.getGoodsId());
+				Goods goods = this.goodsDao.selectByPrimaryKey(detail.getGoodsId());
 				Map form = new HashMap();
 				form.put("goods", goods);
 				form.put("detail", detail);
 				gList.add(form);
 			}
-			
+
 			bean.setForm(gList);
 			list.add(bean);
 		}
@@ -289,8 +292,7 @@ public class CustomerService {
 		}
 	}
 
-	public void updateCustomerForgetPassword(String account,
-			String newOrgiPassword) {
+	public void updateCustomerForgetPassword(String account, String newOrgiPassword) {
 
 		Customer customer = customerDao.selectByAccount(account);
 		if (customer == null) {
@@ -305,8 +307,7 @@ public class CustomerService {
 		}
 	}
 
-	public void updateResetCustomerPassword(Integer customerId,
-			String newOrgiPassword, String oldOrgiPassword) {
+	public void updateResetCustomerPassword(Integer customerId, String newOrgiPassword, String oldOrgiPassword) {
 
 		Customer customer = customerDao.selectByPrimaryKey(customerId);
 		if (customer == null) {
@@ -337,7 +338,7 @@ public class CustomerService {
 
 		return page;
 	}
-	
+
 	public Pagination pageSelectLayerCustomerList(DataMap map, Pagination page) {
 
 		QueryParamterUtils.addQueryTime(map, "startdate", "endate");
@@ -347,15 +348,14 @@ public class CustomerService {
 
 		return page;
 	}
-	
-	public List<Customer> listCustomerLayerUser(int customerId,int level) {
+
+	public List<Customer> listCustomerLayerUser(int customerId, int level) {
 		DataMap param = new DataMap();
 		param.put("customerId", customerId);
 		param.put("level", level);
-		
+
 		List<Customer> list = customerDao.getListCustomerLayerUser(param);
 		return list;
 	}
-	
 
 }

@@ -61,7 +61,7 @@
 			<table tableName="t_distribution" domainObjectName="Distribution"/> -->
 
 
-		<table tableName="t_order_detail" domainObjectName="OrderDetail" />
+		<table tableName="t_wx_share" domainObjectName="WxShare" />
 	
 
 	</context>

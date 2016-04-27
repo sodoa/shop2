@@ -20,9 +20,7 @@
 	<bean id="RedPacketService" class="com.xinfan.wxshop.business.service.RedPacketService" />
 	<bean id="SearchWordsService" class="com.xinfan.wxshop.business.service.SearchWordsService" />
 	<bean id="ArticleService" class="com.xinfan.wxshop.business.service.ArticleService" />
-		
+	<bean id="WxShareService" class="com.xinfan.wxshop.business.service.WxShareService" />	
 	<bean id="SmsService" class="com.xinfan.wxshop.common.sms.YunPianSmsServiceImpl" />
-	
-	
 	
 </beans>

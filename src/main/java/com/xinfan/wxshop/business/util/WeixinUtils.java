@@ -79,4 +79,20 @@ public class WeixinUtils {
 
 		return null;
 	}
+
+	public static Integer getScanEventFromId(String eventKey) {
+
+		if (eventKey == null || eventKey.length() == 0) {
+			return null;
+		}
+
+		try {
+			String fromId = eventKey.replaceAll("qrscene_", "");
+			int intId = Integer.parseInt(fromId);
+			return intId;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
