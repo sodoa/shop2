@@ -46,6 +46,11 @@ public class RedPacketService {
 		if (packet.getPickup() >= packet.getTotal()) {
 			return "今天的红包已经被瓜分完毕，明天中午12点继续投放";
 		}
+		
+		Date current = TimeUtils.getCurrentTime();
+		if (current.getHours() < 12) {
+			return "还没有开始，中午12点开始投放";
+		}
 
 		RedRecord search = new RedRecord();
 		search.setLined(lined);
