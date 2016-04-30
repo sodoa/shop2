@@ -9,7 +9,9 @@
 <jsp:include page="header.jsp"></jsp:include>
 <link type="text/css" rel="stylesheet" href="/theme/newest/css/detail.css" />
 <script type="text/javascript" src="/jslib/timecountdown/timeCountDown.js"></script>
- <script src="/theme/js/wap.js"></script></body>
+<link rel="stylesheet" href="/theme/newest/css/jquery.spinner.css" />
+<script type="text/javascript" src="/theme/js/jquery.spinner.js"></script>
+<script src="/theme/js/wap.js"></script></body>
 <style type="text/css">
 
  .order_address{position:relative;border-top:#eee solid 1px;padding:10px}
@@ -39,6 +41,19 @@ iframe{ height:100%; width:100%; overflow:auto; }
 #htmlwrap img{
  width:100%;
  overflow:hidden;
+}
+
+.spinner {
+    width: 100%;
+}
+
+.spinner button {
+    border: none;
+    width: 25%;
+}
+
+.spinner .value {
+    width: 50%;
 }
 
 </style>
@@ -78,8 +93,10 @@ iframe{ height:100%; width:100%; overflow:auto; }
             <p class="m-change">&yen;${goods.finalPrices} <span class="discount">${goods.discount}折</span><span class="old">原价：&yen;${goods.orginPrices}</span></p>
             </div>
             <div class="col-xs-3"><a href="javascript:void(0)" onclick="addLove(${goods.goodsId})"><span class="favorite-btn btn">收藏</span></a>
-           
             </div>
+		     <div style="clear: both;" class="col-xs-9">
+		    	<input type="text" id="g_num" class="spinner" style="border-radius: 0px;" value="1" data="${goods.goodsId}" name="" />
+		     </div>                
         </div>
         
         <!-- 详情 -->
@@ -211,10 +228,10 @@ iframe{ height:100%; width:100%; overflow:auto; }
 		var current_goods_id = '${goods.goodsId}';
 		
 		$("#put_goods_in_cart").click(function(){
-			
+			var gNum = $('#g_num').val();
 			$.ajax({type:"POST",
 	             url:"/put-goods-cart.html",
-	             data:{"goodsId" : current_goods_id},
+	             data:{"goodsId" : current_goods_id,"num": gNum},
 	             dataType:"json",
 	             success:function(data){
 	            	if(data.result ==0){
@@ -233,9 +250,11 @@ iframe{ height:100%; width:100%; overflow:auto; }
 		
 		$("#put_goods_to_order").click(function(){
 			
+			var gNum = $('#g_num').val();
+			
 			$.ajax({type:"POST",
 	             url:"/put-goods-cart.html",
-	             data:{"goodsId" : current_goods_id},
+	             data:{"goodsId" : current_goods_id,"num": gNum},
 	             dataType:"json",
 	             success:function(data){
 	            	if(data.result ==0){
@@ -248,6 +267,15 @@ iframe{ height:100%; width:100%; overflow:auto; }
 			});
 			
 		});
+		
+		$('#g_num').spinner({
+			 max:100, 
+			 min:1,
+			 increase:function(cartid){
+			 },
+			 decrease:function(cartid){
+			 }
+		});		
 
 	});
 	

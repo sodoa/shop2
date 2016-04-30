@@ -22,7 +22,7 @@
 		
 		<div class="m-tab-btn">
 			<div class="info">
-				共<span class="txtOrange">${item.order.totalQuantity}</span>件商品 共计：<span class="txtOrange">&yen;${item.order.totalAmount}</span>
+				共<span class="txtOrange">${item.order.totalQuantity}</span>件  合计：<span class="txtOrange">&yen;${item.order.totalAmount} (含邮)</span>
 			</div>
 			<div class="btn">
 		<!-- UNPAY("未支付", 0), PAYED("已支付", 1), SHIPPED("已出货", 2), COMMENT("已评价", 3); -->

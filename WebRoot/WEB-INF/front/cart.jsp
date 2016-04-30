@@ -61,6 +61,29 @@
 		                 </c:forEach>
                     </c:if>
                </ul>	
+	         	               
+               <c:if test="${CartInfoVo.hasGoods}">
+               		<div style=" border: 1px solid #dedddd;background: #fff; padding: 0.04rem;font-size: 0.16rem;vertical-align: middle;">
+               			<img alt="" src="/theme/newest/images/warning.png" style="width:16pxx;height:16px;vertical-align: middle;">
+               			<span>满<sp:config id="goods.postage.money"></sp:config>元包邮</span>
+               			<span style="color:orange;">（
+               			<c:if test="${CartInfoVo.hasPostage}">免邮还差&nbsp; ${postageMoney-CartInfoVo.totalAmount}&yen;</c:if>
+               			<c:if test="${!CartInfoVo.hasPostage}">已包邮</c:if>）
+               			</span>
+						<span style="margin-right:10px;float:right;color: #ff4f01;font-size: 0.2rem;">
+			         		<h5>
+				         		<c:choose>
+				         			<c:when test="${CartInfoVo.hasPostage}">
+				         				+&nbsp;<sp:config id="goods.postage"></sp:config>&yen;
+				         			</c:when>
+					         		<c:otherwise>
+					         			+&nbsp;0&yen;
+					         		</c:otherwise>
+				         		</c:choose>
+			         		</h5>
+		         		</span>               			
+               		</div>
+               </c:if>
                
             <form action="/cart-number.html" id="number_operator_form" method="post">
 				<input type="hidden" name="number_operator" /> 
@@ -76,7 +99,13 @@
     <div class="m-shoppinglist-footer">
     <div class="m-shoppinglist-btn">
     	<c:if test="${CartInfoVo.hasGoods}">
-                               <div class="info"><p>总金额：<span class="txtOrange">&yen;${CartInfoVo.totalAmount} </span></p><P class="subMark">原价：<del>&yen;${CartInfoVo.orginAmount}</del></P></div>
+                               <div class="info">
+                               	<p>总金额：<span class="txtOrange">&yen;${CartInfoVo.totalAmount} 
+                               	
+                               	</span></p>
+                               	<p class="subMark">原价：<del>&yen;${CartInfoVo.orginAmount}</del></p>
+         
+                               </div>
                                  <div class="btn">      
                                     <a  href="javascript:void(0)" class="orange-btn" onclick="javascript:goToOrder()">去结算</a>         
                                  </div>

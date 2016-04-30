@@ -70,6 +70,16 @@
 												<sp:dict_label_tag type="shared_state" value="${order.shared}"></sp:dict_label_tag>
 											</td>
 										</tr>
+										<tr>
+											<td>邮费：</td>
+											<td>
+												${order.postage}
+											</td>
+											<td></td>
+											<td>
+												
+											</td>
+										</tr>										
 									</tbody>
 								</table>
 							</div>

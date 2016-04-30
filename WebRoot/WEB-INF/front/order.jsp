@@ -60,9 +60,27 @@
 					</c:if>	
                </ul>	 
          </div>
-        
+         <c:if test="${CartInfoVo.hasGoods}">
+	         <div class="order-manage"> 
+	         	<div style=" border: 0px solid #dedddd;background: #fff; padding: 0.04rem;font-size: 0.16rem;vertical-align: middle;margin-top: 0.1rem;padding-left:0.1rem;">
+	         		<span>邮费&nbsp;(满<sp:config id="goods.postage.money"></sp:config>元包邮)</span>
+	         		<span class="pay-bd">&nbsp;</span>
+	         		<span style="margin-right:10px;float:right;color: #ff4f01;    font-size: 0.2rem;">
+		         		<h5>
+			         		<c:choose>
+			         			<c:when test="${CartInfoVo.hasPostage}">
+			         				+&nbsp;<sp:config id="goods.postage"></sp:config>&yen;
+			         			</c:when>
+				         		<c:otherwise>
+				         			+&nbsp;0 &yen;
+				         		</c:otherwise>
+			         		</c:choose>
+		         		</h5>
+	         		</span>
+	         	</div>
+	         </div>
+         </c:if>
         <div class="m-trade-pay">
-        
 	        <div class="m-trade-pay" id="paytype_div">
 	        	<c:if test="${wecat}">
 		        	<div class="pay-cell">

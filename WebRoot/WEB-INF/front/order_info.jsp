@@ -64,6 +64,18 @@
 					</c:forEach>
                </ul>	 
          </div>
+         
+         <div class="order-manage"> 
+         	<div style=" border: 0px solid #dedddd;background: #fff; padding: 0.04rem;font-size: 0.16rem;vertical-align: middle;margin-top: 0.1rem;padding-left:0.1rem;">
+         		<span>邮费&nbsp;(满<sp:config id="goods.postage.money"></sp:config>元包邮)</span>
+         		<span class="pay-bd">&nbsp;</span>
+         		<span style="margin-right:10px;float:right;color: #ff4f01;    font-size: 0.2rem;">
+	         		<h5>
+		         			+&nbsp;${bean.order.postage}&yen;
+	         		</h5>
+         		</span>
+         	</div>
+         </div>
         
         <div class="m-trade-pay">
         
