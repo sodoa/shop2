@@ -735,7 +735,7 @@ function swipeTabA(elem) {
 $(function(){
 	if (document.getElementById("JslideWrap")) {
 	window.Slide = swipe($$("JslideWrap"), {
-									auto : 2000,
+									auto :2000,
 					continuous : true,
 					nav : $$("JslideNav"),
 					callback : function(index, elem) {
@@ -743,12 +743,7 @@ $(function(){
 								+ "px";
 					}
 				});
-		window.Slide.stop();
-		window.addEventListener("load", function() {
-			setTimeout(function() {
-				window.Slide.start();
-			}, 1000)
-		}, false);
+		//window.Slide.start();
 	}
 	
 	var Jtabs = document.querySelectorAll(".m-tabs");
