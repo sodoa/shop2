@@ -4,164 +4,175 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Order extends BaseEntity {
+public class Order {
     private Integer orderId;
 
-    private Integer customerId;
+	private Integer customerId;
 
-    private Float totalAmount;
+	private Float totalAmount;
 
-    private Date orderDate;
+	private Date orderDate;
 
-    private Integer status;
+	private Integer status;
 
-    private Integer deliveryId;
+	private Integer deliveryId;
 
-    private Integer paymentMode;
+	private Integer paymentMode;
 
-    private String mark;
+	private String mark;
 
-    private Integer shared;
+	private Integer shared;
 
-    private Integer disStatus;
+	private Integer disStatus;
 
-    private String receiverAddress;
+	private String receiverAddress;
 
-    private String receiverName;
+	private String receiverName;
 
-    private String receiverPhone;
+	private String receiverPhone;
 
-    private Integer appraise;
+	private Integer appraise;
 
-    private String orderNo;
+	private String orderNo;
 
-    private Integer totalQuantity;
+	private Integer totalQuantity;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+	private Integer postage;
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public Integer getCustomerId() {
-        return customerId;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
+	public Integer getCustomerId() {
+		return customerId;
+	}
 
-    public Float getTotalAmount() {
-        return totalAmount;
-    }
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
 
-    public void setTotalAmount(Float totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public Float getTotalAmount() {
+		return totalAmount;
+	}
 
-    public Date getOrderDate() {
-        return orderDate;
-    }
+	public void setTotalAmount(Float totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
+	public Date getOrderDate() {
+		return orderDate;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getStatus() {
+		return status;
+	}
 
-    public Integer getDeliveryId() {
-        return deliveryId;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public void setDeliveryId(Integer deliveryId) {
-        this.deliveryId = deliveryId;
-    }
+	public Integer getDeliveryId() {
+		return deliveryId;
+	}
 
-    public Integer getPaymentMode() {
-        return paymentMode;
-    }
+	public void setDeliveryId(Integer deliveryId) {
+		this.deliveryId = deliveryId;
+	}
 
-    public void setPaymentMode(Integer paymentMode) {
-        this.paymentMode = paymentMode;
-    }
+	public Integer getPaymentMode() {
+		return paymentMode;
+	}
 
-    public String getMark() {
-        return mark;
-    }
+	public void setPaymentMode(Integer paymentMode) {
+		this.paymentMode = paymentMode;
+	}
 
-    public void setMark(String mark) {
-        this.mark = mark == null ? null : mark.trim();
-    }
+	public String getMark() {
+		return mark;
+	}
 
-    public Integer getShared() {
-        return shared;
-    }
+	public void setMark(String mark) {
+		this.mark = mark == null ? null : mark.trim();
+	}
 
-    public void setShared(Integer shared) {
-        this.shared = shared;
-    }
+	public Integer getShared() {
+		return shared;
+	}
 
-    public Integer getDisStatus() {
-        return disStatus;
-    }
+	public void setShared(Integer shared) {
+		this.shared = shared;
+	}
 
-    public void setDisStatus(Integer disStatus) {
-        this.disStatus = disStatus;
-    }
+	public Integer getDisStatus() {
+		return disStatus;
+	}
 
-    public String getReceiverAddress() {
-        return receiverAddress;
-    }
+	public void setDisStatus(Integer disStatus) {
+		this.disStatus = disStatus;
+	}
 
-    public void setReceiverAddress(String receiverAddress) {
-        this.receiverAddress = receiverAddress == null ? null : receiverAddress.trim();
-    }
+	public String getReceiverAddress() {
+		return receiverAddress;
+	}
 
-    public String getReceiverName() {
-        return receiverName;
-    }
+	public void setReceiverAddress(String receiverAddress) {
+		this.receiverAddress = receiverAddress == null ? null : receiverAddress.trim();
+	}
 
-    public void setReceiverName(String receiverName) {
-        this.receiverName = receiverName == null ? null : receiverName.trim();
-    }
+	public String getReceiverName() {
+		return receiverName;
+	}
 
-    public String getReceiverPhone() {
-        return receiverPhone;
-    }
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName == null ? null : receiverName.trim();
+	}
 
-    public void setReceiverPhone(String receiverPhone) {
-        this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
-    }
+	public String getReceiverPhone() {
+		return receiverPhone;
+	}
 
-    public Integer getAppraise() {
-        return appraise;
-    }
+	public void setReceiverPhone(String receiverPhone) {
+		this.receiverPhone = receiverPhone == null ? null : receiverPhone.trim();
+	}
 
-    public void setAppraise(Integer appraise) {
-        this.appraise = appraise;
-    }
+	public Integer getAppraise() {
+		return appraise;
+	}
 
-    public String getOrderNo() {
-        return orderNo;
-    }
+	public void setAppraise(Integer appraise) {
+		this.appraise = appraise;
+	}
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo == null ? null : orderNo.trim();
-    }
+	public String getOrderNo() {
+		return orderNo;
+	}
 
-    public Integer getTotalQuantity() {
-        return totalQuantity;
-    }
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo == null ? null : orderNo.trim();
+	}
 
-    public void setTotalQuantity(Integer totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
+	public Integer getTotalQuantity() {
+		return totalQuantity;
+	}
+
+	public void setTotalQuantity(Integer totalQuantity) {
+		this.totalQuantity = totalQuantity;
+	}
+
+	public Integer getPostage() {
+		return postage;
+	}
+
+	public void setPostage(Integer postage) {
+		this.postage = postage;
+	}
+
 }

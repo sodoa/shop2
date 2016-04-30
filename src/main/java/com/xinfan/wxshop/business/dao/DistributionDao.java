@@ -59,6 +59,15 @@ public class DistributionDao extends SqlSessionDaoSupport {
 		return getSqlSession().selectList(wrapCommand("pageBeanSelectDistributionList"), map,page);
 	}
 	
+	public  List<Distribution> pageBeanSelectVirtualDistributionList(int uplineId,String virtual,Pagination page){
+		
+		DataMap map = new DataMap();
+		map.put("uplineId", uplineId);
+		map.put("virtual", virtual);
+		
+		return getSqlSession().selectList(wrapCommand("pageBeanSelectDistributionList"), map,page);
+	}
+	
 	
 	//pageBeanSelectDistributionList
 	

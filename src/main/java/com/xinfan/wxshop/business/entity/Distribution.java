@@ -4,124 +4,135 @@ import java.util.Date;
 
 import com.xinfan.wxshop.common.base.BaseEntity;
 
-public class Distribution extends BaseEntity {
+public class Distribution {
     private Integer distributionId;
 
-    private Integer uplineId;
+	private Integer uplineId;
 
-    private Integer downlineId;
+	private Integer downlineId;
 
-    private Integer result;
+	private Integer result;
 
-    private Float charge;
+	private Float charge;
 
-    private Date consumeDate;
+	private Date consumeDate;
 
-    private String downlineName;
+	private String downlineName;
 
-    private Integer orderId;
+	private Integer orderId;
 
-    private Float rate;
+	private Float rate;
 
-    private Float income;
+	private Float income;
 
-    private String chargeName;
+	private String chargeName;
 
-    private Integer level;
+	private Integer level;
 
-    public Integer getDistributionId() {
-        return distributionId;
-    }
+	private String virtual;
 
-    public void setDistributionId(Integer distributionId) {
-        this.distributionId = distributionId;
-    }
+	public Integer getDistributionId() {
+		return distributionId;
+	}
 
-    public Integer getUplineId() {
-        return uplineId;
-    }
+	public void setDistributionId(Integer distributionId) {
+		this.distributionId = distributionId;
+	}
 
-    public void setUplineId(Integer uplineId) {
-        this.uplineId = uplineId;
-    }
+	public Integer getUplineId() {
+		return uplineId;
+	}
 
-    public Integer getDownlineId() {
-        return downlineId;
-    }
+	public void setUplineId(Integer uplineId) {
+		this.uplineId = uplineId;
+	}
 
-    public void setDownlineId(Integer downlineId) {
-        this.downlineId = downlineId;
-    }
+	public Integer getDownlineId() {
+		return downlineId;
+	}
 
-    public Integer getResult() {
-        return result;
-    }
+	public void setDownlineId(Integer downlineId) {
+		this.downlineId = downlineId;
+	}
 
-    public void setResult(Integer result) {
-        this.result = result;
-    }
+	public Integer getResult() {
+		return result;
+	}
 
-    public Float getCharge() {
-        return charge;
-    }
+	public void setResult(Integer result) {
+		this.result = result;
+	}
 
-    public void setCharge(Float charge) {
-        this.charge = charge;
-    }
+	public Float getCharge() {
+		return charge;
+	}
 
-    public Date getConsumeDate() {
-        return consumeDate;
-    }
+	public void setCharge(Float charge) {
+		this.charge = charge;
+	}
 
-    public void setConsumeDate(Date consumeDate) {
-        this.consumeDate = consumeDate;
-    }
+	public Date getConsumeDate() {
+		return consumeDate;
+	}
 
-    public String getDownlineName() {
-        return downlineName;
-    }
+	public void setConsumeDate(Date consumeDate) {
+		this.consumeDate = consumeDate;
+	}
 
-    public void setDownlineName(String downlineName) {
-        this.downlineName = downlineName == null ? null : downlineName.trim();
-    }
+	public String getDownlineName() {
+		return downlineName;
+	}
 
-    public Integer getOrderId() {
-        return orderId;
-    }
+	public void setDownlineName(String downlineName) {
+		this.downlineName = downlineName == null ? null : downlineName.trim();
+	}
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public Float getRate() {
-        return rate;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
 
-    public void setRate(Float rate) {
-        this.rate = rate;
-    }
+	public Float getRate() {
+		return rate;
+	}
 
-    public Float getIncome() {
-        return income;
-    }
+	public void setRate(Float rate) {
+		this.rate = rate;
+	}
 
-    public void setIncome(Float income) {
-        this.income = income;
-    }
+	public Float getIncome() {
+		return income;
+	}
 
-    public String getChargeName() {
-        return chargeName;
-    }
+	public void setIncome(Float income) {
+		this.income = income;
+	}
 
-    public void setChargeName(String chargeName) {
-        this.chargeName = chargeName == null ? null : chargeName.trim();
-    }
+	public String getChargeName() {
+		return chargeName;
+	}
 
-    public Integer getLevel() {
-        return level;
-    }
+	public void setChargeName(String chargeName) {
+		this.chargeName = chargeName == null ? null : chargeName.trim();
+	}
 
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public String getVirtual() {
+		return virtual;
+	}
+
+	public void setVirtual(String virtual) {
+		this.virtual = virtual == null ? null : virtual.trim();
+	}
+
 }

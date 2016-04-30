@@ -360,7 +360,7 @@
   		select count(*) from t_customer t where 1=1 order by regdate desc 
   </select>
 	
-	<select id="getListCustomerLayerUser" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.business.entity.Customer">
+	<select id="getListCustomerLayerUser" parameterType="com.xinfan.wxshop.common.base.DataMap" resultMap="BaseResultMap">
   		
   		<if test="level == 1">
   			select * from t_customer t where upline_id = #{customerId}  order by regdate desc 

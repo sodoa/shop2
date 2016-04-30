@@ -20,6 +20,7 @@ import com.xinfan.wxshop.business.service.CartService;
 import com.xinfan.wxshop.business.service.DeliveryAddressService;
 import com.xinfan.wxshop.business.service.GoodsService;
 import com.xinfan.wxshop.business.service.OrderService;
+import com.xinfan.wxshop.business.util.ConfigUtils;
 import com.xinfan.wxshop.business.util.LoginSessionUtils;
 import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.business.vo.CartInfoVo;
@@ -56,7 +57,12 @@ public class CartAct {
 			String goodsId = request.getParameter("goodsId");
 			String sessionId = LoginSessionUtils.getCustomerSessionId();
 			
-			CartService.addGoodInCart(sessionId,Integer.parseInt(goodsId));
+			String gNum = request.getParameter("num");
+			if(gNum == null || gNum.length() ==0){
+				gNum = "1";
+			}
+			
+			CartService.addGoodInCart(sessionId,Integer.parseInt(goodsId),Integer.parseInt(gNum));
 			
 			result = JSONResult.success();
 			
@@ -81,7 +87,11 @@ public class CartAct {
 	public ModelAndView cart() {
 		ModelAndView mv = new ModelAndView("/front/cart");
 		CartInfoVo CartInfoVo = CartService.getCartInfoBySessionId(LoginSessionUtils.getCustomerSessionId());
+		
+		float postageMoney = Float.parseFloat(ConfigUtils.getValue("goods.postage.money", "49"));
+		
 		mv.addObject("CartInfoVo", CartInfoVo);
+		mv.addObject("postageMoney", postageMoney);
 		return mv;
 	}
 

@@ -23,6 +23,7 @@ import com.xinfan.wxshop.business.entity.Goods;
 import com.xinfan.wxshop.business.entity.GoodsLimit;
 import com.xinfan.wxshop.business.entity.Order;
 import com.xinfan.wxshop.business.entity.OrderDetail;
+import com.xinfan.wxshop.business.util.ConfigUtils;
 import com.xinfan.wxshop.business.vo.CartInfoVo;
 import com.xinfan.wxshop.business.vo.MakeOrderTable;
 import com.xinfan.wxshop.common.base.BizException;
@@ -130,6 +131,16 @@ public class CartService {
 		if (saveAmount <= 0) {
 			saveAmount = 0;
 		}
+		
+		float postage = Float.parseFloat(ConfigUtils.getValue("goods.postage", "10"));
+		float postageMoney = Float.parseFloat(ConfigUtils.getValue("goods.postage.money", "49"));
+		
+		if (totalAmount >= postageMoney) {
+			info.setHasPostage(false);
+		}else{
+			totalAmount = totalAmount + postage;
+			info.setHasPostage(true);
+		}
 
 		info.setCarts(cartList);
 		info.setGoods(goodsList);
@@ -159,7 +170,7 @@ public class CartService {
 		}
 	}
 
-	public void addGoodInCart(String sessionId, int goodsId) {
+	public void addGoodInCart(String sessionId, int goodsId,int num) {
 
 		List<Cart> list = cartDao.selectCartListBySessionIdIdAndGoodsId(sessionId, goodsId);
 
@@ -177,7 +188,7 @@ public class CartService {
 			Cart cart = new Cart();
 			cart.setCustomerId(0);
 			cart.setSessionid(sessionId);
-			cart.setQuantity(1);
+			cart.setQuantity(num);
 			cart.setGoodsId(goodsId);
 			cart.setCreatetime(TimeUtils.getCurrentTime());
 			cartDao.insertSelective(cart);
@@ -239,7 +250,17 @@ public class CartService {
 			int orderId = SequenceDao.getSequence(SequenceConstants.SEQ_ORDER);
 
 			String orderNo = OrderNoUtils.getOrderNo(orderId);
-
+			boolean hasPostage = false;
+			
+			float postage = Float.parseFloat(ConfigUtils.getValue("goods.postage", "10"));
+			float postageMoney = Float.parseFloat(ConfigUtils.getValue("goods.postage.money", "49"));
+			
+			if (totalAmount <= postageMoney) {
+				totalAmount = totalAmount + postage;
+				hasPostage = true;
+			}
+			
+			order.setPostage(hasPostage ? new Float(postage).intValue() : 0);
 			order.setOrderId(orderId);
 			order.setOrderNo(orderNo);
 			order.setCustomerId(customerId);
@@ -249,7 +270,6 @@ public class CartService {
 			order.setTotalQuantity(totalQuantity);
 			order.setTotalAmount(totalAmount);
 			order.setStatus(BizConstants.ORDER_STATUS_UNPAY);
-			order.setTotalAmount(totalAmount);
 			order.setPaymentMode(paymentMode);
 			order.setDisStatus(BizConstants.ORDER_DISTRIBUTION_READY);
 			order.setReceiverName(address.getReceiverName());
@@ -278,12 +298,5 @@ public class CartService {
 		return null;
 	}
 
-	public void getPayOrderInfo(int customerId, int orderId) {
-
-	}
-
-	public void payOrder(int customerId, String mark, int paymentMode) {
-
-	}
 
 }

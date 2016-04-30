@@ -26,6 +26,18 @@ public class CartInfoVo {
 	private float saveAmount;
 
 	private float orginAmount;
+	
+	private boolean hasPostage = true;
+	
+	
+
+	public boolean isHasPostage() {
+		return hasPostage;
+	}
+
+	public void setHasPostage(boolean hasPostage) {
+		this.hasPostage = hasPostage;
+	}
 
 	public float getOrginAmount() {
 		return orginAmount;

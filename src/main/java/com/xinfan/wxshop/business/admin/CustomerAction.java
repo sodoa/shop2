@@ -19,6 +19,7 @@ import com.xinfan.wxshop.business.entity.Wallet;
 import com.xinfan.wxshop.business.model.DataTableDataGrid;
 import com.xinfan.wxshop.business.model.JSONResult;
 import com.xinfan.wxshop.business.service.CustomerService;
+import com.xinfan.wxshop.business.service.DistributionService;
 import com.xinfan.wxshop.business.util.RequestUtils;
 import com.xinfan.wxshop.common.base.DataMap;
 import com.xinfan.wxshop.common.page.Pagination;
@@ -33,6 +34,9 @@ public class CustomerAction {
 	private CustomerService CustomerService;
 
 	@Autowired
+	private DistributionService DistributionService;
+
+	@Autowired
 	private DistrRankDao DistrRankDao;
 
 	@RequestMapping("/customer-list.jspx")
@@ -44,6 +48,65 @@ public class CustomerAction {
 	@RequestMapping("/customer-layer-list.jspx")
 	public ModelAndView customerLayerList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/admin/customer/list-layer");
+		return mv;
+	}
+	
+	@RequestMapping("/set-virtual-order.jspx")
+	public ModelAndView setVirtualOrder(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/admin/customer/set-virtual-order");
+		int customerId = Integer.parseInt(request.getParameter("cid"));
+		mv.addObject("customerId", customerId);
+		return mv;
+	}
+	
+
+	@RequestMapping("/post-virtual-order.jspx")
+	public @ResponseBody
+	JSONResult postVirtualOrder(HttpServletRequest request) {
+		
+		try{
+			int customerId = Integer.parseInt(request.getParameter("customerId"));
+			float amount = Integer.parseInt(request.getParameter("amount"));
+			String chargeName = request.getParameter("chargeName");
+			
+			this.DistributionService.addCustomerVirtualDistribution(customerId, amount, chargeName);
+			return JSONResult.success();
+		}catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return JSONResult.error(e.getMessage());
+		}
+
+	}
+
+	@RequestMapping("/customer-vir-disr.jspx")
+	public ModelAndView virialDisr(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/admin/customer/customer-vir-disr");
+
+		int customerId = Integer.parseInt(request.getParameter("id"));
+		Pagination page = new Pagination();
+		page.setPageNo(1);
+		page.setPageSize(100);
+
+		page = this.DistributionService.pageNearCustomerVirtualDistributionList(customerId, page);
+
+		mv.addObject("list1", page.getList());
+
+		return mv;
+	}
+
+	@RequestMapping("/customer-layer.jspx")
+	public ModelAndView customerLayert(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/admin/customer/customer-layer");
+
+		int customerId = Integer.parseInt(request.getParameter("id"));
+
+		List<Customer> list1 = CustomerService.listCustomerLayerUser(customerId, 1);
+		List<Customer> list2 = CustomerService.listCustomerLayerUser(customerId, 2);
+
+		mv.addObject("list1", list1);
+		mv.addObject("list2", list2);
+		mv.addObject("customerId", customerId);
+
 		return mv;
 	}
 

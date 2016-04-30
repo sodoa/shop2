@@ -14,6 +14,7 @@
     <result column="income" property="income" jdbcType="REAL" />
     <result column="charge_name" property="chargeName" jdbcType="VARCHAR" />
     <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="virtual" property="virtual" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -75,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     distribution_id, upline_id, downline_id, result, charge, consume_date, downline_name, 
-    order_id, rate, income, charge_name, level
+    order_id, rate, income, charge_name, level, virtual
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.DistributionExample" >
     select
@@ -111,13 +112,13 @@
     insert into t_distribution (distribution_id, upline_id, downline_id, 
       result, charge, consume_date, 
       downline_name, order_id, rate, 
-      income, charge_name, level
-      )
+      income, charge_name, level, 
+      virtual)
     values (#{distributionId,jdbcType=INTEGER}, #{uplineId,jdbcType=INTEGER}, #{downlineId,jdbcType=INTEGER}, 
       #{result,jdbcType=INTEGER}, #{charge,jdbcType=REAL}, #{consumeDate,jdbcType=TIMESTAMP}, 
       #{downlineName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{rate,jdbcType=REAL}, 
-      #{income,jdbcType=REAL}, #{chargeName,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}
-      )
+      #{income,jdbcType=REAL}, #{chargeName,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{virtual,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.Distribution" >
     insert into t_distribution
@@ -158,6 +159,9 @@
       <if test="level != null" >
         level,
       </if>
+      <if test="virtual != null" >
+        virtual,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="distributionId != null" >
@@ -195,6 +199,9 @@
       </if>
       <if test="level != null" >
         #{level,jdbcType=INTEGER},
+      </if>
+      <if test="virtual != null" >
+        #{virtual,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -243,6 +250,9 @@
       <if test="record.level != null" >
         level = #{record.level,jdbcType=INTEGER},
       </if>
+      <if test="record.virtual != null" >
+        virtual = #{record.virtual,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -261,7 +271,8 @@
       rate = #{record.rate,jdbcType=REAL},
       income = #{record.income,jdbcType=REAL},
       charge_name = #{record.chargeName,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=INTEGER}
+      level = #{record.level,jdbcType=INTEGER},
+      virtual = #{record.virtual,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -302,6 +313,9 @@
       <if test="level != null" >
         level = #{level,jdbcType=INTEGER},
       </if>
+      <if test="virtual != null" >
+        virtual = #{virtual,jdbcType=VARCHAR},
+      </if>
     </set>
     where distribution_id = #{distributionId,jdbcType=INTEGER}
   </update>
@@ -317,9 +331,13 @@
       rate = #{rate,jdbcType=REAL},
       income = #{income,jdbcType=REAL},
       charge_name = #{chargeName,jdbcType=VARCHAR},
-      level = #{level,jdbcType=INTEGER}
+      level = #{level,jdbcType=INTEGER},
+      virtual = #{virtual,jdbcType=VARCHAR}
     where distribution_id = #{distributionId,jdbcType=INTEGER}
   </update>
+
+
+
   
   
   <select id="selectTopListByExample" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
@@ -338,6 +356,9 @@
   		</if>
   		<if test="consumeDate!=null">
   			and consume_date >= #{consumeDate}
+  		</if>
+  		<if test="virtual!=null">
+  			and virtual = #{virtual}
   		</if>
   		order by consume_date desc
   </select>
