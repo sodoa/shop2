@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.DistributionMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.Distribution" >
+    <id column="distribution_id" property="distributionId" jdbcType="INTEGER" />
+    <result column="upline_id" property="uplineId" jdbcType="INTEGER" />
+    <result column="downline_id" property="downlineId" jdbcType="INTEGER" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+    <result column="charge" property="charge" jdbcType="REAL" />
+    <result column="consume_date" property="consumeDate" jdbcType="TIMESTAMP" />
+    <result column="downline_name" property="downlineName" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="rate" property="rate" jdbcType="REAL" />
+    <result column="income" property="income" jdbcType="REAL" />
+    <result column="charge_name" property="chargeName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="virtual" property="virtual" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    distribution_id, upline_id, downline_id, result, charge, consume_date, downline_name, 
+    order_id, rate, income, charge_name, level, virtual
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.DistributionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_distribution
+    where distribution_id = #{distributionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_distribution
+    where distribution_id = #{distributionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.DistributionExample" >
+    delete from t_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.Distribution" >
+    insert into t_distribution (distribution_id, upline_id, downline_id, 
+      result, charge, consume_date, 
+      downline_name, order_id, rate, 
+      income, charge_name, level, 
+      virtual)
+    values (#{distributionId,jdbcType=INTEGER}, #{uplineId,jdbcType=INTEGER}, #{downlineId,jdbcType=INTEGER}, 
+      #{result,jdbcType=INTEGER}, #{charge,jdbcType=REAL}, #{consumeDate,jdbcType=TIMESTAMP}, 
+      #{downlineName,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{rate,jdbcType=REAL}, 
+      #{income,jdbcType=REAL}, #{chargeName,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{virtual,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.Distribution" >
+    insert into t_distribution
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="distributionId != null" >
+        distribution_id,
+      </if>
+      <if test="uplineId != null" >
+        upline_id,
+      </if>
+      <if test="downlineId != null" >
+        downline_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="charge != null" >
+        charge,
+      </if>
+      <if test="consumeDate != null" >
+        consume_date,
+      </if>
+      <if test="downlineName != null" >
+        downline_name,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="rate != null" >
+        rate,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="chargeName != null" >
+        charge_name,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="virtual != null" >
+        virtual,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="distributionId != null" >
+        #{distributionId,jdbcType=INTEGER},
+      </if>
+      <if test="uplineId != null" >
+        #{uplineId,jdbcType=INTEGER},
+      </if>
+      <if test="downlineId != null" >
+        #{downlineId,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+      <if test="charge != null" >
+        #{charge,jdbcType=REAL},
+      </if>
+      <if test="consumeDate != null" >
+        #{consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downlineName != null" >
+        #{downlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        #{rate,jdbcType=REAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=REAL},
+      </if>
+      <if test="chargeName != null" >
+        #{chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="virtual != null" >
+        #{virtual,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.DistributionExample" resultType="java.lang.Integer" >
+    select count(*) from t_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_distribution
+    <set >
+      <if test="record.distributionId != null" >
+        distribution_id = #{record.distributionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.uplineId != null" >
+        upline_id = #{record.uplineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.downlineId != null" >
+        downline_id = #{record.downlineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=INTEGER},
+      </if>
+      <if test="record.charge != null" >
+        charge = #{record.charge,jdbcType=REAL},
+      </if>
+      <if test="record.consumeDate != null" >
+        consume_date = #{record.consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.downlineName != null" >
+        downline_name = #{record.downlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rate != null" >
+        rate = #{record.rate,jdbcType=REAL},
+      </if>
+      <if test="record.income != null" >
+        income = #{record.income,jdbcType=REAL},
+      </if>
+      <if test="record.chargeName != null" >
+        charge_name = #{record.chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.virtual != null" >
+        virtual = #{record.virtual,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_distribution
+    set distribution_id = #{record.distributionId,jdbcType=INTEGER},
+      upline_id = #{record.uplineId,jdbcType=INTEGER},
+      downline_id = #{record.downlineId,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=INTEGER},
+      charge = #{record.charge,jdbcType=REAL},
+      consume_date = #{record.consumeDate,jdbcType=TIMESTAMP},
+      downline_name = #{record.downlineName,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      rate = #{record.rate,jdbcType=REAL},
+      income = #{record.income,jdbcType=REAL},
+      charge_name = #{record.chargeName,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=INTEGER},
+      virtual = #{record.virtual,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.Distribution" >
+    update t_distribution
+    <set >
+      <if test="uplineId != null" >
+        upline_id = #{uplineId,jdbcType=INTEGER},
+      </if>
+      <if test="downlineId != null" >
+        downline_id = #{downlineId,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+      <if test="charge != null" >
+        charge = #{charge,jdbcType=REAL},
+      </if>
+      <if test="consumeDate != null" >
+        consume_date = #{consumeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downlineName != null" >
+        downline_name = #{downlineName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="rate != null" >
+        rate = #{rate,jdbcType=REAL},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=REAL},
+      </if>
+      <if test="chargeName != null" >
+        charge_name = #{chargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="virtual != null" >
+        virtual = #{virtual,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where distribution_id = #{distributionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.Distribution" >
+    update t_distribution
+    set upline_id = #{uplineId,jdbcType=INTEGER},
+      downline_id = #{downlineId,jdbcType=INTEGER},
+      result = #{result,jdbcType=INTEGER},
+      charge = #{charge,jdbcType=REAL},
+      consume_date = #{consumeDate,jdbcType=TIMESTAMP},
+      downline_name = #{downlineName,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      rate = #{rate,jdbcType=REAL},
+      income = #{income,jdbcType=REAL},
+      charge_name = #{chargeName,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      virtual = #{virtual,jdbcType=VARCHAR}
+    where distribution_id = #{distributionId,jdbcType=INTEGER}
+  </update>
+
+
+
+  
+  
+  <select id="selectTopListByExample" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
+  		select d.*,c.displayname from t_distribution d,t_customer c  where d.to_customer_id = c.customer_id and from_customer_id = #{CUSTOMERID} order by distribution_date desc limit 0,#{TOP}
+  
+  </select>
+  
+  <select id="pageSelectDistributionList" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="com.xinfan.wxshop.common.base.DataMap">
+  		select d.*,c.displayname as from_displayname,c1.displayname  as to_displayname from t_distribution d,t_customer c ,t_customer c1 where d.to_customer_id = c.customer_id and d.from_customer_id = c1.customer_id order by distribution_date desc 
+  </select>
+  
+   <select id="pageBeanSelectDistributionList" parameterType="map" resultMap="BaseResultMap">
+  		select * from  t_distribution where 1=1
+  		<if test="uplineId!=null">
+  			and upline_id = #{uplineId}
+  		</if>
+  		<if test="consumeDate!=null">
+  			and consume_date >= #{consumeDate}
+  		</if>
+  		<if test="virtual!=null">
+  			and virtual = #{virtual}
+  		</if>
+  		order by consume_date desc
+  </select>
+  
+    <select id="count" parameterType="com.xinfan.wxshop.common.base.DataMap" resultType="int">
+  		
+  		select count(*) from t_distribution
+  
+  </select>
+  
+</mapper>

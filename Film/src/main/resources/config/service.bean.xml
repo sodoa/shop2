@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+
+	<bean id="ConfigService" class="com.xinfan.wxshop.business.service.ConfigService" />
+	<bean id="GoodsService" class="com.xinfan.wxshop.business.service.GoodsService" />
+	<bean id="CartService" class="com.xinfan.wxshop.business.service.CartService" />
+	<bean id="DeliveryAddressService" class="com.xinfan.wxshop.business.service.DeliveryAddressService" />
+	<bean id="OrderService" class="com.xinfan.wxshop.business.service.OrderService" />
+	<bean id="CustomerService" class="com.xinfan.wxshop.business.service.CustomerService" />
+	<bean id="DistributionService" class="com.xinfan.wxshop.business.service.DistributionService" />
+	<bean id="LoveService" class="com.xinfan.wxshop.business.service.LoveService" />
+	<bean id="AppraiseService" class="com.xinfan.wxshop.business.service.AppraiseService" />
+	<bean id="CountService" class="com.xinfan.wxshop.business.service.CountService" />
+	<bean id="GoodsTypeService" class="com.xinfan.wxshop.business.service.GoodsTypeService" />
+	<bean id="RankingService" class="com.xinfan.wxshop.business.service.RankingService" />
+	<bean id="RedPacketService" class="com.xinfan.wxshop.business.service.RedPacketService" />
+	<bean id="SearchWordsService" class="com.xinfan.wxshop.business.service.SearchWordsService" />
+	<bean id="ArticleService" class="com.xinfan.wxshop.business.service.ArticleService" />
+	<bean id="WxShareService" class="com.xinfan.wxshop.business.service.WxShareService" />	
+	<bean id="SmsService" class="com.xinfan.wxshop.common.sms.YunPianSmsServiceImpl" />
+	
+</beans>

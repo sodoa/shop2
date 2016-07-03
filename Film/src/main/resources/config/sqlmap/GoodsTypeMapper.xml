@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.GoodsTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.GoodsType" >
+    <id column="goodstype" property="goodstype" jdbcType="VARCHAR" />
+    <result column="goodstype_name" property="goodstypeName" jdbcType="VARCHAR" />
+    <result column="p_goodstype" property="pGoodstype" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    goodstype, goodstype_name, p_goodstype, sort
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.GoodsTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_goods_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_type
+    where goodstype = #{goodstype,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_goods_type
+    where goodstype = #{goodstype,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.GoodsTypeExample" >
+    delete from t_goods_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.GoodsType" >
+    insert into t_goods_type (goodstype, goodstype_name, p_goodstype, 
+      sort)
+    values (#{goodstype,jdbcType=VARCHAR}, #{goodstypeName,jdbcType=VARCHAR}, #{pGoodstype,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.GoodsType" >
+    insert into t_goods_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodstype != null" >
+        goodstype,
+      </if>
+      <if test="goodstypeName != null" >
+        goodstype_name,
+      </if>
+      <if test="pGoodstype != null" >
+        p_goodstype,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodstype != null" >
+        #{goodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstypeName != null" >
+        #{goodstypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="pGoodstype != null" >
+        #{pGoodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.GoodsTypeExample" resultType="java.lang.Integer" >
+    select count(*) from t_goods_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_goods_type
+    <set >
+      <if test="record.goodstype != null" >
+        goodstype = #{record.goodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodstypeName != null" >
+        goodstype_name = #{record.goodstypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pGoodstype != null" >
+        p_goodstype = #{record.pGoodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_goods_type
+    set goodstype = #{record.goodstype,jdbcType=VARCHAR},
+      goodstype_name = #{record.goodstypeName,jdbcType=VARCHAR},
+      p_goodstype = #{record.pGoodstype,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.GoodsType" >
+    update t_goods_type
+    <set >
+      <if test="goodstypeName != null" >
+        goodstype_name = #{goodstypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="pGoodstype != null" >
+        p_goodstype = #{pGoodstype,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+    </set>
+    where goodstype = #{goodstype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.GoodsType" >
+    update t_goods_type
+    set goodstype_name = #{goodstypeName,jdbcType=VARCHAR},
+      p_goodstype = #{pGoodstype,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER}
+    where goodstype = #{goodstype,jdbcType=VARCHAR}
+  </update>
+</mapper>

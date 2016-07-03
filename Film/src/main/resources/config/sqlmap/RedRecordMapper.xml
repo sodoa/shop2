@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.RedRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.RedRecord" >
+    <id column="rdid" property="rdid" jdbcType="INTEGER" />
+    <result column="lined" property="lined" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="createdate" property="createdate" jdbcType="DATE" />
+    <result column="msgid" property="msgid" jdbcType="VARCHAR" />
+    <result column="fromusername" property="fromusername" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rdid, lined, amount, createdate, msgid, fromusername
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.RedRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_red_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_red_record
+    where rdid = #{rdid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_red_record
+    where rdid = #{rdid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.RedRecordExample" >
+    delete from t_red_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.RedRecord" >
+    insert into t_red_record (rdid, lined, amount, 
+      createdate, msgid, fromusername
+      )
+    values (#{rdid,jdbcType=INTEGER}, #{lined,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, 
+      #{createdate,jdbcType=DATE}, #{msgid,jdbcType=VARCHAR}, #{fromusername,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.RedRecord" >
+    insert into t_red_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rdid != null" >
+        rdid,
+      </if>
+      <if test="lined != null" >
+        lined,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="msgid != null" >
+        msgid,
+      </if>
+      <if test="fromusername != null" >
+        fromusername,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rdid != null" >
+        #{rdid,jdbcType=INTEGER},
+      </if>
+      <if test="lined != null" >
+        #{lined,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=DATE},
+      </if>
+      <if test="msgid != null" >
+        #{msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        #{fromusername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.RedRecordExample" resultType="java.lang.Integer" >
+    select count(*) from t_red_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_red_record
+    <set >
+      <if test="record.rdid != null" >
+        rdid = #{record.rdid,jdbcType=INTEGER},
+      </if>
+      <if test="record.lined != null" >
+        lined = #{record.lined,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.createdate != null" >
+        createdate = #{record.createdate,jdbcType=DATE},
+      </if>
+      <if test="record.msgid != null" >
+        msgid = #{record.msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromusername != null" >
+        fromusername = #{record.fromusername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_red_record
+    set rdid = #{record.rdid,jdbcType=INTEGER},
+      lined = #{record.lined,jdbcType=VARCHAR},
+      amount = #{record.amount,jdbcType=INTEGER},
+      createdate = #{record.createdate,jdbcType=DATE},
+      msgid = #{record.msgid,jdbcType=VARCHAR},
+      fromusername = #{record.fromusername,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xinfan.wxshop.business.entity.RedRecord" >
+    update t_red_record
+    <set >
+      <if test="lined != null" >
+        lined = #{lined,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=DATE},
+      </if>
+      <if test="msgid != null" >
+        msgid = #{msgid,jdbcType=VARCHAR},
+      </if>
+      <if test="fromusername != null" >
+        fromusername = #{fromusername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rdid = #{rdid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xinfan.wxshop.business.entity.RedRecord" >
+    update t_red_record
+    set lined = #{lined,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      createdate = #{createdate,jdbcType=DATE},
+      msgid = #{msgid,jdbcType=VARCHAR},
+      fromusername = #{fromusername,jdbcType=VARCHAR}
+    where rdid = #{rdid,jdbcType=INTEGER}
+  </update>
+</mapper>

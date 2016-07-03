@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xinfan.wxshop.business.dao.IncomeRankMapper" >
+  <resultMap id="BaseResultMap" type="com.xinfan.wxshop.business.entity.IncomeRank" >
+    <result column="rank_date" property="rankDate" jdbcType="VARCHAR" />
+    <result column="displayname" property="displayname" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="INTEGER" />
+    <result column="total_income" property="totalIncome" jdbcType="REAL" />
+    <result column="rank_type" property="rankType" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rank_date, displayname, customer_id, total_income, rank_type, account
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xinfan.wxshop.business.entity.IncomeRankExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_income_rank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.xinfan.wxshop.business.entity.IncomeRankExample" >
+    delete from t_income_rank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
+    insert into t_income_rank (rank_date, displayname, customer_id, 
+      total_income, rank_type, account
+      )
+    values (#{rankDate,jdbcType=VARCHAR}, #{displayname,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, 
+      #{totalIncome,jdbcType=REAL}, #{rankType,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xinfan.wxshop.business.entity.IncomeRank" >
+    insert into t_income_rank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rankDate != null" >
+        rank_date,
+      </if>
+      <if test="displayname != null" >
+        displayname,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="totalIncome != null" >
+        total_income,
+      </if>
+      <if test="rankType != null" >
+        rank_type,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rankDate != null" >
+        #{rankDate,jdbcType=VARCHAR},
+      </if>
+      <if test="displayname != null" >
+        #{displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=INTEGER},
+      </if>
+      <if test="totalIncome != null" >
+        #{totalIncome,jdbcType=REAL},
+      </if>
+      <if test="rankType != null" >
+        #{rankType,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xinfan.wxshop.business.entity.IncomeRankExample" resultType="java.lang.Integer" >
+    select count(*) from t_income_rank
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_income_rank
+    <set >
+      <if test="record.rankDate != null" >
+        rank_date = #{record.rankDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.displayname != null" >
+        displayname = #{record.displayname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalIncome != null" >
+        total_income = #{record.totalIncome,jdbcType=REAL},
+      </if>
+      <if test="record.rankType != null" >
+        rank_type = #{record.rankType,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_income_rank
+    set rank_date = #{record.rankDate,jdbcType=VARCHAR},
+      displayname = #{record.displayname,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=INTEGER},
+      total_income = #{record.totalIncome,jdbcType=REAL},
+      rank_type = #{record.rankType,jdbcType=INTEGER},
+      account = #{record.account,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
